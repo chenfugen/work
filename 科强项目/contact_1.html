@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/contact.css" />
+		<script type="text/javascript" src="js/contact.js"></script>
+		<title>联系我们</title>
+
+		<style type="text/css">
+    html,body{margin:0;padding:0;}
+    .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+    .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+</style>
+	</head>
+
+	<body>
+		<header>
+	<div id="b_left">
+				<a href="#"><img src="img/img2/bg_l.png"/></a>
+				<a href="about_1.html"><img src="img/img2/nav1.png" class="nav"></a>
+                <a href="pro_1.html"><img src="img/img2/nav2.png" class="nav1"></a>
+                <a href="tech.html"><img src="img/img2/nav3.png" class="nav2"></a>
+                <a href="new_1.html"><img src="img/img2/nav4.png" class="nav3"></a>
+                <a href="recruit_1.html"><img src="img/img2/nav5.png" class="nav4"></a>
+                <a href="contact_1.html"><img src="img/img2/nav6.png" class="nav5"></a>
+                <a href="about_1.html"><img src="img/img2/nav1o.png"/ class="nav0o"></a>
+				<a href="pro_1.html"><img src="img/img2/nav2o.png"/ class="nav1o"></a>
+				<a href="tech.html"><img src="img/img2/nav3o.png"/ class="nav2o"></a>
+				<a href="new_1.html"><img src="img/img2/nav4o.png"/ class="nav3o"></a>
+				<a href="recruit_1.html"><img src="img/img2/nav5o.png"/ class="nav4o"></a>
+				<a href="contact_1.html"><img src="img/img2/nav6o.png"/ class="nav5o"></a>
+				<a href="home.html"><img src="img/img2/earth.png" class="earth"></a>
+			</div>
+			<div id="logo"></div>
+			<div class="text">科强愿为您提供最为可靠的解决方案和最捷迅的服务</div>
+			 <div id="msg">
+			 	<p>科强智能控制系统有限公司</p>
+			 	<ul>
+			 		<li><img src="img/img8/cu1.png">地址：杭州市拱墅区申花路88号</li>
+                    <li><img src="img/img8/cu2.png">公司总机：0571-88088346</li>
+                    <li><img src="img/img8/cu2.png">市场服务部：0571-88088345</li>
+                    <li><img src="img/img8/cu3.png"> 公司传真：0571-88366823</li>
+                    <li><img src="img/img8/cu4.png">   公司传真：0571-88366823</li>
+                    <li><img src="img/img8/mail.png">邮箱：HZKQ@vip.163.com</li>
+			 	</ul>
+			 	<img src="img/img8/en.png" class="imgs">
+			 </div>			 
+			<div class="map" id="dituContent">
+				
+			</div>
+		</header>
+		<footer>
+			Copyright&nbsp;©2015&nbsp;浙江科强智能控制系统有限公司&nbsp;All Rights Reserved&nbsp;&nbsp;备案号：浙ICP备16000621号-1&nbsp;&nbsp;
+			<a href="http://www.zjr1.com" target="_blank">技术支持：鼎易科技</a>
+		</footer>
+	</body>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+    <script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap(){
+        createMap();//创建地图
+        setMapEvent();//设置地图事件
+        addMapControl();//向地图添加控件
+        addMarker();//向地图中添加marker
+    }
+    
+    //创建地图函数：
+    function createMap(){
+        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+        var point = new BMap.Point(120.137195,30.320786);//定义一个中心点坐标
+        map.centerAndZoom(point,18);//设定地图的中心点和坐标并将地图显示在地图容器中
+        window.map = map;//将map变量存储在全局
+    }
+    
+    //地图事件设置函数：
+    function setMapEvent(){
+        map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+        map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard();//启用键盘上下左右键移动地图
+    }
+    
+    //地图控件添加函数：
+    function addMapControl(){
+        //向地图中添加缩放控件
+	var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+	map.addControl(ctrl_nav);
+        //向地图中添加缩略图控件
+	var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
+	map.addControl(ctrl_ove);
+        //向地图中添加比例尺控件
+	var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+	map.addControl(ctrl_sca);
+    }
+    
+    //标注点数组
+    var markerArr = [{title:"徐宝明",content:"我的备注",point:"120.112461|30.316125",isOpen:0,icon:{w:21,h:21,l:0,t:0,x:6,lb:5}}
+		 ];
+    //创建marker
+    function addMarker(){
+        for(var i=0;i<markerArr.length;i++){
+            var json = markerArr[i];
+            var p0 = json.point.split("|")[0];
+            var p1 = json.point.split("|")[1];
+            var point = new BMap.Point(p0,p1);
+			var iconImg = createIcon(json.icon);
+            var marker = new BMap.Marker(point,{icon:iconImg});
+			var iw = createInfoWindow(i);
+			var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
+			marker.setLabel(label);
+            map.addOverlay(marker);
+            label.setStyle({
+                        borderColor:"#808080",
+                        color:"#333",
+                        cursor:"pointer"
+            });
+			
+			(function(){
+				var index = i;
+				var _iw = createInfoWindow(i);
+				var _marker = marker;
+				_marker.addEventListener("click",function(){
+				    this.openInfoWindow(_iw);
+			    });
+			    _iw.addEventListener("open",function(){
+				    _marker.getLabel().hide();
+			    })
+			    _iw.addEventListener("close",function(){
+				    _marker.getLabel().show();
+			    })
+				label.addEventListener("click",function(){
+				    _marker.openInfoWindow(_iw);
+			    })
+				if(!!json.isOpen){
+					label.hide();
+					_marker.openInfoWindow(_iw);
+				}
+			})()
+        }
+    }
+    //创建InfoWindow
+    function createInfoWindow(i){
+        var json = markerArr[i];
+        var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
+        return iw;
+    }
+    //创建一个Icon
+    function createIcon(json){
+        var icon = new BMap.Icon("img/img8/icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+        return icon;
+    }
+    
+    initMap();//创建和初始化地图
+</script>
+</html>
+
