@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+		<script type="text/javascript" src="js/frozen.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+	<style type="text/css">
+		.addmoney {
+			width: 24rem;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -12rem;
+			margin-top: -12rem;
+		}
+		
+		.cordbox {
+			width: 24rem;
+			position:absolute;		
+			left: 50%;
+			top: 50%;
+			margin-left: -12rem;
+			margin-top: -14rem;
+			background: white;
+			z-index: 999;
+			border-radius: 5px 5px;
+			text-align: center;
+		}
+		
+		#qrCodeIco {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -15px;
+			margin-top: -15px;
+			z-index: 10000;
+			border-radius: 5px 5px;
+		}
+		input[type=text]{
+			-webkit-appearance: none;
+			outline: none;
+			border-radius:0px;
+		}
+	</style>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="depositCtrl">
+			<header class="ui-header ui-header-positive ui-pulic-header">
+				<a href="order.html"><i class="ui-icon-return ui-header"><span style="font-size:14px">返回</span></i></a>
+				<h2>定金管理</h2>
+				<label onclick="reload()" class="ui-href"><img src="img/flush.png" / style="width:16px;float:right;margin-top:8px;"><span id="state" style="float:right;font-size:15px;margin-top:-22px;">刷新 </span></label>
+			</header>
+			<section class="ui-container ui-whitespace" id="deposit_management">
+				<ul class="ui-whitespace order_details" onclick="">
+					<li >
+						<div class="ui-text-left">订单号:</div><span>{{order.OCode}}</span></li>
+					<!--<li>
+						<div class="ui-text-left"><i class="iconfont icon-gerenkuang" style="color:#6edbc5;font-size:15px;"></i>&nbsp;{{order.TrueName}}</div>
+						<div class="ui-text-right"><i class="iconfont icon-dianhua1" style="color:#6edbc5;font-size:15px;"></i>&nbsp;{{order.Phone}}</div>
+					</li>-->
+					<!--<div class="ui-text-right" style="position: absolute;top:2rem;right:10px;"><i class="iconfont icon-xiayi"></i></div>-->
+				</ul>
+				<ul class="ui-whitespace deposit_management">
+					<li class="ui-border-b">
+						<div class="ui-text-left"><i class="iconfont icon-dingdanguanli" style="color:#6edbc5;font-size:15px;"></i>&nbsp;&nbsp;定金信息</div>
+						<div class="ui-text-right" ng-if="order.DingPrice==0">需付定金:<span style="color:#FA7878;">￥{{order.DingPrice}}</span></div>
+						<button class="ui-btn ui-text-right" ng-click="change()" ng-if="order.DingPrice!=0 && order.OrderPricePayType.PayType ==-1;" style="margin-top:3px;">修改定金</button>
+					</li>
+					<li>
+						<ul class="ui-tiled" ng-if="order.DingPrice!=0" >
+							<li>
+								<div>定金</div>
+							</li>
+							<li>
+								<div>{{order.OrderPricePayType.PayType | payMethod}}</div>
+							</li>
+							<li>
+								<div>￥{{order.DingPrice}}</div>
+							</li>
+						</ul>
+						<div ng-if="order.PayType==-1 || order.DingPrice==0 || order.PayType==null" style="width:100%;text-align: center;line-height:40px;">
+							暂无支付记录!
+						</div>					
+					</li>
+				</ul>
+			</section>
+			<div class="ui-dialog deposit">
+				<div class="ui-dialog-cnt addmoney">
+					<header class="ui-dialog-hd ui-border-b" style="border-bottom:1px solid #e0e0e0;">
+						<h3>添加订金</h3>
+					</header>
+					<div class="ui-dialog-bd" style="border-bottom:1px solid #e0e0e0;">
+						<h4>请输入金额(单位: 元)</h4>
+						<input type="text" ng-model="depositPrice" style="width:100%;height:30px;border:1px solid #e0e0e0" />
+					</div> 
+					<div class="ui-dialog-ft">
+						<button style="border-right:1px solid #e0e0e0;" type="button" ng-click="clear()" data-role="button">取消</button>
+						<button type="button" ng-click="sure()" data-role="button">确定</button>
+					</div>
+				</div>
+			</div>
+			<div class="ui-dialog cord">
+				<div class="ui-dialog-cnt cordbox">
+					<header class="ui-dialog-hd ui-border-b" style="border-bottom:1px solid #e0e0e0;">
+						<p class="ui-nowrap ui-txt-info" style="font-size:1.2rem;"></p>
+					</header>
+					<div class="ui-dialog-bd">
+						<div id="qr_container" style="margin-top:-1rem;position: relative;">
+							<img id="qrCodeIco" src="img/ico22.png" style="position:absolute;width: 30px;height: 30px;" />
+						</div>			
+					</div>
+					<h6 style="color:#1ABC9C;margin-top:-1rem;">扫一扫上面二维码,进行支付</h6>
+				</div>
+			</div>
+			<div class="ui-poptips ui-poptips-success hint_msg" style="display: none;">
+				<div class="ui-poptips-cnt">请输入手机号码</div>
+			</div>
+			<footer class="ui-footer-fixed ui-border-t">
+				<ul class="ui-tiled" ng-if="order.DingPrice!=0">
+					<!--<li class="ui-border-r">
+						<div>微信支付</div>
+					</li>-->
+					<li ng-click="cord(order)">
+						<div>扫码支付</div>
+					</li>
+				</ul>
+				<ul class="ui-tiled" ng-if="order.DingPrice==0">
+					<li class="ui-border-r" ng-click="addDeposit()">
+						<div>添加订金</div>
+					</li>				
+				</ul>
+				<!--<ul class="ui-tiled">
+                  <li class="ui-border-r"><div>服务下单</div></li>
+                  <li><div>完成服务</div></li>
+                </ul>-->
+			</footer>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	function reload(){
+		window.location.reload();
+	}
+	var id = window.location.search.split("=")[1];
+	var requestUrl = APIaddress + "api/Orders/getOrdersInfo/" + id;
+	var myModule = angular.module("app", []);
+	myModule.filter("payMethod",function(){
+		return function(PayType){
+			  switch (PayType) {
+			 case -1:
+                PayType = '未支付';
+                break;  	
+            case 0:
+                PayType = '现金';
+                break;
+            case 1:
+                PayType = '拉卡拉';
+                break;
+            case 2:
+                PayType = '微信';
+                break;
+            case 3:
+                PayType = '支付宝';
+                break;
+            default:
+                PayType = '';
+                break;
+         }
+         return PayType;	
+        }
+	})
+	myModule.controller('depositCtrl', ['$scope', '$http',
+		function($scope, $http) {
+			$http({
+				method: 'GET',
+				url: requestUrl
+			}).success(function(data) {	
+				 $scope.order=data;		
+			$http({
+				method: 'GET',
+				url: APIaddress + 'api/Orders/GetOrdersPriceByOID/'+data.ID+"?type="+2
+			}).success(function(msg) {			
+				$scope.order.OrderPricePayType=msg;
+				$scope.addDeposit = function(){		
+				$(".deposit").show();									
+				$scope.clear = function() {
+					$(".deposit").hide();
+				}
+				$scope.deposit = {};
+				$scope.sure = function() {
+					var isNum = /^\d+(\.\d+)?$/;
+						function isInteger(obj) {
+							return obj % 1 === 0
+						}
+						if(!isNum.test($scope.depositPrice) || !isInteger($scope.depositPrice) || $scope.depositPrice<=0){
+								$(".hint_msg div").text('请填写正确的折扣金额');
+								$(".hint_msg").css({
+									"display": "block",
+									"z-index":999						
+								});
+								setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000)							
+							return false;
+						}				
+					$scope.deposit.PType = 2;
+					$scope.deposit.State = 0;
+					$scope.deposit.PayType =-1;
+					$scope.deposit.Price=$scope.depositPrice-0;
+					$scope.deposit.OID = $scope.order.ID;
+					// console.log($scope.deposit)
+					$.post(APIaddress + 'api/Orders/CreateOrdersPrice', $scope.deposit, function(data) {					
+						if(data) {
+							$(".hint_msg div").text("操作成功")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000);
+							$(".deposit").hide();
+							window.location.reload();
+						} else {
+							$(".hint_msg div").text("操作失败")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000);
+						}
+					})
+				}
+				}
+				$scope.change=function(){
+					$(".deposit").show();									
+				$scope.clear = function() {
+					$(".deposit").hide();
+				}
+				$scope.deposit = {};
+				$scope.sure = function(){
+						var isNum = /^\d+(\.\d+)?$/;
+						function isInteger(obj) {
+							return obj % 1 === 0
+						}
+						if(!isNum.test($scope.depositPrice) || !isInteger($scope.depositPrice) || $scope.depositPrice<=0){
+								$(".hint_msg div").text('请填写正确的折扣金额');
+								$(".hint_msg").css({
+									"display": "block",
+									"z-index":999						
+								});
+								setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000)							
+								return false;
+						}				
+					$scope.deposit.PType = 2;
+					$scope.deposit.State = 0;
+					$scope.deposit.PayType =-1;
+					$scope.deposit.Price =$scope.depositPrice-0;
+					$scope.deposit.OID = $scope.order.ID;
+					$scope.deposit.ID=msg.ID;
+					$scope.deposit.CreateDate=msg.CreateDate;
+					$.post(APIaddress + 'api/Orders/UpdateOrdersPrice', $scope.deposit, function(data) {					
+						if(data) {
+							$(".hint_msg div").text("操作成功")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000);
+							$(".deposit").hide();
+							window.location.reload();
+						} else {
+							$(".hint_msg div").text("操作失败")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000);
+						}
+					})
+				}
+				}
+				$scope.cord = function(order) { //生成二维码
+					$(".ui-dialog header p").text("订单号:" + order.OCode)
+					$(".cord").show();
+					$('#qr_container').qrcode({
+						render: "canvas",
+						height: 200,
+						width: 200,
+						correctLevel: 0,
+						text:order.OCode
+					});
+				}				
+				$(".cord").click(function() {
+					$('#qr_container').empty();
+					$(".cord").hide();
+				})
+			})	
+			}).error(function(data) {
+				console.log("错误......");
+			});
+			
+		}
+	]);
+</script>

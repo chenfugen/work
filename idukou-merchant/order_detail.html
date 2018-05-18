@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+	<style type="text/css">
+		body {
+			position: relative;
+		}
+		
+		.ui-dialog-cnt {
+			width: 24rem;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -12rem;
+			margin-top: -13.5rem;
+			background: white;
+			z-index: 999;
+			border-radius: 5px 5px;
+		}
+	</style>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="myCtrl">
+			<header class="ui-header ui-header-positive ui-pulic-header">
+				<a href="javascript:;" ng-click="back(order)"><i class="ui-icon-return ui-header"><span style="font-size:14px">返回</span></i></a>
+				<h2>订单详情</h2>
+			</header>
+			<section class="ui-container ui-whitespace" id="order_detail">
+				<ul class="ui-whitespace order_details">
+					<li class="ui-border-b">
+						<div class="ui-text-left"><i class="iconfont icon-gerenkuang" style="color:#6EDBC5;font-size:15px;"></i>&nbsp;{{order.TrueName}}</div>
+						<div class="ui-text-right"><a href="tel:{{order.Phone}}"><i class="iconfont icon-dianhua" style="color:#6EDBC5;font-size:15px;">&nbsp;联系客户</i></a></div>
+					</li>
+					<li class="ui-bottom">
+						<div class="ui-text-left">订单号:</div><span>{{order.OCode}}</span></li>
+					<li class="ui-bottom">
+						<div class="ui-text-left">联系电话:</div><span>{{order.Phone}}</span></li>
+					<li class="ui-bottom">
+						<div class="ui-text-left">预约时间:</div><span>{{order.CreateDate | date:'yyyy年M月d日'}}</span></li>
+					<li class="ui-bottom">
+						<div class="ui-text-left">预约地址:</div><span>{{order.Address}}</span></li>
+					<li>
+						<button class="ui-btn" ng-click="remark(order.ID)">备&nbsp;&nbsp;&nbsp;&nbsp;注</button>
+					</li>
+				</ul>
+				<ul class="ui-whitespace order_line">
+					<li class="ui-border-b">
+						<div class="ui-text-left"><i class="iconfont icon-dingdanguanli" style="color:#6EDBC5;font-size:15px;"></i>&nbsp;&nbsp;订单明细</div>
+					</li>
+					<li style="text-align: center;" ng-if="order.OrdersDetails.length == 0">
+						还没有开始服务,快去下单吧!
+					</li>
+					<li ng-if="order.OrdersDetails.length > 0" ng-repeat="goods in order.OrdersDetails" style="height:4rem;line-height: 4rem;">
+						<ul class="ui-tiled">
+							<li>
+								<div>{{goods.GoodsName}}</div>
+							</li>
+							<li>
+								<div>{{goods.OGNum}}</div>
+							</li>
+							<li>
+								<div>¥{{goods.MGPrice}}</div>
+							</li>
+						</ul>
+					</li>
+					<li style="text-align: center;">
+						订单总额：<span style="color:#fa7878">￥{{totalPrice}}</span>
+					</li>
+				</ul>							
+				<div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+				
+				<div class="ui-dialog finished">
+					<div class="ui-dialog-cnt">
+						<header class="ui-dialog-hd ui-border-b" style="border-bottom:1px solid #e0e0e0;">
+							<h3>订单提示</h3>
+						</header>
+						<div class="ui-dialog-bd" style="border-bottom:0.1px solid #e0e0e0;">
+							<h4>您确定要完成服务吗？点击确定后将不能修改服务。</h4>
+						</div>
+						<div class="ui-dialog-ft">
+							<button style="border-right:1px solid #e0e0e0;" type="button" ng-click="clear()" data-role="button">取消</button>
+							<button type="button" ng-click="sure()" data-role="button">确定</button>
+						</div>
+					</div>
+				</div>
+				<div class="ui-poptips ui-poptips-success hint_msg" style="display: none;">
+					<div class="ui-poptips-cnt">请输入手机号码</div>
+				</div>
+			</section>	
+			<footer class="ui-footer ui-footer-btn" ng-if="PayType==-1">
+						<div class="ui-footer ui-footer-stable ui-btn-group ui-border-t ui-btn-100 ui-whitespace">
+							<div style="background:#6EDBC5;" class="ui-button ui-btn-lg "  ng-click="deleteOrder(order)">取消订单</div>
+						</div>
+		   </footer>
+	</body>
+
+	<script type="text/javascript">
+		var id =window.location.search.split("=")[1];
+		var requestUrl = APIaddress + "api/Orders/getOrdersInfo/" + id;
+		var myModule = angular.module("app", []);
+		myModule.filter('orderPrice', function() {
+			return function(orderPrice, ptype) {
+				if(orderPrice) {
+					for(var i = 0; i < orderPrice.length; i++) {
+						if(orderPrice[i].PType == ptype) {
+							return orderPrice[i].Price;
+						}
+					}
+				}
+			};
+		});
+		myModule.controller('myCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$(".ui-loading-block").hide();
+					if(data == null || data == "") {
+						$("#order_detail").html("<div class='ui-center'>还没有任何备注信息！</div>")
+					} else {
+						$scope.order = data;
+						$http({
+							method: 'GET',				
+							url: APIaddress + "api/Orders/GetOrdersPriceByOID/" + id + "?type=2"
+							}).success(function(msg) {								
+								if(msg == null) {
+									$scope.DingpriceState = 0;
+									$scope.PayType=-1;
+								} else {
+									$scope.DingpriceState = msg.State;
+									$scope.PayType=msg.PayType;
+								}					
+						});
+						$http({
+							method: 'GET',
+							url: APIaddress + "api/Orders/getOrdersgoods/" + id
+						}).success(function(data) {
+							$scope.order.OrdersDetails = data;
+							var orderprice = 0;
+							for(var i = 0; i < data.length; i++) {
+								orderprice += data[i].MGPrice * data[i].OGNum;
+							}
+							$scope.totalPrice = orderprice;
+						})
+
+						$scope.remark = function(id) { //备注							
+							window.location.href = "remark.html?id=" + id;
+						}
+
+						$scope.cancel = function() { //取消
+							$(".ui-dialog").hide();
+						}
+
+						
+
+						//删除订单弹出框		
+						$scope.deleteOrder = function(order) {
+							$(".finished header h3").text("订单提示");
+							$(".finished .ui-dialog-bd h4").text("您确定要删除订单吗？点击确定后将不能恢复。");
+							$(".finished").show();
+							$scope.sure = function() { //确定
+								order.State = 2;
+								//console.log(order)
+								$.post(APIaddress + 'api/Orders/UpdateState', order, function(deleteMsg) {
+									var timer = "";
+									if(deleteMsg) {
+										location.href = "order.html";
+										$(".hint_msg").css({
+											"display": "block"
+										});
+										timer = setTimeout(function() {
+											$(".hint_msg").css({
+												"display": "none"
+											});
+										}, 1000)
+										window.location.href = "order.html";
+									} else {
+										$(".hint_msg div").text("取消失败")
+										$(".hint_msg").css({
+											"display": "block"
+										});
+										timer = setTimeout(function() {
+											$(".hint_msg").css({
+												"display": "none"
+											});
+										}, 1000)
+									}
+								})
+								$(".finished").hide();
+							}
+						}
+						$scope.clear = function(order) {
+							$(".ui-dialog").hide();
+						}
+						$scope.back=function(order){
+							if(order.State==1){
+								window.location.href = "order.html";
+							}else{
+								window.location.href = "order_pay.html";
+							}
+						}
+					}
+				}).error(function(data) {
+					console.log("错误......");
+				});
+			}
+		]);
+	</script>
+
+</html>

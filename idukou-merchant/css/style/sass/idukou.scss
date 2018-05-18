@@ -1,0 +1,685 @@
+@charset "utf-8";
+$fontFamliy: "微软雅黑";
+$fontColor: #5c5c5c;
+$background: #1ebd9e;
+@media screen and (min-width:320px) {
+    html {
+        font-size: 10px!important;
+    }
+}
+@media screen and (min-width:360px) {
+    html {
+        font-size: 11.25px!important;
+    }
+}
+@media screen and (min-width:400px) {
+    html {
+        font-size: 12.5px!important;
+    }
+}
+@media only screen and (min-width:481px) {
+    html {
+        font-size: 94%!important;
+    }
+}
+@media only screen and (min-width: 561px) {
+    html {
+        font-size: 109%!important;
+    }
+}
+@media screen and (min-width:640px) {
+    html {
+        font-size: 20px!important;
+    }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    html {
+        font-size: 22px!important;
+    }
+
+}
+
+*,
+*:after,
+*:before {
+    // -webkit-user-select: none;
+    //字体不能被选择（复制等）
+    // -moz-user-select: -moz-none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    //只用于iOS (iPhone和iPad) 点击一个链接或者通过Javascript定义的可点击元素的时候，它就会出现一个半透明的灰色背景
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+    //  box-sizing: border-box;
+    //  //并排两个带边框的框
+    //  -webkit-box-sizing: border-box;
+    //  -moz-box-sizing: border-box;
+    -webkit-touch-callout: none;
+    //当你触摸并按住触摸目标时候，禁止或显示系统默认菜单。
+    margin: 0;
+    padding: 0;
+    -ms-touch-action: pan-y;
+    //可以在父级元素内进行垂直移动的手势操作。在IE11使用属性，在IE10应使用-ms-touch-action，IE10之前的浏览器不支持
+}
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #EEEEEE;
+    overflow-y: auto;
+    color: $fontColor;
+    -webkit-text-size-adjust: none;
+    //解决IPHONE网页兼容（部分字号变大）
+}
+.ng-cloak {
+    display: none;
+}
+ header a {
+    width: 20%;
+    position: absolute;
+}
+//  登录页面
+#loginpage {
+    width: 100%;
+    position: absolute;
+    top: 80px;
+    .ui-form {
+        height: 4.5rem;
+        margin-top: 1.5rem;
+        line-height: 4.5rem;
+    }
+    .login {
+        margin-top: 2rem;
+        background: $background;
+        color: white;
+    }
+    .login:active {
+        background: #fff;
+        color: #888;
+    }
+    h5 {
+        width: 100%;
+        text-align: center;
+        margin-top: 16rem;
+    }
+}
+//我的主页
+#home_list {
+    margin-top:8%;
+    ul {
+        width: 100%;
+        margin-top: 1%;
+        li {
+            position: relative;
+            width: 49.5%;
+            height:11.5rem;
+            background: rgba(255,255,255,0.5);
+            color: #545454;
+            div {
+                margin-top: 7rem;
+                font-size: 1.2rem;
+            }
+        }
+
+    }
+}
+.ui-footer {
+    ul {
+        li {
+            .showpage {
+                color: $background;
+            }
+            div {
+                color: $fontColor;
+                font-size: 12px;
+            }
+
+        }
+    }
+}
+
+//二维码
+#mycord {
+    .user_msg {
+        margin-top: 20px;
+        width: 100%;
+        height: 90px;
+        img {
+            float: left;
+            width: 80px;
+            height: 80px;
+        }
+        ul {
+            float: left;
+            margin-left: 20px;
+            li {
+                color: $fontColor;
+                margin-top: 15px;
+                i {
+                    float: left;
+                }
+                div {
+                    float: left;
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+    #qr_container {
+        margin-top: 1rem;
+        width: 100%;
+        background: white;
+    }
+}
+//我
+#userpage {
+    width: 100%;
+    .myfavicon {
+        width: 100%;
+        height: 150px;
+        background: $background;
+        color: white;
+        h5 {
+            margin-top: 15px;
+        }
+    }
+    ul {
+        margin-top: 5px;
+    }
+    .exit {
+        background: $background;
+        color: white;
+    }
+    .exit:active {
+        background: #eee;
+        color: #888;
+    }
+}
+//意见反馈
+#suggestion {
+    .exit {
+        background: $background;
+        color: white;
+    }
+    .exit:active {
+        background: #eee;
+        color: #888;
+    }
+}
+//口碑管理
+#rappage {
+    position: relative;
+    .rap_box {
+        background: $background;
+        height: 12rem;
+        .score {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 8rem 8rem;
+            border: 1px solid white;
+            text-align: center;
+            color: white;
+            position: absolute;
+            top: 1rem;
+            left:1.5rem;
+            p {
+                font-size: 1.2rem;
+            }
+            h1 {
+                font-size: 3rem;
+                margin-top: 1rem;
+            }
+        }
+        .rap_sclist {
+            position: absolute;
+            width: 45%;
+            height: 8rem;
+            right: 1.5rem;
+            top: 2rem;
+            li {
+                height: 3rem;
+                color:white;
+               label{
+                   color:#fa4343;
+               }
+            }
+        }
+    }
+    #msg_radio {
+        li {
+            float: left;
+            width: 33%;
+            text-align: center;
+        }
+    }
+}
+
+//历史订单
+#order_list {
+    border-top: 1px dotted #e0e0e0;
+    background: white;
+    margin-top: 10px;
+    li {
+        height: 35px;
+        line-height: 35px;
+    }
+    .ui-border-b {
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+}
+.ensure {
+    cursor: pointer;
+}
+.ensure:active {
+    background: #ccc;
+}
+
+//账单详情
+#account_msg {
+    ul {
+        li {
+            margin-top: 15px;
+        }
+    }
+    .msg {
+        li {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            border-bottom: 1px dotted #e0e0e0;
+        }
+    }
+}
+
+//订单执行中
+#order_update {
+    .order_list {
+        border-radius: 10px;
+        background: white;
+        margin-top: 10px;
+        li {
+            font-size: 1.3rem;
+            width: 100%;
+            height: 3rem;
+            line-height: 3rem;
+            overflow: hidden;
+            position: relative;
+         
+        }
+        .remark{
+            button{
+               position: absolute;
+               left:50%;
+               margin-left:-40px;
+               top:50%;
+               margin-top:-15px;
+               color: white;
+           }
+        }
+        .order_details:active {
+            background: #e0e0e0;
+        }
+        a,
+        button {
+            color: #1ebd9e;
+            text-align: center;
+        }
+        a:active {
+            background: #e0e0e0;
+        }
+        button:active {
+            background: #e0e0e0;
+        }
+    }
+}
+
+//订单详情
+#order_detail {
+    .order_details{
+        width: 100%;
+        border: 1px dotted #e0e0e0;
+        background: white;
+        margin-top: 10px;
+        li {
+            font-size: 1.3rem;
+            width: 100%;
+            height: 3rem;
+            line-height: 3rem;
+            overflow: hidden;
+            position: relative;
+            span {
+                display: inline-block;
+                width: 55%;
+                white-space: nowrap;
+                overflow: hidden;
+                position: absolute;
+                left: 10rem;
+            }
+           button{
+               position: absolute;
+               left:50%;
+               margin-left:-35px;
+               top:50%;
+               margin-top:-15px;
+           }
+        }
+        .ui-border-b {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .ui-bottom {
+            border-bottom: 1px dotted #e0e0e0;
+        }
+    }
+    .order_line{
+        width: 100%;
+        border: 1px dotted #ccc;
+        background: white;
+        margin-top: 10px;
+           li{
+            font-size: 1.3rem;
+            width: 100%;
+            height: 3rem;
+            line-height: 3rem;
+            overflow: hidden;   
+           }
+         .ui-border-b {
+            border-bottom: 1px solid #e0e0e0;
+        }
+    }
+}
+//订金管理
+#deposit_management{
+    .order_details{
+        width: 100%;
+        border: 1px dotted #ccc;
+        background: white;
+        margin-top: 10px;
+        position: relative;
+        li {
+            font-size: 1.3rem;
+            width:95%;
+            height: 3rem;
+            line-height: 3rem;
+            overflow: hidden;
+        }
+        .ui-border-b {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .ui-bottom {
+            border-bottom: 1px dotted #e0e0e0;
+        }
+    }
+    .order_details:active{
+        background: #E0E0E0;
+    }
+   .deposit_management{
+       width: 100%;
+       height:300px;
+        border: 1px dotted #ccc;
+        background: white;
+        margin-top: 10px;
+        position: relative;
+        li {
+            font-size: 1.3rem;
+            width:100%;
+            height: 3rem;
+            line-height: 3rem;
+            overflow: hidden;
+        }
+        .ui-border-b {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .ui-bottom {
+            border-bottom: 1px dotted #e0e0e0;
+        }  
+   }
+}
+footer{
+    .ui-border-r{
+         border-right: 1px solid #e0e0e0;
+    }
+    
+}
+
+//备注
+#remark{
+    .user{
+        width:100%;
+        height:3rem;
+        background: white;
+        line-height:3rem;
+    }
+    .add{
+        position:fixed;
+        width:6rem;
+        height: 6rem;
+        border-radius:6rem 6rem;  
+        background:#1ebd9e;  
+        bottom:80px; 
+        left: 50%;
+        margin-left: -3rem;
+        text-align: center;     
+    }
+    .add:active{
+        background:#6edbc5;
+    }
+    .remark_list:active{
+       background: #E0E0E0;
+    }
+}
+
+//忘记密码
+#registerpage {
+    width: 100%;
+    .ui-form {
+        height: 5rem;
+        margin-top: 1rem;
+        line-height: 5rem;
+    }
+    .verify {
+        margin-top: 2rem;
+        background: $background;
+        color: white;
+    }
+    h5 {
+        width: 100%;
+        text-align: center;
+        margin-top: 18rem;
+    }
+    label {
+        color: $fontColor;
+    }
+}
+//重置密码
+#forgetpassword {
+    width: 100%;
+    .ui-form {
+        height: 4.5rem;
+        margin-top: 1rem;
+        line-height: 4.5rem;      
+    }
+}
+#securitycode {
+    position: absolute;
+    top: 6.5rem;
+    width: 100%;
+    .verify {
+        text-align: center;
+        h1 {
+            font-size: 30px;
+        }
+    }
+    .ui-form {
+        height: 4.5rem;
+        margin-top: 1rem;
+        line-height: 4.5rem;
+    }
+}
+//确认订单
+    .confirm{      
+        background: $background;
+        color: white;
+    }
+    .confirm:active {
+        background: #fff;
+        color: #888;
+    } 
+
+
+//服务下单
+#main_plane{
+    padding-top:6rem;
+    height: 100%;
+    overflow: hidden;
+}
+.menu {
+    color: #A8A9AD !important;
+}
+.menus {
+    width: 27%;
+    height: 100%;
+    float: left;
+    border-right: 1px solid #f0f0f0;
+    background: #f7f7f7;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+.all_list {
+    width: 72.8%;
+    float: right;
+    background: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+.menus li {
+    line-height: 4rem;
+    font-size: 18px;
+    text-align: center;
+    color: #999;
+    position: relative;
+}
+.menus .active {
+    background: #fff;
+    color: #4BCC60 !important;
+    display: block;
+}
+.title.active {
+    color: #4BCC60 !important;
+}
+.menus .active:before {
+    content: "";
+    width: 5px;
+    height: 1rem;
+    background-color: #4BCC60 !important;
+    position: absolute;
+    left: -0%;
+    top: 0;
+}
+.menus .active:after {
+    content: "";
+    width: 1px;
+    height: 1rem;
+    background-color: #fff;
+    position: absolute;
+    right: -1px;
+    top: 0;
+}
+.title {
+    width: 100%;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    background: #f7f7f7;
+    font-weight: bold;
+}
+.msglist{
+    position: relative;
+    border-bottom:1px dotted #E0E0E0;
+    input {
+        border: none;
+        margin-left: 0.5rem;
+        height: 30px;
+    }
+    a {
+        font-size: 1rem;
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+    }
+    button{
+        position: absolute;
+        right:0px;
+        text-align: center;
+        width:25%;
+        color:#6edbc5;   
+        background: white; 
+        border-left:1px solid #E0E0E0; 
+        font-size:15px;  
+    }
+    button:active{
+        background:#E0E0E0;
+    }
+}
+
+//支付页
+#paycord{
+    .order_details{
+        width: 100%;
+        border: 1px dotted #ccc;
+        background: white;
+        margin-top: 10px;
+        position: relative;
+        li {
+            font-size: 1.3rem;
+            width:95%;
+            height: 3rem;
+            line-height: 3rem;
+            overflow: hidden;
+        }
+        .ui-border-b {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .ui-bottom {
+            border-bottom: 1px dotted #e0e0e0;
+        }
+    }
+    .order_details:active{
+        background: #E0E0E0;
+    }
+   .order_list{
+       width: 100%;    
+        border: 1px dotted #ccc;
+        background: white;
+        margin-top: 10px;
+        position: relative;
+        li {
+            font-size: 1.3rem;
+            width:100%;
+            height: 3rem;
+            line-height: 3rem;
+            overflow: hidden;
+        }
+        .ui-border-b {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .ui-bottom {
+            border-bottom: 1px dotted #e0e0e0;
+        }  
+   }
+   .price{
+    color: #FA7878;
+    font-size:1.8rem;  
+}
+.addPrivilege{
+    display: none;
+}
+}
+
+
+////搜索
+//.ui-ico-search:before{
+//  color: #B2B2B2;
+//  font-size:1.4rem;
+//}

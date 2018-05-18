@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+		<script src="js/fastclick.min.js"></script>
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/frozen.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+	<style type="text/css">
+		.ui-dialog-cnt {
+			width: 26rem;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -13rem;
+			margin-top: -12rem;
+		}
+	</style>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="userCtrl">
+			<section class="ui-container ui-center" id="userpage">
+				<div class="myfavicon">
+					<div class="ui-avatar-lg" style="margin:3.5rem 0px 0px 3rem;">
+						<span style="background-image:url({{merchantSet.HeadImg | imageSrc}})"></span>
+					</div>
+					<div style="float:left;margin:-7rem 0px 0px 10rem;line-height:3rem;text-align:left;">
+					<h5>{{merchantSet.MName}}</h5>
+					<h4>{{merchantSet.Phone}}</h4>
+					</div>
+				</div>
+				<ul class="ui-list ui-list-text ui-list-link ui-active" onclick="javascript:window.location.href='usermsg.html'">
+					<li class="ui-border-t">
+						<i class="iconfont icon-gerenkuang icon-list" style="color:#03a9f4;"></i>
+						<h4 class="ui-txt-info ui-float">我的信息</h4>
+					</li>
+				</ul>
+				<ul class="ui-list ui-list-text ui-list-link ui-active" ng-click="suggest()">
+					<li class="ui-border-t">
+						<i class="iconfont icon-yijianfankui icon-list" style="color:#e0796a;"></i>
+						<h4 class="ui-txt-info ui-float">意见反馈</h4>
+					</li>
+				</ul>
+				<!--<ul class="ui-list ui-list-text ui-list-link ui-active">
+					<li class="ui-border-t" ng-click="updata()">
+						<i class="iconfont icon-banbengengxin icon-list" style="color:#eb8e21;"></i>
+						<h4 class="ui-txt-info ui-float">版本更新</h4>
+					</li>
+				</ul>-->
+				<ul class="ui-list ui-list-text ui-list-link ui-active">
+					<li class="ui-border-t">
+						<i class="iconfont icon-dianhua icon-list" style="color:#7ed0df;"></i>
+						<h4 class="ui-txt-info ui-float">商户热线：400-0571-820</h4>
+						<div class="ui-txt-info ui-href" style="right:30px;top:25px;font-size:12px;">
+							<a href="tel:400-0571-820" style="color:#6EDBC5;">点击拨打</a>
+						</div>
+					</li>
+				</ul>
+				<ul class="ui-list ui-list-text ui-list-link ui-active ui-about" onclick="javascript:window.location.href='about.html'">
+					<li class="ui-border-t">
+						<i class="iconfont icon-guanyu icon-list" style="color:#2C98D4;"></i>
+						<h4 class="ui-txt-info ui-float">关于千柏渡</h4>
+					</li>
+				</ul>
+				<p>&nbsp;</p>
+				<button class="ui-btn-lg exit">退&nbsp;&nbsp;出</button>
+				<div style="width:100%;height:60px"></div>
+				<div class="ui-dialog">
+					<div class="ui-dialog-cnt">
+						<header class="ui-dialog-hd ui-border-b" style="border-bottom:1px solid #e0e0e0;">
+							<h3>更新提示</h3>
+						</header>
+						<div class="ui-dialog-bd" style="border-bottom:1px solid #e0e0e0;text-align:left;">														 
+							<div>idukou(千柏渡) V2.0.1 <br />
+							1、界面全新升级，更加简洁。<br />
+							2、功能更加完善，使用简化合理。</div>
+						</div>
+						<div class="ui-dialog-ft">
+							<button style="border-right:1px solid #e0e0e0;" type="button" ng-click="clear()" data-role="button">取消</button>
+							<button type="button" ng-click="sure()" data-role="button">更新</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div class="ui-actionsheet">
+				<div class="ui-actionsheet-cnt">
+					<button class="ui-actionsheet-del" ng-click="logoff()">退出</button>
+					<button class="clear">取消</button>
+				</div>
+			</div>
+			<footer class="ui-footer ui-footer-stable ui-border-t">
+				<ul class="ui-tiled  ui-txt-tips" style="margin-top:5px;">
+					<li onclick="javascript:window.location.href='home.html'">
+						<i class="iconfont icon-zhuye icon-footer" style="color:#888"></i>
+						<div>主页</div>
+					</li>
+					<li onclick="javascript:window.location.href='mycord.html'">
+						<i class="iconfont icon-erweima icon-footer" style="color:#888"></i>
+						<div>二维码</div>
+					</li>
+					<li>
+						<i class="iconfont icon-geren icon-footer" style="color:#1ABC9C"></i>
+						<div class="showpage">我</div>
+					</li>
+				</ul>
+			</footer>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			FastClick.attach(document.body);
+			$(".exit").click(function() {
+				$('.ui-actionsheet').addClass('show');
+			})
+			$(".ui-actionsheet button").click(function() {
+				$('.ui-actionsheet').removeClass('show');
+			})
+		})
+		//判断手机网络
+		if(navigator.onLine == false) {
+			$(".hint_msg div").text("请连接网络")
+			$(".hint_msg").css({
+				"display": "block"
+			});
+			setTimeout(function() {
+				$(".hint_msg").css({
+					"display": "none"
+				});
+			}, 2000)
+		}
+		var requestUrl = APIaddress + 'api/Merchants/' + MerchantID;
+		var myModule = angular.module("app", []);
+		myModule.filter('imageSrc', function() {
+			return function(img) {
+				if(img) {
+					img = "http://img.idukou.com/" + img;
+				} else {
+					img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjZEREZGMUE4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjZEREZGMUI4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NkRERkYxODg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NkRERkYxOTg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pr0VlogAAAXbSURBVHja7JvZTjJN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';
+				}
+				return img;
+			};
+		});
+		myModule.controller('userCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$scope.merchantSet =user;			
+				$scope.updata=function(){
+					$(".ui-dialog").show();
+				}
+				$scope.clear=function(){
+					$(".ui-dialog").hide();
+				}
+				$scope.suggest=function(){
+					window.location.href="Suggestion.html";
+				}
+				$scope.logoff=function(){				
+					window.location.href="index.html"										
+				}				
+			}
+		])
+	</script>
+
+</html>
