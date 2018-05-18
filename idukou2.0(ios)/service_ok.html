@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/lwwtemp.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/frozen.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive ui-pulic-header">
+				<i class="ui-icon-return ui-header" style="margin-left:10px;" onclick="history.back()"><span style="font-size:14px">返回</span></i>
+				<h2>确定订单</h2>
+		</header>
+		<section class="ui-container" id="SeriveConOK">
+				<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="SeriveConOK">
+					<div class="ui-whitespace" style="height:8rem;padding-top:1rem;text-align:center;">
+						<p>订单总额（单位：元）</p>
+						<h1 style="font-size:2.3rem;color:#545454;">{{order.OrdersPrice}}</h1>
+					</div>
+					<div class="ui-whitespace" style="line-height:3rem;width:100%;background:white;border-bottom:1px solid #E0E0E0;"><i class="iconfont icon-dingdanguanli" style="color:#6EDBC5;font-size:18px;"></i>&nbsp;订单明细</div>
+					<div >
+						<table class="ui-order-table " style="width:100%;background:white;line-height:3rem;text-align:left;">
+							<tbody>
+								<tr ng-repeat="goods in order.OrdersDetails">
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;{{goods.GoodsName }}</td>
+									<td>{{goods.OGNum}}</td>
+									<td>¥{{goods.MGPrice}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="ui-poptips ui-poptips-success hint_msg" style="display: none;">
+						<div class="ui-poptips-cnt">请输入手机号码</div>
+					</div>
+					<div>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					</div>
+
+					<footer class="ui-footer ui-footer-btn">
+						<div class="ui-footer ui-footer-stable ui-btn-group ui-border-t ui-btn-100 ui-whitespace">
+							<div class="ui-btn-lg confirm" style="border: none;" ng-click="ConOK()">确认订单</div>
+						</div>
+					</footer>
+				</div>
+			</div>
+		</section>
+	</body>
+	<script type="text/javascript">
+		var totalPrice = window.location.search.split("=")[1];
+		var myModule = angular.module("app", []);
+		myModule.controller('SeriveConOK', ['$scope', '$http',
+				function($scope, $http) {
+					$scope.order = JSON.parse(window.sessionStorage.getItem('order'));
+					//确认订单					
+					$scope.ConOK = function(){								
+							var date = new Date();
+							$scope.order.ServiceDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();	
+							console.log($scope.order)
+							$.post(APIaddress + 'api/Orders/Update?' + Math.random(), $scope.order,function(data){
+								   if(data){
+								   	$(".hint_msg div").text("操作成功")
+									$(".hint_msg").css({
+										"display": "block"
+									});
+									setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000);	
+							window.location.href = 'order.html';                  
+					       }else{
+					       		$(".hint_msg div").text("操作失败")
+									$(".hint_msg").css({
+										"display": "block"
+									});
+									setTimeout(function(){
+										$(".hint_msg").css({
+											"display": "none"
+										});
+							}, 1000);
+					       }
+					   })
+									
+					}
+				}
+			])
+	</script>
+
+</html>

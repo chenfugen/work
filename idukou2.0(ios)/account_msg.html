@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="historyCtrl">
+		<header class="ui-header ui-header-positive ui-pulic-header">
+			<a href="account.html"><i class="ui-icon-return ui-header"><span style="font-size:14px">返回</span></i></a>
+			<h2>历史订单</h2>
+		</header>
+		<section class="ui-container" id="account_msg">
+			<ul style="text-align: center;">
+				<li><i class="iconfont icon-gerenkuang" style="color:#6edbc5;"></i>&nbsp;&nbsp;<span>{{order.TrueName}}</span></li>
+				<li style="color:#545454;font-size:25px;">{{order.TotalPrice.toFixed(2)}}</li>
+				<li>交易成功</li>
+			</ul>
+			<ul class="ui-whitespace msg" >
+				<li><div class="ui-text-left">类型</div><div class="ui-text-right">订单实付款</div></li>
+				<li><div class="ui-text-left">付款方式</div><div class="ui-text-right">{{payMethod}}</div></li>
+				<li><div class="ui-text-left">订单号</div><div class="ui-text-right">{{order.OCode}}</div></li>
+				<li><div class="ui-text-left">创建时间</div><div class="ui-text-right">{{order.CreateDate}}</div></li>
+				<li><div class="ui-text-left">联系方式</div><div class="ui-text-right">{{order.Phone}}</div></li>
+				<a href="tel:15888820458" class="ui-btn-lg
+              ui-btn-default" style="margin-top:50px;color:#6edbc5;border:1px solid #6edbc5;border-radius:8px;background: none;"><i class="iconfont icon-dianhua02" style="color:#6edbc5;"></i>&nbsp;拨打客户电话</a>
+			</ul>	
+        </section>
+	</body>
+	</div>
+	<script type="text/javascript">	
+		var id=window.location.search.split("=")[1];
+		var requestUrl = APIaddress + "api/Orders/getOrdersInfo/" + id;      
+		var myModule = angular.module("app", []);
+		myModule.controller('historyCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {	
+					$scope.order=data;
+					$scope.order.CreateDate=$scope.order.CreateDate.split("T")[0]
+                 // console.log(data);
+                  $http({
+					method: 'GET',
+					url:APIaddress + "api/Orders/GetOrdersPriceListByOID/" + id 
+				}).success(function(data) {	
+					if(data && data.length > 0) {
+						data.forEach(function(p) {
+							if(p.PType == 1) {							
+								switch(p.PayType) {
+								case -1:
+									return $scope.payMethod="未付款" ;
+								case 0:
+									return $scope.payMethod="现金";
+								case 1:
+									return $scope.payMethod="拉卡拉";
+								case 2:
+									return $scope.payMethod="微信";
+								case 3:
+									return $scope.payMethod="支付宝";
+								default:
+									return $scope.payMethod=" ";
+							  }
+							}
+						});
+                 }
+                })
+				}).error(function(data) {
+					console.log("错误......");
+				});
+			}
+		])
+	</script>
+
+</html>
+	</script>
+
+</html>

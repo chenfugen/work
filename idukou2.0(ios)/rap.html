@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="rapCtrl">
+			<header class="ui-header ui-header-positive ui-pulic-header">
+				<a href="home.html"><i class="ui-icon-return ui-header"><span style="font-size:14px;">返回</span></i></a>
+				<h2>口碑管理</h2>
+			</header>
+			<section class="ui-container" id="rappage">
+				<div class="panel active">
+					<ul class="ui-list rap_box">
+						<li class="ui-border-t">
+							<div class="ui-list-thumb">
+								<span class="score">
+            	         <h1>{{order.TotalScore}}</h1>
+                         <p>总评分</p>
+                         </span>
+							</div>
+							<ul class="rap_sclist">
+								<li >响应时间： <label>{{order.RestimeNum}}</label></li>
+								<li >专业程度： <label>{{order.MajorNum}}</label></li>
+								<li >服务态度： <label>{{order.MannerNum}}</label></li>
+							</ul>
+						</li>
+					</ul>
+					<!--<ul id="msg_radio">
+						<div class="ui-btn-wrap" style="background:white;height:25px;">
+							<li><button class="ui-btn ui-msg" ng-click="rapInit(0)">
+                                                         全部{{order.AllNum}}
+                            </button></li>
+							<li><button class="ui-btn ui-msg" ng-click="rapInit(1)">
+					                  未回复{{order.NOReply}}                                               
+                            </button></li>
+						    <li><button class="ui-btn ui-msg" ng-click="rapInit(2)">
+					                  低分{{order.LowGrade}}
+                            </button></li>
+						</div>
+					</ul>-->
+					<ul class="ui-list ui-list-pure ui-border-tb">
+						<li class="ui-border-t" ng-repeat="ppmsg in PublicPraises" style="border-top:1px solid #E0E0E0;">
+							<p><label class="ui-label-s">&nbsp;&nbsp;{{ppmsg.TotalScore}}&nbsp;&nbsp;</label>&nbsp;&nbsp;<span>{{ppmsg.UName}}</span><span class="ui-rap-data" style="float: right;">{{ppmsg.CreateDate | date:'yyyy-M-d'}}</span></p>
+							<div class="ui-rap-tit" style="width:100%;">
+								{{ppmsg.PQContent}}
+							</div>
+							<div class="ui-rap-tit" ng-if="ppmsg.State==1" style="border-top:1px solid #eee;text-align:left;width:100%;padding-top:10px;"><span>商家回复:						
+							</span>{{ppmsg.Reply}}</div>
+							<div class="ui-txt-info" ng-if="ppmsg.State==0">
+								<span class="c_alizarin"><i class="ui-txt-tips"></i>&nbsp;<i></i></span>
+								<!--<a href="#rapdetails" class="button ui-btn ui-btn-default ui-rap-btnright"  ng-click="reply(ppmsg)" style="float: right;">回&nbsp;复</a>-->
+							</div>
+						</li>
+					</ul>
+					<div class="ui-loading-wrap" style="font-size:1rem;" ng-if="loading">
+						<p>正在加载中...</p>
+						<i class="ui-loading"></i>
+					</div>
+					<div style="width:100%;height:40px;line-height:40px;text-align: center;font-size:1rem;" ng-if="bottom">
+						---- 到底了----
+					</div>
+			</section>
+			</div>
+	</body>
+	<script type="text/javascript">
+		var pageSize = 5,
+			pageNumber = 1;
+		var requestUrl = APIaddress + "api/PublicPraises/Score/" + MerchantID;
+		var myModule = angular.module("app", []);
+		myModule.controller('rapCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$scope.loading = false;
+				$scope.bottom = false;
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$(".ui-loading-block").hide();
+					if(data == null || data == "") {
+						$("#msg-list").html("<div class='ui-center'>还没有任何消息！</div>")
+					} else {
+						$scope.order = data;
+//						console.log(data)						
+//						$scope.RestimeNum =data.RestimeNum; //响应时间数						
+//						$scope.MajorNum = data.MajorNum; //专业程度数
+//						$scope.MannerNum =data.MannerNum; //服务态度数		
+					}
+				}).error(function(data) {
+					console.log("错误......");
+				});
+
+				function init() {
+					$http.get(APIaddress + "api/PublicPraises/" + pageNumber + "/" + pageSize + "/" + MerchantID)
+						.success(function(msg) {
+							//console.log(msg)
+							sessionStorage.setItem("TotalRecords", msg.Pagination.TotalRecords);
+							$scope.PublicPraises = msg.PublicPraiseDataObjectList;
+							$scope.loading = false;
+							var len = msg.PublicPraiseDataObjectList.length
+							for(var i = 0; i < len; i++) {
+								if(i == (msg.Pagination.TotalRecords - 1)) {
+									$scope.bottom = true;
+								}
+							}
+						})
+				}
+				init();
+				$(window).scroll(function() {
+					var scrollTop = $(this).scrollTop(); //滚动条距离顶部的高度
+					var scrollHeight = $(document).height(); //当前页面的总高度
+					var clientHeight = $(this).height(); //当前可视的页面高度
+					if(scrollTop + clientHeight >= scrollHeight) {
+						pageSize += 5;
+						if(pageSize < parseInt(sessionStorage.getItem("TotalRecords")) + 5) {
+							$scope.loading = true;
+							init();
+						}
+					}
+				})
+				//				$scope.rapInit = function(num) { //评论区
+				//					$http.get(APIaddress + "api/PublicPraises/" + MerchantID + "/" + num)
+				//						.success(function(msg) {
+				//							$scope.PublicPraises = msg;
+				//						}).error(function(msg) {
+				//							console.log("获取数据错误")
+				//						})
+				//				}
+
+				$scope.reply = function(msg) { //回复	
+					window.location.href = "rap_msg.html?a=" + msg.TotalScore + "&b=" + msg.UName + "&c=" + msg.CreateDate + "&d=" + msg.ReplyDate + "&id=" + msg.ID + "&OID=" + msg.OID + "&MID=" + msg.MID + "&PCType=" + msg.PCType;
+				}
+
+			}
+		])
+	</script>
+
+</html>

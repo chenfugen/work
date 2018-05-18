@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="commentCtrl">
+			<header class="ui-header ui-header-positive ui-pulic-header">
+				<a href="home.html"><i class="ui-icon-return ui-header"><span style="font-size:14px">返回</span></i></a>
+				<h2>备注管理</h2>
+			</header>
+			<section class="ui-container ui-whitespace" id="order_update">
+				<div class="ui-searchbar-wrap ui-border-b" style="position:fixed;left:0px;top:64px;width:100%;z-index: 999;">
+					<div class="ui-searchbar ui-border-radius" ng-click="searchbar()">
+						<i class="iconfont icon-sousuo_sousuo " style="font-size:15px; "></i>
+						<div class="ui-searchbar-text ">搜索预约人</div>
+						<div class="ui-searchbar-input "><input value=" " ng-change="search() " type="text " ng-model="searchPhone " placeholder="搜索预约人 " autocapitalize="off "></div>
+					</div>
+					<button class="ui-searchbar-cancel " ng-click="clearbar() ">取消</button>
+				</div>
+				<div style="height:45px;width:100%; "></div>
+				<ul class="order_list " ng-repeat="order in allOrdersOther | filter:customFilter">
+					<li class="ui-bottom ui-whitespace " style="font-size:1rem; ">
+						<div class="ui-text-left ">订单号:{{order.OCode}}</div>
+						<!--<div class="ui-text-right ">{{order.CreateDate}}</div>-->
+					</li>
+					<div class="order_details " ng-click="msg(order.ID)">
+						<li class="ui-whitespace ">
+							<div class="ui-text-left ">预约人:{{order.TrueName}}</div>
+						</li>
+						<li class="ui-whitespace">
+							<div class="ui-text-left ">服务时间:&nbsp;{{order.CreateDate | dateformat}}</div>
+						</li>
+						<li class="ui-whitespace">
+							<div class="ui-text-left ">服务地址:&nbsp;{{order.Address}}</div>
+						</li>
+						<li class="ui-whitespace" >
+							<div class="ui-text-left">备注:</div>
+							<div class="ui-text-left" ng-repeat="oremark in order.OrderRemarks">{{oremark.Remark}}&nbsp;</div>
+						</li>
+					</div>
+					<li class="remark">
+						<button class="ui-btn" ng-if="order.OrderRemarks.length>0" ng-click="remark(order.ID)">查看备注</button>
+						<button class="ui-btn" ng-if="order.OrderRemarks.length==0" ng-click="remark(order.ID)">添加备注</button>
+					</li>
+				</ul>
+			</section>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//搜索框
+		$('.ui-searchbar').click(function() {
+			$('.ui-searchbar-wrap').addClass('focus');
+			$('.ui-searchbar-input input').focus();
+		});
+		$('.ui-searchbar-cancel').click(function() {
+			$('.ui-searchbar-wrap').removeClass('focus');
+		});
+		var requestUrl = APIaddress + "api/Orders/GetOrderListByState/" + MerchantID + "/" + "1";
+		var myModule = angular.module("app", []);
+        myModule.filter('dateformat', function() {
+			return function(date) {
+				var d = date;
+				d = new Date(d)
+				d=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+				return d;
+			};
+		})
+		myModule.filter('orderPrice', function() {
+			return function(orderPrice, ptype) {
+				if(orderPrice) {
+					for(var i = 0; i < orderPrice.length; i++) {
+						if(orderPrice[i].PType == ptype) {
+							return orderPrice[i].Price;
+						}
+					}
+				}
+			};
+		});
+		myModule.controller('commentCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$(".ui-loading-block").hide();
+					if(data == null || data == "") {
+						$("#order_update").html("<div class='ui-center'>还没有任何消息！</div>")
+					} else {
+						//console.log(data);
+						$scope.allOrdersOther = data;
+						$scope.allOrdersOther.forEach(function(order) {
+							$http({
+								method: 'GET',
+								url: APIaddress + "api/Orders/getOrderRemarks/" + order.ID
+							}).success(function(data) {	
+								var msg=[];
+								if(typeof(data[0])=="object"){
+								  msg.push(data[0]);
+								  order.OrderRemarks=msg;
+								}else{
+									order.OrderRemarks=[];
+								}								
+							})
+							$scope.rowClass = function(oremark , index) {
+									if(index == 0) {
+										return oremark .value;
+									}
+									return '';
+								};
+						})
+						$scope.search = function() {
+							if($scope.searchPhone) {
+								$scope.filter = 'linkPhone';
+								$scope.searchtype = $scope.searchPhone;
+							}
+						}
+
+						$scope.customFilter = function(order) {
+							switch($scope.filter) {
+								case 'linkPhone':
+									if(typeof order.Phone == "string") {
+										return !order.Phone.indexOf($scope.searchPhone);
+									} else {
+										return false;
+									};
+								default:
+									return true;
+							}
+						};
+
+						$scope.searchbar = function() {
+							$('.ui-searchbar-wrap').addClass('focus');
+							$('.ui-searchbar-input input').focus();
+						}
+
+						$scope.clearbar = function() {
+							$scope.filter = '';
+							$scope.searchtype = '';
+							$scope.searchPhone = '';
+							$('.ui-searchbar-wrap').removeClass('focus');
+						}
+						$scope.remark = function(id) { //备注
+							//console.log(id)
+							window.location.href = "remark_msg.html?id=" + id;
+						}
+						$scope.msg = function(orderID) {
+							window.location.href = "comment_detail.html?id=" + orderID;
+						};
+					}
+				}).error(function(data) {
+					console.log("错误......");
+				});
+			}
+		])
+	</script>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+	
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="remarkCtrl">
+		<header class="ui-header ui-header-positive ui-pulic-header">
+				<a href="javascript:;" onclick="history.back()"><i class="ui-icon-return ui-header"><span style="font-size:14px">返回</span></i></a>
+				<h2>添加备注</h2>
+		</header>
+		<section class="ui-container" id="remark">
+			<div class="ui-whitespace user" style="border-bottom: 1px solid #eee;">
+				<div class="ui-text-left"><i class="iconfont icon-gerenkuang" style="color:#6EDBC5;font-size:15px;"></i>&nbsp;{{order.TrueName}}</div>
+			    <div class="ui-text-right">{{order.CreateDate}}</div>
+			</div>
+			<div class="ui-form ui-whitespace">
+				<textarea ng-model="remark" placeholder="请在此输入备注" style="border:none;width:100%;height:12rem;line-height:30px;color:#5C5C5C;"></textarea>
+			</div>		
+		    <div class="ui-poptips ui-poptips-success hint_msg" style="display: none;">
+					<div class="ui-poptips-cnt">备注不能为空！</div>
+			</div>
+		</section>  
+		<footer class="ui-footer-fixed ui-border-t" ng-click="save()">			
+			<ul class="ui-tiled">
+				<li ng-click="writeRemark()">
+					<div>保存</div>
+				</li>
+			</ul>
+        </footer> 
+		</div>
+	</body>
+	<script type="text/javascript">		
+		var id=window.location.search.split("=")[1];
+		var requestUrl = APIaddress + "api/Orders/getOrdersInfo/" + id;
+		var myModule = angular.module("app", []);
+		myModule.controller('remarkCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data){					
+						// console.log(data);
+						$scope.order = data;
+						$scope.save = function(){
+							if($scope.remark==undefined) {						
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000);
+							} else {
+								$.post(APIaddress + "api/Orders/CreateOrderRemark", {
+									Remark: $scope.remark,
+									MID: MerchantID,
+									OID: id
+								}, function(msg) {
+									if(msg) {
+										window.location.href = "remark.html?id=" + id;
+									}
+								})
+							}
+						}	
+				}).error(function(data) {
+					console.log("错误......");
+				});
+			}
+		])
+	</script>
+</html>

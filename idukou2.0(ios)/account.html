@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+	<style type="text/css">
+		input[type=date] {
+			-webkit-appearance: none;
+			outline: none;
+			border-radius: 0px;
+		}
+	</style>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="historyCtrl">
+			<header class="ui-header ui-header-positive ui-pulic-header">
+				<a href="home.html"><i class="ui-icon-return ui-header"><span style="font-size:14px">返回</span></i></a>
+				<h2>历史订单</h2>
+			</header>
+			<section class="ui-container">
+				<!--<div class="ui-whitespace" style="background:white;">
+					<ul class="ui-row ui-whitespace" style="text-align:center;height:50px;color:#888;font-size:14px;">
+						<li class="ui-col ui-col-50" style="border-right:1px solid #ccc;height:50px;">
+							<p style="margin-top:5px;">{{count}}</p>
+							<p>服务次数</p>
+						</li>
+						<li class="ui-col ui-col-50">
+							<p style="margin-top:5px;">{{revenue}}</p>
+							<p>总营收</p>
+						</li>
+					</ul>
+				</div>-->
+				<ul id="order_list" style="margin-top:0px;">
+					<li class="ui-border-b">
+						&nbsp;&nbsp;
+						<i class="iconfont icon-dingdanguanli" style="color: #6edbc5;font-size:20px;"></i>
+						<span>账单</span>
+					</li>
+					<li class="ui-border-b">
+						<ul class="ui-tiled">
+							<li>
+								<div>客户</div>
+							</li>
+							<li>
+								<div>结算金额</div>
+							</li>
+							<li>
+								<div>结算时间</div>
+							</li>
+						</ul>
+					</li>
+					<li class="ui-tiled-active" ng-repeat="order in allOrdersOther" ng-click="msg(order.ID)" style="overflow: hidden;background: white;border-bottom: 1px dotted #e0e0e0;"> <!--| filter:customFilter-->
+						<ul class="ui-tiled ui-bottom">
+							<!--<ul class="ui-list ui-list-text ui-list-active ui-list-cover ui-border-tb">-->
+							<li>
+								<div>{{order.TrueName}}</div>
+							</li>
+							<li>
+								<div>￥{{order.TotalPrice}}</div>
+							</li>
+							<li>
+								<div>{{order.LastModifyDate | dateformat}}</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<!--<div class="ui-actionsheet">
+				<div class="ui-actionsheet-cnt">
+					<h4>时间区间</h4>
+					<div style="height:40px;width:100%;background:#EDEDED;border-bottom:1px solid #e0e0e0;border-top:1px solid #e0e0e0;">
+						<input class="starttime" type="date" style="float:left;width:32%;font-size:1.2rem;height:40px;background:#EDEDED;border:none;border-right:1px solid #ccc ;" />
+						<div style="display:inline-block;width:8%;height:40px;float:left;">
+							<div style="width:90%;height:0.5px;float:left;background:#E0E0E0;margin-top:20px;margin-left:6%;"></div>
+						</div>
+						<input class="endtime" type="date" style="float:left;width:32%;font-size:1.2rem;height:40px;background:#EDEDED;border:none;border-left:1px solid #ccc;border-right:1px solid #ccc" />
+						<div class="ensure" ng-click="ensure()" style="float:right;width:27%;height:40px;line-height:40px;text-align: center;">确定</div>
+					</div>
+					<button style="color:#545454;border-bottom:1px solid #e0e0e0;" ng-click="week()">近一周</button>
+					<button style="color:#545454;" ng-click="yeak()">近一月</button>
+					<button style="color:#545454;" ng-click="normal()" class="clear">取消</button>
+				</div>
+			</div>
+			<footer class="ui-footer-fixed ui-border-t" style="border-top:1px solid #eee">
+				<div>筛选</div>
+			</footer>-->
+			<div class="ui-loading-wrap" style="font-size:1rem;" ng-if="loading">
+						<p>正在加载中...</p>
+						<i class="ui-loading"></i>
+					</div>
+			<div style="width:100%;height:40px;line-height:40px;text-align: center;font-size:1rem;" ng-if="bottom">
+				---- 到底了----
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var pageSize =15,
+			pageNumber = 1;
+		$(function() {
+			$("footer").click(function() {
+				$('.ui-actionsheet').addClass('show');
+			})
+			$(".ui-actionsheet button").click(function() {
+				$('.ui-actionsheet').removeClass('show');
+				$('.starttime').val("");
+				$('.endtime').val("");
+			})
+			$(".ensure").click(function() {
+				$('.ui-actionsheet').removeClass('show');
+				$('.starttime').val("");
+				$('.endtime').val("");
+
+			})
+		})
+		var myModule = angular.module("app", []);
+		myModule.filter('dateformat', function() {
+			return function(date){
+				var d = date;
+				d = new Date(d)
+				d=d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+				return d;
+			};
+		})
+		myModule.filter('hideName', function() {
+			return function(name) {
+				if(!isNaN(name)) {
+					name = name.substring(0, 3) + "****" + name.substring(7, 11);
+				}
+				return name;
+			};
+		});
+		myModule.controller('historyCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$scope.init=function(){
+				$http({
+					method: 'GET',
+					url: APIaddress + "api/Orders/GetOrderListByStateForPage/"+pageNumber+"/"+pageSize+"/"+ MerchantID + "/" + 67
+				}).success(function(data){
+					$(".ui-loading-block").hide();
+					if(data == null || data == "") {
+						$("#order_update").html("<div class='ui-center'>历史订单为空</div>")
+					} else {
+						//console.log(data)
+						$scope.allOrdersOther = data.OrdersDataObjectList;
+						sessionStorage.setItem("TotalRecords", data.Pagination.TotalRecords);						
+							$scope.loading = false;
+							var len = data.OrdersDataObjectList.length
+							for(var i = 0; i < len; i++) {
+								if(i == (data.Pagination.TotalRecords - 1)) {
+									$scope.bottom = true;
+								}
+							}
+						$scope.msg = function(orderID) {
+							window.location.href = "account_msg.html?id=" + orderID;
+						}
+					}
+				  }).error(function(data) {
+					console.log("错误......");
+				  });
+				 }
+				 $scope.init();
+				$(window).scroll(function() {
+					var scrollTop = $(this).scrollTop(); //滚动条距离顶部的高度
+					var scrollHeight = $(document).height(); //当前页面的总高度
+					var clientHeight = $(this).height(); //当前可视的页面高度
+					if(scrollTop + clientHeight >= scrollHeight) {
+						 pageSize+=15;
+						if(pageSize < parseInt(sessionStorage.getItem("TotalRecords")) + 15) {
+							$scope.loading = true;
+							$scope.init();
+						}
+					}
+				})
+//						var price = 0;
+//						for(var i = 0; i < data.length; i++) {
+//							price += data[i].TotalPrice;
+//						}
+//						$scope.count = data.length;
+//						$scope.revenue = price;
+//						$scope.week = function() {
+//							var j = 0,
+//								k = 0;
+//							 $scope.filter = 'week';
+//							var Nowdate = new Date();
+//							var a = Nowdate.getTime();
+//							var h = Nowdate.getHours() * 3600000;
+//							var m = Nowdate.getMinutes() * 60000;
+//							var s = Nowdate.getSeconds() * 1000;
+//							var WeekFirstDay = new Date(a - h - m - s) - (Nowdate.getDay() - 1) * 86400000; //这周第一天
+//							var WeekLastDay = (WeekFirstDay / 1000 + 7 * 86400) * 1000;
+//							for(var i = 0; i < data.length; i++) {
+//								if(WeekFirstDay < new Date(data[i].LastModifyDate).getTime() - 8 * 3600000 && new Date(data[i].LastModifyDate).getTime() - 8 * 3600000 < WeekLastDay) {
+//									k += data[i].TotalPrice
+//									j++;
+//								}
+//							}
+//							$scope.count = j;
+//							$scope.revenue = k;
+//						}
+//
+//						$scope.yeak = function() {
+//							$scope.filter = 'yeak';
+//							var j = 0,
+//								k = 0;
+//							var Nowdate = new Date();
+//							var MonthFirstDay = new Date(Nowdate.getFullYear(), Nowdate.getMonth(), 1).getTime(); //这个月第一天 
+//							var MonthLastDay = new Date(Nowdate.getFullYear(), Nowdate.getMonth() + 1, 1).getTime(); //下个月第一天
+//							for(var i = 0; i < data.length; i++) {
+//								if(MonthFirstDay < new Date(data[i].LastModifyDate).getTime() - 8 * 3600000 && new Date(data[i].LastModifyDate).getTime() - 8 * 3600000 < MonthLastDay) {
+//									k += data[i].TotalPrice
+//									j++;
+//								}
+//							}
+//							$scope.count = j;
+//							$scope.revenue = k;
+//						}
+//						$scope.normal = function() {
+//							$scope.filter = 'normal';
+//							var j = 0,
+//								k = 0;
+//							for(var i = 0; i < data.length; i++) {
+//								k += data[i].TotalPrice
+//								j++;
+//							}
+//							$scope.count = j;
+//							$scope.revenue = k;
+//						}
+//						$scope.ensure = function() {
+//							$scope.filter = 'ensure';
+//							var j = 0,
+//								k = 0;
+//							var starttime = new Date($(".starttime").val()).getTime();
+//							var endtime = new Date($(".endtime").val()).getTime();
+//							for(var i = 0; i < data.length; i++) {
+//								if(starttime < new Date(data[i].LastModifyDate).getTime() - 8 * 3600000 && new Date(data[i].LastModifyDate).getTime() - 8 * 3600000 < endtime) {
+//									k += data[i].TotalPrice
+//									j++;
+//								}
+//							}
+//							$scope.count = j;
+//							$scope.revenue = k;
+//						}
+//						$scope.customFilter = function(order) {
+//							var starttime = new Date($(".starttime").val()).getTime();
+//							var endtime = new Date($(".endtime").val()).getTime();
+//							var Nowdate = new Date();
+//							var a = Nowdate.getTime();
+//							var h = Nowdate.getHours() * 3600000;
+//							var m = Nowdate.getMinutes() * 60000;
+//							var s = Nowdate.getSeconds() * 1000;
+//							var WeekFirstDay = new Date(a - h - m - s) - (Nowdate.getDay() - 1) * 86400000; //这周第一天
+//							var WeekLastDay = (WeekFirstDay / 1000 + 7 * 86400) * 1000;
+//							var MonthFirstDay = new Date(Nowdate.getFullYear(), Nowdate.getMonth(), 1).getTime(); //这个月第一天 
+//							var MonthLastDay = new Date(Nowdate.getFullYear(), Nowdate.getMonth() + 1, 1).getTime(); //下个月第一天		
+//							switch($scope.filter) {
+//								case 'ensure':
+//									return starttime < new Date(order.LastModifyDate).getTime() - 8 * 3600000 && new Date(order.LastModifyDate).getTime() - 8 * 3600000 < endtime;
+//								case 'week':
+//									return WeekFirstDay < new Date(order.LastModifyDate).getTime() - 8 * 3600000 && new Date(order.LastModifyDate).getTime() - 8 * 3600000 < WeekLastDay;
+//								case 'yeak':
+//									return MonthFirstDay < new Date(order.LastModifyDate).getTime() - 8 * 3600000 && new Date(order.LastModifyDate).getTime() - 8 * 3600000 < MonthLastDay;
+//								case 'normal':
+//									return true;
+//								default:
+//									return true;
+//							}
+//						};
+			
+			}
+		])
+</script>
+</html>

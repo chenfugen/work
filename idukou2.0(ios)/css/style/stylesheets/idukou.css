@@ -1,0 +1,761 @@
+@media screen and (min-width: 320px) {
+  /* line 6, ../sass/idukou.scss */
+  html {
+    font-size: 10px !important;
+  }
+}
+@media screen and (min-width: 360px) {
+  /* line 11, ../sass/idukou.scss */
+  html {
+    font-size: 11.25px !important;
+  }
+}
+@media screen and (min-width: 400px) {
+  /* line 16, ../sass/idukou.scss */
+  html {
+    font-size: 12.5px !important;
+  }
+}
+@media only screen and (min-width: 481px) {
+  /* line 21, ../sass/idukou.scss */
+  html {
+    font-size: 94% !important;
+  }
+}
+@media only screen and (min-width: 561px) {
+  /* line 26, ../sass/idukou.scss */
+  html {
+    font-size: 109% !important;
+  }
+}
+@media screen and (min-width: 640px) {
+  /* line 31, ../sass/idukou.scss */
+  html {
+    font-size: 20px !important;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* line 36, ../sass/idukou.scss */
+  html {
+    font-size: 22px !important;
+  }
+}
+/* line 42, ../sass/idukou.scss */
+*,
+*:after,
+*:before {
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  margin: 0;
+  padding: 0;
+  -ms-touch-action: pan-y;
+}
+
+/* line 62, ../sass/idukou.scss */
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #EEEEEE;
+  overflow-y: auto;
+  color: #5c5c5c;
+  -webkit-text-size-adjust: none;
+}
+
+/* line 72, ../sass/idukou.scss */
+.ng-cloak {
+  display: none;
+}
+
+/* line 75, ../sass/idukou.scss */
+header a {
+  width: 20%;
+  position: absolute;
+}
+
+/* line 80, ../sass/idukou.scss */
+#loginpage {
+  width: 100%;
+  position: absolute;
+  top: 80px;
+}
+/* line 84, ../sass/idukou.scss */
+#loginpage .ui-form {
+  height: 4.5rem;
+  margin-top: 1.5rem;
+  line-height: 4.5rem;
+}
+/* line 89, ../sass/idukou.scss */
+#loginpage .login {
+  margin-top: 2rem;
+  background: #1ebd9e;
+  color: white;
+}
+/* line 94, ../sass/idukou.scss */
+#loginpage .login:active {
+  background: #fff;
+  color: #888;
+}
+/* line 98, ../sass/idukou.scss */
+#loginpage h5 {
+  width: 100%;
+  text-align: center;
+  margin-top: 16rem;
+}
+
+/* line 105, ../sass/idukou.scss */
+#home_list {
+  margin-top: -40px;
+}
+/* line 107, ../sass/idukou.scss */
+#home_list ul {
+  width: 100%;
+}
+/* line 109, ../sass/idukou.scss */
+#home_list ul li {
+  position: relative;
+  width: 100%;
+  height: 10rem;
+  border-radius: 5px;
+}
+/* line 114, ../sass/idukou.scss */
+#home_list ul li a {
+  width: 100%;
+  height: 100%;
+}
+/* line 117, ../sass/idukou.scss */
+#home_list ul li a div {
+  margin-top: 3.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+/* line 133, ../sass/idukou.scss */
+.ui-footer ul li .showpage {
+  color: #1ebd9e;
+}
+/* line 136, ../sass/idukou.scss */
+.ui-footer ul li div {
+  color: #5c5c5c;
+  font-size: 12px;
+}
+
+/* line 147, ../sass/idukou.scss */
+#mycord .user_msg {
+  margin-top: 20px;
+  width: 100%;
+  height: 90px;
+}
+/* line 151, ../sass/idukou.scss */
+#mycord .user_msg img {
+  float: left;
+  width: 80px;
+  height: 80px;
+}
+/* line 156, ../sass/idukou.scss */
+#mycord .user_msg ul {
+  float: left;
+  margin-left: 20px;
+}
+/* line 159, ../sass/idukou.scss */
+#mycord .user_msg ul li {
+  color: #5c5c5c;
+  margin-top: 15px;
+}
+/* line 162, ../sass/idukou.scss */
+#mycord .user_msg ul li i {
+  float: left;
+}
+/* line 165, ../sass/idukou.scss */
+#mycord .user_msg ul li div {
+  float: left;
+  margin-left: 10px;
+}
+/* line 172, ../sass/idukou.scss */
+#mycord #qr_container {
+  margin-top: 1rem;
+  width: 100%;
+  background: white;
+}
+
+/* line 179, ../sass/idukou.scss */
+#userpage {
+  width: 100%;
+}
+/* line 181, ../sass/idukou.scss */
+#userpage .myfavicon {
+  width: 100%;
+  height: 150px;
+  background: #1ebd9e;
+  color: white;
+}
+/* line 186, ../sass/idukou.scss */
+#userpage .myfavicon h5 {
+  margin-top: 15px;
+}
+/* line 190, ../sass/idukou.scss */
+#userpage ul {
+  margin-top: 5px;
+}
+/* line 193, ../sass/idukou.scss */
+#userpage .exit {
+  background: #1ebd9e;
+  color: white;
+}
+/* line 197, ../sass/idukou.scss */
+#userpage .exit:active {
+  background: #eee;
+  color: #888;
+}
+
+/* line 204, ../sass/idukou.scss */
+#suggestion .exit {
+  background: #1ebd9e;
+  color: white;
+}
+/* line 208, ../sass/idukou.scss */
+#suggestion .exit:active {
+  background: #eee;
+  color: #888;
+}
+
+/* line 214, ../sass/idukou.scss */
+#rappage {
+  position: relative;
+}
+/* line 216, ../sass/idukou.scss */
+#rappage .rap_box {
+  background: #1ebd9e;
+  height: 12rem;
+}
+/* line 219, ../sass/idukou.scss */
+#rappage .rap_box .score {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 8rem 8rem;
+  border: 1px solid white;
+  text-align: center;
+  color: white;
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+}
+/* line 229, ../sass/idukou.scss */
+#rappage .rap_box .score p {
+  font-size: 1.2rem;
+}
+/* line 232, ../sass/idukou.scss */
+#rappage .rap_box .score h1 {
+  font-size: 3rem;
+  margin-top: 1rem;
+}
+/* line 237, ../sass/idukou.scss */
+#rappage .rap_box .rap_sclist {
+  position: absolute;
+  width: 45%;
+  height: 8rem;
+  right: 1.5rem;
+  top: 2rem;
+}
+/* line 243, ../sass/idukou.scss */
+#rappage .rap_box .rap_sclist li {
+  height: 3rem;
+  color: white;
+}
+/* line 246, ../sass/idukou.scss */
+#rappage .rap_box .rap_sclist li label {
+  color: #fa4343;
+}
+/* line 253, ../sass/idukou.scss */
+#rappage #msg_radio li {
+  float: left;
+  width: 33%;
+  text-align: center;
+}
+
+/* line 262, ../sass/idukou.scss */
+#order_list {
+  border-top: 1px dotted #e0e0e0;
+  background: white;
+  margin-top: 10px;
+}
+/* line 266, ../sass/idukou.scss */
+#order_list li {
+  height: 35px;
+  line-height: 35px;
+}
+/* line 270, ../sass/idukou.scss */
+#order_list .ui-border-b {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* line 275, ../sass/idukou.scss */
+.ensure {
+  cursor: pointer;
+}
+
+/* line 278, ../sass/idukou.scss */
+.ensure:active {
+  background: #ccc;
+}
+
+/* line 285, ../sass/idukou.scss */
+#account_msg ul li {
+  margin-top: 15px;
+}
+/* line 290, ../sass/idukou.scss */
+#account_msg .msg li {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 1px dotted #e0e0e0;
+}
+
+/* line 301, ../sass/idukou.scss */
+#order_update .order_list {
+  border-radius: 10px;
+  background: white;
+  margin-top: 10px;
+}
+/* line 305, ../sass/idukou.scss */
+#order_update .order_list li {
+  font-size: 1.3rem;
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
+  overflow: hidden;
+  position: relative;
+}
+/* line 315, ../sass/idukou.scss */
+#order_update .order_list .remark button {
+  position: absolute;
+  left: 50%;
+  margin-left: -40px;
+  top: 50%;
+  margin-top: -15px;
+  color: white;
+}
+/* line 324, ../sass/idukou.scss */
+#order_update .order_list .order_details:active {
+  background: #e0e0e0;
+}
+/* line 327, ../sass/idukou.scss */
+#order_update .order_list a,
+#order_update .order_list button {
+  color: #1ebd9e;
+  text-align: center;
+}
+/* line 332, ../sass/idukou.scss */
+#order_update .order_list a:active {
+  background: #e0e0e0;
+}
+/* line 335, ../sass/idukou.scss */
+#order_update .order_list button:active {
+  background: #e0e0e0;
+}
+
+/* line 343, ../sass/idukou.scss */
+#order_detail .order_details {
+  width: 100%;
+  border: 1px dotted #e0e0e0;
+  background: white;
+  margin-top: 10px;
+}
+/* line 348, ../sass/idukou.scss */
+#order_detail .order_details li {
+  font-size: 1.3rem;
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
+  overflow: hidden;
+  position: relative;
+}
+/* line 355, ../sass/idukou.scss */
+#order_detail .order_details li span {
+  display: inline-block;
+  width: 55%;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  left: 10rem;
+}
+/* line 363, ../sass/idukou.scss */
+#order_detail .order_details li button {
+  position: absolute;
+  left: 50%;
+  margin-left: -35px;
+  top: 50%;
+  margin-top: -15px;
+}
+/* line 371, ../sass/idukou.scss */
+#order_detail .order_details .ui-border-b {
+  border-bottom: 1px solid #e0e0e0;
+}
+/* line 374, ../sass/idukou.scss */
+#order_detail .order_details .ui-bottom {
+  border-bottom: 1px dotted #e0e0e0;
+}
+/* line 378, ../sass/idukou.scss */
+#order_detail .order_line {
+  width: 100%;
+  border: 1px dotted #ccc;
+  background: white;
+  margin-top: 10px;
+}
+/* line 383, ../sass/idukou.scss */
+#order_detail .order_line li {
+  font-size: 1.3rem;
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
+  overflow: hidden;
+}
+/* line 390, ../sass/idukou.scss */
+#order_detail .order_line .ui-border-b {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* line 397, ../sass/idukou.scss */
+#deposit_management .order_details {
+  width: 100%;
+  border: 1px dotted #ccc;
+  background: white;
+  margin-top: 10px;
+  position: relative;
+}
+/* line 403, ../sass/idukou.scss */
+#deposit_management .order_details li {
+  font-size: 1.3rem;
+  width: 95%;
+  height: 3rem;
+  line-height: 3rem;
+  overflow: hidden;
+}
+/* line 410, ../sass/idukou.scss */
+#deposit_management .order_details .ui-border-b {
+  border-bottom: 1px solid #e0e0e0;
+}
+/* line 413, ../sass/idukou.scss */
+#deposit_management .order_details .ui-bottom {
+  border-bottom: 1px dotted #e0e0e0;
+}
+/* line 417, ../sass/idukou.scss */
+#deposit_management .order_details:active {
+  background: #E0E0E0;
+}
+/* line 420, ../sass/idukou.scss */
+#deposit_management .deposit_management {
+  width: 100%;
+  height: 300px;
+  border: 1px dotted #ccc;
+  background: white;
+  margin-top: 10px;
+  position: relative;
+}
+/* line 427, ../sass/idukou.scss */
+#deposit_management .deposit_management li {
+  font-size: 1.3rem;
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
+  overflow: hidden;
+}
+/* line 434, ../sass/idukou.scss */
+#deposit_management .deposit_management .ui-border-b {
+  border-bottom: 1px solid #e0e0e0;
+}
+/* line 437, ../sass/idukou.scss */
+#deposit_management .deposit_management .ui-bottom {
+  border-bottom: 1px dotted #e0e0e0;
+}
+
+/* line 443, ../sass/idukou.scss */
+footer .ui-border-r {
+  border-right: 1px solid #e0e0e0;
+}
+
+/* line 451, ../sass/idukou.scss */
+#remark .user {
+  width: 100%;
+  height: 3rem;
+  background: white;
+  line-height: 3rem;
+}
+/* line 457, ../sass/idukou.scss */
+#remark .add {
+  position: fixed;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 6rem 6rem;
+  background: #1ebd9e;
+  bottom: 80px;
+  left: 50%;
+  margin-left: -3rem;
+  text-align: center;
+}
+/* line 468, ../sass/idukou.scss */
+#remark .add:active {
+  background: #6edbc5;
+}
+/* line 471, ../sass/idukou.scss */
+#remark .remark_list:active {
+  background: #E0E0E0;
+}
+
+/* line 477, ../sass/idukou.scss */
+#registerpage {
+  width: 100%;
+}
+/* line 479, ../sass/idukou.scss */
+#registerpage .ui-form {
+  height: 5rem;
+  margin-top: 1rem;
+  line-height: 5rem;
+}
+/* line 484, ../sass/idukou.scss */
+#registerpage .verify {
+  margin-top: 2rem;
+  background: #1ebd9e;
+  color: white;
+}
+/* line 489, ../sass/idukou.scss */
+#registerpage h5 {
+  width: 100%;
+  text-align: center;
+  margin-top: 18rem;
+}
+/* line 494, ../sass/idukou.scss */
+#registerpage label {
+  color: #5c5c5c;
+}
+
+/* line 499, ../sass/idukou.scss */
+#forgetpassword {
+  width: 100%;
+}
+/* line 501, ../sass/idukou.scss */
+#forgetpassword .ui-form {
+  height: 4.5rem;
+  margin-top: 1rem;
+  line-height: 4.5rem;
+}
+
+/* line 507, ../sass/idukou.scss */
+#securitycode {
+  position: absolute;
+  top: 6.5rem;
+  width: 100%;
+}
+/* line 511, ../sass/idukou.scss */
+#securitycode .verify {
+  text-align: center;
+}
+/* line 513, ../sass/idukou.scss */
+#securitycode .verify h1 {
+  font-size: 30px;
+}
+/* line 517, ../sass/idukou.scss */
+#securitycode .ui-form {
+  height: 4.5rem;
+  margin-top: 1rem;
+  line-height: 4.5rem;
+}
+
+/* line 524, ../sass/idukou.scss */
+.confirm {
+  background: #1ebd9e;
+  color: white;
+}
+
+/* line 528, ../sass/idukou.scss */
+.confirm:active {
+  background: #fff;
+  color: #888;
+}
+
+/* line 535, ../sass/idukou.scss */
+#main_plane {
+  padding-top: 6rem;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 540, ../sass/idukou.scss */
+.menu {
+  color: #A8A9AD !important;
+}
+
+/* line 543, ../sass/idukou.scss */
+.menus {
+  width: 27%;
+  height: 100%;
+  float: left;
+  border-right: 1px solid #f0f0f0;
+  background: #f7f7f7;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* line 554, ../sass/idukou.scss */
+.all_list {
+  width: 72.8%;
+  float: right;
+  background: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* line 563, ../sass/idukou.scss */
+.menus li {
+  line-height: 4rem;
+  font-size: 18px;
+  text-align: center;
+  color: #999;
+  position: relative;
+}
+
+/* line 570, ../sass/idukou.scss */
+.menus .active {
+  background: #fff;
+  color: #4BCC60 !important;
+  display: block;
+}
+
+/* line 575, ../sass/idukou.scss */
+.title.active {
+  color: #4BCC60 !important;
+}
+
+/* line 578, ../sass/idukou.scss */
+.menus .active:before {
+  content: "";
+  width: 5px;
+  height: 1rem;
+  background-color: #4BCC60 !important;
+  position: absolute;
+  left: -0%;
+  top: 0;
+}
+
+/* line 587, ../sass/idukou.scss */
+.menus .active:after {
+  content: "";
+  width: 1px;
+  height: 1rem;
+  background-color: #fff;
+  position: absolute;
+  right: -1px;
+  top: 0;
+}
+
+/* line 596, ../sass/idukou.scss */
+.title {
+  width: 100%;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  background: #f7f7f7;
+  font-weight: bold;
+}
+
+/* line 603, ../sass/idukou.scss */
+.msglist {
+  position: relative;
+  border-bottom: 1px dotted #E0E0E0;
+}
+/* line 606, ../sass/idukou.scss */
+.msglist input {
+  border: none;
+  margin-left: 0.5rem;
+  height: 30px;
+}
+/* line 611, ../sass/idukou.scss */
+.msglist a {
+  font-size: 1rem;
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+}
+/* line 617, ../sass/idukou.scss */
+.msglist button {
+  position: absolute;
+  right: 0px;
+  text-align: center;
+  width: 25%;
+  color: #6edbc5;
+  background: white;
+  border-left: 1px solid #E0E0E0;
+  font-size: 15px;
+}
+/* line 627, ../sass/idukou.scss */
+.msglist button:active {
+  background: #E0E0E0;
+}
+
+/* line 634, ../sass/idukou.scss */
+#paycord .order_details {
+  width: 100%;
+  border: 1px dotted #ccc;
+  background: white;
+  margin-top: 10px;
+  position: relative;
+}
+/* line 640, ../sass/idukou.scss */
+#paycord .order_details li {
+  font-size: 1.3rem;
+  width: 95%;
+  height: 3rem;
+  line-height: 3rem;
+  overflow: hidden;
+}
+/* line 647, ../sass/idukou.scss */
+#paycord .order_details .ui-border-b {
+  border-bottom: 1px solid #e0e0e0;
+}
+/* line 650, ../sass/idukou.scss */
+#paycord .order_details .ui-bottom {
+  border-bottom: 1px dotted #e0e0e0;
+}
+/* line 654, ../sass/idukou.scss */
+#paycord .order_details:active {
+  background: #E0E0E0;
+}
+/* line 657, ../sass/idukou.scss */
+#paycord .order_list {
+  width: 100%;
+  border: 1px dotted #ccc;
+  background: white;
+  margin-top: 10px;
+  position: relative;
+}
+/* line 663, ../sass/idukou.scss */
+#paycord .order_list li {
+  font-size: 1.3rem;
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
+  overflow: hidden;
+}
+/* line 670, ../sass/idukou.scss */
+#paycord .order_list .ui-border-b {
+  border-bottom: 1px solid #e0e0e0;
+}
+/* line 673, ../sass/idukou.scss */
+#paycord .order_list .ui-bottom {
+  border-bottom: 1px dotted #e0e0e0;
+}
+/* line 677, ../sass/idukou.scss */
+#paycord .price {
+  color: #FA7878;
+  font-size: 1.8rem;
+}
+/* line 681, ../sass/idukou.scss */
+#paycord .addPrivilege {
+  display: none;
+}

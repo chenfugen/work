@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<link rel="stylesheet" href="css/frozen.css" />
+		<link rel="stylesheet" href="css/lwwtemp.min.css" />
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/angular/angular-resource.min.js"></script>
+		<script src="js/angular/angular.js"></script>
+		<script src="js/zepto.min.js"></script>
+		<script src="js/frozen.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+	<style type="text/css">
+		.navleft {
+			text-align: center;
+			background: #F3F3F3;
+			line-height: 40px;
+			display: block;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			cursor: pointer;
+		}
+		
+		.navleft:hover {
+			background: #ccc;
+			color: white;
+		}
+		
+		#MerchantGoods {
+			float: right;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+	</style>
+
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive ui-pulic-header">
+				<a href="order.html" ><i class="ui-icon-return ui-header" style="margin-left:10px;"><span style="font-size:14px;">返回</span></i></a>
+				<h2>选择服务</h2>
+		</header>
+		<section class="ui-container" id="merchantSerive">
+			<div ng-app="IDukou" ng-controller="MerchantSelectServiceController" ng-cloak class="ng-cloak">
+				<div class="ui-col" id="selMaskLeft"  ng-click="test($event)" style="width:100px;height:100%;background:#eee;overflow-y:auto;">
+					<ul class="floatCtro ui-txt-sub">
+						<li class="navleft" data-service-index="{{$index}}" ng-repeat="service in services">
+							{{service.TName}}
+						</li>
+					</ul>
+				</div>
+				<div id="MerchantGoods">
+					<div id="{{service.ID}}" data-service-index="{{$index}}" ng-repeat="service in services" class="lisboxsel">
+						<div id="serviceName" style="height:30px;line-height:30px;font-size:15px;">&nbsp;&nbsp;{{service.TName}}</div>
+						<ul class="ui-list">
+							<li class="ui-border-b" ng-click="selectGoods(merchantGoods)" ng-repeat="merchantGoods in service.goods"    repeat-finish="renderFinish('merchantGoods')" style="height:100px;">
+								<div class="ui-list-thumb ui-list-show" ng-click="imgShow(merchantGoods)">
+									<span style="background-image:url({{merchantGoods.MGImg | imageSrc}})"></span>
+								</div>
+								<div style="padding-top:10px;">
+									<h5>{{merchantGoods.MGName}}</h5>
+									<div class="ui-txt-warning">￥{{merchantGoods.MGPrice}}</div>
+									<div class="ui-rap-add">
+										        <span class="ui-rap-data" style="color:#818181;">
+										        	<div style="width: 100%;height:6px;"></div>
+                                                    <i class="iconfont icon-gowild ui-txt-f24" ng-if="merchantGoods.OrderCount > 0" ng-click="subtractOrderGoods(merchantGoods,service)"></i>
+                                                    <i class="ui-add-figure" ng-if="merchantGoods.OrderCount > 0">&nbsp;{{merchantGoods.OrderCount}}&nbsp;</i>
+                                                    <i class="iconfont icon-icoadd2x ui-txt-f24 c_turquoise" ng-click="addOrderGoods(merchantGoods,service)"></i>
+                                                </span>
+										<span class="ui-rap-data ui-rap-addtit" style="display:none;" ng-click="orderShow(true)">选规格</span>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div id="box" style="width:100%;"></div>
+				</div>
+							<!--////选择类型 弹出list//////-->
+					<div class="ui-ordershow" id="ui-ordershow-clear" ng-class="{true : 'show'}[isOrderShow]" style="display:none;">
+						<div class="ui-ordershow-cnt">
+							<h4><span class="ui-txt-sub">添加规格</span><i class="ui-ico-loginclose ui-txt-f30 ui-rap-data" ng-click="orderShow(false)"></i></h4>
+							<div class="sheetbox wrapper">
+								<ul class="ui-list">
+									<li class="ui-border-b">
+										<div class="ui-list-thumb">
+											<span style="background-image:url(img/img_01.jpg)"></span>
+										</div>
+										<div class="ui-list-info">
+											<h5 class="ui-nowrap">一条龙祈福套餐(不含用品)一条龙祈福套餐(不含用品)</h5>
+											<p>已售990</p>
+											<p><span class="ui-txt-warning">￥6888</span></p>
+											<div class="ui-rap-add"><span class="ui-rap-data "><i class="ui-ico-subtract ui-txt-f32"></i><i class="ui-add-figure">1</i><i class="ui-ico-add05  ui-txt-f32 c_turquoise"></i></span></div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="ui-sheet-btn">
+								<button class="ui-btn-lg ui-btn-primary" id="ui-ordershow-ok">确定</button>
+							</div>
+						</div>
+					</div>
+					<!--////选择弹出list end//////-->
+
+			<div class="ui-loading-block show" style="display: none;">
+				<div class="ui-loading-cnt" style="margin:50% auto">
+					<i class="ui-loading-bright"></i>
+					<p>正在加载中...</p>
+				</div>
+			</div>
+			<div class="ui-footer ui-footer-stable ui-ser-label ui-border-t ui-ser-ok " style="position: fixed;bottom:0px;">
+				<div class="ui-ser-com" ng-click="cartShow()">
+					<i class="iconfont icon-gouwuche ui-txt-f24 c_alizarin ui-border-r"></i>
+					<div>总额：<span class="c_alizarin"><strong class="ui-txt-tips">¥&nbsp;</strong>{{totalPrice}}</span></div>
+				</div>
+			<button class="ui-btn-primary"  ng-click="submit()" style="-webkit-appearance: none;" >下一步</button>
+			</div>
+			<!--////选择类型 弹出list//////-->
+			<div class="ui-accountshow" ng-class="{true : 'show'}[isCartShow]">
+				<div class="ui-accountshow-cnt">
+					<h4><span class="ui-txt-sub">购物车</span><span class="ui-rap-data" ng-click="clearCart()" style="display:none;"><i class="ui-ico-delete ui-txt-f22"></i>清空</span></h4>
+					<div class="sheetbox wrapper">
+						<div ng-repeat="service in services">
+							<ul class="ui-list ui-list-pure ui-border-tb" >
+								<li class="ui-border-t" ng-repeat="merchantGoods in service.goods" ng-if="merchantGoods.OrderCount > 0">
+									<div class="ui-row-flex">
+										<div class="ui-col ui-col-3">
+											<h3>{{merchantGoods.MGName}}</h3>
+											<p class="ui-txt-info" style="font-size:12px;">{{service.SName}}</p>
+										</div>
+										<div class="ui-col ui-col-2">
+											<span class="ui-txt-sub ui-ser-amount">¥{{merchantGoods.MGPrice}}</span>
+											<span class="ui-rap-data02 ui-rap-add ui-ser-amount" style="color:#818181;">
+                                                    <i class="iconfont icon-gowild ui-txt-f24" ng-if="merchantGoods.OrderCount > 0" ng-click="subtractOrderGoods(merchantGoods,service)"></i>
+                                                    <i class="ui-add-figure" ng-if="merchantGoods.OrderCount > 0">&nbsp;{{merchantGoods.OrderCount}}&nbsp;</i>
+                                                    <i class="iconfont icon-icoadd2x ui-txt-f24 c_turquoise" ng-click="addOrderGoods(merchantGoods,service)"></i>
+                                            </span>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--////选择弹出list end//////-->
+
+			<!--////查看物品大图//////-->
+			<div class="ui-showbox ui-showbox-hide" ng-click="imgHide()" style="top:65px;height: 100%;">
+				<div class="ui-whitespace">
+					<div class="ui-placehold-img  ui-imgser  c_white" style="margin-top:-5rem;">
+						<img ng-src="{{showGoods.MGImg | imageSrc}}" class="" style="width:100%;height:22rem;"/>
+						<h3 style="color: #5C5C5C;">{{showGoods.MGName}}&nbsp;&nbsp;<span class="c_carrot">单价：{{showGoods.MGPrice}}元&nbsp;&nbsp;</span></h3>
+						<p class="ui-nowrap-multi ui-txt-sub ui-nm4" style="color: #5C5C5C;">{{showGoods.MGRemark}}</p>
+					</div>
+				</div>
+			</div>
+
+		<div class="ui-poptips ui-poptips-success hint_msg" style="display: none;">
+			<div class="ui-poptips-cnt">请输入手机号码</div>
+		</div>		
+		</div>
+		</section>
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			var height = $(window).height() - $("header").height()-45;
+			var width = $(window).width() - 100;
+			$("#selMaskLeft").css({
+				"height": height
+			});
+			$("#MerchantGoods").css({
+				"width": width,
+				"height": height
+			});
+			$("#box").css({
+				"height": height
+			});
+		})
+		var config = {
+			webAPI: {
+				address: APIaddress
+			},
+			file: {
+				imageRoot: 'http://img.idukou.com/'
+			},
+			sms: {
+				template: {
+					verification: '08A74B1F-5C99-46FC-A0DD-E49919A78EA6',
+					verifyCode: '7b9a2aa5-9944-48be-9602-176ed4cedc75'
+				}
+			},
+			baidu: {
+				push: {
+					apiKey: 'hoq3wex5MblhGc0j48DwcMPk'
+				}
+			}
+		};
+		var myModule = angular.module("IDukou", []);
+		myModule.filter('imageSrc', function() {
+			return function(img) {
+				if(img) {
+					img = config.file.imageRoot + img;
+				} else {
+					img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjZEREZGMUE4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjZEREZGMUI4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NkRERkYxODg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NkRERkYxOTg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pr0VlogAAAXbSURBVHja7JvZTjJN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';
+				}
+				return img;
+			};
+		});
+
+		myModule.controller('MerchantSelectServiceController',
+			function($scope, $http) {
+				$(".ui-loading-block").css("display", "block");
+				window.selectService = {};
+				window.selectService.scope = $scope;
+
+				$scope.order = JSON.parse(window.sessionStorage.getItem("order"));
+				var orderprice = 0;
+				for(var i = 0; i < $scope.order.OrdersDetails.length; i++) {
+					orderprice += $scope.order.OrdersDetails[i].MGPrice * $scope.order.OrdersDetails[i].OGNum;
+				}
+				$scope.totalPrice = orderprice;
+				if(!$scope.isFromBack || !$scope.services) {
+					var requestUrl = APIaddress + "api/MerchantGoodsTypes/" + MerchantID;
+					$http({
+						method: 'GET',
+						url: requestUrl
+					}).success(function(data) {
+						// console.log(data.length)
+						if(data == null || data == "") {
+							$("#merchantSerive").html("<div class='ui-center'>暂无商品！</div>")
+						} else {
+							$scope.services = data;
+							var slength = data.length;
+							$scope.services.forEach(function(service) {
+								$http({
+									method: 'GET',
+									url: APIaddress + "api/MerchantGoods/" + MerchantID + "/" + service.ID + "/-1" + "/0" + "?" + Math.random()
+								}).success(function(data) {
+									service.goods = data;
+									if($scope.order.OrdersDetails && $scope.order.OrdersDetails.length > 0) {
+										service.goods.forEach(function(mg) {
+											$scope.order.OrdersDetails.forEach(function(goods) {
+												if(mg.ID == goods.MGMID) {
+													mg.OrderCount = goods.OGNum;
+													if(!goods.isNew)
+														mg.isRapShow = goods.OGNum;
+												}
+											})
+										})
+									}
+									$("#merchantselectService").css("visibility", "visible");
+									$(".ui-loading-block").css("display", "none");
+									$("#selMaskLeft ul li").eq(0).css({
+										"background": "white",
+										"color": "#fa7878"
+									});
+								})
+							})
+
+							function getTOP(i) { //点击获取滚动条高度
+								var x = 0;
+								for(var j = 0; j < i; j++) {
+									x += $("#MerchantGoods ul").eq(j).height();
+								}
+								return x + (i) * 30;
+							}
+
+							$scope.test = function($event) {
+								// 获取到当前点击元素在页面中的坐标  
+								var off = $event.clientY;
+								//左侧div滚动条高度
+								var eY = $("#selMaskLeft").scrollTop();
+								//点击的是第几个服务
+								var i = Math.floor((off + eY - 64) / 40);
+								$("#selMaskLeft ul li").not(i).css({
+									"background": "#F3F3F3",
+									"color": "#000000"
+								});
+								$("#selMaskLeft ul li").eq(i).css({
+									"background": "white",
+									"color": "#fa7878"
+								});
+								$("#MerchantGoods").scrollTop(getTOP(i));
+							}
+
+							$("#MerchantGoods").scroll(function() {
+								var scorllTop = $(this)[0].scrollTop;
+								for(var k = 0; k < slength; k++) {
+									if(scorllTop >= getTOP(k)) {
+										$("#selMaskLeft ul li").not(k).css({
+											"background": "#F3F3F3",
+											"color": "#000000"
+										});
+										$("#selMaskLeft ul li").eq(k).css({
+											"background": "white",
+											"color": "#fa7878"
+										});
+									}
+								}
+							})
+
+							$scope.rapshow = function(index) {
+								$(".raphide" + index).hide();
+								$(".rap" + index).show();
+								$(".raphide" + index).hide();
+							}
+							//点击看大图
+							$scope.imgShow = function(merchantGoods) {
+								$scope.showGoods = merchantGoods;
+								$('.ui-showbox').removeClass('ui-showbox-hide');
+							}
+							$scope.imgHide = function() {
+								$('.ui-showbox').addClass('ui-showbox-hide');
+							}
+							//选规格
+							$scope.orderShow = function(isShow) {
+								$scope.isOrderShow = isShow;
+							};
+
+							//显示购物车
+							$scope.cartShow = function() {
+								if($scope.isCartShow) {
+									$scope.isCartShow = false;
+								} else {
+									$scope.isCartShow = true;
+								}
+							};
+
+							$scope.addMerchantGoodsCount = function(mgid) {
+								$scope.services.forEach(function(service) {
+									service.goods.forEach(function(merchantGoods) {
+										if(mgid == merchantGoods.ID) {
+											if(!merchantGoods.OrderCount) {
+												merchantGoods.OrderCount = 1;
+											} else {
+												merchantGoods.OrderCount++;
+											}
+										}
+									});
+								});
+							};
+
+							$scope.subtractMerchantGoodsCount = function(mgid) {
+								$scope.services.forEach(function(service) {
+									service.goods.forEach(function(merchantGoods) {
+										if(mgid == merchantGoods.ID) {
+											if(!merchantGoods.OrderCount || merchantGoods.OrderCount == 0) {
+												merchantGoods.OrderCount = 0;
+											} else {
+												merchantGoods.OrderCount--;
+											}
+										}
+									});
+								});
+							};
+							//添加
+							$scope.addOrderGoods = function(merchantGoods, service) {
+								$scope.totalPrice += merchantGoods.MGPrice;
+								$scope.addMerchantGoodsCount(merchantGoods.ID);
+								var goods = {
+									SID: service.ID,
+									MGMID: merchantGoods.ID,
+									SName: service.Name,
+									MGPrice: merchantGoods.MGPrice,
+									GoodsName: merchantGoods.MGName,
+									MGImg: merchantGoods.MGImg,
+									OGNum: 1
+								};
+								if($scope.order.OrdersDetails && $scope.order.OrdersDetails.length > 0) {
+									var existGoods = false;
+									$scope.order.OrdersDetails.forEach(function(goods) {
+										if(goods.GoodsName == merchantGoods.MGName) {
+											existGoods = true;
+											goods.OGNum++;
+										}
+									});
+
+									if(!existGoods) {
+										$scope.order.OrdersDetails.push(goods);
+									}
+								} else {
+									$scope.order.OrdersDetails = [];
+									$scope.order.OrdersDetails.push(goods);
+								}
+							};
+							//删除
+							$scope.subtractOrderGoods = function(merchantGoods, service) {
+								if(!$scope.order.OrdersDetails || $scope.order.OrdersDetails.length == 0) {
+									return false;
+								}
+								$scope.totalPrice -= merchantGoods.MGPrice;
+
+								var existGoods = false;
+								for(var i = 0; i < $scope.order.OrdersDetails.length; i++) {
+									if($scope.order.OrdersDetails[i].GoodsName == merchantGoods.MGName) {
+										existGoods = true;
+										$scope.order.OrdersDetails[i].OGNum--;
+										if($scope.order.OrdersDetails[i].OGNum == 0) {
+											$scope.order.OrdersDetails.splice(i, 1);
+											i--;
+										}
+										$scope.subtractMerchantGoodsCount(merchantGoods.ID);
+									}
+								}
+							}
+
+							$scope.submit = function() {
+								if($scope.totalPrice == '0') {
+									$(".hint_msg div").text("请选择服务物品")
+									$(".hint_msg").css({
+										"display": "block"
+									});
+									setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000);
+									return false;
+								} else {
+									$scope.order.OrdersPrice = $scope.totalPrice;
+								}
+								window.sessionStorage.clear();
+								window.sessionStorage.setItem('order', JSON.stringify($scope.order));
+								location.href = "service_ok.html?totalPrice=" + $scope.order.OrdersPrice;
+							};
+						}
+					}).error(function(data) {
+						console.log("获取数据错误")
+					})
+				}
+			})
+	</script>
+
+</html>
