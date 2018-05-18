@@ -1,0 +1,20 @@
+<div class="weui-tab" ng-cloak>
+   	<div class="fix-top">
+		<div class="weui-flex bg-white">
+			<div class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="location='#/'" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">风水玄学</div>
+			</div>
+		</div>
+	</div> 
+	 <div style="margin-top:52px;padding:0px 10px 0px 10px;">
+	 	<div style="height:190px;padding:5px 10px 5px 10px;margin-bottom:10px;background:white;"  ng-repeat="new in newList" ng-click="msg(new)">	 	
+	 	<img ng-src="{{new.HeadImg |imageSrc}}"  style="width:100%;height:160px;background:#eee;margin-top:5px;/">
+	 	 <div class="weui-media-box__bd">
+        <h3 class="weui-media-box__title" style="font-size:14px;text-align: center;">{{new.NTitle}}</h3>    
+        </div>
+         </div>
+         </div>
+	 </div>	
+  </div>
+

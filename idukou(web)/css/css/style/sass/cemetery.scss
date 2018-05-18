@@ -1,0 +1,143 @@
+@charset "utf-8";
+$fontFamliy: "微软雅黑";
+$fontColor: #7f7f7f;
+$background: #F7F7F7;
+@media screen and (min-width:320px) {
+    html {
+        font-size: 10px!important;
+    }
+}
+@media screen and (min-width:360px) {
+    html {
+        font-size: 11.25px!important;
+    }
+}
+@media screen and (min-width:400px) {
+    html {
+        font-size: 12.5px!important;
+    }
+}
+@media only screen and (min-width:481px) {
+    html {
+        font-size: 94%!important;
+    }
+}
+@media only screen and (min-width: 561px) {
+    html {
+        font-size: 109%!important;
+    }
+}
+@media screen and (min-width:640px) {
+    html {
+        font-size: 20px!important;
+    }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    html {
+        font-size: 22px!important;
+    }
+
+}
+*,
+*:after,
+*:before {
+    // -webkit-user-select: none;
+    //字体不能被选择（复制等）
+    // -moz-user-select: -moz-none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    //只用于iOS (iPhone和iPad) 点击一个链接或者通过Javascript定义的可点击元素的时候，它就会出现一个半透明的灰色背景
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+    //  box-sizing: border-box;
+    //  //并排两个带边框的框
+    //  -webkit-box-sizing: border-box;
+    //  -moz-box-sizing: border-box;
+    -webkit-touch-callout: none;
+    //当你触摸并按住触摸目标时候，禁止或显示系统默认菜单。
+    margin: 0;
+    padding: 0;
+    -ms-touch-action: pan-y;
+    //可以在父级元素内进行垂直移动的手势操作。在IE11使用属性，在IE10应使用-ms-touch-action，IE10之前的浏览器不支持
+}
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #F2F2F2;
+    overflow-y: auto;
+    color: $fontColor;
+    -webkit-text-size-adjust: none;
+    //解决IPHONE网页兼容（部分字号变大）
+}
+.ng-cloak {
+    display: none;
+}
+//首页
+#cemetery_list {
+    ul {
+        width: 100%;
+//      display: none;
+        li {
+            width: 100%;
+            background: white;
+            margin-bottom:4px;
+            .imgbox {
+                width:48%;
+                span {
+                    display: block;
+                    width: 100%;
+                    margin:5px;
+                    height: 8rem;
+                    background-size:100% 9rem;
+                }
+            }
+            .cemetery_msg {
+                width:50%;
+                height: 8.9rem;
+                h3 {
+                    margin-top: 10px;
+                }
+                p {
+                    font-size: 12px;
+                    margin-top:0.7rem;
+                }
+            }
+            .diatance{
+                display: inline-block;
+                border:1px solid #1EBD9E;
+                border-radius:3px;
+                color: #1EBD9E;
+                text-align: center;
+            }
+            .address {
+                clear: both;
+                width: 100%;
+                height:3rem;
+                line-height: 3rem;               
+                .ui-text-left {
+                    display: block;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 70%;
+                    border-top: 1px solid #f7f7f7;
+                }
+                .ui-text-left:active {
+                    background: #eee;
+                }
+                .ui-text-right {
+                    width: 29.8%;
+                    height:2.97rem;
+                    text-align: center;
+                    background: #1EBD9E;
+                    color: white;
+                }
+                .ui-text-right:active {
+                    background: #eee;
+                }
+            }
+        }
+    }
+}
+
+
+

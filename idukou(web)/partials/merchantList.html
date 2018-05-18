@@ -1,0 +1,25 @@
+<div class="weui-tab">
+	<div class="fix-top">
+		<div class="weui-flex bg-white">
+			<div class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="location='#/'" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">商家列表</div>
+			</div>
+		</div>
+	</div>
+	<p style="margin-top:17px;">&nbsp;</p>
+	<div id="store"></div>
+	<div class="weui-panel weui-panel_access weui-panel-space" ng-repeat="Business in BusinessList">
+		<div class="weui-panel__bd">
+			<a href="javascript:;" class="weui-media-box weui-media-box_appmsg" ng-click="gostore(Business.ID)">
+				<div class="weui-media-box__hd c" style="border: solid 2px #eeeeee;width:96px;height: 60px; display: table-cell;vertical-align:middle;line-height:56px;;">
+					<img class="" ng-src="{{Business.BusinessImg | imageSrc}}" style="max-width:100%;max-height:100%;vertical-align:middle;">
+				</div>
+				<div class="weui-media-box__bd">
+					<h4 class="weui-media-box__title" style="color: #333;font-size:15px;">{{Business.BusinessName}}</h4>
+					<p class="weui-media-box__desc" style="color: #666;font-size:8px;margin-top:3px;line-height:18px;">{{Business.Summary | autoMerchantName}}</p>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>

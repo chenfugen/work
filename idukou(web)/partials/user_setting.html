@@ -1,0 +1,42 @@
+﻿<div class="weui-tab">
+	<div class="fix-top">
+		<div class="weui-flex bg-white">
+			<div  class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="location='#/user'" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">设置</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="weui-tab__bd" style="color:#999999;padding-top: 50px;">
+		<div class="weui-cells" style="margin-top: 0;">
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><i class="ui-ico-update" style="color:#e67e22;margin-right: 8px;font-size: 20px;"></i></div>
+				<div class="weui-cell__bd color-darkgray">
+					<p>时时刷新<span class="font-11 color-lightgray"> 礼仪师列表</span></p>
+				</div>
+				<div class="weui-cell__ft" style="margin-top: -0.8rem;height: 20px;">
+					<input class="weui-switch" type="checkbox" ng-click="setReadType($event)">
+				</div>
+			</div>
+		</div>
+
+		<div class="weui-cells" ng-if="isLogin" style="margin-top:10px;">
+			<a class="weui-cell" href="#/password">
+				<div class="weui-cell__hd"><i class="ui-ico-modify" style="color:#2980b9;margin-right: 8px;font-size: 20px;"></i></div>
+				<div class="weui-cell__bd color-darkgray">
+					<p>修改密码</p>
+				</div>
+				<div class="weui-cell__ft" style="margin-top: -0.8rem;height: 20px;"><i class="ui-ico-arrow color-lightgray font-25" style="margin:0px -10px 0 0;"></i></div>
+			</a>
+			<div class="weui-cell" ng-click="showLogout()">
+				<div class="weui-cell__hd"><i class="ui-ico-quit" style="color:#2980b9;margin-right: 8px;font-size: 20px;"></i></div>
+				<div class="weui-cell__bd color-darkgray">
+					<p>退出登录</p>
+				</div>
+				<div class="weui-cell__ft" style="margin-top: -0.8rem;height: 20px;"><i class="ui-ico-arrow color-lightgray font-25" style="margin:0px -10px 0 0;"></i></div>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,27 @@
+<div class="weui-tab" ng-cloak>
+	 <div class="fix-top">
+		<div class="weui-flex bg-white">
+			<div class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="history.back()" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">付款码</div>
+			</div>
+		</div>
+	</div>
+    <p style="margin-top: 70px;width: 100%;" class="c">请于商家使用拉卡拉当面扫码支付</p>
+    <div class="color-darkgray c bg-white" style="width:80%;position:fixed;top:120px;left:10%;">
+
+        <p class="font-13 " style="margin: 10px 0;">订单号:{{id}}</p>
+        <div class="c" >
+            <div id="barcode" ></div>
+        </div>
+        <br/>
+        <div style="height: 200px;margin-bottom:20px;position: relative;">
+            <div id="qrcord" style="z-index: 1;position: relative;"></div>
+            <div style="margin:-115px 50% 0;z-index: 2;position: relative;">
+                <img src="img/ico22.png" style="margin: -10px 0 0 -10px;width: 20px; height: 20px;border-radius: 2px;vertical-align: middle;">
+            </div>
+        </div>
+
+        <br/>
+    </div>
+</div>

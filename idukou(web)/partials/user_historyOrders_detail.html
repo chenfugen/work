@@ -1,0 +1,116 @@
+<div class="weui-tab" ng-cloak>
+	<div class="fix-top">
+		<div class="weui-flex bg-white">
+			<div class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="history.back()" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">历史订单详情</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="weui-tab__bd" style="padding:60px 15px 20px;">
+		<div class="bg-white color-darkgray" style="padding: 10px 15px;margin: 0px 0 10px;font-size: 0.9em;line-height: 2">
+
+			<div ng-if="order.State !=6 && order.State !=7" class="c">
+				<h3>订单已关闭</h3>
+				<i class="ui-ico-close ico-big" style="color:#95a5a6;"></i>
+				<p class="font-13">{{order.Reason}}</p>
+			</div>
+			<div ng-if="order.State ==6 || order.State ==7" class="c">
+				<h3>订单全款</h3>
+				<i class="ui-ico-successs ico-big" style="color:#f39c12;"></i>
+				<p class="font-13 ">{{order.Reason}}</p>
+			</div>
+		</div>
+		<div class="bg-white color-darkgray" style="padding: 10px 15px;margin: 0px 0 10px;font-size: 0.9em;line-height: 2">
+			<p>
+				<div class="color-darkgray b" style="width:70px;display: inline-block;">订单号</div><span>{{order.OCode}}</span></p>
+			<p>
+				<div class="color-darkgray b" style="width:70px;display: inline-block;">礼仪师</div><span>{{funeralDir.MName}}</span></p>
+			<p>
+				<div class="color-darkgray b" style="width:70px;display: inline-block;">预约人</div><span>{{order.TrueName}}</span></p>
+			<p>
+				<div class="color-darkgray b" style="width:70px;display: inline-block;">下单时间</div><span>{{order.CreateDate}}</span></p>
+			<!-- <p><div class="color-darkgray b" style="width:70px;display: inline-block;">服务时间</div><span >{{order.ServiceDate}}</span></p>-->
+			<p>
+				<div class="color-darkgray b" style="width:70px;display: inline-block;">服务地址</div><span>{{order.Address}}</span></p>
+
+			<p>
+				<div class="color-darkgray b" style="width:70px;display: inline-block;">备注</div><span>{{order.Remark}}</span></p>
+			<div class="btn-default bg-lightgray" href="tel:{{funeralDir.Phone}}" style="padding: 5px 0px;">
+				<a href="tel:{{order.Extf4}}"><i class="ui-ico-tel font-25 color-green b"></i> <span class=" color-green" style="vertical-align: 0.2em;">联系礼仪师</span></a>
+			</div>
+		</div>
+		<div class="bg-white" ng-if="goodsList.length>0" style="">
+			<p class="b c bg-lightgray color-darkgray" style="line-height: 35px;padding:5px 0px;">订单明细</p>
+			<div class="weui-form-preview__bd weui-form-preview__item " style="border-top: solid 1px #eeeeee;">
+				<div ng-repeat="goods in goodsList">
+					<label class="weui-form-preview__label">{{goods.GoodsName}}</label>
+					<span class="weui-form-preview__value"><span>x{{goods.OGNum}}</span>
+					<div style="width:90px;display: inline-block;">¥{{goods.MGPrice/goods.OGNum}}</div>
+					</span>
+				</div>
+				<div class="weui-form-preview__item  " style="border-top: solid 1px #eeeeee;">
+					<label class="weui-form-preview__label "></label>
+					<span class="weui-form-preview__value color-darkgray font-20">总额：￥{{order.TotalPrice}}</span>
+				</div>
+				<div class="weui-form-preview__item ">
+					<label class="weui-form-preview__label b">已付定金</label>
+					<span class="weui-form-preview__value">￥{{order.DingPrice}}</span>
+				</div>
+				<div class="weui-form-preview__item color-darkgray " ng-if="order.Discount!=0">
+					<label class="weui-form-preview__label b">优惠折扣</label>
+					<span class="weui-form-preview__value">￥{{order.Discount | number:1}}</span>
+				</div>
+				<div class="weui-form-preview__item color-darkgray b" ng-if="order.State==6 || order.State==7">
+					<label class="weui-form-preview__label ">实付款：</label>
+					<span class="weui-form-preview__value color-red" style="color:#f39c12;">￥{{order.TotalPrice-order.DingPrice-order.Discount | number:1}}</span>
+				</div>
+				<br/>
+			</div>
+		</div>
+		<div ng-if="order.State==7" class="bg-white weui-panel weui-panel_access">
+			<div class="weui-panel__hd font-16 b color-darkgray">已评价</div>
+			<div class="weui-panel__bd">
+				<div ng-repeat="evaluate in evaluates" class="weui-media-box">
+					<p><span class="font-13">{{evaluate.CreateDate}}</span></p>
+					<p>{{evaluate.PQContent}}</p>
+				</div>
+
+			</div>
+		</div>
+
+		<div class=" btn-default bg-lightgray color-darkgray" ng-click="deleteOrder(order)">
+			删除订单
+		</div>
+
+		<!-- <img src="{{goods.MGImg | imageSrc}}" width="100%">
+        <p class="font-20 color-darkgray b">套餐名：{{goods.Class}}</p>
+        <p class="color-darkgray font-16">商品名：{{goods.MGName}}　<span class="color-red font-16">￥{{goods.MGPrice}}</span> </p>
+
+        <p class="b" style="margin:10px 0;padding:6px 0;border-bottom: solid 1px #cccccc;">商品详情</p>
+        <p class="font-13" >{{goods.MGRemark}}提供高档灵堂布置1次提供高档灵堂布置1次提供高档灵堂布置1次提供高档灵堂布置1次提供高档灵堂布置1次提供高档灵堂布置1次提供高档灵堂布置1次</p>-->
+		<!--<div class="weui-panel weui-panel_access clear-margin clear-padding">
+            <img src="{{goods.MGImg | imageSrc}}" width="100%">
+
+            <div class="weui-panel__hd">
+                <p class="color-darkgray font-16">{{goods.MGName}}　<span class="color-red font-16">￥{{goods.MGPrice}}</span> </p>
+                <p>套餐：{{goods.Class}}</p>
+            </div>
+
+        </div>
+
+        <div class="weui-panel weui-panel_access ">
+            <div class="weui-panel__hd">商品详情</div>
+            <div class="weui-panel__bd">
+                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__bd">
+                        <p class="weui-media-box__title font-13 color-darkgray"></p>
+                        <p class="weui-media-box__desc">{{goods.MGRemark}}</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>-->
+	</div>
+</div>

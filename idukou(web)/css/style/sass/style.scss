@@ -1,0 +1,340 @@
+@charset "utf-8";
+$fontFamliy: "微软雅黑";
+$fontColor: #7f7f7f;
+$background: #F7F7F7;
+@media screen and (min-width:320px) {
+    html {
+        font-size: 10px!important;
+    }
+}
+@media screen and (min-width:360px) {
+    html {
+        font-size: 11.25px!important;
+    }
+}
+@media screen and (min-width:400px) {
+    html {
+        font-size: 12.5px!important;
+    }
+}
+@media only screen and (min-width:481px) {
+    html {
+        font-size: 94%!important;
+    }
+}
+@media only screen and (min-width: 561px) {
+    html {
+        font-size: 109%!important;
+    }
+}
+@media screen and (min-width:640px) {
+    html {
+        font-size: 20px!important;
+    }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    html {
+        font-size: 22px!important;
+    }
+
+}
+*,
+*:after,
+*:before {
+    // -webkit-user-select: none;
+    //字体不能被选择（复制等）
+    // -moz-user-select: -moz-none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    //只用于iOS (iPhone和iPad) 点击一个链接或者通过Javascript定义的可点击元素的时候，它就会出现一个半透明的灰色背景
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+    //  box-sizing: border-box;
+    //  //并排两个带边框的框
+    //  -webkit-box-sizing: border-box;
+    //  -moz-box-sizing: border-box;
+    -webkit-touch-callout: none;
+    //当你触摸并按住触摸目标时候，禁止或显示系统默认菜单。
+    margin: 0;
+    padding: 0;
+    -ms-touch-action: pan-y;
+    //可以在父级元素内进行垂直移动的手势操作。在IE11使用属性，在IE10应使用-ms-touch-action，IE10之前的浏览器不支持
+}
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #eee;
+    overflow-y: auto;
+    color: $fontColor;
+    -webkit-text-size-adjust: none;
+    //解决IPHONE网页兼容（部分字号变大）
+}
+.ng-cloak {
+    display: none;
+}
+#header {
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    z-index: 999;
+    background: white;
+    text-align: center;
+    line-height: 40px;
+    h2 {
+        position: absolute;
+        left: 50%;
+        margin-left: -34px;
+    }
+}
+#store_msg {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    height: 100%;
+    background: white;
+    .imgbox {
+        width: 100%;
+        span {
+            display: block;
+            margin-left: 10%;
+            width: 80%;
+            height: 11rem;
+            background-size: 100% 100%;
+        }
+    }
+    .store_intro {
+        width: 100%;
+        text-align: center;
+        //      background:rgba(0,0,0,0.1);
+        h2 {
+            font-size: 1.5rem;
+            color: #545454;
+            margin-top: -10px;
+        }
+        p {
+            width: 95%;
+            text-align: left;
+            background: white;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        .down {
+            width: 100%;
+            text-align: center;
+            transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            /* IE 9 */
+            -moz-transform: rotate(180deg);
+            /* Firefox */
+            -webkit-transform: rotate(180deg);
+            /* Safari 和 Chrome */
+            -o-transform: rotate(180deg);
+            /* Opera */
+            background: white;
+        }
+    }
+}
+#store_merchant {
+    width: 100%;
+    background: #eee;
+    margin-top: 2px;
+    .merchant_nav {
+        width: 100%;
+        background: white;
+        height: 40px;
+        padding-top: 7px;
+        span {
+            margin-left: 20%;
+            display: block;
+            width: 60%;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            border-top: 1px dashed #ccc;
+            border-bottom: 1px dashed #ccc;
+        }
+    }
+    .merchantList {
+        width: 100%;
+        height: 130px;
+        background: white;
+        border-bottom: 1px solid #eee;
+        .imgbox {
+            width: 60px;
+            height: 60px;
+            border-radius: 6rem 6rem;
+            overflow: hidden;
+            margin-top: 15px;
+            background-color: #cccccc;
+            span {
+                display: block;
+                margin: 0;
+                width: 100%;
+                height: 6rem;
+                background-size: 100% 6rem;
+                background-repeat: no-repeat;
+            }
+        }
+        .merchant_msg {
+            width: 77%;
+            margin-top: 15px;
+            text-align: left;
+            h3 {
+                color: #000000;
+                margin-left: 0;
+            }
+            h2 {
+                float: right;
+                font-size: 13px;
+                e {
+                    font-weight: bold;
+                    font-style: italic;
+                }
+            }
+            p {
+                font-size: 12px;
+                margin-top: 0.7rem;
+            }
+
+        }
+        .serveRap {
+            width: 100%;
+            float: left;
+            margin-top: 15px;
+            border-top: 1px solid #eeeeee;
+            ul {
+                margin-left: 10%;
+                li {
+                    float: left;
+                    width: 33%;
+                    height: 30px;
+                    line-height: 30px;
+                    text-align: center;
+                    font-size: 13px;
+                    color: #ccc;
+                    strong {
+                        color: #1abc9c;
+                    }
+                }
+            }
+        }
+    }
+}
+//案例详情页
+#riteMsg {
+    margin: 42px 20px 0 0;
+    background: white;
+}
+
+//套餐
+.combo {
+    width: 100%;
+    margin-top: 3px;
+    background: white;
+    height: 61px;
+    .imgFour {
+        margin: 3px 1%;
+    }
+}
+//活动区
+.mortician {
+    height: 106px;
+    background: white;
+    position: relative;
+    img {
+        display: block;
+        position: absolute;
+        cursor: pointer;
+    }
+    .imgOne {
+        left: 1%;
+    }
+    .imgTwo {
+        left: 57%;
+    }
+    .imgThree {
+        left: 57%;
+        top: 53px;
+    }
+}
+
+//套餐页
+#combo {
+    background: white;
+    .imgbox {
+        width: 100%;
+        span {
+            display: block;
+            width: 98%;
+            height: 250px;
+            margin: 0 auto;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 60%;
+        }
+    }
+    .menuNav {
+        li {         
+            float: left;
+            text-align: center;
+            margin:0px;
+            width:20%;
+            img {
+                display: inline-block;
+                margin-top:10px;
+                width: 40%;
+            }
+            p {
+                font-size: 10px;
+            }
+        }
+    }
+    .merchant_nav {
+        text-align: center;
+    }
+    table {
+        width:96%;
+        margin: 0 auto;
+        color: #666666;
+        text-align: center;
+         border-right:1px solid #eee;
+         border-bottom:1px solid #eee;
+        tr {          
+            td,th{
+               border-left:1px solid #eee;
+               border-top:1px solid #eee;  
+               font-size:12px;
+            }
+        }
+
+    }
+    .goodList{
+        width:96%;
+        margin: 0 auto;
+      li{
+          width:23.5%;
+          display: inline-block;
+          height:80px;
+          margin-bottom:5px;
+        img{
+           width:80%;
+           height:80%;
+           margin:10%;
+        }  
+      }
+    }
+    .text{
+        width:60%;
+        color: #666666;
+        margin: 0 auto;
+        p{
+            font-size:13px;
+        }
+    }
+}

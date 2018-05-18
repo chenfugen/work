@@ -1,0 +1,146 @@
+@media screen and (min-width: 320px) {
+  /* line 6, ../sass/cemetery.scss */
+  html {
+    font-size: 10px !important;
+  }
+}
+@media screen and (min-width: 360px) {
+  /* line 11, ../sass/cemetery.scss */
+  html {
+    font-size: 11.25px !important;
+  }
+}
+@media screen and (min-width: 400px) {
+  /* line 16, ../sass/cemetery.scss */
+  html {
+    font-size: 12.5px !important;
+  }
+}
+@media only screen and (min-width: 481px) {
+  /* line 21, ../sass/cemetery.scss */
+  html {
+    font-size: 94% !important;
+  }
+}
+@media only screen and (min-width: 561px) {
+  /* line 26, ../sass/cemetery.scss */
+  html {
+    font-size: 109% !important;
+  }
+}
+@media screen and (min-width: 640px) {
+  /* line 31, ../sass/cemetery.scss */
+  html {
+    font-size: 20px !important;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* line 36, ../sass/cemetery.scss */
+  html {
+    font-size: 22px !important;
+  }
+}
+/* line 41, ../sass/cemetery.scss */
+*,
+*:after,
+*:before {
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  margin: 0;
+  padding: 0;
+  -ms-touch-action: pan-y;
+}
+
+/* line 61, ../sass/cemetery.scss */
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #F2F2F2;
+  overflow-y: auto;
+  color: #7f7f7f;
+  -webkit-text-size-adjust: none;
+}
+
+/* line 71, ../sass/cemetery.scss */
+.ng-cloak {
+  display: none;
+}
+
+/* line 76, ../sass/cemetery.scss */
+#cemetery_list ul {
+  width: 100%;
+}
+/* line 79, ../sass/cemetery.scss */
+#cemetery_list ul li {
+  width: 100%;
+  background: white;
+  margin-bottom: 4px;
+}
+/* line 83, ../sass/cemetery.scss */
+#cemetery_list ul li .imgbox {
+  width: 48%;
+}
+/* line 85, ../sass/cemetery.scss */
+#cemetery_list ul li .imgbox span {
+  display: block;
+  width: 100%;
+  margin: 5px;
+  height: 8rem;
+  background-size: 100% 9rem;
+}
+/* line 93, ../sass/cemetery.scss */
+#cemetery_list ul li .cemetery_msg {
+  width: 50%;
+  height: 8.9rem;
+}
+/* line 96, ../sass/cemetery.scss */
+#cemetery_list ul li .cemetery_msg h3 {
+  margin-top: 10px;
+}
+/* line 99, ../sass/cemetery.scss */
+#cemetery_list ul li .cemetery_msg p {
+  font-size: 12px;
+  margin-top: 0.7rem;
+}
+/* line 104, ../sass/cemetery.scss */
+#cemetery_list ul li .diatance {
+  display: inline-block;
+  border: 1px solid #1EBD9E;
+  border-radius: 3px;
+  color: #1EBD9E;
+  text-align: center;
+}
+/* line 111, ../sass/cemetery.scss */
+#cemetery_list ul li .address {
+  clear: both;
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
+}
+/* line 116, ../sass/cemetery.scss */
+#cemetery_list ul li .address .ui-text-left {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 70%;
+  border-top: 1px solid #f7f7f7;
+}
+/* line 124, ../sass/cemetery.scss */
+#cemetery_list ul li .address .ui-text-left:active {
+  background: #eee;
+}
+/* line 127, ../sass/cemetery.scss */
+#cemetery_list ul li .address .ui-text-right {
+  width: 29.8%;
+  height: 2.97rem;
+  text-align: center;
+  background: #1EBD9E;
+  color: white;
+}
+/* line 134, ../sass/cemetery.scss */
+#cemetery_list ul li .address .ui-text-right:active {
+  background: #eee;
+}

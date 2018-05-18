@@ -1,0 +1,154 @@
+﻿<div class="weui-tab">
+    <div class="weui-tab__bd ">
+        <div class="weui-panel weui-panel_access  bg-green" style="height:110px;border:none;">
+            <div class="weui-panel__bd">
+                <div ng-click="gotoPage('/account')" class="weui-media-box weui-media-box_appmsg" style="text-align: center">
+                    <!--<div style="width:40%;href="javascript:;" ">
+                        <img class="" src="http://img.idukou.com/20160121/2e26f512217749a5ab4797302514439e.jpg" width="70px" height="70px" style="-webkit-border-radius: 75px;border: 3px solid rgba(255,255,255,0.5);">
+                    </div>-->
+                    <div style="width:38%;">
+                        <div style="width:70px;height:70px;margin: 0 auto;-webkit-border-radius:50px;border: 3px solid rgba(255,255,255,0.5);overflow: hidden;">
+                            <div style="background-image:url({{user.HeadImg | imageSrc}});width: 100%;height: 100%;background-repeat: no-repeat;-webkit-background-size: cover;"></div>
+                        </div>
+                    </div>
+                    <div class=" weui-media-box__bd color-white" style="text-align: left;" >
+                        <div ng-if="isLogin"><i class="ui-ico-arrow float_r color-white" style="width:50px;font-size: 40px;margin-right: -20px;"></i>
+                            <span class="font-20 color-white">{{user.TrueName}}</span>
+                           <!-- <div class="">我的余额：￥{{user.Blanace}}</div>-->
+                            <div class="font-13"><i class="ui-ico-tel color-white font-20"></i> {{user.Phone}}</div>
+                        </div>
+                        <div ng-if="!isLogin">
+                            <h2></h2>
+                            <div class="btn-default  bg-green color-white" style="background:rgba(255,255,255,0.1);border: 1px solid rgba(255,255,255,0.5);width:50%;border-radius: 50px;">登 录</div>
+                        </div>
+                    </div>
+                </div>
+                <!--<a href="javascript:;" ng-click="gotoPage('#/userAccout')" class="weui-media-box weui-media-box_appmsg " style="text-align: center">
+                    <div style="width:40%;">
+                        <img class="" src="http://img.idukou.com/20160121/2e26f512217749a5ab4797302514439e.jpg" width="70px" height="70px" style="-webkit-border-radius: 75px;border: 3px solid rgba(255,255,255,0.5);">
+                    </div>
+                    <div class=" weui-media-box__bd color-white" style="text-align: left;" >
+                        <div ng-if="isAuth">
+                            <h2>{{user.TrueName}}</h2>
+                            <div class="">我的余额：￥{{user.Blanace}}</div>
+                        </div>
+                        <div ng-if="!isAuth">
+                            <h2></h2>
+                            <div class="btn-default  bg-red color-white" style="background:rgba(255,255,255,0.1);border: 1px solid rgba(255,255,255,0.5);width:50%;border-radius: 50px;">登录/注册</div>
+                        </div>
+                    </div>
+                </a>
+                -->
+            </div>
+        </div>
+
+        <div class="weui-cells" style="margin-top: 0;">
+            <!--<div class="weui-cell"  ng-click="gotoPage('#/address')">
+                <div class="weui-cell__hd"><i class="ui-ico-home  font-25" style="color:#f39c12;margin-right: 8px;"></i> </div>
+                <div class="weui-cell__bd">
+                    <p>地址</p>
+                </div>
+                <div class="weui-cell__ft" style="margin-top: -0.8rem;height: 20px;"><i class="ui-ico-arrow color-lightgray font-25" style="margin:0px -10px 0 0;"></i></div>
+            </div>-->
+            <a class="weui-cell color-darkgray"  href="tel:057185020446">
+                <div class="weui-cell__hd "> <i class="ui-ico-tel"  style="color:#1abc9c;margin-right: 8px;font-size: 20px;"></i></div>
+                <div class="weui-cell__bd">
+                    客服电话<span class="font-13 "></span><!--style="font-size: 32px;line-height:32px;margin:-5px -10px -5px 0;"-->
+                </div>
+                <div class="weui-cell__ft" style="margin-top: -0.8rem;height: 20px;">
+                    <span class="font-11 color-green" style="vertical-align:text-top;" >0571-85020446</span><!--: 点击拨打-->
+                    <i class="ui-ico-arrow color-lightgray font-25" style="margin:0px -10px 0 0;"></i>
+                </div>
+            </a>
+            <a class="weui-cell color-darkgray"  href="mailto:kf@handsnet.cn">
+                <div class="weui-cell__hd"><i class="ui-ico-discount " style="color:#f39c12;margin-right: 12px;font-size: 20px;"></i></div>
+                <div class="weui-cell__bd">
+                    Email<span class="font-13 "></span>
+                </div>
+                <div class="weui-cell__ft" style="margin-top: -0.8rem;height: 20px;">
+                    <span class="font-11 color-green" style="vertical-align:text-top;" >kf@handsnet.cn</span><!--点击发送-->
+                    <i class="ui-ico-arrow color-lightgray font-25" style="margin:0px -10px 0 0;"></i>
+                </div>
+            </a>
+            <a class="weui-cell" href="#/about">
+                <div class="weui-cell__hd"> <i class="ui-ico-code"  style="color:#1abc9c;margin-right: 8px;font-size: 20px;"></i></div>
+                <div class="weui-cell__bd color-darkgray">
+                    <p>关于千柏渡</p>
+                </div>
+                <div class="weui-cell__ft" style="margin-top: -0.8rem;height: 20px;"><i class="ui-ico-arrow color-lightgray font-25" style="margin:0px -10px 0 0;"></i></div>
+            </a>
+            <!--<div class="weui-cell"  ng-click="gotoPage('#/msglist')">
+                <div class="weui-cell__hd"> <i class="ui-ico-umsg02"  style="color:#1abc9c;margin-right: 8px;font-size: 20px;"></i></div>
+                <div class="weui-cell__bd">
+                    <p>消息</p>
+                </div>
+                <div class="weui-cell__ft color-lightgray">></div>
+            </div>
+            <div class="weui-cell"  ng-click="gotoPage('#/couponspage')">
+                <div class="weui-cell__hd"><i class="ui-ico-discount" style="color:#f39c12;margin-right: 8px;font-size: 20px;"></i></div>
+                <div class="weui-cell__bd">
+                    <p>我的优惠券</p>
+                </div>
+                <div class="weui-cell__ft color-lightgray">></div>
+            </div>
+            <div class="weui-cell"  ng-click="gotoPage('#/codepage')">
+                <div class="weui-cell__hd"> <i class="ui-ico-code"  style="color:#1abc9c;margin-right: 8px;font-size: 20px;"></i></div>
+                <div class="weui-cell__bd">
+                    <p>我的二维码</p>
+                </div>
+                <div class="weui-cell__ft color-lightgray">></div>
+            </div>-->
+
+
+        </div>
+        <div class="weui-cells" >
+            <div class="weui-cell" ng-click="gotoPage('/historyOrders')">
+                <div class="weui-cell__hd"><i class="ui-ico-daijieshou" style="color:#2980b9;margin-right: 8px;font-size: 20px;"></i></div>
+                <div class="weui-cell__bd">
+                    <p>历史订单</p>
+                </div>
+                <div class="weui-cell__ft" style="margin-top: -0.8rem;height: 20px;"><i class="ui-ico-arrow color-lightgray font-25" style="margin:0px -10px 0 0;"></i></div>
+            </div>
+        </div>
+
+        <div class="weui-cells" >
+            <a class="weui-cell" href="#/setting">
+                <div class="weui-cell__hd"><i class="ui-ico-set02" style="color:#2980b9;margin-right: 8px;font-size: 20px;"></i></div>
+                <div class="weui-cell__bd color-darkgray">
+                    <p>设置</p>
+                </div>
+                <div class="weui-cell__ft" style="margin-top: -0.8rem;height: 20px;"><i class="ui-ico-arrow color-lightgray font-25" style="margin:0px -10px 0 0;"></i></div>
+            </a>
+        </div>
+        <div class="weui-cells" >
+            <!--<a class="weui-cell" href="#/text">
+                <div class="weui-cell__hd"><i class="ui-ico-set02" style="color:#2980b9;margin-right: 8px;font-size: 20px;"></i></div>
+                <div class="weui-cell__bd color-darkgray">
+                    <p>微信支付</p>
+                </div>
+                <div class="weui-cell__ft" style="margin-top: -0.8rem;height: 20px;"><i class="ui-ico-arrow color-lightgray font-25" style="margin:0px -10px 0 0;"></i></div>
+            </a>-->
+        </div>
+    </div>
+
+    <div class="weui-tabbar fix-bottom">
+        <a href="#/"  class="weui-tabbar__item clear-padding">
+            <div class="weui-tabbar__icon">
+                <i class="ui-ico-protocol ui-ico-fillprotocol"></i>
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a href="#/order" class="weui-tabbar__item clear-padding">
+            <div class="weui-tabbar__icon">
+                <i class="ui-ico-browse ui-ico-fillbrowse"></i>
+            </div>
+            <p class="weui-tabbar__label">订单</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item weui-bar__item--on clear-padding">
+            <div class="weui-tabbar__icon">
+                <i class="ui-ico-my"></i>
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>

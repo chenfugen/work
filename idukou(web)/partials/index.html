@@ -1,0 +1,223 @@
+<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+<style type="text/css">
+	.swiper-pagination {
+		height: 20px;
+	}
+	
+	.swiper-pagination-bullet {
+		width: 10px;
+		height: 10px;
+		opacity: 1;
+		background: rgba(0, 0, 0, 0.2);
+	}
+	/*小圆点的样式*/
+	
+	.swiper-pagination-bullet-active {
+		background: white;
+	}
+	/*小圆点改变后的样式*/
+	
+	select {
+		/*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+		border: solid 1px #000;
+		/*很关键：将默认的select选择框样式清除*/
+		appearance: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		/*在选择框的最右侧中间显示小箭头图片*/
+		background: url("img/arrow.png") no-repeat scroll right center transparent;
+		/*为下拉小箭头留出一点位置，避免被文字覆盖*/
+		padding-right: 14px;
+	}
+</style>
+<div id="container"></div>
+<div class="weui-tab" ng-cloak class="ng-cloak" style="width: 100%;overflow: hidden;">
+	<div class="fix-top">
+		<div class="weui-flex bg-white">
+			<div style="padding:10px 10px 0px 10px;width:100%;">
+				<span style="background:url(img/logo.png) no-repeat;width:150px;height:40px;display:inline-block;background-size:100%;"></span>
+				<select id="selector" style="position:absolute;font-size:12px;height:17px;color:#1EBD9E;top:12px;right:20px;border:none;outline:none;" ng-model="selectedSite" ng-change="change(selectedSite)">
+					<option value="杭州市">杭州市</option>
+					<option value="上海市">上海市</option>
+				</select>
+				<!--<span id="city" ></span>-->
+				<span style="float:right;display:block;color:#1EBD9E;margin-top:16px;">0571-85020445</span>
+			</div>
+		</div>
+	</div>
+	<div style="width:100%;color:#999999;padding-top:56px;">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img src="img/banner1.jpg" style="width:100%;display: block;"></div>
+				<div class="swiper-slide"><img src="img/banner4.jpg" style="width:100%;display: block;"></div>
+				<div class="swiper-slide"><img src="img/banner2.jpg" style="width:100%;display: block;"></div>
+				<div class="swiper-slide"><img src="img/banner3.jpg" style="width:100%;display: block;"></div>
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+	</div>
+	<div id="mapBox"></div>
+	<div style="width:100%;height:120px;background:white;padding-top:10px;">	
+		<div style="position:relative;background: white;display:inline-block;width:80%;border:0.5px solid #E0E0E0;border-radius:4px;margin-left:8%;line-height:35px;padding-left:10px;">	
+			<input type="text" ng-model="phone" style="background:none;outline:none;border:none;width:50%;height:35px;font-size:15px;" placeholder="请输入您的电话" />
+			<span class="getVcode" style="position:absolute;right:0px;padding:0 5px;top:0px;line-height:35px;border-left:1px solid #eee;">获取验证码</span>
+		</div>
+	    <input type="text" ng-model="Vcode" style="margin:10px 0 0 8%;width:40%;line-height:35px;outline:none;border:none;background:white;padding-left:10px;border:0.5px solid #E0E0E0;border-radius:4px;"  placeholder="验证码" />
+		<a href="javascript:;" ng-click="addOrder()" class="weui-btn weui-btn_plain-primary" style="width:30%;background: #1EBD9E;border: none;color: white;float:right;margin-right:10%;margin-top:10px;font-size:14px;">电话咨询</a>
+		<p style="color:#bbb;width:100%;text-align:left;margin:5px 0px 10px 8.6%"><i class="iconfont icon-guangbo" style="font-size:15px;color: #8ae6cf"></i><strong style="font-size:13px;color: #8ae6cf"> 我们将安排专业的礼仪师为您服务！</strong></p>
+	</div>
+	<div style="width:100%;height:60px;background:white;border-top: 1px solid #f5f5f5;padding-top:15px;">
+		<a href="#/home" class="weui-btn weui-btn_plain-primary" style="margin-left:10px;width:46%;background: #8ae6cf;border: none;color: white;font-size:15px;float: left;margin-top:5px;"><i class="iconfont icon-biaoqian"></i>&nbsp;&nbsp;&nbsp;白事预约&nbsp;&nbsp;&nbsp;<i class="iconfont icon-20151209tubiaolianxizhuanhuan09-copy"></i></a>
+		<a href="cemetery.html" class="weui-btn weui-btn_plain-primary" style="width:46%;background: #98d9b6;border: none;color: white;font-size:15px;float: left;margin-left:2%;margin-top:5px;"><i class="iconfont icon-goumai"></i>&nbsp;&nbsp;&nbsp;购墓服务&nbsp;&nbsp;&nbsp;<i class="iconfont icon-20151209tubiaolianxizhuanhuan09-copy" style="font-size:16px;"></i></a>
+	</div>
+		<!--活动区-->	
+	<div class="combo">
+		<a href="#/combo"><img src="img/index_04.jpg" style="width:98%;height:55px;" class="imgFour"/></a>
+	</div>
+	<div class="row mortician">
+		<img src="img/index_01.jpg" style="width:55%;height:103px;" class="imgOne" ng-click="goMerchant('9f0b4d1f-b9d6-4f6e-abca-373b46c05052')" />
+		<a href="#/home"><img src="img/index_02.jpg" style="width:42%;height:50px;" class="imgTwo" ng-click="goNear()"/></a>
+		<a href="lottery.html"><img src="img/index_03.jpg" style="width:42%;height:50px;" class="imgThree" /></a>	
+	</div>
+	
+	<div style="margin-top:3px;width: 100%;">
+		<div style="padding:5px 10px 10px 10px;height:20px;background: white;">
+			<strong style="width:3px;height:20px;background:#1EBD9E;display: inline-block;float: left;margin-top:3px;"></strong>
+			<span style="float: left;">&nbsp;推荐礼仪师</span>
+			<span onclick="location='#/home'" style="float:right;color: #8ae6cf;font-size:12px;line-height: 25px;">
+    			更多<i class="iconfont icon-20151209tubiaolianxizhuanhuan09-copy" style="font-size:12px;"></i>
+    		</span>
+		</div>
+		<div id="merchant"></div>
+		<div class="weui-panel weui-panel_access weui-panel-space" ng-repeat="merchant in merchants">
+			<div class="weui-panel_bd">
+				<a href="javascript:;" ng-click="learnmore(merchant)" class="weui-media-box weui-media-box_appmsg">
+					<div class="weui-media-box__hd" style="position: absolute;top:20px;-webkit-border-radius:50px;overflow: hidden;">
+						<div style="background-color:#cccccc;background-image:url({{merchant.HeadImg | imageSrc}});width: 100%;height: 100%;background-repeat: no-repeat;-webkit-background-size: cover;"></div>
+					</div>
+					<div class="weui-media-box__bd" style="padding-left: 72px;">
+						<!--<p class="float_r font-13 color-lightgray" style="vertical-align: 40px;margin-top: 5px;">服务次数 <span class="b font-16"><i>{{merchant.OrderCount}}</i></span> 次</p>-->
+						<p style="font-size:15px;color: #333;">{{merchant.MName}}</p>
+						<div style="line-height: 1.4;margin-top: 3px;">
+							<span class="">
+                            <i ng-repeat="i in merchant.Fullstar | range" class="ui-ico-star color-red "></i><i ng-repeat="i in merchant.Halfstar | range " class="ui-ico-halfstar color-red "></i><i ng-repeat="i in merchant.Emptystar | range " class="ui-ico-grade color-red "></i><span class="color-red"> {{merchant.TTotalScore.toFixed(1)}}</span>
+							</span>
+							<!--<span class="clear color-red"><i ng-repeat="i in 5 | range" class="ui-ico-star color-red "></i> {{merchant.PublicPraiseScore.TotalScore.toFixed(1)}}</span>-->
+							<!--<i class="ui-ico-shop font-20 color-green"></i>-->
+							<div class="font-13 color-darkgray text-overflow-1"> <span style="vertical-align:0.1rem;font-size:12px;">{{merchant.BusName}}</span></div>
+						</div>
+						<div class="font-13 c" style="margin-left: -70px;margin-top:10px;border-top: solid 1px #eeeeee;padding-top:3px;color:#cccccc;">
+							响应速度<span class="color-green font-13"> {{merchant.TRestimeNum.toFixed(1)}}　</span>专业程度<span class="color-green font-13"> {{merchant.TMajorNum.toFixed(1)}}　</span>服务态度<span class="color-green font-13"> {{merchant.TMannerNum.toFixed(1)}}</span>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top:3px;width:100%;">
+		<div style="padding:5px 10px 10px 10px;height:20px;background: white;margin-bottom:3px;">
+			<strong style="width:3px;height:20px;background:#1EBD9E;display: inline-block;float: left;margin-top:3px;"></strong>
+			<span style="float: left;">&nbsp;品牌商家</span>
+			<span onclick="location='#/merchantList'" style="float:right;color: #8ae6cf;font-size:12px;line-height: 25px;">
+    			更多<i class="iconfont icon-20151209tubiaolianxizhuanhuan09-copy" style="font-size:12px;"></i>
+    		</span>
+		</div>
+		<div id="store"></div>
+		<ul id="BusinessList" style="width:100%;height:100px;margin-top:1px;background: white;">
+			<li style="float:left;margin-top:15px;padding:1% 1% 1% 1%;width:31%;height:60px" ng-repeat="Business in BusinessList">
+				<div ng-click="gostore(Business.ID)" style="width:100%;height: 100%;">
+					<div style="background:#cccccc;background-image:url({{Business.BusinessImg | imageSrc}});border:1px dotted #eee;width: 100%;height: 100%;background-repeat: no-repeat;-webkit-background-size:100%;"></div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<img ng-src="{{adviewBusiness.IMG | imageSrc}}" style="width:100%;height:50px;display: block;" ng-if="adviewBusiness" />
+	<div style="margin-top:3px;width:100%;">
+		<div style="padding:5px 10px 10px 10px;height:20px;background: white;">
+			<strong style="width:3px;height:20px;background:#1EBD9E;display: inline-block;float: left;margin-top:3px;"></strong>
+			<span style="float: left;">&nbsp;陵墓导购</span>
+			<span onclick="location='cemetery.html'" style="float:right;color: #8ae6cf;font-size:12px;line-height: 25px;">
+    			更多<i class="iconfont icon-20151209tubiaolianxizhuanhuan09-copy" style="font-size:12px;"></i>
+    		 </span>
+		</div>
+		<div id="cemetery"></div>
+		<ul style="width:100%;margin-top:3px;">
+			<li style="float:left;display:block;padding:2% 2% 2% 2%;width:46%;height:170px;background:white; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" ng-repeat="cemetery in cemeteryList" ng-click="getMap(cemetery.ID)">
+				<div style="width:100%;height:100px;border-radius:3px 3px;overflow: hidden;">
+					<span style="background-image:url({{cemetery.CemImg | imageSrc}});width:100%;height:100px;display: block;background-size:100% 100px"></span>
+				</div>
+				<p style="font-size:14px;margin-top:2px;">{{cemetery.CemName}}</p>
+				<p style="font-size:12px;">均价:<span style="color:#fa7878;">{{cemetery.Average}}元</span>
+					<a href="tel：{{cemetery.CemeTel}}" style="background:#8ae6cf;line-height:20px;border-radius:5px;float:right;">&nbsp;<span style="color:white;font-size:12px;">电话咨询</span>&nbsp;</a>
+				</p>
+				<p style="width:100%;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><i class="iconfont icon-dingwei" style="color:#1EBD9E;"></i><span style="font-size:12px;">&nbsp;{{cemetery.City+cemetery.CemAddr}}</span></p>
+			</li>
+
+		</ul>
+	</div>
+	<img ng-src="{{adviewCemetery.IMG | imageSrc}}" style="width: 100%;height:50px;display:block;" ng-if="adviewCemetery"  />
+	<div id="news" style="margin-top:3px;width:100%;">
+		<div style="padding:5px 10px 10px 10px;height:20px;background: white;margin-bottom:3px;">
+			<strong style="width:3px;height:20px;background:#1EBD9E;display: inline-block;float: left;margin-top:3px;"></strong>
+			<span style="float: left;">&nbsp;为您推荐</span>
+		</div>			
+		<div style="width:100%;height:100px;background: white;padding-top:10px;">
+			<a href="#/story" style="display:block;width:33.3%;text-align: center;height:100px;float: left;">
+				<span style="width:56px;height:56px;border-radius:56px 56px;text-align:center;border:1px solid #2ADDF5;display: inline-block;">
+				<span style="width:50px;height:50px;border-radius:50px 50px;display:inline-block;background:#2ADDF5;margin-top:3px;">
+					<i class="iconfont icon-xiaojing" style="font-size:25px;color:white;display:inline-block;margin-top:5px;"></i>
+				</span>
+				</span>
+				<p style="font-size:12px;color:#666;margin-top:2px;">孝道故事</p>
+			</a>
+			<a href="#/geomancy" style="display:block;width:33.3%;text-align: center;height:100px;float: left;">
+				<span style="width:56px;height:56px;border-radius:56px 56px;text-align:center;border:1px solid #ff7f88;display:inline-block;">
+				<span style="width:50px;height:50px;border-radius:50px 50px;display:inline-block;background:#ff7f88;margin-top:3px;">
+					<i class="iconfont icon-fengshui1" style="font-size:25px;color:white;display: inline-block;margin-top:6px;"></i>
+				</span>
+				</span>
+				<p style="font-size:12px;color:#666;margin-top:2px;">风水玄学</p>
+			</a>
+			<a href="#/news" style="display:block;width:33.3%;text-align: center;height:100px;float: left;">
+				<span style="width:56px;height:56px;border-radius:56px 56px;text-align:center;border:1px solid #25cc78;display: inline-block;">
+				<span style="width:50px;height:50px;border-radius:50px 50px;display:inline-block;background:#25cc78;margin-top:3px;">
+					<i class="iconfont icon-xinwen" style="font-size:25px;color:white;display: inline-block;margin-top:6px;"></i>
+				</span>
+				</span>
+				<p style="font-size:12px;color:#666;margin-top:2px;">行业资讯</p>
+			</a>
+		</div>
+	</div>
+	<p>&nbsp;</p>
+	<div class="weui-tabbar fix-bottom">
+		<a href="#/" class="weui-tabbar__item weui-bar__item--on clear-padding">
+			<div class="weui-tabbar__icon">
+				<i class="ui-ico-protocol ui-ico-fillprotocol"></i>
+			</div>
+			<p class="weui-tabbar__label">首页</p>
+		</a>
+		<a href="#/order" class="weui-tabbar__item clear-padding">
+			<div class="weui-tabbar__icon">
+				<i class="ui-ico-browse ui-ico-fillbrowse"></i>
+			</div>
+			<p class="weui-tabbar__label">订单</p>
+		</a>
+		<a href="#/user" class="weui-tabbar__item clear-padding">
+			<div class="weui-tabbar__icon">
+				<i class="ui-ico-my"></i>
+			</div>
+			<p class="weui-tabbar__label">我的</p>
+		</a>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		var swiper = new Swiper('.swiper-container', {
+			pagination: '.swiper-pagination',
+			paginationClickable: true,
+			autoplay: 1000,
+			loop: true,
+			speed: 1500, //翻页速度}
+		});
+	})
+</script>

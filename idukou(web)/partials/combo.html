@@ -1,0 +1,125 @@
+<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+<div id="container"></div>
+<div class="weui-tab" ng-cloak >
+	<div class="fix-top">
+		<div class="weui-flex bg-white">
+			<div class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="history.back()" style="line-height:42px;"><i class="iconfont icon-fangxiang" style="font-size:12px;color:#ccc;"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">套餐页</div>
+			</div>
+		</div>
+	</div>
+  <div ng-hide="city" style="padding:50px 0px;text-align: center;">暂无数据,正在更新中..</div>
+<div id="combo" ng-if="city">	
+	<div class="imgbox">
+		<span style="background:url(img/taocan_01.jpg);background-size: 100% 100%;"></span>
+		<img src="img/taocan_price.png" />
+	</div>
+	<ul class="menuNav">
+		<li><img src="img/taocan_02.png" />
+			<p>入殓服务</p>
+		</li>
+		<li><img src="img/taocan_03.png" />
+			<p>搭设灵堂</p>
+		</li>
+		<li><img src="img/taocan_04.png" />
+			<p>出殡火化</p>
+		</li>
+		<li><img src="img/taocan_05.png" />
+			<p>墓地落葬</p>
+		</li>
+		<li><img src="img/taocan_06.png" />
+			<p>做七祭奠</p>
+		</li>
+	</ul>
+	<div class="merchant_nav">
+		<span style="color:#7F7F7F;">
+			<i class="iconfont icon-huawen" style="color:#1ABC9C;font-size:25px;"></i>
+			&nbsp;&nbsp;服务说明&nbsp;&nbsp;
+			<i class="iconfont icon-huawen" style="color: #1ABC9C;font-size: 25px;"></i>
+		</span>
+	</div>
+	<table cellpadding="0" cellspacing="0">
+		<tr>
+			<th width="25%">服务名称</th>
+			<th>物料说明</th>
+		</tr>
+		<tr>
+			<td>净身穿衣</td>
+			<td>寿衣1套（分男女款）、经文被1条</td>
+		</tr>
+		<tr>
+			<td>灵堂搭设</td>
+			<td>灵堂背景装饰1套、牌位1个、无烟香2捆、蜡烛2对 银元宝10刀、香炉1个、黑伞1把</td>
+		</tr>
+		<tr>
+			<td>遗像制作</td>
+			<td>遗像框1个，含照片放大</td>
+		</tr>
+		<tr>
+			<td>花圈服务</td>
+			<td>主花圈一个</td>
+		</tr>
+		<tr>
+			<td>灵棚搭设</td>
+			<td>20平方灵棚租赁，配2张桌子、20张凳子</td>
+		</tr>
+		<tr>
+			<td>五七服务</td>
+			<td>望乡台1个、大棚搭设1次</td>
+		</tr>
+		<tr>
+			<td>返主除灵</td>
+			<td>跨火盆1个、净手台1个、梯子租赁1把、稻草1捆</td>
+		</tr>
+		<tr>
+			<td>礼仪指导</td>
+			<td>做七流程指导</td>
+		</tr>
+		<tr>
+			<td>代办事宜 </td>
+			<td>联系殡仪馆</td>
+		</tr>
+	</table>
+	<div class="merchant_nav">
+		<span style="color:#7F7F7F;">
+			<i class="iconfont icon-huawen" style="color:#1ABC9C;font-size:25px;"></i>
+			&nbsp;&nbsp;用品展示&nbsp;&nbsp;
+			<i class="iconfont icon-huawen" style="color: #1ABC9C;font-size: 25px;"></i>
+		</span>
+	</div>
+	<ul class="goodList">
+		<li><img src="img/taocan_goods1.png" /></li>
+		<li><img src="img/taocan_goods2.png" /></li>
+		<li><img src="img/taocan_goods3.png" /></li>
+		<li><img src="img/taocan_goods4.png" /></li>
+		<li><img src="img/taocan_goods5.png" /></li>
+		<li><img src="img/taocan_goods6.png" /></li>
+		<li><img src="img/taocan_goods7.png" /></li>
+		<li><img src="img/taocan_goods8.png" /></li>
+		<!--<li><img src="img/taocan_goods9.png"/></li>
+		<li><img src="img/taocan_goods10.png"/></li>-->
+	</ul>
+	<div class="merchant_nav">
+		<span style="color:#7F7F7F;">
+			<i class="iconfont icon-huawen" style="color:#1ABC9C;font-size:25px;"></i>
+			&nbsp;&nbsp;顾客须知&nbsp;&nbsp;
+			<i class="iconfont icon-huawen" style="color: #1ABC9C;font-size: 25px;"></i>
+		</span>
+	</div>
+	<div class="text">
+	<p>1.套餐价格仅限套餐服务内容</p>
+	<p>2.套餐物料以实物为准</p>
+	<p>3.套餐添加其他服务，价格另议</p>
+	<p>4.最终解释权归千柏渡所有</p>
+	</div>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<div class="weui-tabbar fix-bottom">
+		<input type="text" ng-model="$parent.phone" style="padding-left:5px;background: white;outline:none;width:60%;border:0.5px solid #E0E0E0;border-radius:4px;height:35px;font-size:15px;margin:5px 10px;" placeholder="请输入您的电话"/>
+		<a href="javascript:;" ng-click="addOrder()" class="bg-green color-white clear-padding" style="width:35%;line-height:46px;font-size:15px;text-align: center;float: right;">
+			电话咨询
+		</a>
+	</div>
+</div>
+</div>

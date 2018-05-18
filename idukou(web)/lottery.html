@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <title>抽奖</title>
+   <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    <script src="js/jquery-3.1.1.js"></script>
+    <!--弹窗用-->
+    <script src="js/layer.js"></script>
+    <!--榜单滚动http://apps.bdimg.com/libs/layer/2.0/layer.m.js-->
+    <script src="js/scroll.js"></script>
+    <style>
+        /*ＰＵＢＬＩＣ*/
+        body{background-color: #f5f5f5;margin: 0;padding: 0;font-family: 微软雅黑}
+        a{text-decoration:none;}
+        ul,li{list-style:none;padding: 0;margin: 0;}
+
+        .b{font-weight: bold}
+        /*常用集合*/
+        .font-30{font-size: 30px;}
+        .font-24{font-size: 24px;}
+        .font-20{font-size: 20px;}
+        .font-18{font-size: 18px;}
+        .font-14{font-size: 14px;}
+        .font-12{font-size: 12px;}
+        .color-white{color:#ffffff;}
+        .color-green{color:#007d68;}
+        .color-black{color:#000000;}
+        .color-yellow{color:#fbeecc;}
+        .bg-white{background-color:#ffffff;}
+        .bg-green{background-color:#007d68;}
+        .bg-black{background-color:#000000;}
+        .bg-yellow{background-color:#fbeecc;}
+
+        /**/
+
+
+        #platebtn {background:rgba(100,0,255,1);}
+        #platebtn:hover {background: #ff00ff;}
+
+        ::-webkit-input-placeholder { color:#fbeecc; }
+        ::-moz-placeholder { color:#fbeecc; } /* firefox 19+ */
+        :-ms-input-placeholder { color:#fbeecc; } /* ie */
+        input:-moz-placeholder { color:#fbeecc; }
+
+
+        .list_lh{heihgt:50px;overflow: hidden;}
+        .my{margin-top: 50px;}
+        .my li{margin: 2px;}/**/
+
+    </style>
+</head>
+
+<body style="background-image:url(img/wap-bg.jpg);background-position: top center ;background-size:100% auto;background-repeat: no-repeat;background-color: #f5f5f5" >
+<div style="text-align: center;margin-top:28%;position: relative;">
+    <img src="img/txtBg.png" width="74%" height="28rem" style="position: absolute;z-index: -1;left: 13%">
+    <input  type='tel'  pattern="^\d{11}$" placeholder="请输入手机号" id="phone" style="padding:0.2rem 0 0;text-align:center;background:none;border: none;" class="color-yellow font-18">
+    <div class="font-12 color-green" style="margin-top: 0.5rem;">注：请输入正确的手机号，以接收优惠券短信凭证</div>
+</div>
+<div style="margin: 0 auto;text-align: center">
+    <div style="margin:6% auto 0;">
+        <div style="position: relative;">
+            <div  style="margin-top: 10px;position: relative;">
+                <img  id='turnplatewrapper'  src="img/lotteryBg1.png" width="100%">
+            </div>
+
+            <div id='turnplate' style="position: absolute;left:20.2%;top:12%;width:20%;display: block;"><img src="img/effect.png" width="100%;" style="vertical-align: middle;"></div>
+            <a id='platebtn' style="position: absolute;top:34%;left:40.5%;width:19%;height:21%;text-align: center;cursor: pointer;" class=""></a>
+            <div style="position: absolute;top:12%;left:20%;width:60%;pointer-events:none;">
+                <img src="img/lotteryTxt.png" width="100%" height="auto" style="vertical-align:middle;">
+            </div>
+        </div>
+
+        <div style="margin: 10px 13% 20px;text-align: left;line-height: 18px;background:rgba(2,54,55,0);"  class="color-green font-22">
+            <div class="b font-18" >活动规则</div>
+            <div style="margin-top:10px;font-size: 12px;">1.每个手机号码只允许抽取优惠券一次。<br/>
+                2.获得优惠券后，平台将发送短信作为优惠凭证。<br/>
+                3.通过千柏渡平台预约并完成服务后可凭优惠券短信进行现金抵扣。<br/>
+                4.单笔服务订单总额满5000元可使用优惠券（不可叠加使用）。<br/>
+                5.最终解释权归千柏渡平台所有。</div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!--<img src="lottery.jpg">-->
+<script>
+    var config={domain:'http://202.91.245.20:3000/'};
+    var util={
+
+    }
+
+    var hasPhone=false;
+    ///////////登录 手机    检测手机号是否为新用户  （新用户）
+    var user=window.localStorage.getItem("user");//sessionStorage
+    var couponData={UserPhone:"",CouponID:"",Activeid:"1"};
+    if(user && user.Phone){
+        couponData.UserPhone=user.Phone;
+        hasPhone=true;
+    }else{
+        hasPhone=false;
+        couponData.UserPhone=$("#phone").val();
+    }
+    /*loginInit();
+    function loginInit(){
+
+    }*/
+
+
+    ///////////////////
+    function postRegister(phone,fun,t){
+        $.ajax({
+            type:'POST',
+            url:config.domain+'/api/Users/GetOrCreate/' + phone,///api/Conpou/Exist',
+            datatype:'json',
+            success:function(e1){
+                postConpouExit({UserPhone:phone,Activeid:1},fun,t);
+                couponData.UserPhone=phone;
+                return true;
+               /* if(e1 && e1.Img){
+                    storage.addNetTomb(e1);
+                    window.location.href="index.html";
+                }else{
+                    alert("创建失败，请重试！");
+                }
+            },error:function (e){
+                alert("错误，请重试！");*/
+            },error:function(){
+                return false;
+            }
+        })
+
+    }
+    function postConpouExit(data,fun,t){
+        $.ajax({
+            type:'POST',
+            url:config.domain+'/api/Conpou/Exist',
+            datatype:'json',
+            data:data,
+            success:function(e1){
+                if(e1){
+                    fun(t);
+                    return true;
+                }else{
+                   // layer.msg('您已抽过奖了');
+                    layer.open({
+                        content: '您已抽过奖了'
+                        ,skin: 'msg'
+                        ,time: 3
+                    });
+                    return false;
+                }
+
+                /* if(e1 && e1.Img){
+                 storage.addNetTomb(e1);
+                 window.location.href="index.html";
+                 }else{
+                 alert("创建失败，请重试！");
+                 }
+                 },error:function (e){
+                 alert("错误，请重试！");*/
+            },error:function(){
+                return false;
+            }
+        })
+    }
+    function postConpouResult(data){
+        $.ajax({
+            type:'POST',
+            url:config.domain+'/api/Conpou/GetCoupon',
+            datatype:'json',
+            data:data,
+            success:function(e1){
+
+                /* if(e1 && e1.Img){
+                 storage.addNetTomb(e1);
+                 window.location.href="index.html";
+                 }else{
+                 alert("创建失败，请重试！");
+                 }
+                 },error:function (e){
+                 alert("错误，请重试！");*/
+            },error:function(){
+                return false;
+            }
+        })
+    }
+
+
+    ///////////////////榜单
+    var phone1Arr=["158","138","137","136","135","187","186","139","159","183","153","188","180","181","189","177","131","132"];
+    var phone2Arr="";
+    var voucher=["300","500"];
+
+    function init(){
+        var count=15;
+        var i=0;
+        var list=[];
+        for (i;i<count;i++){
+            list.push('<li>'+getRandomPhone()+'　抽到优惠券'+voucher[Math.round(Math.random()*10)%2]+'元</li>');
+        }
+        list.join("");
+        $(".my").append(list);
+
+        $(document).ready(function(){
+           /* $('.list_lh li:even').addClass('lieven');*/
+        })
+        $(function(){
+            $("div.list_lh").myScroll({
+                speed:40, //数值越大，速度越慢
+                rowHeight:35 //li的高度
+            });
+        });
+    }
+    init();
+    function getRandomPhone(){
+        var font=Math.round(Math.random()*17);
+        font=phone1Arr[font];
+
+        var s=[];
+        var i=0;
+        s.push(font);
+        s.push("****");
+        for (i;i<4;i++){
+            s.push(Math.round(Math.random()*9));
+        }
+        s= s.join("");
+
+        return s;
+    }
+    //字符串格式化－电话号码隐藏中间四位
+    function formatTel(tel){
+        tel=tel.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+        return tel;
+    }
+
+    //抽奖后结果更新
+    function updatePhone(tel,prize){
+        $('.my li').first().remove();
+        $(".my").append('<li>'+formatTel(tel)+'　抽到'+prize+'</li>');
+        /*$('.my li').last().val("000"+tel);*/
+    }
+
+
+    ////////////抽奖
+    /*/////抽奖*/
+
+    var turnplate = {
+        turnplateBox: $('#turnplate'),
+        turnplateBtn: $('#platebtn'),
+        lightDom: $('#turnplatewrapper'),
+        freshLotteryUrl: 'http://huodong.kuaipan.cn/ajaxTurnplate/freshLottery/',
+        msgBox: $('#msg'),
+        lotteryUrl: 'http://huodong.kuaipan.cn/ajaxTurnplate/lottery/',
+        height: '450', //帧高度
+        lightSwitch: 0, //闪灯切换开关. 0 和 1间切换
+        minResistance: 5, //基本阻力
+        Cx: 0.01, //阻力系数 阻力公式：  totalResistance = minResistance + curSpeed * Cx;
+        accSpeed: 15, //加速度
+        accFrameLen: 40, //加速度持续帧数
+        maxSpeed: 250, //最大速度
+        minSpeed: 20, //最小速度
+        frameLen: 8, //帧总数
+        totalFrame: 0, //累计帧数,每切换一帧次数加1
+        curFrame: 0, //当前帧
+        curSpeed: 20, //上帧的速度
+        lotteryTime: 0, //抽奖次数
+        lotteryIndex: 6, //奖品index
+        errorIndex: 6, //异常时的奖品指针
+        initBoxEle: $('#turnplate #init'),
+        progressEle: $('#turnplate #init span'),
+        initProgressContent: '~~~^_^~~~', //初始化进度条的内容
+        initFreshInterval: 500, //进度条刷新间隔
+        virtualDistance: 10000, //虚拟路程,固定值，速度越快，切换到下帧的时间越快: 切换到下帧的时间 = virtualDistance/curSpeed
+        isStop: false, //抽奖锁,为true时，才允许下一轮抽奖
+        timer2: undefined, //计时器
+        initTime: undefined,
+        showMsgTime: 2000, //消息显示时间
+        lotteryChannel: '',
+
+        channelList: {
+            'login': '每日登录',
+            'consume': '购买空间'
+        },
+        lotteryType:['优惠券100元','谢谢参与','优惠券200元','谢谢参与','优惠券500元','谢谢参与','优惠券300元','谢谢参与'],
+        /*lotteryType: {
+            '优惠券100元': 0,
+            '谢谢参与': 1,
+            '优惠券200元': 2,
+            '谢谢参与': 3,
+            '优惠券500元': 4,
+            '谢谢参与': 5,
+            '优惠券300元': 6,
+            '谢谢参与': 7
+        },*/
+
+        lotteryList: [
+            '5M 永久空间',
+            '80M 永久空间',
+            '1G 永久空间',
+            '200M 永久空间',
+            '100M 永久空间',
+            '20M 永久空间',
+            '继续攒人品',
+            '10G 永久空间',
+            '50M 永久空间',
+            '1T 永久空间',
+        ],
+
+        lotteryDes: [
+            '手气一般般，幸运指数半颗星！',
+            '手气不错呢，幸运指数3颗星！',
+            '手气无敌了，幸运指数4颗星！',
+            '手气很好呢，幸运指数3颗星！',
+            '手气很好呢，幸运指数3颗星！',
+            '手气还凑合，幸运指数1颗星！',
+            '手气太差了，幸运指数0颗星！',
+            '手气太好了，幸运指数5颗星！',
+            '手气还可以，幸运指数2颗星！',
+            '手气爆棚了，幸运指数5颗星！'
+        ],
+
+        //初始化
+        init: function () {
+            this.initAnimate()
+            this.freshLottery();
+            this.turnplateBtn.click($.proxy(function () {
+                this.click();
+            }, this));
+        },
+
+        //初始化动画
+        initAnimate: function () {
+            //this.initBoxEle.show();
+            clearTimeout(this.initTimer);
+            var curLength = this.progressEle.text().length,
+                    totalLength = this.initProgressContent.length;
+
+            if (curLength < totalLength) {
+                this.progressEle.text(this.initProgressContent.slice(0, curLength + 1));
+            } else {
+                this.progressEle.text('');
+            }
+            this.initTimer = setTimeout($.proxy(this.initAnimate, this), this.initFreshInterval);
+        },
+
+        //停止初始化动画
+        stopInitAnimate: function () {
+            clearTimeout(this.initTimer);
+            this.initBoxEle.hide();
+        },
+
+        //显示还有几次抽奖机会
+        freshLotteryTime: function () {
+            //$('#top-menu').find('.lottery-times').html(this.lotteryTime);
+        },
+
+        //更新抽奖次数
+        freshLottery: function () {
+            this.stopInitAnimate();
+            this.setBtnHover();
+            this.isStop = true;
+            this.lotteryTime = 1;
+            this.freshLotteryTime();
+
+        },
+
+        //设置按钮三态
+        setBtnHover: function () {
+            //按钮三态
+            $('#platebtn').hover(function () {
+                $(this).addClass('hover');
+            }, function () {
+                $(this).removeClass('hover click');
+            }).mousedown(function () {
+                $(this).addClass('click');
+            }).mouseup(function () {
+                $(this).removeClass('click');
+            });
+        },
+
+        //获取奖品
+        lottery: function () {
+           // postConpouResult();
+            this.lotteryIndex = undefined;
+            this.lotteryTime--;
+            this.freshLotteryTime();
+            this.totalFrame = 0;
+            this.curSpeed = this.minSpeed;
+            this.turnAround();
+            var last=4;//Math.floor(Math.random()+0.2)*2+4;
+            this.lotteryIndex =last// typeof this.lotteryType[2] !== 'undefined' ? this.lotteryType[2] :last;// this.errorIndex;
+            this.lotteryChannel = typeof this.channelList[1] !== 'undefined' ? this.channelList[1] : '';
+        },
+
+        //点击抽奖
+        click: function () {
+            if(!$("#phone").val() || $("#phone").val().length!=11){
+                //layer.msg('请输入完整的电话号码');
+                layer.open({
+                    content: '请输入正确的电话号码'
+                    ,skin: 'msg'
+                    ,time: 2
+                });
+                return;
+            }else {
+                var reg=/^\d{11}$/;
+                if($("#phone").val().match(reg)==null){
+                    //layer.msg('请输入正确的电话号码2');
+                    layer.open({
+                        content: '请输入正确的电话号码'
+                        ,skin: 'msg'
+                        ,time: 2
+                    });
+                    return;
+                }
+            }
+            //加锁时
+            if (this.isStop == false) {
+                layer.open({
+                    content: '现在还不能抽奖哦'
+                    ,skin: 'msg'
+                    ,time: 3
+                });
+                //layer.msg('');
+                return;
+            }
+            postRegister($("#phone").val(),this.beginTurn,this);
+
+            //this.beginTurn(this)
+        },
+        beginTurn:function(t){
+
+            t.turnplateBox.css("display","block");
+            t.lottery();
+        },
+        //更新当前速度
+        freshSpeed: function () {
+            var totalResistance = this.minResistance + this.curSpeed * this.Cx;
+            var accSpeed = this.accSpeed;
+            var curSpeed = this.curSpeed;
+            if (this.totalFrame >= this.accFrameLen) {
+                accSpeed = 0;
+            }
+            curSpeed = curSpeed - totalResistance + accSpeed;
+
+            if (curSpeed < this.minSpeed) {
+                curSpeed = this.minSpeed;
+            } else if (curSpeed > this.maxSpeed) {
+                curSpeed = this.maxSpeed;
+            }
+
+            this.curSpeed = curSpeed;
+        },
+
+        //闪灯,切换到下一张时调用
+        switchLight: function () {
+            this.lightSwitch = this.lightSwitch === 0 ? 1 : 0;
+            var lightHeight = -this.lightSwitch * this.height;
+            if(this.lightSwitch==0){
+                this.lightDom.attr('src', 'img/lotteryBg2.png');
+            }else{
+                this.lightDom.attr('src', 'img/lotteryBg1.png');
+            }
+
+        },
+
+        //旋转,trunAround,changeNext循环调用
+        turnAround: function () {
+            //加锁
+            this.isStop = false;
+            var intervalTime = parseInt(this.virtualDistance / this.curSpeed);
+            this.timer = window.setTimeout('turnplate.changeNext()', intervalTime);
+        },
+
+        //弹出奖品
+        showAwards: function () {
+            postConpouResult({UserPhone:$("#phone").val(),Activeid:1,CouponID:1});
+
+            var s=this.lotteryType[this.lotteryIndex];
+            if(this.lotteryIndex%2==0){
+                updatePhone($("#phone").val(),s);
+                s="您抽到了"+"<span style='font-size:20px;color:#ff6203;'>"+s+"</span>"+"<br><span style='font-size: 12px;color: #999999;line-height: 30px;'>优惠券以短信形式发送至手机号"+$("#phone").val()+"</span>";
+            }
+            layer.open({
+                type: 1,
+                title: '抽奖结果',
+                shadeClose: true, //点击遮罩关闭
+                content: '\<\div style="padding:0 20px 10px;">'+s+'\<\/div>'
+            });
+            //alert('抽奖结束');
+            //$('#lotteryMsg').dialog('open');
+        },
+
+        //显示提示信息
+        showMsg: function (msg, isFresh) {
+
+            isFresh = typeof isFresh == 'undefined' ? false : true;
+            if (typeof msg != 'string') {
+                msg = '今天已经抽过奖了，明天再来吧';
+            }
+            var msgBox = this.msgBox;
+            var display = msgBox.css('display');
+
+            msgBox.html(msg);
+
+            window.clearTimeout(this.timer2);
+            msgBox.stop(true, true).show();
+            var fadeOut = $.proxy(function () {
+                this.msgBox.fadeOut('slow');
+            }, this);
+            this.timer2 = window.setTimeout(fadeOut, this.showMsgTime);
+        },
+
+
+        //切换到下帧
+        changeNext: function () {
+            //判断是否应该停止
+            if (this.lotteryIndex !== undefined && this.curFrame == this.lotteryIndex && this.curSpeed <= this.minSpeed + 10 && this.totalFrame > this.accFrameLen) {
+                this.isStop = true;
+                this.showAwards();
+                return;
+            }
+
+            var nextFrame = this.curFrame + 1 < this.frameLen ? this.curFrame + 1 : 0;
+            var w,h;
+            if (nextFrame<3){
+                h =0;
+                w=( nextFrame)%3 ;
+            }else if(nextFrame==3){
+                h =Math.ceil(nextFrame/3) ;
+                w=( nextFrame-1)%3 ;
+            }else if(nextFrame>3 & nextFrame<7){
+                h =Math.ceil(nextFrame/3) ;
+                w=(7-nextFrame-1)%3 ;
+            }else if(nextFrame==7){
+                h =1;
+                w=0;
+            }
+//left:20.2%;top:12%;width:20%;
+            w=w*19.9+20.2;
+            h=h*21+12;
+            //this.turnplateBox.css('backgroundPosition', '0 ' + bgTop.toString() + 'px');
+
+            this.turnplateBox.css('top', '0' + h.toString() + '%');
+            this.turnplateBox.css('left', '0' + w.toString() + '%');
+            this.switchLight();
+            this.curFrame = nextFrame;
+            this.totalFrame++;
+            this.freshSpeed();
+            this.turnAround();
+        }
+    }
+    turnplate.init();
+
+</script>
+</body>
+</html>
