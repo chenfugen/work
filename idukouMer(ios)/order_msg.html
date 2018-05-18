@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="x-rim-auto-match" content="none"> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/angular/angular-route.min.js"></script>
+		<script src="js/idukou.js"></script>
+		<style type="text/css">
+			.ui-dialog-cnt {
+				width: 20rem;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -10rem;
+				margin-top: -10rem;
+				z-index: 999;
+			}
+			
+			textarea {
+				width: 15rem;
+				height: 2rem;
+			}
+		</style>
+	</head>
+
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive ui-pulic-header">
+			<a href="order.html" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev"><span>返回</span></i></a>
+			<h2>订单详情</h2>
+			<a href="order.html" class="ui-href" data-transition="slide-left">关闭</a>
+		</header>
+		<div class="panel active" id="orderdetails">
+			<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="myCtrl">
+				<div class="ui-orderdetails">
+					<h1>订单状态:<span id="state"></span></h1></div>
+				<ul class="ui-list ui-list-text ui-border-tb">
+					<li class="ui-border-b">
+						<h4 class="ui-nowrap">客户：{{order.TrueName}}</h4>
+						<div class="ui-txt-info">{{order.Phone}}</div>
+					</li>
+					<li>
+						<h4>联系地址：{{order.Address}}</h4>
+					</li>
+					<li>
+						<h4>备注：{{order.Remark}}</h4>
+					</li>
+					<li class="ui-ordetai">
+						<a href="tel:{{order.Phone}}" class="ui-btn-lg
+              ui-btn-default"><i class="ui-ico-csad" style="display:inline;color:#3397DA;"></i>&nbsp;拨打客户电话</a>
+					</li>
+				</ul>
+				<div class="ui-pubil-bg ui-accout-top" ng-if="order.OrdersGoodsDataObjects.length > 0">
+					<div class="ui-txt-sub" style="width:100%;line-height:3.5rem;background: #C8C7CC;">&nbsp;&nbsp;&nbsp;订单明细</div>
+					<div>
+					<table class="ui-order-table" style="width:100%;background:white;line-height:3rem;text-align:left;">
+							<tbody>
+								<tr ng-repeat="goods in order.OrdersGoodsDataObjects">
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;{{goods.GoodsName}}</td>
+									<td>{{goods.OGNum}}</td>
+									<td style="text-align:center;">&nbsp;&nbsp;¥{{goods.MGPrice}}</td>
+								</tr>
+							</tbody>
+					</table>		
+					</div>
+					<ul class="ui-list ui-list-text ui-border-tb ui-accout-top">
+						<li>
+							<h4 class="ui-nowrap">总额：</h4>
+							<div class="ui-txt-info c_alizarin">￥{{order.OrdersPriceDataObjects | orderPrice:1}}</div>
+						</li>
+						<li>
+							<h4 class="ui-nowrap">定金：</h4>
+							<div class="ui-txt-info c_alizarin">￥{{order.OrdersPriceDataObjects | orderPrice:2}}</div>
+						</li>
+						<!--<li>
+                    <h4 class="ui-nowrap">优惠券：</h4>
+                    <div class="ui-txt-info c_alizarin">￥200</div>
+               </li>-->
+						<li ng-repeat="coupon in order.OrderCouponDataObjects">
+							<h4 class="ui-nowrap">{{coupon.Remark}}：</h4>
+							<div class="ui-txt-info" ng-if="order.State==4"><span style="color:red;">￥{{coupon.Price}}</span></div>
+							<div class="ui-txt-info c_alizarin" ng-if="order.State!=4"><span>￥{{coupon.Price}}</span></div>
+						</li>
+						<li class="ui-border-t ">
+							<h4 class="ui-nowrap">实付款：</h4>
+							<div class="ui-txt-info c_alizarin" ng-if="order.State==4"><input type="text" style="width: 100px;" ng-change="change(full)" ng-model="full" />&nbsp;元</div>
+							<div class="ui-txt-info c_alizarin" ng-if="order.State!=4">￥{{full}}&nbsp;元</div>
+						</li>
+					</ul>
+				</div>
+				<div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+				<div class="ui-dialog">
+					<div class="ui-dialog-cnt">
+						<header class="ui-dialog-hd ui-border-b">
+							<h3>删除提示</h3>
+							<i class="ui-dialog-close" data-role="button"></i>
+						</header>
+						<div class="ui-dialog-bd" style="text-align: center;">
+							<div>你确定删除该订单吗？删除后不能恢复。</div>
+						</div>
+						<div class="ui-dialog-ft">
+							<button type="button" ng-click="cancel()" data-role="button">取消</button>
+							<button type="button" ng-click="confirm(order.ID)" data-role="button">确定</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="ui-loading-block show">
+					<div class="ui-loading-cnt">
+						<i class="ui-loading-bright"></i>
+						<p>正在加载中...</p>
+					</div>
+				</div>
+
+				<div class="ui-poptips ui-poptips-success hint_msg" style="display:none;">
+					<div class="ui-poptips-cnt">操作成功</div>
+				</div>
+
+				<footer class="ui-footer ui-footer-stable ui-border-t">
+					<!--待商家接单-->
+					<ul class="ui-tiled ui-border-t ui-txt-tips" ng-if="order.State==0">
+						<li class="ui-footer-order ui-border-r">
+							<a href="javascript:;" ng-click="updateState(order,1)"><span class="ui-text-f16">确认接单</span></a>
+						</li>
+						<li class="ui-footer-order">
+							<a href="javascript:;" ng-click="refuse(order)" class="ui-btn-cancel"><span class="ui-text-f16">拒绝接单</span></a>
+						</li>
+					</ul>
+					<!--商家已接单-->
+					<ul class="ui-tiled ui-border-t ui-txt-tips" ng-if="order.State==1">
+						<li class="ui-footer-order  ui-border-r">
+							<a href="javascript:;" ng-click="selectService(order)"><span class="ui-text-f16">服务下单</span></a>
+						</li>
+						<li class="ui-footer-order">
+							<a href="tel:{{order.Phone}}"><span class="ui-text-f16">联系客户</span></a>
+						</li>
+					</ul>
+					<!--未付订金-->
+					<ul class="ui-tiled ui-border-t ui-txt-tips" ng-if="order.State==2">
+						<li class="ui-footer-order  ui-border-r">
+							<a href="javascript:;" ng-click="selectService(order)"><span class="ui-text-f16">选择服务</span></a>
+						</li>
+						<!--<li class="ui-footer-order" ng-if="!order.IsCreatedByMerchant"><a href="tel:{{order.Phone}}"><span class="ui-text-f16">联系客户</span></a></li>-->
+						<li class="ui-footer-order">
+							<a href="javascript:;" ng-click="finishOrder(order,4)"><span class="ui-text-f16">服务完成</span></a>
+						</li>
+					</ul>
+					<!--执行中-->
+					<ul class="ui-tiled ui-border-t ui-txt-tips" ng-if="order.State==3">
+						<li class="ui-footer-order  ui-border-r">
+							<a href="javascript:;" ng-click="finishOrder(order,4)"><span class="ui-text-f16">服务完成</span></a>
+						</li>
+						<li class="ui-footer-order">
+							<a href="tel:{{order.Phone}}"><span class="ui-text-f16">联系客户</span></a>
+						</li>
+					</ul>
+					<!--执行完成，付全款-->
+					<ul class="ui-tiled ui-border-t ui-txt-tips" ng-if="order.State==4">
+						<li class="ui-footer-order  ui-border-r">
+							<a href="javascript:;" ng-click="editCoupon(order)"><span class="ui-text-f16">修改金额</span></a>
+						</li>
+						<li class="ui-footer-order" ng-if="!order.IsCreatedByMerchant">
+							<a href="javascript:;" ng-click="pressmoney(order.ID)" class="pay"><span class="ui-text-f16">结账</span></a>
+						</li>
+						<li class="ui-footer-order" ng-if="order.IsCreatedByMerchant">
+							<a href="javascript:;" ng-click="linePay(order)"><span class="ui-text-f16">线下支付</span></a>
+						</li>
+					</ul>
+					<!--订单已关闭-->
+					<ul class="ui-tiled ui-border-t ui-txt-tips" ng-if="order.State<0 || order.State==5">
+						<li class="ui-footer-order" ng-click="deleteOrder(order.ID)">
+							<a href="javascript:;" class="ui-order-delete"><span class="ui-text-f16">删除订单</span></a>
+						</li>
+					</ul>
+				</footer>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var id =window.location.search.split("=")[1];
+		var requestUrl = APIaddress + "api/Orders/getOrdersInfo/" + id;
+		var myModule = angular.module("app", []);
+		myModule.filter('orderPrice', function(){
+			return function(orderPrice, ptype) {
+				if(orderPrice) {
+					for(var i = 0; i < orderPrice.length; i++) {
+						if(orderPrice[i].PType == ptype){
+							return orderPrice[i].Price;
+						}
+					}
+				}
+			};
+		});
+		myModule.controller('myCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$(".ui-loading-block").hide();
+					if(data == null || data == "") {
+						$("#remark").html("<div class='ui-center'>还没有任何备注信息！</div>")
+					} else {
+						$scope.order = data;
+						//console.log(data);
+						var str = "";
+						switch(data.State) {
+							case -1:
+								str = "取消预约";
+								break;
+							case -2:
+								str = "拒绝接单";
+								break;
+							case 0:
+								str = "已预约";
+								break;
+							case 1:
+								str = "已接单";
+								break;
+							case 2:
+								str = "未付订金";
+								break;
+							case 3:
+								str = "已付订单,执行中";
+								break;
+							case 4:
+								str = "等待付全款";
+								break
+							case 5:
+								str = "已付全款";
+								break
+						}
+						$("#state").text(str);
+						$scope.Total = 0; //总额
+						$scope.DJSum = 0; //订金
+						$scope.preferential = 0; //优惠
+
+						for(var i = 0; i < $scope.order.OrdersPriceDataObjects.length; i++) {
+							if($scope.order.OrdersPriceDataObjects[i].PType == 1) //总额
+								$scope.Total = $scope.order.OrdersPriceDataObjects[i].Price;
+							if($scope.order.OrdersPriceDataObjects[i].PType == 2)
+								$scope.DJSum = $scope.order.OrdersPriceDataObjects[i].Price;
+						}
+						if($scope.order.OrderCouponDataObjects.length == 0) {
+							var coupon = {
+								Price: 0,
+								Remark: "折扣优惠"
+							};
+							$scope.order.OrderCouponDataObjects.push(coupon);
+						} else {
+							for(var j = 0; j < $scope.order.OrderCouponDataObjects.length; j++) {
+								$scope.preferential += $scope.order.OrderCouponDataObjects[j].Price;
+							}
+						}
+						$scope.full = $scope.Total - $scope.DJSum - $scope.preferential;
+					}
+					
+				//确定接单
+				$scope.updateState = function(order, state) {
+					order.State = state;
+					$.post(APIaddress + 'api/Orders/UpdateState', order, function(msg) {
+						//console.log(order.State);
+						if(msg) {
+							$(".hint_msg div").text("已成功接单")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+					 window.location.href = "order_msg.html?id="+order.ID;
+						} else {
+							$(".hint_msg div").text("接单失败")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+						}
+					});
+				}
+
+				//拒绝接单
+				$scope.refuse = function(order) {
+					$(".ui-dialog header h3").text("拒绝订单提示");
+					$(".ui-dialog .ui-dialog-bd div").text("您确定拒绝该订单？拒绝后将不能接单");
+					$(".ui-dialog .ui-dialog-bd").append('<p><textarea placeholder="请输入拒绝接单的理由" id="reason"></textarea></p>');
+					$(".ui-dialog").show();
+					$scope.confirm = function(orderID) { //确定
+						$http.post(APIaddress + 'api/Orders/Reject/' + order.ID + '?reason=' + $("#khl_reason").val())
+							.success(function(data) {
+								$(".hint_msg div").text('已拒绝成功');
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000)	
+					 window.location.href = "order_msg.html?id="+order.ID;
+							}).error(function(data) {
+								$(".hint_msg div").text("拒绝失败")
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000)
+							})
+						$(".ui-dialog").hide();
+					}
+
+					$scope.cancel = function() { //取消
+						$(".ui-dialog").hide();
+					}
+
+				}
+					
+														
+					//选择服务
+					 $scope.selectService = function (order) {
+							window.sessionStorage.setItem("order", JSON.stringify(order));
+							window.location.href = "selectService.html";
+						};
+				
+				   $scope.cancel = function() { //取消
+					  $(".ui-dialog").hide();
+				    }
+
+				//结账              
+				$scope.pressmoney = function(id){
+					$http.post(APIaddress + 'api/Orders/PressMoney/' + id + '?' + Math.random())
+						.success(function() {
+							$(".hint_msg div").text("您的信息已发送，请耐心等候")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+						}).error(function() {
+							$(".hint_msg div").text("短信发送失败，抱歉")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+						})
+					$('.pay').unbind("click");
+				}
+
+			
+
+				//修改折扣优惠后
+				$scope.change = function(t) {
+					var isNum = /^\d+(\.\d+)?$/;
+					if(t != ""){
+						if(!isNum.test(t) && parseInt(t) != 0) {
+							$(".hint_msg div").text('请填写正确的折扣金额');
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+							$scope.full=$scope.Total - $scope.DJSum - $scope.preferential;
+							return false;
+						}
+					}
+					if(t> $scope.Total - $scope.DJSum) {
+						$(".hint_msg div").text('请填写正确的折扣金额');
+						$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+						$scope.full=$scope.Total - $scope.DJSum - $scope.preferential;						
+						return false;
+					}					
+					$scope.full =t;
+					$scope.order.OrderCouponDataObjects[0].Price=$scope.Total - $scope.DJSum-$scope.full;					
+				}
+        
+				//服务完成		
+				$scope.finishOrder = function(order, state) {
+					$(".ui-dialog header h3").text("订单消息");
+					$(".ui-dialog .ui-dialog-bd div").text("您确定完成订单吗？");
+					$(".ui-dialog").show();
+					$scope.confirm = function() {
+						order.State=4;
+						//console.log(order)
+						$.post(APIaddress + 'api/Orders/UpdateState', order, function(msg) {
+							if(msg) {
+								$(".hint_msg div").text("已成功完成订单")
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000)
+					      window.location.href = "order_msg.html?id="+order.ID;
+							} else {
+								$(".hint_msg div").text("完成订单失败")
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000)
+							}
+						});
+						$(".ui-dialog").hide();
+					}
+				}
+
+               	//修改金额              
+				$scope.editCoupon = function(order) {
+					$.post(APIaddress + 'api/Orders/Coupon', order, function(msg) {
+						if(msg) {
+							$(".hint_msg div").text("折扣添加成功");
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+					window.location.href="order_msg.html?id="+order.ID;	
+						} else {
+							$(".hint_msg div").text("折扣添加失败，抱歉");
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+						};
+					})
+				}
+               
+				//线下支付			
+				$scope.linePay = function(order) {
+					console.log(order.State)
+					$(".ui-dialog header h3").text("支付消息");
+					$(".ui-dialog .ui-dialog-bd div").text("确定线下支付吗？");
+					$(".ui-dialog").show();
+					$scope.confirm = function(orderID) { //确定
+						$http.post(APIaddress + 'api/Orders/LineFull/' + order.ID + '?price=' + $scope.full)
+							.success(function(data){
+								$(".hint_msg div").text('线下支付成功');
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000)
+						  window.location.href = "order_msg.html?id=" + order.ID;
+							}).error(function(data){
+								$(".hint_msg div").text("完成订单失败")
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000)
+							})
+						$(".ui-dialog").hide();
+					}
+				}
+
+					//删除订单弹出框		
+				 $scope.deleteOrder = function(orderID) { 	
+					$(".ui-dialog").show();
+					var id = orderID;
+					$scope.confirm = function(orderID) { //确定
+						$.post(APIaddress + 'api/Orders/Delete/' + id + '/-4', function(deleteMsg) {
+							var timer = "";
+							if(deleteMsg){
+								location.href = "order_four.html";
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								timer = setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000)
+							} else {
+								location.href = "order_four.html";
+								$(".hint_msg div").text("删除失败")
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								timer = setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000)
+							}
+						})
+					}
+				}
+					
+				}).error(function(data) {
+					console.log("错误......");
+				});              
+			}
+		]);
+	</script>
+
+</html>

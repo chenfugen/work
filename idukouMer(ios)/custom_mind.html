@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/angular/angular-route.min.js"></script>
+		<script src="js/idukou.js"></script>
+
+	</head>
+
+	<body ontouchstart>
+	    <div ng-app="app" ng-cloak class="ng-cloak" ng-controller="customermindCtrl">
+           <header class="ui-header ui-header-positive ui-pulic-header">
+    <a href="javascript:;" onclick="history.back(-1)" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev"><span>取消</span></i></a>
+    <h2 ng-if="remindMethod == 'update'">修改提醒</h2>
+    <h2 ng-if="remindMethod != 'update'">添加提醒</h2>
+</header>
+<div class="pages">
+    <div class="panel active" id="customer_remind">
+        <div class="ui-form ui-border-t">
+            <div class="ui-panel ui-panel-simple ui-border-b"><h3>提醒标题</h3></div>
+            <div class="ui-form-item ui-form-item-pure ui-border-b">
+                <input type="text" ng-model="customRemind.Title" id="Title"  placeholder="请输入 头七／一周年／三周年">
+            </div>
+        </div>
+        <div class="ui-form ui-border-t ui-accout-top">
+            <div class="ui-panel ui-panel-simple ui-border-b"><h3>提醒内容</h3></div>
+            <div class="ui-whitespace">
+                <textarea placeholder="提醒内容" ng-model="customRemind.RemindContent" style="width:100%;height:8rem;border: none;line-height:2em;" id="RemindContent"></textarea>
+            </div>
+        </div>
+        <div class="ui-form ui-border-t ui-accout-top ui-data-box">
+            <form action="#">
+                <div class="ui-panel ui-panel-simple"><h3>设置提醒时间</h3></div>
+                &nbsp;&nbsp;<input type="datetime-local" ng-model="customRemind.RemindDate" id="RemindDate" style="width:60%;">
+            </form>
+        </div>
+    </div>
+</div>
+<footer class="ui-footer ui-footer-btn">
+    <div class="ui-footer ui-footer-stable ui-btn-group ui-border-t  ui-btn-100  ui-btn-follow">
+        <button class="button ui-btn-lg ui-btn-cbgreen" ng-click="save()" style="background:#1ABC9C;color:white">保存</button>
+    </div>
+</footer>
+        <div class="ui-poptips ui-poptips-success hint_msg" style="display:none;">
+			<div class="ui-poptips-cnt"></div>
+		</div>
+  </div>
+	</body>
+	<script type="text/javascript">
+ 		//按钮点击事件
+		$(".button").on("touchstart", function() {
+			$(".button").css({
+				"background": "#eee",
+				"color": "#1ABC9C"
+			})
+		}).on("touchend", function() {
+			$(".button").css({
+				"background": "#1ABC9C",
+				"color": "white"
+			})
+		});
+
+		var id =window.location.search.split("=")[1];
+		//console.log(id);
+		var requestUrl = APIaddress + "api/MerchantCustomReminds";
+		var myModule = angular.module("app", []);
+		myModule.controller('customermindCtrl', ['$scope', '$http',
+			function($scope, $http) {
+		  $scope.save=function(){
+			if($("#Title").val()==""){
+				$(".hint_msg div").text("请输入提醒标题容")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+						}, 1000)
+						return false;
+			   }
+			if($("#RemindContent").val()==""){
+				$(".hint_msg div").text("请输入提醒内容")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+						}, 1000)
+						return false;
+		   }
+	             $scope.customRemind.CID=id;         
+	         if ($scope.customRemind.RemindDate){
+            var RemindDate =$scope.customRemind.RemindDate.getFullYear();
+            if (($scope.customRemind.RemindDate.getMonth() + 1) < 10){
+                RemindDate += "-0" + ($scope.customRemind.RemindDate.getMonth() + 1);
+            }else{
+                RemindDate += "-" + ($scope.customRemind.RemindDate.getMonth() + 1);
+            }
+            if ($scope.customRemind.RemindDate.getDate() < 10){
+                RemindDate += "-0" + $scope.customRemind.RemindDate.getDate();
+            }else{
+                RemindDate += "-" + $scope.customRemind.RemindDate.getDate();}
+           if ($scope.customRemind.RemindDate.getHours() < 10){
+                RemindDate += "T"+"0" + $scope.customRemind.RemindDate.getHours();
+            }else{
+                RemindDate += "T" + $scope.customRemind.RemindDate.getHours();}
+             if ($scope.customRemind.RemindDate.getMinutes() < 10){
+                RemindDate += ":0" + $scope.customRemind.RemindDate.getMinutes();
+            }else{
+                RemindDate += ":" + $scope.customRemind.RemindDate.getMinutes();}
+                    $scope.customRemind.RemindDate=RemindDate;
+                     // console.log($scope.customRemind.RemindDate);
+        }
+	            var msg= $scope.customRemind;
+			  
+		     $.post(requestUrl,msg,function(data){
+               $(".hint_msg div").text('提交成功');
+                 $(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+						}, 1000)
+				 window.location.href="custom_msg.html?id="+id;
+        })
+		  
+	}
+}])
+	</script>
+
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/frozen.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+	<style type="text/css">
+		input[type=checkbox] {
+			width: 1rem;
+			height: 1rem;
+			border: 1px solid #C7C7C7;
+			border-radius: 2px 2px;
+			-webkit-appearance: none;
+			appearance: none;
+			outline: none;
+			position: relative;
+			background:#EEEEEE;
+		}	
+		input[type=checkbox]:checked:after {
+			content: '';
+			position: absolute;
+			left: 1px;
+			top: 1px;
+			width: 0.6rem;
+			height: 0.4rem;
+			border-left: 2px solid #545454;
+			border-bottom: 2px solid #545454;
+			-webkit-transform: rotate(-45deg);
+			-ms-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+		}
+	</style>
+	<body ontouchstart>
+		<header class="ui-header ui-header-stable ui-border-b" style="background: #1ABC9C;color: white;">
+			<h2>登录</h2>
+		<a href="#" onclick="reload()" class="ui-href"><img src="img/flush.png"/ style="width:16PX;float:right;margin-top:6px;"><span id="state" style="float:right">刷新 </span></a>
+		</header>
+		<div class="panel active" id="loginpage">
+			<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="loginCtrl">
+				<div class="ui-btn-wrap">
+					<div class="ui-form-login">
+						<form action="#">
+							<div class="ui-form-item ui-form-item-pure ui-border-b ui-form">
+								<input type="text" placeholder="手机号码" id="phone">
+							</div>
+							<div class="ui-form-item ui-form-item-pure ui-border-b ui-form">
+								<input type="password" placeholder="密码" id="password">
+							</div>
+
+							<div style="margin-top: 1rem">
+								<label class="ui-txt-info" style="font-size:1.1rem;">记住密码</label>
+								<label>
+                                    <input type="checkbox" id="rememberPass" onclick="rememberpass()">
+                            </label>
+							</div>
+							<div style="float: right;margin-top:-2rem;">
+								<label>
+                                    <input type="checkbox" id="directLogin" onclick="directlogin()">
+                             </label>
+								<label class="ui-txt-info" style="font-size:1.1rem;">直接登录</label>
+							</div>
+							<a href="javascript:;" class="button ui-btn-lg login" ng-click="login()" style="top:-1rem;">登&nbsp;&nbsp;录</a>
+						</form>
+						<div class="ui-btn-wrap ui-login-tit" style="margin-top:-1rem;">
+							<p class="ui-txt-sub">
+								<a href="forget_password.html" style="position: absolute;left: 1rem;">忘记密码？</a>
+								<a href="text_login.html" style="position: absolute;right:1rem;">短信验证码登录</a>
+							</p>
+							<h5 class="ui-txt-muted">点击登录后，表示您同意<i class="c_turquoise" style="color:#1ABC9C;">《千柏渡免责声明》</i></h5>
+						</div>
+						<div class="ui-poptips ui-poptips-success hint_msg" style="display: none;">
+							<div class="ui-poptips-cnt">请输入手机号码</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//刷新
+		function reload() {						
+		$(".hint_msg div").text("刷新中...")
+			$(".hint_msg").css({
+				"display": "block"
+			});
+			setTimeout(function() {
+				$(".hint_msg").css({
+					"display": "none"
+				});
+		  window.location.reload();
+			}, 500)		
+		}
+		//判断手机网络
+		if(window.navigator.onLine == false) {
+			$(".hint_msg div").text("连接超时，请检查你的网络设置")
+			$(".hint_msg").css({
+				"display": "block"
+			});
+			setTimeout(function() {
+				$(".hint_msg").css({
+					"display": "none"
+				});
+			}, 2000)
+		}
+		//按钮点击事件
+		$(".button").on("touchstart", function() {
+			$(".button").css({
+				"background": "#eee",
+				"color": "#1ABC9C"
+			})
+		}).on("touchend", function() {
+			$(".button").css({
+				"background": "#1ABC9C",
+				"color": "white"
+			})
+		});
+		var check = document.getElementById("rememberPass");
+		var directLogin = document.getElementById("directLogin");
+		loUser = localStorage.getItem("user") || "";
+		loPass = localStorage.getItem("pass") || "";
+		//console.log(loPass)
+		$("#phone").val(loUser);
+		$("#password").val(loPass);
+		if(loUser !== "" && loPass !== "") {
+			check.setAttribute("checked", "");
+		}
+
+		var str;
+
+		function rememberpass() {
+			$("#directLogin").attr("checked", false);
+			if(directLogin.checked) {
+				str = 1;
+			} else {
+				str = 2;
+			}
+			localStorage.setItem("str", str);
+		}
+
+		function directlogin() {
+			$("#rememberPass").attr("checked", true);
+			if(directLogin.checked) {
+				str = 1;
+			} else {
+				str = 2;
+			}
+			localStorage.setItem("str", str);
+		}
+		if(localStorage.getItem("str") == 1) {
+			$("#directLogin").attr("checked", true);
+			var phone = $("#phone").val();
+			var pass = $("#password").val();
+			var requestUrl = APIaddress + 'api/Merchants/LoginPwd/' + phone + "/" + pass;
+			setTimeout(function() {
+				$.post(requestUrl, function(data) {
+					var id = data.ID
+					//console.log(data.ID)
+					window.localStorage.setItem('id', id);
+					window.location.href = "userpage.html";
+				})
+			}, 2000)
+		} else {
+			$("#directLogin").attr("checked", false);
+		}
+		var myModule = angular.module("app", []);
+		myModule.controller('loginCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$scope.login = function() {
+					var phone = $("#phone").val();
+					var pass = $("#password").val();
+					//判断手机网络
+					if(window.navigator.onLine == false) {
+						$(".hint_msg div").text("请连接网络")
+						$(".hint_msg").css({
+							"display": "block"
+						});
+						setTimeout(function() {
+							$(".hint_msg").css({
+								"display": "none"
+							});
+						}, 1000);
+						return false;
+					} else if(phone == "") {
+						$(".hint_msg div").text("请输入手机号码")
+						$(".hint_msg").css({
+							"display": "block"
+						});
+						setTimeout(function() {
+							$(".hint_msg").css({
+								"display": "none"
+							});
+						}, 1000);
+						return false;
+					} else if(phone.length != 11 || !phone.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
+						$(".hint_msg div").text("请输入手机正确格式")
+						$(".hint_msg").css({
+							"display": "block"
+						});
+						setTimeout(function() {
+							$(".hint_msg").css({
+								"display": "none"
+							});
+						}, 1000);
+						return false;
+					} else if(pass == "") {
+						$(".hint_msg div").text("请输入密码")
+						$(".hint_msg").css({
+							"display": "block"
+						});
+						setTimeout(function() {
+							$(".hint_msg").css({
+								"display": "none"
+							});
+						}, 1000);
+						return false;
+					}
+					if(check.checked) {
+						localStorage.setItem("user", phone);
+						localStorage.setItem("pass", pass);
+					} else {
+						localStorage.setItem("user", phone);
+						localStorage.setItem("pass", "");
+					}
+					var requestUrl = APIaddress + 'api/Merchants/LoginPwd/' + phone + "/" + pass;
+					//console.log(requestUrl);
+					$http({
+						method: 'POST',
+						url: requestUrl
+					}).success(function(data) {
+						if(data) {
+							var id = data.ID
+							window.localStorage.setItem('id', id);
+							window.location.href = "userpage.html";
+						} else {
+							$(".hint_msg div").text("请输入正确的号码或密码");
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000);
+						}
+					}).error(function(data) {
+						$(".hint_msg div").text("请输入正确的号码或密码");
+						$(".hint_msg").css({
+							"display": "block"
+						});
+						setTimeout(function() {
+							$(".hint_msg").css({
+								"display": "none"
+							});
+						}, 1000);
+					})
+				}
+			}
+		])
+	</script>
+
+</html>

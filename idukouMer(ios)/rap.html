@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css" />
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="rapCtrl">
+			<header class="ui-header ui-header-positive">
+				<a href="home.html"slide-left" class="ui-href-l">
+					<i class="ui-icon-prev"><span>返回</span></i>
+				</a>
+				<h2>口碑管理</h2>
+			</header>
+			
+			<div class="panel active" id="rap">
+				<ul class="ui-list  ui-border-tb rap_box">
+					<li class="ui-border-t">
+					<div class="ui-list-thumb">
+						<span class="score">
+            	         <h1>{{order.TotalScore}}</h1>
+                         <p>总评分</p>
+                         </span>
+					</div>
+						<ul class="rap_sclist">
+							<li id="khl_restimenum"></li>
+							<li id="khl_majornum"></li>
+							<li id="khl_mannernum"></li>
+						</ul>
+					</li>
+				</ul>				
+
+				<ul class="ui-list ui-list-pure ui-border-tb  CommentInfo">
+					<div class="rap_nav">
+						<a href="javascript:;" class="button ui-btn ui-btn-default" ng-click="rapInit(0)">全部{{order.AllNum}}</a>
+						<a href="javascript:;" class="button ui-btn ui-btn-default" ng-click="rapInit(1)">未回复{{order.NOReply}}</a>
+						<a href="javascript:;" class="button ui-btn ui-btn-default" ng-click="rapInit(2)">低分{{order.LowGrade}}</a>
+					</div>
+					<li class="ui-border-t" ng-repeat="ppmsg in PublicPraises">
+						<p><label class="ui-label-s">&nbsp;&nbsp;{{ppmsg.TotalScore}}&nbsp;&nbsp;</label>&nbsp;&nbsp;<span>{{ppmsg.UName}}</span><span class="ui-rap-data" style="float: right;">{{ppmsg.CreateDate | date:'yyyy-M-d'}}</span></p>
+						<div class="ui-txt-sub ui-rap-tit" style="width: 100%;">
+							{{ppmsg.PQContent}}
+						</div>
+						<div class="rap_concent" ng-if="ppmsg.State==1" style="background:#ECF0F1;width: 100%;">{{ppmsg.Reply}}</div>
+						<div class="ui-txt-info"><span class="c_alizarin"><i class="ui-txt-tips">¥</i>&nbsp;<i>{{ppmsg.SPrice}}</i></span>
+							<a href="#rapdetails" class="button ui-btn ui-btn-default ui-rap-btnright" ng-if="ppmsg.State==0" ng-click="reply(ppmsg)" style="float: right;">回&nbsp;复</a>
+						</div>
+					</li>
+				</ul>
+				<div class="ui-loading-block show">
+					<div class="ui-loading-cnt">
+						<i class="ui-loading-bright"></i>
+						<p>正在加载中...</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var requestUrl = APIaddress + "api/PublicPraises/Score/" + MerchantID;
+		var myModule = angular.module("app", []);
+		myModule.controller('rapCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$(".ui-loading-block").hide();
+					if(data == null || data == "") {
+						$("#msg-list").html("<div class='ui-center'>还没有任何消息！</div>")
+					} else {
+						$scope.order = data;				
+                $scope.RestimeNum = data.RestimeNum; //响应时间数
+                $scope.MajorNum = data.MajorNum; //专业程度数
+                $scope.MannerNum = data.MannerNum; //服务态度数
+                var rstr = '<span class="ui-txt-sub">响应时间</span>';
+                var mstr = '<span class="ui-txt-sub">专业程度</span>';
+                var mrstr = '<span class="ui-txt-sub">服务态度</span>';
+                for (var i = 0; i < 5; i++) {
+                    if (i < parseInt($scope.RestimeNum)) {
+                        rstr += '<i class="ui-ico-star c_alizarin ui-icon-f24" style="margin-left:0.2rem"></i>';
+                    } else
+                        rstr += '<i class="ui-ico-grade ui-icon-f24 c_alizarin" style="margin-left:0.2rem"></i>';
+                    if (i < parseInt($scope.MajorNum)) {
+                        mstr += '<i class="ui-ico-star c_alizarin ui-icon-f24" style="margin-left:0.2rem"></i>';
+                    } else
+                        mstr += '<i class="ui-ico-grade ui-icon-f24 c_alizarin" style="margin-left:0.2rem"></i>';
+                    if (i < parseInt($scope.MannerNum)) {
+                        mrstr += '<i class="ui-ico-star c_alizarin ui-icon-f24" style="margin-left:0.2rem"></i>';
+                    } else
+                        mrstr += '<i class="ui-ico-grade ui-icon-f24 c_alizarin" style="margin-left:0.2rem"></i>';
+                }
+                $("#khl_restimenum").html(rstr);
+                $("#khl_majornum").html(mstr);
+                $("#khl_mannernum").html(mrstr);
+					}
+				}).error(function(data) {
+					console.log("错误......");
+				});
+				// 默认打开全部
+				$.get(APIaddress + "api/PublicPraises/" + MerchantID + "/0", function(msg) {
+					if(msg) {
+						$scope.PublicPraises = msg;
+						//console.log(msg)
+					} else {
+						console.log("数据获取错误")
+					}
+				})
+				$scope.rapInit = function(num) { //评论区
+					//console.log(num);
+					$http.get(APIaddress + "api/PublicPraises/" + MerchantID + "/" + num)
+						.success(function(msg) {
+							$scope.PublicPraises = msg;
+						}).error(function(msg) {
+							console.log("获取数据错误")
+						})
+				}
+
+				$scope.reply = function(msg) { //回复	
+					window.location.href = "rap_msg.html?a=" + msg.TotalScore + "&b=" + msg.UName + "&c=" + msg.CreateDate + "&d=" + msg.ReplyDate + "&id=" + msg.ID + "&OID=" + msg.OID + "&MID=" + msg.MID + "&PCType=" + msg.PCType;
+				}
+
+			}
+		])
+	</script>
+
+</html>

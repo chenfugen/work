@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/frozen.js"></script>
+		<script src="js/idukou.js"></script>
+		<style type="text/css">
+			body {
+				background: white;
+			}
+			
+			#main h5 i:nth-child(1) {
+				font-size: 3.5rem;
+			}
+		</style>
+	</head>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="homeCtrl">
+			<header class="ui-header ui-header-positive">
+				<h2>{{home.MName}}(<span class="state">营业中</span>)</h2>
+				<a href="#" ng-click="toggle()" class="ui-href"><span id="state">暂停营业</span></a>
+			</header>
+			<div id="main">
+				<ul class="ui-tiled">
+					<li>
+						<a href="merchantselectService.html">
+							<h5 class="btn ui-btn1"><i class="ui-ico-project" style="color: #E67E22;"></i></h5>
+							<div>服务下单</div>
+						</a>
+					</li>
+					<li>
+						<a href="custom.html">
+							<h5 class="btn ui-btn4"><i class="ui-ico-orderman" style="color:#3397DA;"></i></h5>
+							<div>客户管理</div>
+						</a>
+					</li>
+					<li>
+						<a href="rap.html">
+							<h5 class="btn ui-btn3"><i class="ui-ico-messagerecord" style="color:#A459BC;"></i></h5>
+							<div>口碑管理</div>
+						</a>
+					</li>
+				</ul>
+				<ul class="ui-tiled">
+					<li>
+					</li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<footer class="ui-footer ui-footer-btn">
+				<ul class="ui-tiled ui-border-t ui-txt-tips">
+					<li class="ui-footer-info">
+						<a href="javascript:;"><i class="ui-ico-home02" style="font-size:30px;color:#1ABC9C;"></i><span style="margin-top:-9px;">首页</span></a>
+					</li>
+					<li class="ui-footer-info ">
+						<a href="order.html"><i class="ui-ico-orderman" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top: -9px;">订单</span></a>
+					</li>
+					<li class="ui-footer-info ">
+						<a href="infromation.html"><i class="ui-ico-message" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top: -9px;">消息</span></a>
+					</li>
+					<li class="ui-footer-info ">
+						<a href="userpage.html"><i class="ui-ico-my" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top: -9px;">我的</span></a>
+					</li>
+				</ul>
+			</footer>
+			<div class="ui-poptips ui-poptips-success hint_msg" style="display: none;">
+				<div class="ui-poptips-cnt"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+					//判断手机网络
+		if(navigator.onLine == false) {
+			$(".hint_msg div").text("请连接网络")
+			$(".hint_msg").css({
+				"display": "block"
+			});
+			setTimeout(function() {
+				$(".hint_msg").css({
+					"display": "none"
+				});
+			}, 2000)}
+		var requestUrl = APIaddress + 'api/Merchants/' + MerchantID;
+		var myModule = angular.module("app", []);
+		myModule.controller('homeCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					//console.log(data)
+					$scope.home = data;
+				}).error(function(data) {
+					console.log("获取数据失败")
+				})
+				var i = 1;
+				var Uri;
+				$scope.toggle = function() {
+					i++;
+					i % 2 == 0 ? Uri = "api/Merchants/Close/" : Uri = "api/Merchants/Open/";
+					// console.log(Uri);
+					var URL = APIaddress + Uri + MerchantID;
+					$http({
+						method: 'POST',
+						url: URL
+					}).success(function(msg) {
+						if(i % 2 == 0) {
+							$("#state").text("开始营业");
+							$(".state").text("暂停营业");
+							$(".hint_msg div").text("已暂停营业！")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000);
+						} else {
+							$("#state").text("暂停营业");
+							$(".state").text("营业中");
+							$(".hint_msg div").text("已开始营业！")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000);
+						}
+
+					}).error(function(msg) {
+						console.log("获取数据失败")
+					})
+				}
+			}
+		])
+	</script>
+
+</html>

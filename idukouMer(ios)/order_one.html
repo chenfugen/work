@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css" />
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+	<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="myCtrl">
+		<header class="ui-header ui-header-positive">
+			<a href="home.html" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev" style="color: white;"><span>返回</span></i></a>
+			<h2>订单管理</h2>
+		</header>
+		<div class="panel active" id="order">
+				<ul class="ui-list ui-border-tb ui-order-t ui-list-active02" ng-if="order.State==0 && !order.IsTimeout" ng-repeat="order in allOrdersOther">
+					<li>
+						<h4><span class="ui-nowrap">预约单</span></h4>
+						<h4 id="orderstate">{{order.CreateDate | data}}</h4>
+					<li class="ui-border-t ui-order-conlist ui-order-list" ng-click="msg(order.ID)">
+						<p class="ui-nowrap ui-txt-info">订单号：{{order.OCode}}<br>预约人：{{order.TrueName}}<br>预约时间：{{order.ServiceDate | date:'yyyy年M月d日'}} {{order.ServiceTime}}<br>服务地址：{{order.Address}}</p>
+					</li>
+					<li class="ui-order-center" style="margin-top:1rem; padding-bottom:1rem;">
+						&nbsp;&nbsp;
+						<a href="#" class="button ui-btn ui-btn-default" ng-click="updateState(order,1)"><i class="ui-ico-successs c_turquoise" style="float: left;color:#1ACAD9;"></i>&nbsp;&nbsp;确认接单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#selectService" class="button ui-btn ui-btn-gray ui-order-btn" ng-click="refuse(order)">拒绝接单</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					</li>
+				</ul>
+				<div class="ui-dialog">
+					<div class="ui-dialog-cnt">
+						<header class="ui-dialog-hd ui-border-b">
+							<h3>拒绝接单提示</h3>
+							<i class="ui-dialog-close" data-role="button"></i>
+						</header>
+						<div class="ui-dialog-bd">
+							<div>您确定拒绝该订单？拒绝后将不能接单。</div>
+							<p><textarea placeholder="请输入拒绝接单的理由" ng-model="reason"></textarea></p>
+						</div>
+						<div class="ui-dialog-ft">
+							<button type="button" ng-click="cancel()" data-role="button">取消</button>
+							<button type="button" ng-click="confirm(order.ID)" data-role="button">确定</button>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+		
+		<div class="ui-loading-block show">
+			<div class="ui-loading-cnt">
+				<i class="ui-loading-bright"></i>
+				<p>正在加载中...</p>
+			</div>
+		</div>
+
+		<div class="ui-poptips ui-poptips-success hint_msg" style="display:none;">
+			<div class="ui-poptips-cnt">操作成功</div>
+		</div>
+
+		<footer class="ui-footer ui-footer-btn">
+			<ul class="ui-tiled ui-border-t ui-txt-tips">
+				<li class="ui-footer-info">
+					<a href="javascript:;"><i class="ui-ico-dengdai" style="font-size:30px;color:#1ABC9C;"></i><span style="margin-top:-9px;">待接单</span></a>
+				</li>
+				<li class="ui-footer-info ">
+					<a href="order_two.html"><i class="ui-ico-daijieshou" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top:-9px;">待下单</span></a>
+				</li>
+				<li class="ui-footer-info ">
+					<a href="order.html"><i class="ui-ico-proceed" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top:-9px;">执行中</span></a>
+				</li>
+				<li class="ui-footer-info ">
+					<a href="order_three.html"><i class="ui-ico-await" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top:-9px;">待付款</span></a>
+				</li>
+				<li class="ui-footer-info ">
+					<a href="order_four.html"><i class="ui-ico-orderOk" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top:-9px;">已完成</span></a>
+				</li>
+			</ul>
+		</footer>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var requestUrl = APIaddress + "api/Orders/GetOrederListNoService/" + MerchantID;
+		var myModule = angular.module("app", []);
+		myModule.filter('data', function() {
+			return function(type) {
+				type = type.split("T")[0] + "/" + type.split("T")[1].split(".")[0];
+				return type;
+			};
+		});
+		myModule.controller('myCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$(".ui-loading-block").hide();
+					if(data == null || data == "") {
+						$("#msg-list").html("<div class='ui-center'>还没有任何消息！</div>")
+					} else {
+						// console.log(data);
+						$scope.allOrdersOther = data;
+						$scope.msg = function(orderID) {
+							window.location.href = "order_msg.html?id=" + id;
+						};
+					}				
+				}).error(function(data) {
+					console.log("错误......");
+				});
+
+				//确定接单
+				$scope.updateState = function(order, state) {
+					order.State =state;
+					$.post(APIaddress + 'api/Orders/UpdateState', order, function(msg) {
+						//console.log(order.State);
+						if(msg) {
+							$(".hint_msg div").text("已成功接单")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+						} else {
+							$(".hint_msg div").text("接单失败")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+						}
+					});
+				}
+
+				//拒绝接单
+				$scope.refuse = function(order) {
+					$(".ui-dialog").show();
+					$scope.confirm = function(orderID) { //确定
+						$http.post(APIaddress + 'api/Orders/Reject/' + order.ID + '?reason=' + $scope.reason)
+							.success(function(data) {
+								$(".hint_msg div").text('已拒绝成功');
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000)
+									//$scope.init();
+							}).error(function(data) {
+								$(".hint_msg div").text("拒绝失败")
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000)
+							})
+						$(".ui-dialog").hide();
+					}
+
+					$scope.cancel = function() { //取消
+						$(".ui-dialog").hide();
+					}
+
+				}
+			}
+		]);
+	</script>
+
+</html>

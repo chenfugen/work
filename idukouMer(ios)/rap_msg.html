@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css"/>		
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />	
+		<script src="js/zepto.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>		
+		<script type="text/javascript" src="js/jquery.min.js"></script>			
+		<script src="js/idukou.js"></script>
+	 </head>
+	<body ontouchstart>
+	<header class="ui-header ui-header-positive">
+    <a href="javascript:;" onclick="history.back(-1)" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev"><span>返回</span></i></a>
+    <h2>回复评价</h2>
+</header>
+    <div class="panel active" id="rapdetails">
+    	<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="rapCtrl"> 
+        <ul class="ui-list ui-list-pure">
+            <li>
+                <p><label class="ui-label-s">&nbsp;{{rap.TotalScore}}&nbsp;</label>&nbsp;&nbsp;<span>{{rap.UName}}</span><span class="ui-rap-data" style="float:right">{{rap.CreateDate | date:'yyyy-M-d'}}</span></p>
+            </li>
+        </ul>
+        <div class="ui-form ui-whitespace" style="height:8rem;">        
+                   <textarea  placeholder="你能输入70个文字！" maxlength="70" rows="5" style="width:100%;border: none;margin: auto;" ng-model="rap.Reply"></textarea>
+        </div>
+        <ul class="ui-list ui-list-pure">
+            <li>
+                <div class="ui-txt-info  ui-rap-tit02"><span><i class="ui-txt-tips">{{rap.ReplyDate}}</i><a href="javascript:;" ng-click="replySave()" class="button ui-btn ui-btn-default ui-rap-btnright" style="float:right">回&nbsp;复</a></div>
+            </li>
+        </ul>
+    </div>
+    	</div>
+    <div class="ui-poptips ui-poptips-success hint_msg" style="display:none;">
+			<div class="ui-poptips-cnt">操作成功</div>
+	</div>
+	</body>
+	<script type="text/javascript">
+	//console.log(window.location.search);
+	var msg=window.location.search.split("=")[1];//相关参数
+	var TotalScore=msg.split("&")[0];	
+	var UName=decodeURI(window.location.search.split("&")[1].split("=")[1]);
+	var CreateDate=window.location.search.split("c")[1].split("=")[1].split("&")[0];
+	var ID=window.location.search.split("id")[1].split("=")[1].split("&")[0];
+	var OID=window.location.search.split("OID")[1].split("&")[0].split("=")[1];
+	var MID=window.location.search.split("MID")[1].split("&")[0].split("=")[1];
+	var PCType=window.location.search.split("PCType")[1].split("=")[1];
+	//console.log(ID)
+	//当前时间
+	var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var ReplyDate = date.getFullYear() + seperator1 + month + seperator1 + strDate;          
+	//console.log(ReplyDate)
+	var myModule =angular.module("app",[]); 
+        myModule.controller('rapCtrl',['$scope','$http',
+     function($scope,$http){
+     	var Reply=$("textarea").val();
+        $scope.rap={
+        	"ID":ID,
+        	"MID":MID,
+        	"OID":OID,
+        	"PCType":PCType,
+        	"TotalScore":TotalScore,
+        	"UName":UName,
+        	"CreateDate":CreateDate,
+        	"ReplyDate":ReplyDate, 
+        	"Reply":Reply
+        }
+        
+        $scope.replySave=function(){
+        		//console.log($scope.rap);
+        	if ($("textarea").val()==""){       		
+              $(".hint_msg div").text("请输入回复内容");
+             $(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							},1000)
+            return false;
+       }
+        $.post(APIaddress + "api/PublicPraises/Reply/", $scope.rap,function(data){    	
+               if(data){
+               $(".hint_msg div").text("回复成功");            
+               $(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+                   location.href="rap.html";
+                  }
+          });          
+      }
+       }
+    ])
+	</script>
+</html>

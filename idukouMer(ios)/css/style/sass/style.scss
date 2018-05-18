@@ -1,0 +1,647 @@
+@charset "utf-8"; //福源荣誉
+$fontFamliy: "微软雅黑";
+$fontColor: #5c5c5c;
+@media screen and (min-width:320px) {
+    html {
+        font-size: 10px!important;
+    }
+}
+@media screen and (min-width:360px) {
+    html {
+        font-size: 11.25px!important;
+    }
+}
+@media screen and (min-width:400px) {
+    html {
+        font-size: 12.5px!important;
+    }
+}
+@media only screen and (min-width:481px) {
+    html {
+        font-size: 94%!important;
+    }
+}
+@media only screen and (min-width: 561px) {
+    html {
+        font-size: 109%!important;
+    }
+}
+@media screen and (min-width:640px) {
+    html {
+        font-size: 20px!important;
+    }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape){
+    html{
+        font-size: 22px!important;
+    }
+    
+}
+*,
+*:before,
+*:after {
+   // -webkit-user-select: none;
+    //字体不能被选择（复制等）
+   // -moz-user-select: -moz-none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    //只用于iOS (iPhone和iPad) 点击一个链接或者通过Javascript定义的可点击元素的时候，它就会出现一个半透明的灰色背景
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+//  box-sizing: border-box;
+//  //并排两个带边框的框
+//  -webkit-box-sizing: border-box;
+//  -moz-box-sizing: border-box;
+    -webkit-touch-callout: none;
+    //当你触摸并按住触摸目标时候，禁止或显示系统默认菜单。
+    margin: 0;
+    padding: 0;
+    -ms-touch-action: pan-y;
+    //可以在父级元素内进行垂直移动的手势操作。在IE11使用属性，在IE10应使用-ms-touch-action，IE10之前的浏览器不支持
+}
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #EEEEEE;
+    overflow-y: auto;
+    -webkit-text-size-adjust:none;
+    //解决IPHONE网页兼容（部分字号变大）
+}
+.ng-cloak {
+    display: none;
+}
+header a{
+    width:20%;
+}
+//  登录页面
+#loginpage {
+    width: 100%;
+    position: absolute;
+    top:80px;
+    .ui-form {
+        height: 4.5rem;
+        margin-top: 1rem;
+        line-height: 4.5rem;
+    }
+    .login {
+        margin-top: 2rem;
+        background: #1ABC9C;
+        color: white;
+    }
+    h5 {
+        width: 100%;
+        text-align: center;
+        margin-top: 16rem;
+    }
+}
+//注册页面
+#registerpage {
+    width: 100%;
+    position: absolute;
+    top:64px;
+    .ui-form {
+        height: 5rem;
+        margin-top: 1rem;
+        line-height: 5rem;
+    }
+    .verify {
+        margin-top: 2rem;
+        background: #1ABC9C;
+        color: white;
+    }
+    h5 {
+        width: 100%;
+        text-align: center;
+        margin-top: 18rem;
+    }
+    label {
+        color: #1ABC9C;
+    }
+}
+//注册验证页面
+#registercode {
+    width: 100%;
+    position: absolute;
+    top: 6.5rem;
+    .verify {
+        text-align: center;
+        h1 {
+            font-size: 30px;
+        }
+    }
+    .ui-form {
+        height: 5rem;
+        margin-top: 1rem;
+        line-height: 5rem;
+    }
+    button{
+        height: 5rem;
+        line-height: 5rem;
+    }
+    .ui-login-tit {
+        p {
+            font-size: 15px;
+            margin-top: -1rem;
+        }
+    }
+    .prev {
+        background: #1ABC9C;
+        color: white;
+    }
+}
+//注册密码设置页面
+#registerpassword {
+    width: 100%;
+    position: absolute;
+    top: 5.5rem;
+    .ui-form {
+        height: 4.5rem;
+        margin-top: 1rem;
+        line-height: 4.5rem;
+    }
+    .register {
+        background: #1ABC9C;
+        color: white;
+    }
+}
+//我的首页
+#userpage{
+    width: 100%;
+    position: absolute;
+    top:64px;
+}
+footer {
+    span {
+        display: block;
+        margin-top: -0.8rem;
+    }
+}
+//我的账号
+#userAccout {
+    width: 100%;
+    position: absolute;
+    top:64px;
+}
+//关于千柏渡
+#aboutpage {
+    width: 100%;
+    position: absolute;
+    top: 7rem;
+}
+.version {
+    margin-top: -230px;
+}
+//二维码页面
+.username {
+    position: absolute;
+    top:70px;
+    width: 100%;
+    height: 4rem;
+    background: white;
+   line-height: 4rem;
+}
+#codepage {
+    position: absolute;
+    top:120px;
+    width: 100%;
+    background: white;
+}
+//重置密码
+#forgetpassword {
+    position: absolute;
+    top:6rem;
+    width: 100%;
+    .ui-form {
+        height: 4.5rem;
+        margin-top: 1rem;
+        line-height: 4.5rem;
+    }
+}
+#securitycode {
+    position: absolute;
+    top: 6.5rem;
+    width: 100%;
+    .verify {
+        text-align: center;
+        h1 {
+            font-size: 30px;
+        }
+    }
+    .ui-form {
+        height: 4.5rem;
+        margin-top: 1rem;
+        line-height: 4.5rem;
+    }
+}
+// 主页
+#main {
+    position: absolute;
+    top:6rem;
+    width: 100%;
+    .btn {
+        width: 4.5rem;
+        height: 4.5rem;
+        border-radius: 5px 5px;
+        padding-top: 0.1rem;
+    }
+    ul {
+        margin-top: 1rem;
+        li {
+            a {
+                color: #5C5C5C;
+                font-size: 1.2rem;
+                div {
+                    margin-top: 0.5rem;
+                }
+            }
+        }
+    }
+    .ui-btn1 {
+        border: 1px solid #e67e22;
+    }
+    .ui-btn2 {
+        border: 1px solid #1ABC9C;
+    }
+    .ui-btn3 {
+        border: 1px solid #A459BC;
+    }
+    .ui-btn4 {
+        border: 1px solid #3397DA;
+    }
+}
+//消息页面
+#msg-list {
+    position: absolute;
+    top:64px;
+    width: 100%;
+}
+.ui-txt-sub {
+    float: right;
+}
+//订单管理
+#order {
+    position: absolute;
+    top:64px;
+    width: 100%;
+    ul {
+        margin-top:1rem;
+        li {
+            line-height: 2rem;
+            a:nth-child(2),
+            a:nth-child(3) {
+                color: #5c5c5c;
+            }
+            .ui-btn-default {
+                border: 1px solid #1ACAD9;
+                color: #1ACAD9;
+            }
+        }
+    }
+    #orderstate {
+        color: #5C5C5C;
+        position: absolute;
+        right: 1rem;
+        font-size: 1rem;
+    }
+}
+//注册成功
+.registersuccuss {
+    width: 210px;
+    height: 200px;
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -100px;
+}
+//订单详情页
+#orderdetails {
+    position: absolute;
+    top:70px;
+    width: 100%;
+}
+.ui-orderdetails {
+    line-height: 3.5rem;
+    text-align: center;
+}
+#remark {
+    position: absolute;
+    top:64px;
+    width: 100%;
+}
+#orderdetails {
+    footer {
+        background: white;
+        ul {
+            .ui-footer-order {
+                margin-top: 25px;
+                a {
+                    font-size: 1.5rem;
+                    color: #5C5C5C;
+                }
+            }
+        }
+    }
+}
+//口碑管理
+#rap {
+    margin-top:64px;
+    width: 100%;
+    position: relative;
+    .rap_box {
+        background: #1ABC9C;
+        height: 12rem;
+        .score {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 8rem 8rem;
+            border: 1px solid white;
+            text-align: center;
+            color: white;
+            position:absolute;
+             top:1.2rem;
+            p {
+                font-size: 1.2rem;
+            }
+            h1 {
+                font-size: 3rem;
+                margin-top: 1rem;
+            }
+        }
+        .rap_sclist {
+            position:absolute;
+            width: 60%;
+            height:8rem;
+            right:1.5rem;
+            top: 2.5rem;
+            li {
+                height: 3rem;
+                span {
+                    display: block;
+                    float: left;
+                    font-size: 1.2rem;
+                    color: white;
+                    font-weight: bold;
+                }
+                .c_alizarin {
+                    float: left;
+                    font-size: 2.3rem;
+                    margin-top: -1rem;
+                    color: red;
+                }
+            }
+        }
+    }
+    .CommentInfo {
+        width: 100%;
+        .rap_nav {
+            background: white;
+            height: 4rem;
+            a {
+                float: left;
+                margin-left: 3rem;
+                color: #1ABC9C;
+                margin-top: 1rem;
+                border: 1px solid #1ABC9C;
+            }
+        }
+        li {
+            background: white;
+            div {
+                line-height: 3rem;
+                margin-top: 0.5rem;
+            }
+        }
+    }
+}
+//回复评论
+#rapdetails {
+    margin-top:64px;
+    width: 100%;
+}
+//客户管理
+.head_nav {
+    width:12rem;
+    height:2rem;
+    overflow: hidden;
+    border: 1px solid white;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin-left:-6rem;
+    margin-top:-0.7rem;
+    border-radius: 5px 5px;
+    a {
+        float: left;
+        display: block;
+        width: 6rem;
+        height: 2rem;
+        line-height:2rem;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    .pressedon {
+        background: white;
+        color: #1ABC9C;
+    }
+}
+.ui-cust {
+    position:fixed;
+    top:64px; 
+    width:100%;
+    z-index:99;
+}
+.retrie{
+    width: 100%;
+    background: white;
+    position: fixed;
+    top:108px; //  position: relative;
+    z-index: 99;
+    dt {
+        width: 100%;
+        a {
+            display: block;
+            float: left;
+            width: 50%;
+            line-height: 3rem;
+            background: white;
+            color: #5c5c5c;
+            text-align: center;
+            font-size: 1.2rem;
+            img {
+                width: 6%;
+            }
+        }
+        .splitline {
+            width: 1px;
+            height: 2rem;
+            position: absolute;
+            top: 0.5rem;
+            left: 50%;
+            margin-left: -0.5rem;
+            background: #EBEBEB;
+            z-index: 5;
+        }
+    }
+    .area {
+        position: absolute;
+        z-index: 99;
+        top: 3rem;
+        width: 100%;
+        background: white;
+        li {
+            a {
+                display: inline-block;
+                height: 3rem;
+                line-height: 3rem;
+                width: 100%;
+                text-align: center;
+                border-top: 1px solid #EBEBEB;
+                color: #5C5C5C;
+            }
+        }
+    }
+    .wage {
+        position: absolute;
+        z-index: 99;
+        top: 3rem;
+        width: 100%;
+        background: white;
+        li {
+            a {
+                display: inline-block;
+                height: 3rem;
+                line-height: 3rem;
+                width: 100%;
+                text-align: center;
+                border-top: 1px solid #EBEBEB;
+                color: #5C5C5C;
+            }
+        }
+    }
+}
+#customer {
+    position: absolute;
+    top:150px;
+    width: 100%;
+}
+.bg {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    display: none;
+}
+//客户待办页面
+#custbacklog {
+    width: 100%;
+    margin-top:64px;
+}
+//客户详情
+#customer_detail,
+#customer_remind,
+#customer_follow {
+    position: absolute;
+    top: 64px;
+    width: 100%;
+}
+#customer_add {
+    position: absolute;
+    top: 64px;
+    width: 100%;
+    .ui-date-tit {
+        margin-top: 0.5rem;
+        input {
+            border: 1px solid #ccc;
+        }
+    }
+}
+//服务下单
+#main_plane{
+    padding-top:6rem;
+    height: 100%;
+    overflow: hidden;
+}
+.menu {
+    color: #A8A9AD !important;
+}
+.menus {
+    width: 27%;
+    height: 100%;
+    float: left;
+    border-right: 1px solid #f0f0f0;
+    background: #f7f7f7;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+.all_list {
+    width: 72.8%;
+    float: right;
+    background: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+.menus li {
+    line-height: 4rem;
+    font-size: 18px;
+    text-align: center;
+    color: #999;
+    position: relative;
+}
+.menus .active {
+    background: #fff;
+    color: #4BCC60 !important;
+    display: block;
+}
+.title.active {
+    color: #4BCC60 !important;
+}
+.menus .active:before {
+    content: "";
+    width: 5px;
+    height: 1rem;
+    background-color: #4BCC60 !important;
+    position: absolute;
+    left: -0%;
+    top: 0;
+}
+.menus .active:after {
+    content: "";
+    width: 1px;
+    height: 1rem;
+    background-color: #fff;
+    position: absolute;
+    right: -1px;
+    top: 0;
+}
+.title {
+    width: 100%;
+    font-size: 1.5rem;
+    line-height: 3rem;
+    background: #f7f7f7;
+    font-weight: bold;
+}
+.msglist {
+    position: relative;
+    input {
+        border: none;
+        margin-left: 0.5rem;
+        height: 30px;
+    }
+    a {
+        font-size: 1rem;
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+    }
+}
+//搜索
+.ui-ico-search:before{
+    color: #B2B2B2;
+    font-size:1.4rem;
+}
