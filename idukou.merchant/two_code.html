@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>	
+		<script src="js/frozen.js"></script>
+		<script src="js/idukou.js"></script>
+	<style type="text/css">
+	    body{
+	    	background: white;
+	    }
+	    #qrCodeIco{
+			position:absolute;
+			left: 50%;
+			top:14%;
+			margin-left:-15px;
+			z-index:10000;
+			border-radius:5px 5px;
+		}
+	</style>
+	
+	</head>
+	<body ontouchstart>
+		     <header class="ui-header ui-header-positive ui-pulic-header">            
+              <a href="javascript:;" onclick="history.back(-1)" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev" style="color: white;"><span>返回</span></i></a>
+             <h2>二维码</h2>
+           </header>
+          <div ng-app="app" ng-cloak class="ng-cloak" ng-controller="cordCtrl">  
+          	 <div class="ui-center" style="margin-top:1rem;">{{merchantSet.MName}}</div>  
+            <div class="panel ui-pubil-bgwhite active" id="codepage">
+                    <section class="ui-container ">
+                        <div class="ui-code-img ui-center">
+                           <div id="qr_container"></div>
+                           <img id="qrCodeIco" ng-src="{{merchantSet.HeadImg | imageSrc}}" style="position:absolute;width: 30px; height: 30px;" />
+                            <p>千柏渡商家客户端</p>
+                            <div class="ui-code-tit" style="font-size:18px;font-family: 'arial black';">共建共赢 、挚诚服务</div>
+                            <p sytle="display:none;">编码：{{merchantSet.MCode}}</p>
+                        </div>
+                        <ul class="ui-list ui-list-text ui-list-link ui-border-tb ui-list-active" style="margin-top:8rem;">
+                            <li class="ui-border-t">
+                                <h4>微信分享</h4>
+                            </li>
+                            <li class="ui-border-t">
+                                <h4>短信分享</h4>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+                </div>
+	</body>
+<script type="text/javascript">
+	var requestUrl = APIaddress + 'api/Merchants/' + MerchantID;
+		var myModule = angular.module("app", []);
+		myModule.filter('imageSrc', function() {
+			return function(img) {
+				if(img) {
+					img = "http://img.idukou.com/" + img;
+				} else {
+					img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjZEREZGMUE4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjZEREZGMUI4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NkRERkYxODg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NkRERkYxOTg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pr0VlogAAAXbSURBVHja7JvZTjJN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';
+				}
+				return img;
+			};
+		});
+		myModule.controller('cordCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {					
+					$scope.merchantSet = data;
+                     //console.log(data)
+				}).error(function(data) {})
+
+			}
+		])
+	$(".username").text(decodeURI(name));
+	var url="http://wx.idukou.com/#/lyslist/"+MerchantID;
+	$('#qr_container').qrcode({
+						render: "canvas",
+						height: 120,
+						width: 120,
+						correctLevel: 0,
+						text:url
+		});
+</script>
+</html>
+

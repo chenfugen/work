@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css"/>
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>		
+		<script src="js/idukou.js"></script>
+	     </head>
+	     <style type="text/css">
+	     	.ui-dialog-cnt{
+	     		width: 20rem;
+	     		position: absolute;
+	     		left:50%;
+	     		top:50%;
+	     		margin-left:-10rem;
+	     		margin-top: -10rem;
+	     	}
+	     </style>
+	<body>
+		<div class="ui-dialog">
+    <div class="ui-dialog-cnt">
+      <header class="ui-dialog-hd ui-border-b">
+                  <h3>删除提示</h3>
+                  <i class="ui-dialog-close" data-role="button"></i>
+              </header>
+        <div class="ui-dialog-bd">           
+            <div>你确定删除该订单吗？删除后不能恢复。</div>
+        </div>
+        <div class="ui-dialog-ft">
+            <button type="button" data-role="button" class="false">取消</button>
+            <button type="button" data-role="button" class="true">确定</button>
+        </div>
+    </div>        
+</div>
+	</body>
+	<script type="text/javascript">
+		$(".ui-dialog").show();
+		$(".false").click(function(){
+			location.href="order_four.html";
+		})
+		
+	</script>
+</html>

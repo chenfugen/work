@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/frozen.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+		<header class="ui-header ui-header-stable ui-border-b" style="background: #1ABC9C;color: white;">
+			<a href="index.html" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev" style="color: white;"><span>取消</span></i></a>
+			<h2>短信登录</h2>
+		</header>		
+		<div class="panel active" id="registerpage">
+			<div class="ui-btn-wrap">
+				<div class="ui-form-login">
+					<form action="#">
+						<div class="ui-form-item ui-form-item-pure ui-border-b ui-form">
+							<label class="ui-border-r" style="width:60px;">手机号</label>
+							<input type="text" placeholder="请输入手机号码" style=" padding-left:70px;" id="phone">
+						</div>
+						<a href="javascript:;" class="button ui-btn-lg ui-btn-cbgreen verify">获取手机验证码</a>
+					</form>
+					<div class="ui-center">
+						<h5 class="ui-txt-muted ui-center">点击登录后，表示您同意<i class="c_turquoise" style="color:#1ABC9C;">《千柏渡免责声明》</i></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ui-poptips ui-poptips-success hint_msg" style="display: none;">
+			<div class="ui-poptips-cnt"></div>
+		</div>
+	</body>
+   <script>    
+      	 //按钮点击事件
+		$(".button").on("touchstart", function() {
+			$(".button").css({
+				"background": "#eee",
+				"color": "#1ABC9C"
+			})
+		}).on("touchend", function() {
+			$(".button").css({
+				"background": "#1ABC9C",
+				"color": "white"
+			})
+		});
+   		$(".verify").click(function(){  
+   			var phone=$("#phone").val();
+   			if(phone==""){
+   				$(".hint_msg div").text("请输入手机号码")
+						$(".hint_msg").css({
+							"display": "block"
+						});
+						setTimeout(function() {
+							$(".hint_msg").css({
+								"display": "none"
+							});
+						}, 1000);	
+						return false;
+   			}
+   			if(phone.length != 11 || !phone.match(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
+						$(".hint_msg div").text("请输入手机正确格式")
+						$(".hint_msg").css({
+							"display": "block"
+						});
+						setTimeout(function() {
+							$(".hint_msg").css({
+								"display": "none"
+							});
+						}, 1000);
+						return false;
+		}
+   		var phoneUrl=APIaddress + "api/Merchants/GetMerchantByPhone/" +phone;
+   		 $.get(phoneUrl,function(data){
+   			if(data==null){
+   				$(".hint_msg div").text("你的手机号码不正确或未注册")
+				$(".hint_msg").css({
+					"display": "block"
+				});
+				setTimeout(function(){
+					$(".hint_msg").css({
+						"display": "none"
+					});
+				}, 1000);
+			return false;
+   			}else{
+     		$(".verify").unbind("click"); 
+   			$(".verify").css({"background":"white","color":"#5c5c5c"});
+        var Url = APIaddress+"api/NoteMessages/SendVerification/" +phone+"/"+templateID;
+		$.post(Url, function(date){
+			if(date) { 
+				$(".hint_msg div").text("验证码发送成功，请注意查收！")
+				$(".hint_msg").css({
+					"display": "block"
+				});
+				setTimeout(function() {
+					$(".hint_msg").css({
+						"display": "none"
+					});
+				}, 1000);
+				window.location.href="text_verify.html?phone="+phone;
+			} else {
+				$(".hint_msg div").text("验证码发送失败！")
+				$(".hint_msg").css({
+					"display": "block"
+				});
+				setTimeout(function(){
+					$(".hint_msg").css({
+						"display": "none"
+					});
+				}, 1000);
+			}
+		}) 	
+   			}
+   		})
+   })
+   </script>
+</html>

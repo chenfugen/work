@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+	    <meta http-equiv="x-rim-auto-match" content="none"> 
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/angular/angular-route.min.js"></script>
+		<script src="js/idukou.js"></script>
+
+	</head>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="customerCtrl">
+			<header class="ui-header ui-header-positive ui-pulic-header">
+				<a href="custom.html" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev"><span>取消</span></i></a>
+				<h2>客户详情</h2>
+			</header>
+			<div class="panel active" id="customer_detail">
+				<ul class="ui-list ui-list-pure ui-border-tb ui-accout-top ui-list-link" ng-click="gotoEdit()">
+					<li class="ui-border-t">
+						<h2>{{customAddOrUpdate.LinkName}}&nbsp;&nbsp;<span class="ui-txt-tips ui-txt-info">{{customAddOrUpdate.Sex | Sex}}</span></h2>
+						<p>{{customAddOrUpdate.Phone}}&nbsp;&nbsp;{{customAddOrUpdate.Address}}</p>
+						<div class="ui-comment ui-txt-info">
+							<p>{{customAddOrUpdate.Remark}}</p>
+						</div>
+					</li>
+				</ul>
+				<ul class="ui-tiled ui-border-b ui-gray-bg">
+					<li>
+						<div style="line-height:3rem;border: none;">
+							<a href="tel:{{customAddOrUpdate.Phone}}" style="color: #5C5C5C;"><i class="ui-ico-msg c_turquoise" style="float:left;color: #1ABC9C;"></i>&nbsp;短信</a>
+						</div>
+					</li>
+					<li class="ui-border-l">
+						<div>
+							<a href="tel:{{customAddOrUpdate.Phone}}" style="color: #5C5C5C;"><i class="ui-ico-tel c_turquoise" style="float:left;color: #1ABC9C;"></i>&nbsp;电话</a>
+						</div>
+					</li>
+				</ul>
+				<div class="ui-pubilc-bg">
+					<div class="ui-panel ui-panel-simple ui-border-tb ui-accout-top">
+						<h3>客户重要程度</h3></div>
+					<div class="ui-label-list ui-pubilc-p10 khl-custom-type  importance" style="line-height:4rem;">
+						<label class="ui-label {{customAddOrUpdate.TypeID}}">强</label><label class="ui-label {{customAddOrUpdate.TypeID}}">中</label><label class="ui-label {{customAddOrUpdate.TypeID}}">弱</label><label class="ui-label {{customAddOrUpdate.TypeID}}">无</label>
+					</div>
+				</div>
+				<div class="ui-tab ui-accout-top">
+					<ul class="ui-tab-nav ui-border-tb">
+						<li class="current">提醒（{{customAddOrUpdate.MerchantCustomRemindDataObjects.length}}）</li>
+						<li>跟踪记录（{{customAddOrUpdate.MerchantCustomRecordDataObjects.length}}）</li>
+					</ul>
+				</div>
+				<div class="ui-tab">
+					<dl class="ui-tab-dir">
+						<dd class="current">
+							<div class="ui-row ui-pubilc-bg ui-border-tb" ng-repeat="remind in customAddOrUpdate.MerchantCustomRemindDataObjects" style="background: white;">
+								<div class="ui-col ui-col-67 ui-border-r">
+									<ul class="ui-list ui-list-pure">
+										<li ng-click="gotoRemind(remind)">
+											<div class="ui-data-box"><span class="ui-data-bg">{{remind.RemindDate | date:'yyyy-MM-dd'}}</span>&nbsp;&nbsp;<strong>{{remind.Title}}</strong></div>
+											<p>{{remind.RemindContent}}</p>
+										</li>
+									</ul>
+								</div>
+								<div class="ui-col ui-col-33 ui-border-r">
+									<div class="ui-data-r ui-whitespace" ng-if="remind.ResidueDay==1000000" style="float: right;margin-top:1rem;">
+										<span class="ui-txt-info">已过期</span>
+										<p></p>
+									</div>
+									<div class="ui-data-r ui-whitespace" ng-if="remind.ResidueDay!=1000000" style="float: right;margin-top:1rem;">
+										<span class="ui-txt-info">还剩</span>
+										<p>{{remind.ResidueDay}}天</p>
+									</div>
+								</div>
+							</div>
+						</dd>
+						<dd style="display: none;">
+							<ul class="ui-list ui-list-pure ui-border-tb ui-data-tit" ng-repeat="record in customAddOrUpdate.MerchantCustomRecordDataObjects">
+								<li class="ui-border-t" ng-click="gotoRecord(record)">
+									<h2><i class="ui-ico-history c_carrot" style="color:#D84C29;"></i>&nbsp;&nbsp;{{record.RecordDate | date:'yyyy-MM-dd hh:mm'}}<span style="float: right;">{{record.RecordDate | week}}</h2>
+									<p>{{record.RecordContent}}</p>
+								</li>
+							</ul>
+						</dd>
+					</dl>
+				</div>
+				<script>
+					$(function() {
+						var tt = $('#customer_detail .ui-tab-nav li');
+						var tts = $('#customer_detail .ui-tab-dir dd');
+						tt.each(function(index) {
+							$(this).click(function() {
+								tt.removeClass('current');
+								tts.removeClass('current');
+								$(this).addClass('current');
+								$("#customer_detail .ui-tab-dir > dd:eq(" + index + ")").addClass("current");
+								$('#customer_detail .ui-tab-dir dd').not(index).css({
+									"display": "none"
+								});
+								$('#customer_detail .ui-tab-dir dd').eq(index).css({
+									"display": "block"
+								});
+							});
+						});
+					})
+				</script>
+				<div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+
+				<footer class="ui-footer ui-footer-stable ui-border-t">
+					<ul class="ui-tiled ui-border-t">
+						<li class="ui-footer-order" ng-click="editRecord()" style="height:56px;">
+							<a href="#"><span style="margin-top:0px;">添加跟进</span></a>
+						</li>
+						<li class="ui-footer-order ui-border-l" ng-click="editRemind()" style="height:56px;">
+							<a href="#"><span style="margin-top:0px;">添加提醒</span></a>
+						</li>
+					</ul>
+				</footer>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var id = window.location.search.split("=")[1];
+		//console.log(id);
+		var requestUrl = APIaddress + "api/MerchantCustoms/" + id;
+		var myModule = angular.module("app", []);
+		myModule.filter('week', function() {
+			return function(number) {
+				var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+				var orderDate = number.split("T")[0];
+				var myWeek = new Date(Date.parse(orderDate.replace(/-/g, "/")));
+				weeks = weekDay[myWeek.getDay()];
+				return weeks;
+			}
+		})
+		myModule.filter('Sex', function () {
+    return function (sex) {
+        switch (sex) {
+            case 0:
+                sex = "女士";
+                break;
+            case 1:
+                sex = "先生";
+                break;
+            default:
+                sex = "";
+                break;
+        }
+        return sex;
+    };
+});
+		myModule.controller('customerCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$scope.customAddOrUpdate = data;				
+						var MerchantID=data.MID;					
+					$(".importance label").click(function() {
+						var j = $(this).index();
+						var typeid = 3 - j;
+						var Url = APIaddress + "api/MerchantCustoms/Update/" + id + "/" + typeid;
+						//console.log(Url);
+						$(this).css({
+							"border": "1px solid #E67E22",
+							"color": "#E67E22"
+						}).siblings().css({
+							"border": "1px solid #DBDCDD",
+							"color": "#5c5c5c"
+						});
+						//console.log(data);
+						$.post(Url, function(msg) {
+							console.log("成功")
+						})
+					})
+					var i = data.TypeID;
+					$(".importance label").eq(3 - i).css({
+						"border": "1px solid #E67E22",
+						"color": "#E67E22"
+					});
+				}).error(function(data) {
+					console.log("错误......");
+				});
+				$scope.editRecord = function() {
+					window.location.href = "custom_follow.html?id=" + id;
+				}
+				$scope.editRemind = function() {
+					window.location.href = "custom_mind.html?id=" + id;
+				}
+				$scope.gotoEdit = function() {
+					window.location.href = "custom_msgrevise.html?id=" + id;
+				}
+				$scope.gotoRemind = function(remind) {
+					//console.log(id);
+					window.location.href = "custom_mindrevise.html?Title=" + encodeURI(remind.Title) + "RemindContent=" + encodeURI(remind.RemindContent) + "RemindDate=" + remind.RemindDate + "CID=" + remind.ID + "id=" + id;
+				}
+				$scope.gotoRecord = function(record) {
+					window.location.href = "custom_followrevise.html?RecordContent=" + encodeURI(record.RecordContent) + "RecordDate=" + record.RecordDate + "CID=" + record.ID + "id=" + id;
+				}
+			}
+		]);
+	</script>
+
+</html>

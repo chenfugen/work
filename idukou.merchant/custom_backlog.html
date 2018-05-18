@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css" />
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/frozen.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+		<body ontouchstart>
+			<header class="ui-header ui-header-positive ui-border-b">
+				<a href="home.html" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev"><span>取消</span></i></a>
+				<div class="head_nav">
+					<a href="custom.html">我的客户</a>
+					<a class="pressedon">客户待办</a>
+				</div>
+			</header>
+			<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="customerCtrl">
+				<div class="panel active" id="customer_backlog">
+					<div class="ui-tab">
+						<ul class="ui-tab-nav ui-border-tb" id="custbacklog">
+							<li class="current" aid="4">三天</li>
+							<li aid="5">周</li>
+							<li aid="6">月</li>
+						</ul>
+					</div>
+				</div>
+				<div class="panel active" id="customer_backlog">
+					<div class="ui-tab" style="background: white;">
+						<dl class="ui-tab-dir">
+							<dd class="current">
+								<div ng-repeat="custom in Customs" ng-if="custom.MerchantCustomRemindDataObjects.length>0">
+									<ul class="ui-list ui-list-pure ui-border-tb ui-data-tit  {{$index | indexCss}}" ng-click="gotoDetail(custom)">
+										<li class="ui-border-t">{{custom.LinkName}}&nbsp;&nbsp;<span class="ui-txt-tips ui-txt-info">{{custom.Sex | Sex}}</span><span class="ui-data-right ui-txt-tips ui-txt-info" style="float: right;">{{custom.Phone}}</span></li>
+									</ul>
+									<div class="ui-row ui-pubilc-bg  ui-border-tb" ng-repeat="remind in custom.MerchantCustomRemindDataObjects">
+										<div class="ui-col ui-col-67 ui-border-r">
+											<ul class="ui-list ui-list-pure" ng-click="gotoDetail(custom)">
+												<li>
+													<div class="ui-data-box"><span class="ui-data-bg">{{remind.RemindDate | date:'yyyy-MM-dd'}}</span><strong>{{remind.Title}}</strong></div>
+													<p>{{remind.RemindContent}}</p>
+												</li>
+											</ul>
+										</div>
+										<div class="ui-col ui-col-33" style="background: white;line-height:2.7rem;text-align: center;">
+											<div class="ui-data">
+												<span class="ui-txt-info">还剩</span>
+												<p>{{remind.ResidueDay}}天</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</div>
+
+				<div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+
+				<div class="ui-loading-block show">
+					<div class="ui-loading-cnt">
+						<i class="ui-loading-bright"></i>
+						<p>正在加载中...</p>
+					</div>
+				</div>
+
+			</div>
+		</body>
+		<script type="text/javascript">
+			var myModule = angular.module("app", []);
+			myModule.filter('Sex', function() {
+				return function(sex) {
+					switch(sex) {
+						case 0:
+							sex = "女士";
+							break;
+						case 1:
+							sex = "先生";
+							break;
+						default:
+							sex = "";
+							break;
+					}
+					return sex;
+				};
+			});
+			myModule.filter('indexCss', function() {
+				return function(index) {
+					if(index > 0)
+						return "ui-accout-top";
+				};
+			});
+			myModule.controller('customerCtrl', ['$scope', '$http',
+				function($scope, $http) {
+					$scope.init = function() {
+						var requestUrl = APIaddress + 'api/MerchantCustoms/' + MerchantID + '/' + $scope.sort + '?' + Math.random();
+						$http({
+							method: 'GET',
+							url: requestUrl
+						}).success(function(data) {
+							$(".ui-loading-block").hide();
+							if(data == null || data == "") {
+								$("#msg-list").html("<div class='ui-center'>还没有任何消息！</div>")
+							} else {
+								$scope.Customs = data;
+								//console.log(data)
+							}
+						}).error(function(data) {
+							console.log("错误......");
+						})
+					};
+					$scope.sort = 4;
+					$scope.init();
+					$("#custbacklog li").click(function() {
+						$("#custbacklog li").removeClass("current");
+						$(this).addClass("current");
+						$scope.sort = $(this).attr("aid");
+						$scope.init();
+					})
+					$scope.gotoDetail = function(custom) {
+						var id=custom.ID;
+				       window.location.href="custom_msg.html?id="+id;
+					}
+				}
+			])
+		</script>
+
+</html>

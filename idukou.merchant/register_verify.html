@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+	</head>
+
+	<body ontouchstart>
+		<header class="ui-header ui-header-stable ui-border-b" style="background: #1ABC9C;color: white;">
+			<a href="register.html" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev" style="color: white;"><span>取消</span></i></a>
+			<h2>注册</h2>
+		</header>
+		<div class="pages">
+			<div class="panel active" id="registercode">
+				<div class="ui-whitespace verify">
+					<p class="ui-txt-info">已发送短信验证码到</p>
+					<h1 class="ui-txt-f32">+86&nbsp;159&nbsp;6710&nbsp;0406</h1>
+				</div>
+				<div class="ui-btn-wrap">
+					<div class="ui-form-login">
+						<form action="#">
+							<div class="ui-form-item ui-form-item-pure ui-border-b ui-form">
+								<input type="text" placeholder="6位数验证码">
+							</div>
+							<div class="ui-form-item ui-form-item-r ui-border-b ui-login-font ui-form">
+								<input type="text" placeholder="推荐人邀请码">
+								<!-- 若按钮不可点击则添加 disabled 类 -->
+								<button type="button" class="ui-border-l">扫一扫</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="ui-btn-wrap ui-login-tit">
+					<p class="ui-txt-info">接收短信大概需要35秒</p>
+				</div>
+				<div class="ui-btn-wrap ui-btn-skip">
+					<a href="register_last.html" class="button ui-btn-lg prev">下一步</a>
+				</div>
+			</div>
+		</div>
+	</body>
+  <script type="text/javascript">
+  			 		//按钮点击事件
+		$(".button").on("touchstart", function() {
+			$(".button").css({
+				"background": "#eee",
+				"color": "#1ABC9C"
+			})
+		}).on("touchend", function() {
+			$(".button").css({
+				"background": "#1ABC9C",
+				"color": "white"
+			})
+		});
+  </script>
+</html>

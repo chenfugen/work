@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/lwwtemp.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/frozen.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive ui-pulic-header">
+			<a href="javascript:;" onclick="history.back(-1)" class="ui-href-l"><i class="ui-icon-prev"><span>返回</span></i></a>
+			<h2>订单确认</h2>
+		</header>
+		<div class="pages">
+			<div class="panel active ui-order-t" id="SeriveConOK">
+				<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="SeriveConOK">
+					<div class="ui-whitespace" style="height:12rem;padding-top: 5.4rem;background: white;">
+						<p>订单总额（单位：元）</p>
+						<h1 style="font-size:2rem;">{{totalPrice}}</h1>
+					</div>
+					<div style="height:5rem;background:#FF6339;">
+						<div class="ui-form-item ui-form-item-show" style="line-height:5rem;color: white;">
+							<label for="#" style="color: white;">订金额度</label><input type="text" ng-init="deposit=0" ng-model="deposit" style="color: white;width:90%;" /><span style="">元</span>
+						</div>
+					</div>
+
+					<div class="ui-whitespace" style="line-height:4rem;width:100%;background:#ccc;">订单明细</div>
+					<div>
+						<table class="ui-order-table" style="width:100%;background:white;line-height:3rem;text-align:left;">
+							<tbody>
+								<tr ng-repeat="goods in order.OrdersGoodsDataObjects">
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;{{goods.GoodsName }}</td>
+									<td>{{goods.OGNum}}</td>
+									<td>¥{{goods.MGPrice}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="ui-poptips ui-poptips-success hint_msg" style="display: none;">
+						<div class="ui-poptips-cnt">请输入手机号码</div>
+					</div>
+					<div>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					</div>
+
+					<footer class="ui-footer ui-footer-btn">
+						<div class="ui-footer ui-footer-stable ui-btn-group ui-border-t ui-btn-100">
+							<button class="button ui-btn-lg" style="color: white;background:#27BFA1;border: none;" ng-click="ConOK()">确认订单</button>
+						</div>
+					</footer>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		 		//按钮点击事件
+		$(".button").on("touchstart", function() {
+			$(".button").css({
+				"background": "#eee",
+				"color": "#1ABC9C"
+			})
+		}).on("touchend", function() {
+			$(".button").css({
+				"background": "#1ABC9C",
+				"color": "white"
+			})
+		});
+		var totalPrice = window.location.search.split("=")[1];
+		var myModule = angular.module("app", []);
+		myModule.controller('SeriveConOK', ['$scope', '$http',
+				function($scope, $http) {
+					$scope.totalPrice = totalPrice;
+					$scope.order = JSON.parse(window.sessionStorage.getItem('order'));
+					//console.log($scope.OrdersGoodsDataObjects);
+					//确认订单
+					$scope.ConOK = function(){
+						var isNum = /^\d+(\.\d+)?$/;
+						if(!isNum.test($scope.deposit) && parseInt($scope.deposit) != 0) {
+							$(".hint_msg div").text("请填写正确格式定金额度")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000);
+							return false;
+						}
+						if($scope.deposit > parseInt($scope.totalPrice) || parseInt($scope.deposit) < 0) {
+							$(".hint_msg div").text("请输入正确的订金额度")
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000);
+							return false;
+						}
+						if($scope.deposit=0){
+							$scope.order.State =2;
+						}else{
+							$scope.order.State =3;
+						}				
+							var date = new Date();
+							$scope.order.ServiceDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+							$scope.order.EarnestScale= $scope.deposit; //$scope.scale;
+							$scope.order.User = {
+								UserName: $scope.phone,
+								TrueName: $scope.phone,
+								Phone: $scope.phone
+							};
+							if($scope.order.OrdersPriceDataObjects.length > 1) {
+								$scope.order.OrdersPriceDataObjects.forEach(function(p) {
+									if(p.PType == 2) {
+										p.Price = $scope.deposit;
+									}
+								});
+							} else {
+								$scope.order.OrdersPriceDataObjects.push({
+									PType: 2,
+									Price: $scope.deposit
+								});
+							}
+							//console.log($scope.order);
+							$.post(APIaddress + 'api/Orders/Update?' + Math.random(), $scope.order,function(data){
+								   if(data){
+								   	$(".hint_msg div").text("操作成功")
+									$(".hint_msg").css({
+										"display": "block"
+									});
+									setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000);
+									if($scope.order.State ==2){
+										window.location.href = 'order.html';
+									}else{
+										window.location.href = 'order_2.html';
+									}                         
+					       }else{
+					       		$(".hint_msg div").text("操作失败")
+									$(".hint_msg").css({
+										"display": "block"
+									});
+									setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000);
+					       }
+					   })
+									
+					}
+				}
+			])
+	</script>
+
+</html>

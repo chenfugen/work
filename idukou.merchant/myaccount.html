@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/idukou.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/angular/angular-resource.js"></script>
+		<script src="js/angular/angular-file-upload.js"></script>
+		<script src="js/frozen.js"></script>
+		
+	</head>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="userCtrl">
+			<header class="ui-header ui-header-positive">
+				<a href="userpage.html" data-transition="slide-left" class="ui-href-l"><i class="ui-icon-prev"><span>返回</span></i></a>
+				<h2>我的账号</h2>
+			</header>
+			<div class="panel" id="userAccout">
+				<section class="ui-container">
+					<ul ng-click="uploadImage()" class="ui-list ui-list-link ui-list-text" id="imgbox-uact">
+						<li class="ui-border-t">
+							<h4 class="ui-nowrap">头&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像</h4>
+							<div class="ui-txt-info">
+								<div class="ui-avatar">
+									<img ng-src="{{merchantSet.HeadImg | imageSrc}}" style="width:100%; height:100%;" />
+								</div>
+							</div>
+						</li>
+					</ul>
+					<!--模拟图片上传-->
+					<input type="file" id="imgupload02" accept="image/*" capture="camera" ng-file-select="onFileSelect($files)" style="display: none;" />
+					<script>
+						$('#imgbox-uact').on('tap', function() {
+							$('#imgupload02').click();
+						});
+					</script>
+					<div class="ui-form ui-border-t" style="margin-top:10px;">
+						<form action="#">
+							<div class="ui-form-item  ui-border-b">
+								<label>电话号码</label>
+								<input type="text" placeholder="{{merchantSet.Phone}}" readonly="readonly" style="text-align:right;">
+							</div>
+							<div class="ui-form-item  ui-border-b">
+								<label>真实姓名</label>
+								<input type="text" placeholder="{{merchantSet.MName}}" ng-model="merchantSet.MName" style="text-align:right;">
+							</div>
+						</form>
+					</div>
+					<div class="ui-form ui-border-t" style="margin-top:10px;">
+						<div class="ui-form-item ui-form-item-textarea ui-border-b ui-rap-textarea02">
+							<label>个人简介</label>
+							<textarea placeholder="你还没有填写任何简介，这将影响到客户对你的了解。" ng-model="merchantSet.Remark" rows="5" style="text-align:right;"></textarea>
+						</div>
+					</div>
+					<div class="ui-form ui-border-t" style="margin-top:10px;">
+						<div class="ui-form-item  ui-border-b">
+							<label>现金支付</label>
+							<label class="ui-switch">
+                                    <input type="checkbox" name="chkItem"  ng-mobel="merchantSet.IsAllowCash" id="isallowpay" ng-click="isallowpay()">
+                                </label>
+						</div>
+					</div>
+					<div class="ui-btn-wrap" style="margin-top:20px;">
+						<a href="javascript:;" ng-click="submit()" class="button ui-btn-lg" style="background:#1ABC9C;color: white;">确认修改</a>
+					</div>
+				</section>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+	  	
+ 		//按钮点击事件
+		$(".button").on("touchstart", function() {
+			$(".button").css({
+				"background": "#eee",
+				"color": "#1ABC9C"
+			})
+		}).on("touchend", function() {
+			$(".button").css({
+				"background": "#1ABC9C",
+				"color": "white"
+			})
+		});
+
+		var i = 0;
+		var requestUrl = APIaddress + 'api/Merchants/' + MerchantID;
+		var myModule = angular.module("app", ['angularFileUpload']);
+		myModule.filter('imageSrc', function() {
+			return function(img) {
+				if(img) {
+					img = "http://img.idukou.com/" + img;
+				} else {
+					img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjZEREZGMUE4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjZEREZGMUI4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NkRERkYxODg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NkRERkYxOTg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pr0VlogAAAXbSURBVHja7JvZTjJN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';
+				}
+
+				return img;
+			};
+		});		
+		
+		myModule.controller('userCtrl', ['$scope', '$http', '$upload', function($scope, $http, $upload) {
+			$http({
+				method: 'GET',
+				url: requestUrl
+			}).success(function(data) {
+				
+				$scope.merchantSet = data;
+				//console.log($scope.merchantSet);
+				//现金支付          
+				if($scope.merchantSet.IsAllowCash){
+					 $("[name = chkItem]:checkbox").attr("checked",true);
+				} else {
+					 $("[name = chkItem]:checkbox").attr("checked",false);
+					}
+				
+				$scope.isallowpay = function() {
+					if(data.IsAllowCash){
+						data.IsAllowCash = false;
+					} else {
+						data.IsAllowCash = true;
+					}				 
+				}
+				$scope.uploadImage = function() {
+					if(navigator.camera) {
+						$.afui.actionsheet(
+							[{
+								text: '拍照',
+								handler: function() {
+									util.capturePhoto(function(imageURL) {
+										util.uploadImage(imageURL, onSuccess);
+									});
+								}
+							}, {
+								text: '从手机相册选择',
+								handler: function() {
+									util.getPhoto(function(imageURL) {
+										util.uploadImage(imageURL, onSuccess);
+									});
+								}
+							}]);
+					} else {
+						$('#imgupload02').click();
+					}
+				};
+
+				$scope.upload =[];
+				$scope.onFileSelect = function($files){
+					//$files: an array of files selected, each file has name, size, and type.
+					for(var i = 0; i < $files.length; i++) {
+						var $file = $files[i];
+						(function(index) {
+							$scope.upload[index] = $upload.upload({
+								url: APIaddress + 'api/Files/Image', // webapi url
+								method: 'POST',
+								file: $file
+							}).progress(function(evt) {
+								// get upload percentage
+								console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+							}).success(function(data, status, headers, config) {
+								// file is uploaded successfully
+								//console.log(data);
+								onSuccess(data, false);
+							}).error(function(data, status, headers, config) {
+								// file failed to upload
+								console.log(data);
+							});
+						})(i);
+					}
+				}
+
+				$scope.abortUpload = function(index) {
+					$scope.upload[index].abort();
+				}
+
+				function onSuccess(data, isApply) {
+					var imageURL = '';
+					if(data.response) {
+						imageURL = data.response;
+					} else if(data) {
+						imageURL = data;
+					}
+					$scope.merchantSet.HeadImg=imageURL.replace('"', '').replace('"', '');
+					if(isApply == undefined) {
+						isApply = true;
+					}
+					if(isApply) {
+						$scope.$apply();
+					}
+				}
+				
+				//确认修改 
+				var Url = APIaddress + 'api/Merchants/Update';
+				$scope.submit = function(){	
+					$.post(Url, $scope.merchantSet, function(data) {						
+						if(data) {
+						  location.href ="userpage.html";
+						}
+					})
+				}
+			}).error(function(data) {
+				console.log("获取详细信息失败")
+			})
+		}])
+	</script>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css" />
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<a href="javascript:;" onclick="history.back(-1)" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev" style="color: white;"><span>返回</span></i></a>
+			<h2>备注</h2>
+		</header>
+		<div class="panel active" id="writeremark">
+			<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="myCtrl">
+				<div class="ui-form">
+					<textarea ng-model="remark" style="margin-top:64px;border:none;width: 100%;height:15rem;"></textarea>
+				</div>
+
+				<footer class="ui-footer ui-footer-stable ui-border-t">
+					<ul class="ui-tiled ui-border-t ui-txt-tips" style="background: white;" ng-click="save()">
+						<li class="ui-footer-order ui-btn-remark02">
+							<a href="#" class="button ui-btn-cancel" style="color: #5c5c5c;font-size:1.5rem;line-height:56px;">提交</a>
+						</li>
+					</ul>
+				</footer>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var id = window.location.search.split("=")[1];
+			var myModule = angular.module("app", []);
+			myModule.controller('myCtrl', function($scope) {
+				$scope.save = function() {
+					$.post(APIaddress + "api/OrderRemarks", {
+						Remark: $scope.remark,
+						MID: MerchantID,
+						OID: id
+					}, function(msg) {
+						if(msg) {
+							window.location.href = "remark.html?id="+id;
+						}
+					})
+
+				}
+
+			})
+		</script>
+	</body>
+
+</html>

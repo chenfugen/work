@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/angular/angular-route.min.js"></script>
+		<script src="js/idukou.js"></script>
+		<style type="text/css">
+    
+		</style>
+	</head>
+
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive ui-pulic-header">		
+			<h2>订单详情</h2>
+		</header>
+		<div class="panel active" id="orderdetails">
+			<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="myCtrl">
+				<ul class="ui-list ui-list-text ui-border-tb">	
+					<li>
+						<i class="ui-ico-orderman" style="color: #E67E22;"></i>&nbsp;&nbsp;
+						<h4 class="ui-nowrap">订单号：{{order.OCode}}</h4>						
+					<li>
+					<i class="ui-ico-location c_turquoise" style="color:#1ABC9C;"></i>&nbsp;&nbsp;
+					<h4 class="ui-nowrap">下单时间：{{order.CreateDate | date:'yyyy-MM-dd HH:mm'}}</h4>	
+					</li>
+					<div class="ui-txt-sub" style="width:100%;line-height:3rem;background:#E2E2E2;font-size:20px;">&nbsp;&nbsp;&nbsp;客户信息</div>
+					<li class="ui-border-b">
+						<i class="ui-ico-my" style="color:#A459BC;"></i>&nbsp;&nbsp;
+						<h4 class="ui-nowrap">客户：{{order.TrueName}}</h4>
+					</li>
+					<li class="ui-border-b">
+						<i class="ui-ico-phone" style="color:#3397DA;"></i>&nbsp;&nbsp;
+						<h4>联系电话：{{order.Phone}}</h4>
+					</li>
+					<li>
+						<i class="ui-ico ui-ico-mapbig" style="color:#1ABC9C;"></i>&nbsp;&nbsp; 
+						<h4>联系地址：{{order.Address}}</h4>
+					</li>
+				</ul>
+				<div class="ui-pubil-bg ui-accout-top" ng-if="order.OrdersGoodsDataObjects.length > 0">
+					<div class="ui-txt-sub" style="width:100%;line-height:3rem;background:#E2E2E2;font-size:20px;">&nbsp;&nbsp;&nbsp;订单明细</div>
+					<div>
+					<table class="ui-order-table" style="width:100%;background:white;line-height:3rem;text-align:left;">
+							<tbody>
+								<tr ng-repeat="goods in order.OrdersGoodsDataObjects">
+									<td>&nbsp;&nbsp;&nbsp;&nbsp;{{goods.GoodsName}}</td>
+									<td>{{goods.OGNum}}</td>
+									<td style="text-align:center;">&nbsp;&nbsp;¥{{goods.MGPrice}}</td>
+								</tr>
+							</tbody>
+					</table>		
+					</div>
+					<ul class="ui-list ui-list-text ui-border-tb ui-accout-top">
+						<li>
+							<h4 class="ui-nowrap">订单总额：</h4>
+							<div class="ui-txt-info c_alizarin">￥{{order.OrdersPriceDataObjects | orderPrice:1}}</div>
+						</li>
+						<li>
+							<h4 class="ui-nowrap">定金:</h4>
+							<div class="ui-txt-info c_alizarin">￥{{order.OrdersPriceDataObjects | orderPrice:2}}</div>
+						</li>
+						<li ng-repeat="coupon in order.OrderCouponDataObjects">
+							<h4 class="ui-nowrap">{{coupon.Remark}}：</h4>
+							<div class="ui-txt-info c_alizarin">￥{{coupon.Price}}</div>
+						</li>
+						<li class="ui-border-t ">
+							<div class="  ui-ser-total">需付款：<span class="c_alizarin" style="font-size:20px;">￥{{full}}</span></div>
+						</li>
+
+					</ul>
+
+				</div>
+				<div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+
+				<div class="ui-loading-block show">
+					<div class="ui-loading-cnt">
+						<i class="ui-loading-bright"></i>
+						<p>正在加载中...</p>
+					</div>
+				</div>
+
+				<div class="ui-poptips ui-poptips-success hint_msg" style="display:none;">
+					<div class="ui-poptips-cnt">操作成功</div>
+				</div>
+              
+				<footer class="ui-footer ui-footer-btn">
+						<div class="ui-footer ui-footer-stable ui-btn-group ui-border-t ui-btn-100">
+							<button class="ui-btn-lg" style="color:white;background:#27BFA1;border:none;">确认支付</button>
+						</div>
+				</footer>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var oid =window.location.search.split("=")[1];
+		var requestUrl = APIaddress + "api/Orders/GetOrderInfoByOcode/" + oid;
+		var myModule = angular.module("app", []);
+		myModule.filter('orderPrice', function(){
+			return function(orderPrice, ptype) {
+				if(orderPrice) {
+					for(var i = 0; i < orderPrice.length; i++) {
+						if(orderPrice[i].PType == ptype) {
+							return orderPrice[i].Price;
+						}
+					}
+				}
+			};
+		});
+		myModule.controller('myCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$(".ui-loading-block").hide();
+					if(data == null || data == "") {
+						$("#remark").html("<div class='ui-center'>还没有任何备注信息！</div>")
+					} else {
+						$scope.order = data;
+						//console.log(data);					
+						$scope.Total = 0; //总额
+						$scope.DJSum = 0; //订金
+						$scope.preferential = 0; //优惠
+
+						for(var i = 0; i < $scope.order.OrdersPriceDataObjects.length; i++) {
+							if($scope.order.OrdersPriceDataObjects[i].PType == 1) //总额
+								$scope.Total = $scope.order.OrdersPriceDataObjects[i].Price;
+							if($scope.order.OrdersPriceDataObjects[i].PType == 2)
+								$scope.DJSum = $scope.order.OrdersPriceDataObjects[i].Price;
+						}
+						if($scope.order.OrderCouponDataObjects.length == 0) {
+							var coupon = {
+								Price: 0,
+								Remark: "折扣优惠"
+							};
+							$scope.order.OrderCouponDataObjects.push(coupon);
+						} else {
+							for(var j = 0; j < $scope.order.OrderCouponDataObjects.length; j++) {
+								$scope.preferential += $scope.order.OrderCouponDataObjects[j].Price;
+							}
+						}
+
+						$scope.full = $scope.Total - $scope.DJSum - $scope.preferential;
+
+					}
+				
+					
+				}).error(function(data) {
+					console.log("错误......");
+				});              
+			}
+		]);
+	</script>
+
+</html>

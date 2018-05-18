@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+	</head>
+
+	<body ontouchstart>
+		<header class="ui-header ui-header-stable ui-border-b" style="background: #1ABC9C;color: white;">
+			<a href="index.html" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev" style="color: white;"><span>取消</span></i></a>
+			<h2>注册</h2>
+		</header>
+		<div class="panel active" id="registerpage">
+			<div class="ui-btn-wrap">
+				<div class="ui-form-login">
+					<form action="#">
+						<div class="ui-form-item ui-form-item-pure ui-border-b ui-form">
+							<label class="ui-border-r" style="width:60px;">手机号</label>
+							<input type="text" placeholder="未注册将自动创建千柏渡账号" style=" padding-left:70px;">
+						</div>
+						<a href="register_verify.html" class="button ui-btn-lg ui-btn-cbgreen verify">获取手机验证码</a>
+					</form>
+					<div class="ui-btn-wrap ui-login-tit">
+						<h5 class="ui-txt-muted">点击登录后，表示您同意<i class="c_turquoise" style="color:#1ABC9C;">《千柏渡免责声明》</i></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+  <script type="text/javascript">
+  	 		//按钮点击事件
+		$(".button").on("touchstart", function() {
+			$(".button").css({
+				"background": "#eee",
+				"color": "#1ABC9C"
+			})
+		}).on("touchend", function() {
+			$(".button").css({
+				"background": "#1ABC9C",
+				"color": "white"
+			})
+		});
+  </script>
+</html>

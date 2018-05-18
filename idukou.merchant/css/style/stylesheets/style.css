@@ -1,0 +1,760 @@
+@media screen and (min-width: 320px) {
+  /* line 5, ../sass/style.scss */
+  html {
+    font-size: 10px !important;
+  }
+}
+@media screen and (min-width: 360px) {
+  /* line 10, ../sass/style.scss */
+  html {
+    font-size: 11.25px !important;
+  }
+}
+@media screen and (min-width: 400px) {
+  /* line 15, ../sass/style.scss */
+  html {
+    font-size: 12.5px !important;
+  }
+}
+@media only screen and (min-width: 481px) {
+  /* line 20, ../sass/style.scss */
+  html {
+    font-size: 94% !important;
+  }
+}
+@media only screen and (min-width: 561px) {
+  /* line 25, ../sass/style.scss */
+  html {
+    font-size: 109% !important;
+  }
+}
+@media screen and (min-width: 640px) {
+  /* line 30, ../sass/style.scss */
+  html {
+    font-size: 20px !important;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* line 35, ../sass/style.scss */
+  html {
+    font-size: 22px !important;
+  }
+}
+/* line 40, ../sass/style.scss */
+*,
+*:before,
+*:after {
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  margin: 0;
+  padding: 0;
+  -ms-touch-action: pan-y;
+}
+
+/* line 60, ../sass/style.scss */
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #EEEEEE;
+  overflow-y: auto;
+  -webkit-text-size-adjust: none;
+}
+
+/* line 69, ../sass/style.scss */
+.ng-cloak {
+  display: none;
+}
+
+/* line 72, ../sass/style.scss */
+header a {
+  width: 20%;
+}
+
+/* line 76, ../sass/style.scss */
+#loginpage {
+  width: 100%;
+  position: absolute;
+  top: 80px;
+}
+/* line 80, ../sass/style.scss */
+#loginpage .ui-form {
+  height: 4.5rem;
+  margin-top: 1rem;
+  line-height: 4.5rem;
+}
+/* line 85, ../sass/style.scss */
+#loginpage .login {
+  margin-top: 2rem;
+  background: #1ABC9C;
+  color: white;
+}
+/* line 90, ../sass/style.scss */
+#loginpage h5 {
+  width: 100%;
+  text-align: center;
+  margin-top: 16rem;
+}
+
+/* line 97, ../sass/style.scss */
+#registerpage {
+  width: 100%;
+  position: absolute;
+  top: 64px;
+}
+/* line 101, ../sass/style.scss */
+#registerpage .ui-form {
+  height: 5rem;
+  margin-top: 1rem;
+  line-height: 5rem;
+}
+/* line 106, ../sass/style.scss */
+#registerpage .verify {
+  margin-top: 2rem;
+  background: #1ABC9C;
+  color: white;
+}
+/* line 111, ../sass/style.scss */
+#registerpage h5 {
+  width: 100%;
+  text-align: center;
+  margin-top: 18rem;
+}
+/* line 116, ../sass/style.scss */
+#registerpage label {
+  color: #1ABC9C;
+}
+
+/* line 121, ../sass/style.scss */
+#registercode {
+  width: 100%;
+  position: absolute;
+  top: 6.5rem;
+}
+/* line 125, ../sass/style.scss */
+#registercode .verify {
+  text-align: center;
+}
+/* line 127, ../sass/style.scss */
+#registercode .verify h1 {
+  font-size: 30px;
+}
+/* line 131, ../sass/style.scss */
+#registercode .ui-form {
+  height: 5rem;
+  margin-top: 1rem;
+  line-height: 5rem;
+}
+/* line 136, ../sass/style.scss */
+#registercode button {
+  height: 5rem;
+  line-height: 5rem;
+}
+/* line 141, ../sass/style.scss */
+#registercode .ui-login-tit p {
+  font-size: 15px;
+  margin-top: -1rem;
+}
+/* line 146, ../sass/style.scss */
+#registercode .prev {
+  background: #1ABC9C;
+  color: white;
+}
+
+/* line 152, ../sass/style.scss */
+#registerpassword {
+  width: 100%;
+  position: absolute;
+  top: 5.5rem;
+}
+/* line 156, ../sass/style.scss */
+#registerpassword .ui-form {
+  height: 4.5rem;
+  margin-top: 1rem;
+  line-height: 4.5rem;
+}
+/* line 161, ../sass/style.scss */
+#registerpassword .register {
+  background: #1ABC9C;
+  color: white;
+}
+
+/* line 167, ../sass/style.scss */
+#userpage {
+  width: 100%;
+  position: absolute;
+  top: 64px;
+}
+
+/* line 173, ../sass/style.scss */
+footer span {
+  display: block;
+  margin-top: -0.8rem;
+}
+
+/* line 179, ../sass/style.scss */
+#userAccout {
+  width: 100%;
+  position: absolute;
+  top: 64px;
+}
+
+/* line 185, ../sass/style.scss */
+#aboutpage {
+  width: 100%;
+  position: absolute;
+  top: 7rem;
+}
+
+/* line 190, ../sass/style.scss */
+.version {
+  margin-top: -230px;
+}
+
+/* line 194, ../sass/style.scss */
+.username {
+  position: absolute;
+  top: 70px;
+  width: 100%;
+  height: 4rem;
+  background: white;
+  line-height: 4rem;
+}
+
+/* line 202, ../sass/style.scss */
+#codepage {
+  position: absolute;
+  top: 120px;
+  width: 100%;
+  background: white;
+}
+
+/* line 209, ../sass/style.scss */
+#forgetpassword {
+  position: absolute;
+  top: 6rem;
+  width: 100%;
+}
+/* line 213, ../sass/style.scss */
+#forgetpassword .ui-form {
+  height: 4.5rem;
+  margin-top: 1rem;
+  line-height: 4.5rem;
+}
+
+/* line 219, ../sass/style.scss */
+#securitycode {
+  position: absolute;
+  top: 6.5rem;
+  width: 100%;
+}
+/* line 223, ../sass/style.scss */
+#securitycode .verify {
+  text-align: center;
+}
+/* line 225, ../sass/style.scss */
+#securitycode .verify h1 {
+  font-size: 30px;
+}
+/* line 229, ../sass/style.scss */
+#securitycode .ui-form {
+  height: 4.5rem;
+  margin-top: 1rem;
+  line-height: 4.5rem;
+}
+
+/* line 236, ../sass/style.scss */
+#main {
+  position: absolute;
+  top: 6rem;
+  width: 100%;
+}
+/* line 240, ../sass/style.scss */
+#main .btn {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 5px 5px;
+  padding-top: 0.1rem;
+}
+/* line 246, ../sass/style.scss */
+#main ul {
+  margin-top: 1rem;
+}
+/* line 249, ../sass/style.scss */
+#main ul li a {
+  color: #5C5C5C;
+  font-size: 1.2rem;
+}
+/* line 252, ../sass/style.scss */
+#main ul li a div {
+  margin-top: 0.5rem;
+}
+/* line 258, ../sass/style.scss */
+#main .ui-btn1 {
+  border: 1px solid #e67e22;
+}
+/* line 261, ../sass/style.scss */
+#main .ui-btn2 {
+  border: 1px solid #1ABC9C;
+}
+/* line 264, ../sass/style.scss */
+#main .ui-btn3 {
+  border: 1px solid #A459BC;
+}
+/* line 267, ../sass/style.scss */
+#main .ui-btn4 {
+  border: 1px solid #3397DA;
+}
+
+/* line 272, ../sass/style.scss */
+#msg-list {
+  position: absolute;
+  top: 64px;
+  width: 100%;
+}
+
+/* line 277, ../sass/style.scss */
+.ui-txt-sub {
+  float: right;
+}
+
+/* line 281, ../sass/style.scss */
+#order {
+  position: absolute;
+  top: 64px;
+  width: 100%;
+}
+/* line 285, ../sass/style.scss */
+#order ul {
+  margin-top: 1rem;
+}
+/* line 287, ../sass/style.scss */
+#order ul li {
+  line-height: 2rem;
+}
+/* line 289, ../sass/style.scss */
+#order ul li a:nth-child(2),
+#order ul li a:nth-child(3) {
+  color: #5c5c5c;
+}
+/* line 293, ../sass/style.scss */
+#order ul li .ui-btn-default {
+  border: 1px solid #1ACAD9;
+  color: #1ACAD9;
+}
+/* line 299, ../sass/style.scss */
+#order #orderstate {
+  color: #5C5C5C;
+  position: absolute;
+  right: 1rem;
+  font-size: 1rem;
+}
+
+/* line 307, ../sass/style.scss */
+.registersuccuss {
+  width: 210px;
+  height: 200px;
+  position: absolute;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+}
+
+/* line 318, ../sass/style.scss */
+#orderdetails {
+  position: absolute;
+  top: 70px;
+  width: 100%;
+}
+
+/* line 323, ../sass/style.scss */
+.ui-orderdetails {
+  line-height: 3.5rem;
+  text-align: center;
+}
+
+/* line 327, ../sass/style.scss */
+#remark {
+  position: absolute;
+  top: 64px;
+  width: 100%;
+}
+
+/* line 333, ../sass/style.scss */
+#orderdetails footer {
+  background: white;
+}
+/* line 336, ../sass/style.scss */
+#orderdetails footer ul .ui-footer-order {
+  margin-top: 25px;
+}
+/* line 338, ../sass/style.scss */
+#orderdetails footer ul .ui-footer-order a {
+  font-size: 1.5rem;
+  color: #5C5C5C;
+}
+
+/* line 347, ../sass/style.scss */
+#rap {
+  margin-top: 64px;
+  width: 100%;
+  position: relative;
+}
+/* line 351, ../sass/style.scss */
+#rap .rap_box {
+  background: #1ABC9C;
+  height: 12rem;
+}
+/* line 354, ../sass/style.scss */
+#rap .rap_box .score {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 8rem 8rem;
+  border: 1px solid white;
+  text-align: center;
+  color: white;
+  position: absolute;
+  top: 1.2rem;
+}
+/* line 363, ../sass/style.scss */
+#rap .rap_box .score p {
+  font-size: 1.2rem;
+}
+/* line 366, ../sass/style.scss */
+#rap .rap_box .score h1 {
+  font-size: 3rem;
+  margin-top: 1rem;
+}
+/* line 371, ../sass/style.scss */
+#rap .rap_box .rap_sclist {
+  position: absolute;
+  width: 60%;
+  height: 8rem;
+  right: 1.5rem;
+  top: 2.5rem;
+}
+/* line 377, ../sass/style.scss */
+#rap .rap_box .rap_sclist li {
+  height: 3rem;
+}
+/* line 379, ../sass/style.scss */
+#rap .rap_box .rap_sclist li span {
+  display: block;
+  float: left;
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+}
+/* line 386, ../sass/style.scss */
+#rap .rap_box .rap_sclist li .c_alizarin {
+  float: left;
+  font-size: 2.3rem;
+  margin-top: -1rem;
+  color: red;
+}
+/* line 395, ../sass/style.scss */
+#rap .CommentInfo {
+  width: 100%;
+}
+/* line 397, ../sass/style.scss */
+#rap .CommentInfo .rap_nav {
+  background: white;
+  height: 4rem;
+}
+/* line 400, ../sass/style.scss */
+#rap .CommentInfo .rap_nav a {
+  float: left;
+  margin-left: 3rem;
+  color: #1ABC9C;
+  margin-top: 1rem;
+  border: 1px solid #1ABC9C;
+}
+/* line 408, ../sass/style.scss */
+#rap .CommentInfo li {
+  background: white;
+}
+/* line 410, ../sass/style.scss */
+#rap .CommentInfo li div {
+  line-height: 3rem;
+  margin-top: 0.5rem;
+}
+
+/* line 418, ../sass/style.scss */
+#rapdetails {
+  margin-top: 64px;
+  width: 100%;
+}
+
+/* line 423, ../sass/style.scss */
+.head_nav {
+  width: 12rem;
+  height: 2rem;
+  overflow: hidden;
+  border: 1px solid white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -6rem;
+  margin-top: -0.7rem;
+  border-radius: 5px 5px;
+}
+/* line 434, ../sass/style.scss */
+.head_nav a {
+  float: left;
+  display: block;
+  width: 6rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+/* line 443, ../sass/style.scss */
+.head_nav .pressedon {
+  background: white;
+  color: #1ABC9C;
+}
+
+/* line 448, ../sass/style.scss */
+.ui-cust {
+  position: fixed;
+  top: 64px;
+  width: 100%;
+  z-index: 99;
+}
+
+/* line 454, ../sass/style.scss */
+.retrie {
+  width: 100%;
+  background: white;
+  position: fixed;
+  top: 108px;
+  z-index: 99;
+}
+/* line 460, ../sass/style.scss */
+.retrie dt {
+  width: 100%;
+}
+/* line 462, ../sass/style.scss */
+.retrie dt a {
+  display: block;
+  float: left;
+  width: 50%;
+  line-height: 3rem;
+  background: white;
+  color: #5c5c5c;
+  text-align: center;
+  font-size: 1.2rem;
+}
+/* line 471, ../sass/style.scss */
+.retrie dt a img {
+  width: 6%;
+}
+/* line 475, ../sass/style.scss */
+.retrie dt .splitline {
+  width: 1px;
+  height: 2rem;
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  margin-left: -0.5rem;
+  background: #EBEBEB;
+  z-index: 5;
+}
+/* line 486, ../sass/style.scss */
+.retrie .area {
+  position: absolute;
+  z-index: 99;
+  top: 3rem;
+  width: 100%;
+  background: white;
+}
+/* line 493, ../sass/style.scss */
+.retrie .area li a {
+  display: inline-block;
+  height: 3rem;
+  line-height: 3rem;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #EBEBEB;
+  color: #5C5C5C;
+}
+/* line 504, ../sass/style.scss */
+.retrie .wage {
+  position: absolute;
+  z-index: 99;
+  top: 3rem;
+  width: 100%;
+  background: white;
+}
+/* line 511, ../sass/style.scss */
+.retrie .wage li a {
+  display: inline-block;
+  height: 3rem;
+  line-height: 3rem;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #EBEBEB;
+  color: #5C5C5C;
+}
+
+/* line 523, ../sass/style.scss */
+#customer {
+  position: absolute;
+  top: 150px;
+  width: 100%;
+}
+
+/* line 528, ../sass/style.scss */
+.bg {
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  display: none;
+}
+
+/* line 537, ../sass/style.scss */
+#custbacklog {
+  width: 100%;
+  margin-top: 64px;
+}
+
+/* line 542, ../sass/style.scss */
+#customer_detail,
+#customer_remind,
+#customer_follow {
+  position: absolute;
+  top: 64px;
+  width: 100%;
+}
+
+/* line 549, ../sass/style.scss */
+#customer_add {
+  position: absolute;
+  top: 64px;
+  width: 100%;
+}
+/* line 553, ../sass/style.scss */
+#customer_add .ui-date-tit {
+  margin-top: 0.5rem;
+}
+/* line 555, ../sass/style.scss */
+#customer_add .ui-date-tit input {
+  border: 1px solid #ccc;
+}
+
+/* line 561, ../sass/style.scss */
+#main_plane {
+  padding-top: 6rem;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 566, ../sass/style.scss */
+.menu {
+  color: #A8A9AD !important;
+}
+
+/* line 569, ../sass/style.scss */
+.menus {
+  width: 27%;
+  height: 100%;
+  float: left;
+  border-right: 1px solid #f0f0f0;
+  background: #f7f7f7;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* line 580, ../sass/style.scss */
+.all_list {
+  width: 72.8%;
+  float: right;
+  background: #fff;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* line 589, ../sass/style.scss */
+.menus li {
+  line-height: 4rem;
+  font-size: 18px;
+  text-align: center;
+  color: #999;
+  position: relative;
+}
+
+/* line 596, ../sass/style.scss */
+.menus .active {
+  background: #fff;
+  color: #4BCC60 !important;
+  display: block;
+}
+
+/* line 601, ../sass/style.scss */
+.title.active {
+  color: #4BCC60 !important;
+}
+
+/* line 604, ../sass/style.scss */
+.menus .active:before {
+  content: "";
+  width: 5px;
+  height: 1rem;
+  background-color: #4BCC60 !important;
+  position: absolute;
+  left: -0%;
+  top: 0;
+}
+
+/* line 613, ../sass/style.scss */
+.menus .active:after {
+  content: "";
+  width: 1px;
+  height: 1rem;
+  background-color: #fff;
+  position: absolute;
+  right: -1px;
+  top: 0;
+}
+
+/* line 622, ../sass/style.scss */
+.title {
+  width: 100%;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  background: #f7f7f7;
+  font-weight: bold;
+}
+
+/* line 629, ../sass/style.scss */
+.msglist {
+  position: relative;
+}
+/* line 631, ../sass/style.scss */
+.msglist input {
+  border: none;
+  margin-left: 0.5rem;
+  height: 30px;
+}
+/* line 636, ../sass/style.scss */
+.msglist a {
+  font-size: 1rem;
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+}
+
+/* line 644, ../sass/style.scss */
+.ui-ico-search:before {
+  color: #B2B2B2;
+  font-size: 1.4rem;
+}

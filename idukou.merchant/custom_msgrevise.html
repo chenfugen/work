@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/angular/angular-route.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="customermsgCtrl">
+			<header class="ui-header ui-header-positive ui-pulic-header">
+				<a href="javascript:;" onclick="history.back(-1)" class="ui-href-l"><i class="ui-icon-prev"><span>取消</span></i></a>
+				<h2>修改客户</h2>
+			</header>
+			<div class="panel active" id="customer_add">
+				<div class="ui-form ui-border-t">
+					<form action="#">
+						<div class="ui-form-item ui-form-item-show ui-border-b ui-form-black">
+							<label for="#">客户名称</label>
+							<input type="text" id="name" ng-model="customAddOrUpdate.LinkName" />
+						</div>
+						<div class="ui-form-item ui-form-item-show ui-border-b ui-form-black">
+							<label for="#">联系电话</label>
+							<input type="text" id="phone" ng-model="customAddOrUpdate.Phone" />
+						</div>
+						<div class="ui-form-item ui-border-b ui-form-item-show">
+							<label>性别</label>
+							<div class="ui-select">
+								<select ng-model="customAddOrUpdate.Sex" ng-options="sex.id as sex.name for sex in selSexs" style="color:#777777;">
+									<option value="">先生/女生</option>
+								</select>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="ui-form ui-border-t ui-accout-top">
+					<form action="#">
+						<div class="ui-form-item ui-form-item-show ui-border-b ui-form-black">
+							<label for="#">联系地址</label>
+							<input type="text" id="address" ng-model="customAddOrUpdate.Address" />
+						</div>
+					</form>
+				</div>
+				<div class="ui-form ui-border-t ui-accout-top">
+					<form action="#">
+						<div class="ui-form-item ui-form-item-show ui-border-b ui-form-black">
+							<label for="#">逝者名称</label>
+							<input type="text" value="" ng-model="customAddOrUpdate.DeathorName" />
+						</div>
+						<div class="ui-form-item ui-form-item-show ui-border-b ui-form-black">
+							<label for="#">与客户关系</label>
+							<input type="text" value="" ng-model="customAddOrUpdate.Relation" />
+						</div>
+						<div class="ui-date-tit ui-form-item-show ui-whitespace">
+							<label>出生日期</label>
+							<input type="date" id="birthday" ng-model="customAddOrUpdate.Birthday" />
+						</div>
+						<div class="ui-date-tit ui-form-item-show ui-whitespace">
+							<label>逝世日期</label>
+							<input type="date" id="dieday" ng-model="customAddOrUpdate.DieDate" />
+						</div>
+					</form>
+				</div>
+				<div class="ui-form ui-border-t ui-accout-top">
+					<form action="#">
+						<div class="ui-form-item ui-form-item-show ui-border-b ui-form-black">
+							<label for="#">落葬陵园</label>
+							<input type="text" value="" ng-model="customAddOrUpdate.InCemetery" />
+						</div>
+						<div class="ui-form-item ui-form-item-show ui-border-b ui-form-black">
+							<label for="#">落葬位置</label>
+							<input type="text" value="" ng-model="customAddOrUpdate.TombCode" />
+						</div>
+					</form>
+				</div>
+				<div class="ui-form ui-border-t ui-accout-top">
+					<form action="#">
+						<div class="ui-form-item ui-form-item-textarea ui-border-b ui-form-item-show">
+							<label for="#">备注</label>
+							<textarea placeholder="" ng-model="customAddOrUpdate.Remark">{{customAddOrUpdate.Remark}}</textarea>
+						</div>
+					</form>
+				</div>
+				<div class="ui-poptips ui-poptips-success hint_msg" style="display:none;">
+					<div class="ui-poptips-cnt"></div>
+				</div>
+				<div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+			<footer class="ui-footer ui-footer-btn">
+				<div class="ui-footer ui-footer-stable ui-btn-group ui-border-t  ui-btn-100 ui-btn-custm">
+					<button class="button ui-btn-lg ui-btn-cbgreen" ng-click="customSave()" style="background:#1ABC9C;color:white;">修改</button>
+				</div>
+			</footer>
+		</div>
+	</body>
+	<script type="text/javascript">
+	   
+ 		//按钮点击事件
+		$(".button").on("touchstart", function() {
+			$(".button").css({
+				"background": "#eee",
+				"color": "#1ABC9C"
+			})
+		}).on("touchend", function() {
+			$(".button").css({
+				"background": "#1ABC9C",
+				"color": "white"
+			})
+		});
+
+		var id =window.location.search.split("=")[1];
+		//console.log(id);
+		var myModule = angular.module("app", []);
+		var requestUrl = APIaddress + "api/MerchantCustoms/Update";
+		var Url = APIaddress + "api/MerchantCustoms/" + id;
+		myModule.controller('customermsgCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http.get(Url).success(function(data) {
+					$scope.customAddOrUpdate = data;
+					$scope.customAddOrUpdate.Birthday=new Date(data.Birthday);
+					$scope.customAddOrUpdate.DieDate=new Date(data.DieDate);
+				})
+				$scope.selSexs = [{
+					id: 1,
+					name: '先生'
+				}, {
+					id: 0,
+					name: '女士'
+				}];
+				$scope.customSave = function() {
+					if($("#name").val() == "") {
+						$(".hint_msg div").text("请输入客户名称")
+						$(".hint_msg").css({
+							"display": "block"
+						});
+						setTimeout(function() {
+							$(".hint_msg").css({
+								"display": "none"
+							});
+						}, 1000)
+						return false;
+					}
+					if($("#phone").val() == "") {
+						$(".hint_msg div").text("请输入联系电话")
+						$(".hint_msg").css({
+							"display": "block"
+						});
+						setTimeout(function() {
+							$(".hint_msg").css({
+								"display": "none"
+							});
+						}, 1000)
+						return false;
+					}
+					if($("#adress").val() == "") {
+						$(".hint_msg div").text("请输入联系地址话")
+						$(".hint_msg").css({
+							"display": "block"
+						});
+						setTimeout(function() {
+							$(".hint_msg").css({
+								"display": "none"
+							});
+						}, 1000)
+						return false;
+					}
+					if($scope.customAddOrUpdate.Birthday){
+						var birthday = $scope.customAddOrUpdate.Birthday.getFullYear();
+						if(($scope.customAddOrUpdate.Birthday.getMonth() + 1) < 10)
+							birthday += "-0" + ($scope.customAddOrUpdate.Birthday.getMonth() + 1);
+						else
+							birthday += "-" + ($scope.customAddOrUpdate.Birthday.getMonth() + 1);
+
+						if($scope.customAddOrUpdate.Birthday.getDate() < 10)
+							birthday += "-0" + $scope.customAddOrUpdate.Birthday.getDate();
+						else
+							birthday += "-" + $scope.customAddOrUpdate.Birthday.getDate();
+						$scope.customAddOrUpdate.Birthday = birthday;
+
+						//console.log($scope.customAddOrUpdate.Birthday) 
+					}
+					if($scope.customAddOrUpdate.DieDate) {
+						var diedate = $scope.customAddOrUpdate.DieDate.getFullYear();
+						if(($scope.customAddOrUpdate.DieDate.getMonth() + 1) < 10)
+							diedate += "-0" + ($scope.customAddOrUpdate.DieDate.getMonth() + 1);
+						else
+							diedate += "-" + ($scope.customAddOrUpdate.DieDate.getMonth() + 1);
+
+						if($scope.customAddOrUpdate.DieDate.getDate() < 10)
+							diedate += "-0" + $scope.customAddOrUpdate.DieDate.getDate();
+						else
+							diedate += "-" + $scope.customAddOrUpdate.DieDate.getDate();
+
+						$scope.customAddOrUpdate.DieDate = diedate;
+					}
+
+					$scope.customAddOrUpdate.MID = id;
+					var msg = $scope.customAddOrUpdate;
+					$.post(requestUrl, msg, function(data) {
+						if(data) {
+							//console.log(data);
+							$(".hint_msg div").text('修改成功');
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+							window.location.href ="custom_msg.html?id="+id;
+						} else {
+							console.log("获取数据错误。。");
+						}
+					})
+				}
+			}
+		]);
+	</script>
+
+</html>

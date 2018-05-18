@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/frozen.js"></script>
+		<script src="js/idukou.js"></script>
+		<style type="text/css">
+			.ui-icon-f24 {
+				font-size: 25px;
+			}
+			
+			#qrCodeIco {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -15px;
+				margin-top: -15px;
+				z-index: 10000;
+				border-radius: 5px 5px;
+			}
+		</style>
+	</head>
+
+	<body ontouchstart>
+		<header class="ui-header ui-header-stable ui-border-b" style="background: #1ABC9C;color: white;">
+			<h2>我的</h2>
+		</header>
+		<div class="panel active" id="userpage">
+			<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="userCtrl">
+				<section class="ui-container">
+					<div class="demo-item">
+						<a href="javascript:;">
+							<ul class="ui-list ui-list-link ui-border-tb ui-public-accout ui-info-top ui-list-active">
+								<li ng-click="detail()">
+									<div class="ui-avatar">
+										<img ng-src="{{merchantSet.HeadImg | imageSrc}}" style="width:100%; height:100%;" />
+									</div>
+									<div class="ui-list-info ui-border-t">
+										<h4 class="ui-nowrap" style="color:black;">{{merchantSet.MName}}</h4>
+										<p class="ui-nowrap">{{merchantSet.Phone}}</p>
+									</div>
+								</li>
+							</ul>
+						</a>
+					</div>
+
+					<div class="demo-item" style="display:none;">
+						<p>&nbsp;</p>
+						<ul class="ui-list ui-list-text ui-list-link ui-border-tb">
+							<li class="ui-border-t">
+								<i class="ui-icon-home ui-icon-f30 c_alizarin"></i>&nbsp;&nbsp;
+								<h4 class="ui-nowrap">常用地址</h4>
+							</li>
+						</ul>
+					</div>
+					<div class="demo-item">
+						<p>&nbsp;</p>
+						<ul class="ui-list ui-list-text ui-list-link ui-border-tb ui-list-active">
+							<li class="ui-border-t code" ng-click="mycord(merchantSet.MName)">
+								<i class="ui-ico-code ui-icon-f24 " style="color:#e67e22;"></i>&nbsp;&nbsp;
+								<h4 class="ui-nowrap">我的二维码</h4>
+							</li>
+							<li class="ui-border-t ">
+								<i class="ui-ico-tel ui-icon-f24 c_nephritis" style="color:#47b27b;"></i>&nbsp;&nbsp;
+								<h4 class="ui-nowrap">商户热线：159-6710-0406</h4>
+								<div class="ui-txt-info ui-txt-tips">
+									<a href="tel:15967100406">点击拨打</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="demo-item">
+						<p>&nbsp;</p>
+						<ul class="ui-list ui-list-text ui-list-link ui-border-tb ui-list-active">
+							<li class="ui-border-t">
+								<i class="ui-ico-info ui-icon-f24 c_carrot" style="color:#e67e22;"></i>&nbsp;&nbsp;
+								<h4 class="ui-nowrap">帮助中心</h4>
+							</li>
+							<li class="ui-border-t ui-user-about">
+								<i class="ui-ico-help ui-icon-f24 c_turquoise " style="color:#47b27b;"></i>&nbsp;&nbsp;
+								<h4 class="ui-nowrap" style="color: black;">关于千柏渡</h4>
+							</li>
+							<script type="text/javascript">
+								$(".ui-user-about").click(function() {
+									location.href = "qbd_intro.html";
+								})
+							</script>
+						</ul>
+					</div>
+					<div class="demo-item">
+						<p>&nbsp;</p>
+						<ul class="ui-list ui-list-text ui-list-link ui-border-tb ui-list-active">
+							<li class="ui-border-t">
+								<i class="ui-ico-set ui-icon-f24 c_belize" style="color:#2C98D4;"></i>&nbsp;&nbsp;
+								<h4 class="ui-nowrap">设置</h4>
+							</li>
+						</ul>
+					</div>
+					<div class="demo-item" style="margin-top: 1rem;">
+						<p>&nbsp;</p>
+						<a href="javascript:;" ng-click="exit()" class="button ui-list ui-tiled ui-border-tb ui-pubilc-exit  ui-info-exit" style="display:block;color:white;width:100%;height:4rem;line-height:4rem;background:#1ABC9C;text-align:center">
+							<h1>退&nbsp;&nbsp;出</h1>
+						</a>
+
+					</div>
+					<div class="demo-item">
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					</div>
+				</section>
+
+				<footer class="ui-footer ui-footer-btn">
+					<ul class="ui-tiled ui-border-t ui-txt-tips">
+						<li class="ui-footer-info">
+							<a href="home.html"><i class="ui-ico-home02" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top: -9px;">首页</span></a>
+						</li>
+						<li class="ui-footer-info ">
+							<a href="order.html"><i class="ui-ico-orderman" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top: -9px;">订单</span></a>
+						</li>
+						<li class="ui-footer-info ">
+							<a href="infromation.html"><i class="ui-ico-message" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top: -9px;">消息</span></a>
+						</li>
+						<li class="ui-footer-info ui-footer-active">
+							<a href="javascript:;"><i class="ui-ico-my" style="font-size:30px;color:#1ABC9C;"></i><span style="margin-top:-9px;">我的</span></a>
+						</li>
+					</ul>
+				</footer>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//判断手机网络
+		if(navigator.onLine == false) {
+			$(".hint_msg div").text("请连接网络")
+			$(".hint_msg").css({
+				"display": "block"
+			});
+			setTimeout(function() {
+				$(".hint_msg").css({
+					"display": "none"
+				});
+			}, 2000)
+		}
+		//按钮点击事件
+		$(".button").on("touchstart", function() {
+			$(".button").css({
+				"background": "#eee",
+				"color": "#1ABC9C"
+			})
+		}).on("touchend", function() {
+			$(".button").css({
+				"background": "#1ABC9C",
+				"color": "white"
+			})
+		});
+		var requestUrl = APIaddress + 'api/Merchants/' + MerchantID;
+		var myModule = angular.module("app", []);
+		myModule.filter('imageSrc', function() {
+			return function(img) {
+				if(img) {
+					img = "http://img.idukou.com/" + img;
+				} else {
+					img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjZEREZGMUE4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjZEREZGMUI4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NkRERkYxODg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NkRERkYxOTg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pr0VlogAAAXbSURBVHja7JvZTjJN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';
+				}
+				return img;
+			};
+		});
+		myModule.controller('userCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$scope.merchantSet = data;
+					//console.log(data);
+					$scope.mycord = function(name) {
+						location.href = "two_code.html";
+					}
+					$scope.detail = function() {
+						location.href = "myaccount.html";
+					}
+					$scope.exit = function() {　　
+						window.location.href = "index.html";
+					}
+				}).error(function(data) {})
+
+			}
+		])
+	</script>
+
+</html>

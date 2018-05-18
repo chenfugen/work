@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/iconfont.min.css" />
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/angular/angular-route.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+	<style type="text/css">
+		body {
+			position: relative;
+		}
+		
+		.ui-dialog-cnt {
+			width:22rem;
+			position: absolute;
+			height:27rem;
+			left: 50%;
+			top: 50%;
+			margin-left: -11rem;
+			margin-top: -13.5rem;
+			background: white;
+			z-index: 999;
+			border-radius: 5px 5px;
+		}
+		#qrCodeIco{
+			position:absolute;
+			left: 50%;
+			top: 50%;
+			margin-left:-15px;
+			margin-top: -15px;
+			z-index:10000;
+			border-radius:5px 5px;
+		}
+	</style>
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="myCtrl">
+			<header class="ui-header ui-header-positive">
+				<a href="home.html" class="ui-href-l" data-transition="slide-left"><i class="ui-icon-prev" style="color: white;"><span>返回</span></i></a>
+				<h2>订单管理</h2>
+			</header>
+			<div class="panel active" id="order">
+				<div class="ui-searchbar-wrap ui-border-b" style="position:fixed;top:64px;width:100%;z-index: 999;">
+					<div class="ui-searchbar ui-border-radius" ng-click="searchbar()">
+						<i class="ui-ico-search"></i> 
+						<div class="ui-searchbar-text">搜索订单</div>
+						<div class="ui-searchbar-input"><input value="" ng-change="search()" type="text" ng-model="searchPhone" placeholder="搜索订单" autocapitalize="off"></div>
+					</div>
+					<button class="ui-searchbar-cancel" ng-click="clearbar()">取消</button>
+				</div>
+					<p style="margin-top: 10px;">&nbsp;</p>
+				<ul class="ui-list ui-border-tb ui-order-t ui-list-active02" ng-if="order.State==4" ng-repeat="order in allOrdersOther | filter:customFilter">
+					<li>
+						<h4><span class="ui-nowrap">预约单</span></h4>
+						<h4 id="orderstate">{{order.CreateDate | data}}</h4></li>
+					<li class="ui-border-t ui-order-conlist ui-order-list" ng-click="msg(order.ID)">
+						<p class="ui-nowrap ui-txt-info">订单号：{{order.OCode}}<br>预约人：{{order.TrueName}}<br>预约时间：{{order.ServiceDate | date:'yyyy年M月d日'}} {{order.ServiceTime}}<br>服务地址：{{order.Address}}</p>
+					</li>
+					<li class="ui-border-t ui-order-padding" style="margin-top:1rem;">
+						<p class="ui-txt-info">服务全款:<i class="ui-text-f16">{{order.OrdersPriceDataObjects | orderPrice:1}}</i>元（订金{{order.OrdersPriceDataObjects | orderPrice:2}}元）</p>
+					</li>
+					<li class="ui-border-t ui-order-padding">
+						<p class="ui-txt-info">折扣优惠:<i class="ui-text-f16">{{order.OrderCouponDataObjects[0].Price}}</i>元</p>
+					</li>
+					<li style="height: 4rem;">
+						<div style="margin-left:10%;margin-top: 1rem;">
+							<a href="javascript:;" ng-click="cord(order)" class="button ui-btn  ui-order-btn" style="color: #5c5c5c;">扫码支付</a>&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="javascript:;" ng-click="pressmoney(order.ID)" class="button ui-btn  ui-order-btn pay" style="color: #5c5c5c;">结账</a>&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="javascript:;" ng-click="remark(order.ID)" class="button ui-btn ui-btn-gray ui-order-btn04">备注</a>
+						</div>
+					</li>
+				</ul>
+				<div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+			</div>
+			<div class="ui-loading-block show">
+				<div class="ui-loading-cnt">
+					<i class="ui-loading-bright"></i>
+					<p>正在加载中...</p>
+				</div>
+			</div>
+
+			<div class="ui-dialog" style="background:rgba(0,0,0,0.2);text-align: center;">
+				<div class="ui-dialog-cnt">
+					<header class="ui-dialog-hd ui-border-b">
+						<p class="ui-nowrap ui-txt-info" style="font-size:1.2rem;"></p>
+					</header>
+					<div class="ui-dialog-bd">
+						<div id="qr_container" style="margin-top:-1rem;"></div>
+						<img id="qrCodeIco" src="img/ico22.png" style="position:absolute;width: 30px; height: 30px;" />
+					</div>
+                      <h6 style="color:#1ABC9C;margin-top:-0.5rem;">扫一扫上面二维码,进行支付</h6>                      
+				</div>
+			</div>
+
+			<div class="ui-poptips ui-poptips-success hint_msg" style="display: none;">
+				<div class="ui-poptips-cnt">您的信息已发送，请耐心等候</div>
+			</div>
+
+			<footer class="ui-footer ui-footer-btn">
+				<ul class="ui-tiled ui-border-t ui-txt-tips">
+					<li class="ui-footer-info">
+						<a href="order_one.html"><i class="ui-ico-dengdai" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top:-9px;">待接单</span></a>
+					</li>
+					<li class="ui-footer-info ">
+						<a href="order_two.html"><i class="ui-ico-daijieshou" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top:-9px;">待下单</span></a>
+					</li>
+					<li class="ui-footer-info ">
+						<a href="order.html"><i class="ui-ico-proceed" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top:-9px;">执行中</span></a>
+					</li>
+					<li class="ui-footer-info ">
+						<a href="javascript:;"><i class="ui-ico-await" style="font-size:30px;color:#1ABC9C;"></i><span style="margin-top:-9px;">待付款</span></a>
+					</li>
+					<li class="ui-footer-info ">
+						<a href="order_four.html"><i class="ui-ico-orderOk" style="font-size:30px;"></i><span style="color:#5c5c5c;margin-top:-9px;">已完成</span></a>
+					</li>
+				</ul>
+			</footer>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var requestUrl = APIaddress + "api/Orders/GetOrederListPaySum/" + MerchantID;
+		var myModule = angular.module("app", []);
+		myModule.filter('data', function() {
+			return function(type) {
+				type = type.split("T")[0] + "/" + type.split("T")[1].split(".")[0];
+				return type;
+			};
+		});
+		myModule.filter('orderPrice', function() {
+			return function(orderPrice, ptype) {
+				if(orderPrice) {
+					for(var i = 0; i < orderPrice.length; i++) {
+						if(orderPrice[i].PType == ptype) {
+							return orderPrice[i].Price;
+						}
+					}
+				}
+			};
+		});
+		myModule.controller('myCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$(".ui-loading-block").hide();
+					if(data == null || data == "") {
+						$("#msg-list").html("<div class='ui-center'>还没有任何消息！</div>")
+					} else {
+						$scope.allOrdersOther = data;
+						$scope.search = function() {
+							if($scope.searchPhone) {
+								$scope.filter = 'linkPhone';
+								$scope.searchtype = $scope.searchPhone;
+							}
+						}
+						$scope.customFilter = function(order) {
+							switch($scope.filter) {
+								case 'linkPhone':
+									if(typeof order.Phone == "string") {
+										return !order.Phone.indexOf($scope.searchPhone);
+									} else {
+										return false;
+									};
+								default:
+									return true;
+							}
+						};
+
+						$scope.searchbar = function() {
+							$('.ui-searchbar-wrap').addClass('focus');
+							$('.ui-searchbar-input input').focus();
+						}
+
+						$scope.clearbar = function() {
+							$scope.filter = '';
+							$scope.searchtype = '';
+							$scope.searchPhone = '';
+							$('.ui-searchbar-wrap').removeClass('focus');
+						}
+
+						$scope.cord = function(order) { //生成二维码
+							$(".ui-dialog header p").text("订单号:" + order.OCode)
+							$(".ui-dialog").show();			
+							$('#qr_container').qrcode({
+								render: "canvas",
+								height: 200,
+								width: 200,
+								correctLevel: 0,
+								text:"http://m.idukou.com/2017/order_detail.html?id="+order.OCode
+							});
+						}
+						$(".ui-dialog").click(function(){	
+						    $('#qr_container').empty();
+							$(".ui-dialog").hide();
+						})
+						$scope.pressmoney = function(id) { //结账			 
+							$http.post(APIaddress + 'api/Orders/PressMoney/' + id + '?' + Math.random())
+								.success(function() {
+									$(".hint_msg div").text("您的信息已发送，请耐心等候")
+									$(".hint_msg").css({
+										"display": "block"
+									});
+									setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000)
+								}).error(function(data) {
+									$(".hint_msg div").text("短信发送失败，抱歉")
+									$(".hint_msg").css({
+										"display": "block"
+									});
+									setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000)
+								})
+							$('.pay').unbind("click");
+						}
+						$scope.remark = function(id) { //备注
+							//console.log(id)
+							window.location.href = "remark.html?id=" + id;
+						}
+						$scope.msg = function(id) { //获取详细信息
+							window.location.href = "order_msg.html?id=" + id;							
+						};
+					}
+
+				}).error(function(data) {
+					console.log("错误......");
+				});
+			}
+		]);
+	</script>
+
+</html>
