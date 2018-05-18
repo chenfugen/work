@@ -1,0 +1,70 @@
+﻿<div class="weui-tab" ng-cloak>
+   	<div class="fix-top">	
+       	<div class="weui-flex bg-white">
+			<div  class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="location='#/user'" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">历史订单</div>
+			</div>
+		</div>
+	</div>
+
+
+    <div class="weui-tab__bd" style="color:#999999;padding-top: 40px;">
+        <div ng-if="hasOrders">
+            <div class="weui-form-preview" ng-repeat="order in orders">
+                <div class="weui-panel__ft weui-cells" style="margin-top: 10px;">
+                    <a href="javascript:;" ng-click="gotoPage(order,'historyDetail')" class="weui-cell weui-cell_access weui-cell_link color-darkgray">
+                        <div class="weui-cell__bd font-16 "> {{order.funeralDir.MName}}</div>
+                        <span class="weui-cell__ft font-13 ">{{order.Tip}}</span><!---->
+                    </a>
+                </div>
+                <!--<div class="weui-cells">
+                    <div class="weui-cell">
+                        <div class="weui-cell__bd">
+                            <p>钟星礼仪师</p>
+                        </div>
+                        <div class="weui-cell__ft">2016-12-12</div>
+                    </div>
+                </div>-->
+
+                <!--<div class="weui-form-preview__hd">
+                    <label class="weui-form-preview__label">钟星礼仪师</label>
+                    <span class=" ">2016-12-12</span>
+                </div>-->
+                <div class="weui-form-preview__bd" style="line-height: 1.6;">
+                    <a href="javascript:;" ng-click="gotoPage(order,'historyDetail')" class="color-darkgray">
+
+                        <div class="weui-form-preview__item">
+                           <label class="weui-form-preview__label">订单号</label>
+                            <span class="weui-form-preview__value text-overflow-1">{{order.OCode}}</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">预约人</label>
+                            <span class="weui-form-preview__value">{{order.TrueName}} / {{order.Phone}}</span>
+                        </div>
+
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">下单时间</label>
+                            <span class="weui-form-preview__value">{{order.CreateDate}}</span>
+                        </div>
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">服务地址</label>
+                            <span class="weui-form-preview__value">{{order.Address}}</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="weui-form-preview__ft" style="line-height: 40px;">
+                   <!-- <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:;" ng-click="deleteOrder(order)">删除订单</a>-->
+                    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:;" style="color:#1EBD9E;" ng-click="gotoPage(order,'historyDetail')">查看订单</a>
+<!--                    <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ng-click="gotoPage(order,'historyEvaluate')" ng-if="order.State==6">去评价</button>-->
+                  <!--  <button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ng-click="gotoPage(order,'historyEvaluate')" ng-if="order.State==7">追加评价</button>-->
+                    <!--<button type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary" ng-click="gotoPage(order,'historyEvaluation')" ng-if="order.State==7">查看评价</button>-->
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="!hasOrders" id="tip" style="padding: 20px;font-size: 14px;">数据加载中……</div>
+    </div>
+</div>
+

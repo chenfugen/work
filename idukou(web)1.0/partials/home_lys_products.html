@@ -1,0 +1,142 @@
+<div class="weui-tab" ng-cloak>
+   <div id="container"></div>
+    <div class="fix-top">
+        <div class="weui-flex bg-white">
+            <a href="javascipt:;" onclick="history.back(-1)" class="color-darkgray" style="margin: 8px 0px 8px 10px;"><div><i class="ui-ico-back"></i> 返回 </div></a>
+        </div>
+        <div class="weui-cells clear-margin bg-green lys-head-bg" style="height: 45px;min-height: 50px;">
+            <div class="weui-cell" style="padding: 7px 15px;">
+                <div class="weui-cell__hd">
+                        <div style="width:30px;height:30px;margin: 0 auto;-webkit-border-radius:50px;border: 3px solid rgba(255,255,255,0.5);overflow: hidden;margin-right: 8px;">
+                            <div class="bg" style="background-image:url({{merchant.HeadImg | imageSrc}});"></div>
+                        </div>
+                </div>
+                <!--<div class="weui-cell__hd"><img src="{{merchant.HeadImg | imageSrc}}" width="30px" height="30px" style="-webkit-border-radius: 75px;border: 3px solid rgba(255,255,255,0.5);"></div>-->
+                <div class="weui-cell__bd">
+                    <span style="line-height:0.8;vertical-align:top;font-size:12px;">{{merchant.MName}}</span>
+                    <p style="letter-spacing:-1px;line-height:0.01;margin-top: -5px;" class="">
+                        <i ng-repeat="i in merchant.Fullstar | range" class="ui-ico-star color-red font-11 "></i><i ng-repeat="i in merchant.Halfstar | range " class="ui-ico-halfstar color-red font-11 "></i><i ng-repeat="i in merchant.Emptystar | range " class="ui-ico-grade color-red font-11 "></i>
+                    </p>
+                </div>
+                <div class="weui-cell__ft"  style="max-width: 64%"><span class="font-11 text-overflow-1 color-white">{{merchant.BusName}}</span></div>
+            </div>
+        </div>
+
+        <!--<div class="weui-panel weui-panel_access  lys-head-bg clear-margin" style="height: 45px;min-height: 50px;">
+            <div class="weui-media-box weui-media-box_appmsg " style="text-align: center;padding: 0 10px;">
+                <div style="width:20%;">
+                    <img class="" src="{{merchant.HeadImg | imageSrc}}" width="30px" height="30px" style="-webkit-border-radius: 75px;border: 3px solid rgba(255,255,255,0.5);">
+                </div>
+                <div class=" weui-media-box__bd color-darkgray" style="text-align: left;" >
+                    <span style=line-height:2.4;">{{merchant.MName}}</span>
+                    <span class="float_r  font-11 text-overflow-1 color-white" style="line-height:4;width:65%;text-align: right;">{{merchant.BusName}}</span>
+                    <div style="letter-spacing:-2px;line-height:0.1">
+                        <i ng-repeat="i in merchant.Fullstar | range" class="ui-ico-star color-red font-11 "></i>
+                        <i ng-repeat="i in merchant.Halfstar | range " class="ui-ico-halfstar color-red font-11 "></i>
+                        <i ng-repeat="i in merchant.Emptystar | range " class="ui-ico-grade color-red font-11 "></i>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+    <div class="weui-tab__bd color-lightgray" style="padding:90px 0 0px;">
+        <div ng-if="data.hasMenu" class="weui-flex bg-white" >
+            <div id="listLeft" class="color-white bg-lightgray listmenu" style="width:100px;">
+                <ul class="listview-left">
+                    <li ng-click="selectService($index,$event)"  ng-repeat="service in services" >
+                       <div style="width:100%;height:23px;" data-service-index="{{$index}}" ng-class="{true : 'listview-on'}[data.selectedServiceID == $index]">
+                       	  {{service.TName}}
+                       </div>
+                      
+                    </li>
+                </ul>
+            </div>
+            <div id="listRight" class="weui-flex__item listmenu" style="height:0px;">
+                <div class="" id="{{service.ID}}" data-service-index="{{$index}}" ng-repeat="service in services" >
+                    <div class="color-darkgray listview-right-pagetitle" ><i class="ui-ico-supplies color-darkgray"></i> {{service.TName}}</div>
+                    <div ng-if="service.MerchantDataObject.noData">
+                        <!--<ul class="listview-right">
+                            <li class="weui-media-box__desc  color-lightgray listview-right-nodata" style="padding:10px 20px;">暂无数据</li>
+                        </ul>-->
+                        <p class="listview-right weui-media-box__desc  color-lightgray listview-right-nodata"  style="padding:10px 20px;">暂无数据</p>
+                    </div>
+                    <div ng-if="!service.MerchantDataObject.noData" class="cc">
+                        <a href="javascript:;" ng-repeat="merchantGoods in service.MerchantDataObject" ng-click="learnmore(merchantGoods,service.TName)"  style="padding: 10px 15px 0 5px;" class="listview-right weui-media-box weui-media-box_appmsg listview-right-hasdata">
+                            <div class="weui-media-box__hd" style="line-height: 0;position: absolute;top:15px;overflow: hidden;">
+                                <div style="background-image:url({{merchantGoods.MGImg | imageSrc}});width:50px;height:50px;background-repeat: no-repeat;-webkit-background-size:100%;"></div>
+                            </div>
+                            <div class="weui-media-box__bd" style="padding-left:60px;min-height: 60px;">
+                                <div class="weui-media-box__title font-16 color-darkgray" style="font-size:14px;">{{merchantGoods.MGName}}</div>
+                             <p class="weui-media-box__desc  color-lightgray text-overflow-1 " >&nbsp;</p><!--style="display:block; "-->
+                                <div class="text-overflow-1 color-red ">
+                                                                   ￥{{merchantGoods.MGPrice}}
+                                </div>
+                            </div>
+
+                            <!--<div class="" style="    position: relative;display:block;padding-left:60px;min-height: 60px;">
+                                    <p  class=" font-16 color-darkgray text-overflow-1 ">{{merchantGoods.MGName}}</p>
+                                    <p  class="weui-media-box__desc  color-lightgray text-overflow-2">{{merchantGoods.MGRemark }}</p>
+                                    <p  class="text-overflow-1 color-red ">￥{{merchantGoods.MGPrice}}</p>
+                            </div>
+                            <div class="weui-media-box__hd" style="line-height: 0;position: absolute;top:15px;overflow: hidden;">
+                                <div style="background-image:url({{merchantGoods.MGImgBackUp}});width:50px;height:50px;background-repeat: no-repeat;-webkit-background-size: cover;"></div>
+                            </div>-->
+                            <!--<div style="background-image:url();width:50px;height:50px;background-repeat: no-repeat;-webkit-background-size: cover;"></div>-->
+                            <!--<div style="display:inline-block;height: 100%;"><img width="50px" height="50px" src="{{merchantGoods.MGImgBackUp}}"></div>-->
+
+                        </a>
+
+                        <!--<ul class="listview-right" ng-repeat="merchantGoods in service.MerchantDataObject">
+                            <li class="listview-right-hasdata" >
+                                <a href="javascript:;" ng-click="learnmore(merchantGoods,service.TName)" class="weui-media-box weui-media-box_appmsg" style="padding: 10px 15px 0 5px;">
+                                    <div class="weui-media-box__hd" style="line-height: 0;position: absolute;top:15px;overflow: hidden;">
+                                        <div style="background-image:url({{merchantGoods.MGImgBackUp}});width:50px;height:50px;background-repeat: no-repeat;-webkit-background-size: cover;"></div>
+                                    </div>&lt;!&ndash;merchantGoods.MGImg | imageSrc&ndash;&gt;
+                                    <div class="weui-media-box__bd" style="padding-left:60px;min-height: 60px;">
+                                        <div class="weui-media-box__title font-16">{{merchantGoods.MGName}}</div>
+                                        <p class="weui-media-box__desc  color-lightgray" >{{merchantGoods.MGRemark }}</p>&lt;!&ndash;style="display:block; "&ndash;&gt;
+                                        <div class="text-overflow-1 color-red ">
+                                            ￥{{merchantGoods.MGPrice}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>-->
+                    </div>
+                </div>
+                <div id="box" style="width:100%;height:0px;"></div>
+            </div>
+
+        </div>
+        <div ng-if="!data.hasMenu">
+            <div  style="text-align: center;color:#666666;margin-top:20px;overflow: hidden;">{{data.tip}}</div>
+        </div>
+    </div>
+
+    <div class="weui-tabbar fix-bottom">
+        <a href="#/lysinfo/{{merchant.ID}}"   class="weui-tabbar__item clear-padding">
+            <div class="weui-tabbar__icon">
+                <i class="ui-ico-orderman"></i>
+            </div>
+            <p class="weui-tabbar__label">介绍</p>
+        </a>
+        <a href="javascript:;"  class="weui-tabbar__item weui-bar__item--on clear-padding">
+            <div class="weui-tabbar__icon">
+                <i class="ui-ico-batch "></i>
+            </div>
+            <p class="weui-tabbar__label">菜单</p>
+        </a>
+       <a href="#/evaluations/{{merchant.ID}}" class="weui-tabbar__item clear-padding">
+			<!--{{merchant.ID}}-->
+			<div class="weui-tabbar__icon">
+				<i class="ui-ico-messagerecord"></i>
+			</div>
+			<p class="weui-tabbar__label">评论</p>
+		</a>
+		<a href="javascript:;" ng-click="reserve()" class="bg-green color-white clear-padding" style="width:35%;font-size: 20px;text-align: center;padding-top: 8px;">
+			立即预约
+		</a>
+    </div>
+</div>
+
+

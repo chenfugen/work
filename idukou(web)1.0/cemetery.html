@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购墓服务</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="icon" href="img/favicon.ico" mce_href="img/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="css/css/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="css/weui.min-1.1.1.css"/>
+		<link rel="stylesheet" type="text/css" href="css/jquery-weui-1.0.1.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/lm.css"/>
+		<link rel="stylesheet" href="css/css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/css/style/stylesheets/cemetery.css" />
+		<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+		<script src="js/jquery-weui-1.0.1.js"></script>
+		<script src="js/angular.min.js"></script>
+		<script src="js/zepto.min.js"></script>
+		<script src="js/frozen.js"></script>
+		<script src="js/cemetery.js"></script>
+		<script type="text/javascript" src="js/baiduMap.js"></script>
+	</head>
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="cemeteryCtrl">
+			<header class="ui-header ui-header-positive ui-pulic-header" style="height:44px;background:white;">
+				<a href="index.html" style="background:white;"><i class="ui-icon-return ui-header" style="color:#bbb;"><span style="font-size:14px;">返回</span></i></a>
+				<div class="ui-searchbar-wrap " style="position: absolute;width:82%;z-index:9999;right:0px;background:white;border: none;">
+					<div class="ui-searchbar ui-border-radius" ng-click="searchbar()">
+						<i class="iconfont icon-sousuo-sousuo" style="font-size:12px;color:#bbb">&nbsp;</i>
+						<div class="ui-searchbar-text">搜索陵园</div>
+						<div class="ui-searchbar-input"><input value="" ng-change="search()" type="text" ng-model="searchName" placeholder="搜索客户" autocapitalize="off"></div>
+					</div>
+					<button class="ui-searchbar-cancel" style="color:#666;" ng-click="clearbar()">取消</button>
+				</div>
+			</header>
+			<section class="ui-container" id="cemetery_list" >
+				<ul style="border-top:1px solid #eee;">
+					<li class="cemetery_msg" ng-repeat="cemetery in cemeteryList | filter:customFilter">
+						<div style="width:100%">
+							<div class="ui-text-left  imgbox">
+								<span style="background-image:url({{cemetery.CemImg | imageSrc}});border-radius:3px 3px;"></span>
+							</div>
+							<div class="ui-text-right cemetery_msg">
+								<div style="margin-left:10px;">
+									<h3 style="color:#666;">{{cemetery.CemName}}</h3>
+									<p>均价:<span style="color:#fa7878;">{{cemetery.Average}}元</span></p>
+								<p><span class="diatance">&nbsp;距离{{cemetery.distance}}公里&nbsp;</span>&nbsp;&nbsp;</p>
+								</div>
+							</div>
+						</div>
+						<div class="address">
+							<div class="ui-text-left ui-whitespace" ng-click="getMap(cemetery.ID)">
+								<i class="iconfont icon-dingwei" style="color:#1EBD9E;"></i><span style="font-size:12px;">&nbsp;{{cemetery.City+cemetery.CemAddr}}</span>
+							</div>
+							<div class="ui-text-right">
+								<a href="tel:{{cemetery.CemeTel}}"><i class="iconfont icon-dianhua" style="color:white;font-size:12px;">&nbsp;电话咨询</i></a>
+							</div>
+						</div>
+					</li>
+				</ul>	
+			</section>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//根据经纬度计算距离
+		function Rad(d) {
+			return d * Math.PI / 180.0; //经纬度转换成三角函数中度分表形式。
+		}
+		//计算距离，参数分别为第一点的纬度，经度；第二点的纬度，经度
+		function GetDistance(lat1, lng1, lat2, lng2) {
+			var radLat1 = Rad(lat1);
+			var radLat2 = Rad(lat2);
+			var a = radLat1 - radLat2;
+			var b = Rad(lng1) - Rad(lng2);
+			var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+			s = s * 6378.137; // EARTH_RADIUS;
+			s = Math.round(s * 10000) / 10000; //输出为公里
+			//s=s.toFixed(4);
+			return s;
+		}
+		//搜索框
+		$('.ui-searchbar').click(function() {
+			$('.ui-searchbar-wrap').addClass('focus');
+			$('.ui-searchbar-input input').focus();
+		});
+		$('.ui-searchbar-cancel').click(function() {
+			$('.ui-searchbar-wrap').removeClass('focus');
+		});
+         var positionX=sessionStorage.getItem("positionX");
+		 var positionY=sessionStorage.getItem("positionY");
+		 var city=sessionStorage.getItem("city");
+		 $.showLoading("加载中", true)
+		var myModule = angular.module("app", []);
+		myModule.filter('imageSrc', function() {
+			return function(img) {
+				if(img) {
+					img = IMGaddress + img;
+				} else {
+					img = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjZEREZGMUE4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjZEREZGMUI4ODQ5MTFFNTlBQ0FDRDE1QzM0NzM4NzEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2NkRERkYxODg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2NkRERkYxOTg4NDkxMUU1OUFDQUNEMTVDMzQ3Mzg3MSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pr0VlogAAAXbSURBVHja7JvZTjJN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';
+				}
+				return img;
+			};
+		});
+		myModule.controller('cemeteryCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				        $("#city").text(city);			        
+				        var requestUrl = APIaddress + 'api/Cemeterys?city='+city;			        					
+						$http({
+							method: 'GET',
+							url: requestUrl
+						}).success(function(data) {
+							$.hideLoading();	
+							if(data == null || data == "") {
+								$("#cemetery_list").html("<div class='ui-center'>暂无数据！</div>")
+							} else {
+								for(var i = 0; i < data.length; i++) {
+								data[i].distance =GetDistance(positionX,positionY,data[i].X,data[i].Y).toFixed(1);
+									if(data[i].CemAddr == null) {
+										data[i].CemAddr = '';
+									}
+									if(data[i].Average == 0) {
+										data[i].Average = '-- --';
+									}
+								}
+								$scope.cemeteryList = data;								
+								//console.log(data)
+								$scope.search = function() {
+									if($scope.searchName) {
+										$scope.filter = 'linkname';
+										$scope.searchtype = $scope.searchName;
+									}
+								}
+								$scope.customFilter = function(cemetery) {
+									switch($scope.filter) {
+										case 'linkname':
+											if(typeof cemetery.CemName == "string") {
+												var str;
+												if(cemetery.CemName.indexOf($scope.searchName) >= 0) {
+													str = true;
+												} else {
+													str = false;
+												}
+												return str;
+											} else {
+												return false;
+											};
+										default:
+											return true;
+									}
+								};
+								$scope.searchbar = function() {
+									$('.ui-searchbar-wrap').addClass('focus');
+									$('.ui-searchbar-input input').focus();
+								}
+								$scope.clearbar = function() {
+									$scope.filter = '';
+									$scope.searchtype = '';
+									$scope.searchName = '';
+									$('.ui-searchbar-wrap').removeClass('focus');
+								}
+
+								$scope.getMap = function(id) {
+									window.location.href = "map.html?id=" + id;
+								}
+							}
+						}).error(function(data) {
+							console.log("错误......");
+						});
+					}]);
+	</script>
+
+</html>

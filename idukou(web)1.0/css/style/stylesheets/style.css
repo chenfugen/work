@@ -1,0 +1,254 @@
+@charset "UTF-8";
+@media screen and (min-width: 320px) {
+  /* line 6, ../sass/style.scss */
+  html {
+    font-size: 10px !important;
+  }
+}
+@media screen and (min-width: 360px) {
+  /* line 11, ../sass/style.scss */
+  html {
+    font-size: 11.25px !important;
+  }
+}
+@media screen and (min-width: 400px) {
+  /* line 16, ../sass/style.scss */
+  html {
+    font-size: 12.5px !important;
+  }
+}
+@media only screen and (min-width: 481px) {
+  /* line 21, ../sass/style.scss */
+  html {
+    font-size: 94% !important;
+  }
+}
+@media only screen and (min-width: 561px) {
+  /* line 26, ../sass/style.scss */
+  html {
+    font-size: 109% !important;
+  }
+}
+@media screen and (min-width: 640px) {
+  /* line 31, ../sass/style.scss */
+  html {
+    font-size: 20px !important;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* line 36, ../sass/style.scss */
+  html {
+    font-size: 22px !important;
+  }
+}
+/* line 41, ../sass/style.scss */
+*,
+*:after,
+*:before {
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  margin: 0;
+  padding: 0;
+  -ms-touch-action: pan-y;
+}
+
+/* line 61, ../sass/style.scss */
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #eee;
+  overflow-y: auto;
+  color: #7f7f7f;
+  -webkit-text-size-adjust: none;
+}
+
+/* line 71, ../sass/style.scss */
+.ng-cloak {
+  display: none;
+}
+
+/* line 74, ../sass/style.scss */
+#header {
+  position: fixed;
+  width: 100%;
+  height: 40px;
+  z-index: 999;
+  background: white;
+  text-align: center;
+  line-height: 40px;
+}
+/* line 82, ../sass/style.scss */
+#header h2 {
+  position: absolute;
+  left: 50%;
+  margin-left: -34px;
+}
+
+/* line 88, ../sass/style.scss */
+#store_msg {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+/* line 94, ../sass/style.scss */
+#store_msg .imgbox {
+  width: 100%;
+}
+/* line 96, ../sass/style.scss */
+#store_msg .imgbox span {
+  display: block;
+  margin-left: 10%;
+  width: 80%;
+  height: 11rem;
+  background-size: 100% 100%;
+}
+/* line 104, ../sass/style.scss */
+#store_msg .store_intro {
+  width: 100%;
+  text-align: center;
+}
+/* line 108, ../sass/style.scss */
+#store_msg .store_intro h2 {
+  font-size: 1.5rem;
+  color: #545454;
+  margin-top: -10px;
+}
+/* line 113, ../sass/style.scss */
+#store_msg .store_intro p {
+  width: 95%;
+  text-align: left;
+  background: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+/* line 125, ../sass/style.scss */
+#store_msg .store_intro .down {
+  width: 100%;
+  text-align: center;
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  /* IE 9 */
+  -moz-transform: rotate(180deg);
+  /* Firefox */
+  -webkit-transform: rotate(180deg);
+  /* Safari 和 Chrome */
+  -o-transform: rotate(180deg);
+  /* Opera */
+  background: white;
+}
+
+/* line 141, ../sass/style.scss */
+#store_merchant {
+  width: 100%;
+  background: #eee;
+  margin-top: 2px;
+}
+/* line 145, ../sass/style.scss */
+#store_merchant .merchant_nav {
+  width: 100%;
+  background: white;
+  height: 40px;
+  padding-top: 7px;
+}
+/* line 150, ../sass/style.scss */
+#store_merchant .merchant_nav span {
+  margin-left: 20%;
+  display: block;
+  width: 60%;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  border-top: 1px dashed #ccc;
+  border-bottom: 1px dashed #ccc;
+}
+/* line 161, ../sass/style.scss */
+#store_merchant .merchantList {
+  width: 100%;
+  height: 130px;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+/* line 166, ../sass/style.scss */
+#store_merchant .merchantList .imgbox {
+  width: 60px;
+  height: 60px;
+  border-radius: 6rem 6rem;
+  overflow: hidden;
+  margin-top: 15px;
+  background-color: #cccccc;
+}
+/* line 173, ../sass/style.scss */
+#store_merchant .merchantList .imgbox span {
+  display: block;
+  margin: 0px;
+  width: 100%;
+  height: 6rem;
+  background-size: 100% 6rem;
+  background-repeat: no-repeat;
+}
+/* line 182, ../sass/style.scss */
+#store_merchant .merchantList .merchant_msg {
+  width: 77%;
+  margin-top: 15px;
+  text-align: left;
+}
+/* line 186, ../sass/style.scss */
+#store_merchant .merchantList .merchant_msg h3 {
+  color: #000000;
+  margin-left: 0px;
+}
+/* line 190, ../sass/style.scss */
+#store_merchant .merchantList .merchant_msg h2 {
+  float: right;
+  font-size: 13px;
+}
+/* line 193, ../sass/style.scss */
+#store_merchant .merchantList .merchant_msg h2 e {
+  font-weight: bold;
+  font-style: italic;
+}
+/* line 198, ../sass/style.scss */
+#store_merchant .merchantList .merchant_msg p {
+  font-size: 12px;
+  margin-top: 0.7rem;
+}
+/* line 204, ../sass/style.scss */
+#store_merchant .merchantList .serveRap {
+  width: 100%;
+  float: left;
+  margin-top: 15px;
+  border-top: 1px solid #eeeeee;
+}
+/* line 209, ../sass/style.scss */
+#store_merchant .merchantList .serveRap ul {
+  margin-left: 10%;
+}
+/* line 211, ../sass/style.scss */
+#store_merchant .merchantList .serveRap ul li {
+  float: left;
+  width: 33%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 13px;
+  color: #ccc;
+}
+/* line 219, ../sass/style.scss */
+#store_merchant .merchantList .serveRap ul li strong {
+  color: #1abc9c;
+}
+
+/* line 228, ../sass/style.scss */
+#riteMsg {
+  margin: 42px 20px 0px 0px;
+  background: white;
+}

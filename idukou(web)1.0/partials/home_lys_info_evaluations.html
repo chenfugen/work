@@ -1,0 +1,71 @@
+<div class="weui-tab" ng-cloak>
+	<div id="container"></div>
+	<div class="fix-top" style="border-bottom:1px solid #eee;">
+		<div class="weui-flex bg-white">
+			<div class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="history.back(-1)" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">全部评价</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="weui-tab__bd color-lightgray" style="padding-top: 40px;">
+		<div class="weui-loadmore" ng-if="loading">
+			<i class="weui-loading"></i>
+			<span class="weui-loadmore__tips">正在加载</span>
+		</div>
+		<!-- <div class="weui-panel weui-panel_access  lys-head-bg " style="height: 45px;min-height: 40px;">
+            <div class="weui-cell">
+                <div class="weui-cell__bd color-white b">总体服务评价( {{comments.contentCount}} )</div>
+                <div class="weui-cell__ft"><i ng-repeat="i in comments.TotalCount | range" class="ui-ico-star color-red"></i><i ng-repeat="i in (5-comments.TotalCount) | range" class="ui-ico-grade color-red"></i></div>
+            </div>
+        </div>-->
+		<!--<div class="bg-white" style="width:100%;height:40px;line-height: 40px;color: #bbb;">
+            <span  ng-click="myfilter()" style="width:24%;text-align:center;display:inline-block;font-size:15px;" ng-class="{true:'b'}[filterStyle =='']">全部 ({{comments.GoodCount+comments.NormalCount+comments.BadCount}})</span>
+            <span  ng-click="myfilter('good')" style="width:23%;text-align:center;display:inline-block;font-size:15px;" ng-class="{true : 'b'}[filterStyle == 'good']">满意 ({{comments.GoodCount}})</span>
+            <span  ng-click="myfilter('normal')" style="width:23%;text-align:center;display:inline-block;font-size:15px;" ng-class="{true : 'b'}[filterStyle == 'normal']">一般 ({{comments.NormalCount}})</span>
+            <span  ng-click="myfilter('bad')" style="width:25%;text-align:center;display:inline-block;font-size:15px;" ng-class="{true : 'b'}[filterStyle == 'bad']">不满意 ({{comments.BadCount}})</span>
+        </div>-->
+		<div class="weui-panel weui-panel_access weui-panel-space">
+			<div class="weui-panel__bd">
+				<div class="weui-media-box weui-media-box_appmsg" ng-repeat="item in comments.content | filter:commentFilter">
+					<!---->
+					<div class="weui-media-box__bd">
+						<span class="weui-media-box__title color-darkgray">{{item.UName | hideName}}&nbsp;&nbsp;<i ng-repeat="i in item.TotalScore | range" class="ui-ico-star color-red"></i><i ng-repeat="i in 5-item.TotalScore | ranges" class="ui-ico-grade color-red"></i></span>
+						<p class="weui-media-box__desc clear color-darkgray" style="font-size:14px;padding-left:6px;">{{item.PQContent | makeComment}}</p>
+						<span class="float_r color-darkgray font-11" style="margin-top:0px;">{{item.CreateDate}}</span>
+						<!--<div class="bg-lightgray color-darkgray font-13" style="width:100%;margin-top: 8px;padding: 6px 0;" ng-if="item.Reply"><span style="padding: 6px;">礼仪师回复：{{item.Reply}}</span></div>-->
+					</div>
+				</div>
+			</div>			
+		</div>
+		<div class="weui-loadmore weui-loadmore_line" ng-if="record">
+				<span class="weui-loadmore__tips">暂无数据</span>
+		</div>
+		<br />
+	</div>
+	<div class="weui-tabbar fix-bottom">
+		<a href="#/lysinfo/{{merchant.ID}}" class="weui-tabbar__item clear-padding">
+			<div class="weui-tabbar__icon">
+				<i class="ui-ico-orderman"></i>
+			</div>
+			<p class="weui-tabbar__label">介绍</p>
+		</a>
+		<a href="#/lysproducts/{{merchant.ID}}" class="weui-tabbar__item  clear-padding">
+			<div class="weui-tabbar__icon">
+				<i class="ui-ico-batch "></i>
+			</div>
+			<p class="weui-tabbar__label">菜单</p>
+		</a>
+		<a href="#/evaluations/{{merchant.ID}}" class="weui-tabbar__item weui-bar__item--on clear-padding">
+			<!--{{merchant.ID}}-->
+			<div class="weui-tabbar__icon">
+				<i class="ui-ico-messagerecord"></i>
+			</div>
+			<p class="weui-tabbar__label">评论</p>
+		</a>
+		<a href="javascript:;" ng-click="reserve()" class="bg-green color-white clear-padding" style="width:35%;font-size: 20px;text-align: center;padding-top: 8px;">
+			立即预约
+		</a>
+	</div>
+</div>

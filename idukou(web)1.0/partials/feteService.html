@@ -1,0 +1,30 @@
+<div class="weui-tab" ng-cloak class="ng-cloak" id="feteService">
+	<div class="fix-top">
+		<div class="weui-flex bg-white">
+			<div class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="location='#/'" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">代祭服务</div>
+			</div>
+		</div>
+	</div>
+	<div id="fetes"></div>
+	<ul style="width:100%;margin-bottom:3px;position: relative;margin-top:42px;" id="fetelist">
+		<li style="display:inline-block;width:45%;height:195px;background:white;padding:2.5% 2.5% 2.5% 2.5%;margin-top:3px;" ng-repeat="fete in feteList">
+			<div style="width:100%;height:130px;border-radius:3px 3px;overflow: hidden;">
+				<span style="background-image:url({{fete.Img | imageSrc}});width:100%;height:130px;display: block;background-size:100% 130px"></span>
+			</div>
+			<p style="font-size:14px;margin-top:2px;color:#333;">{{fete.SName}}</p>
+			<p style="font-size:12px;margin-top:2px;width:100%;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{fete.VendorName}}</p>
+			<p style="font-size:12px;margin-top:2px;" ng-if="fete.Price!=0">价格:<span style="color:#fa7878;">&nbsp;{{fete.Price}}元</span></p>
+			<p style="font-size:12px;margin-top:2px;" ng-if="fete.Price==0">价格:<span style="color:#fa7878;">&nbsp;--元</span></p>
+			<div style="position:absolute;width:1%;height:100%;background:#eee;top:0px;left:49.5%;"></div>
+		</li>
+	</ul>
+	<div class="weui-loadmore" ng-if="loading">
+		<i class="weui-loading"></i>
+		<span class="weui-loadmore__tips">正在加载</span>
+	</div>
+	<div class="weui-loadmore weui-loadmore_line" ng-if="bottom">
+		<span class="weui-loadmore__tips">到底啦</span>
+	</div>
+</div>

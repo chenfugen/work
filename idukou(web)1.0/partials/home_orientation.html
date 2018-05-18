@@ -1,0 +1,35 @@
+﻿<div id="container"></div>
+<div class="weui-tab" ng-cloak class="ng-cloak">
+    <div class="fix-top">
+        <div class="weui-flex bg-white">
+            <a href="#/home" class="color-darkgray" style="padding: 8px 0px 8px 10px;"><div><i class="ui-ico-back"></i> 返回 </div></a>
+        </div>
+    </div>
+    <div class="weui-tab__bd " style="color:#999999;padding-top: 40px;">
+        <div class="weui-cell  clear-border font-13" id="city" ></div>                          
+        <div class="weui-flex" style="text-align: center;">
+            <div class="weui-flex__item bg-lightgray color-red " ng-if="isLogin" style="padding: 5px 0px;border-right: solid 1px #eeeeee;">
+                <a ng-click="getUserAdd()" ><i class="ui-ico-location font-20 color-red"></i>&nbsp;&nbsp;我的地址</a>
+            </div>
+            <div class="weui-flex__item bg-lightgray" style="color:#2980b9;padding: 5px 0px;">
+                <a ng-click="getCurrentPosition()"><i class="ui-ico-location font-20" style="color:#2980b9"></i>&nbsp;&nbsp;定位当前位置</a>
+            </div>
+        </div>
+        <div class="weui-cells clear-margin font-13" style="">
+            <div class="weui-cell" ng-click="modifyAdd()" ng-if="isNeedModify">还未填写地址，去填写</div>
+            <div class="weui-panel weui-panel_access weui-panel-space" ng-if="userAddress">
+            <div class="weui-cell" ng-click="select(item)">{{userAddress}}</div>
+            </div>
+            <div class="weui-panel weui-panel_access weui-panel-space"   ng-repeat="item in addresslist" >
+            <div class="weui-cell" ng-click="select(item)">{{item.address+item.name}}</div>
+            </div>
+        </div>
+        <!--<ul class="ui-list ui-list-pure ui-border-tb">
+            <li class="ui-border-t" ng-click="select(result)" ng-repeat="result in results">
+                <h4>{{result.title}}</h4>
+                <p class="ui-txt-tips">{{result.address}}</p>
+            </li>
+        </ul>-->
+    </div>
+</div>
+

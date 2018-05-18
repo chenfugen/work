@@ -1,0 +1,96 @@
+﻿<div class="weui-tab" ng-cloak>
+    <!--<div class="fix-top">
+    </div>-->
+
+    <div class="weui-tab__bd " style="color:#999999;">
+
+            <div ng-if="isLogin">
+                <p ng-if="hasOrders" class="font-11 bg-lightgray color-darkgray" style="padding:10px 15px;margin-bottom: -18px;" >交易完成或失败订单请到我的历史订单中查看！<a href="javascript:;" ng-click="init()" class="color-darkgray " style="position: fixed;right:0;top:0;padding: 4px 10px;" ng-if="order.State!=0"><i class="ui-ico-update font-20"></i></a></p>
+                <div class="weui-form-preview" ng-repeat="order in orders | filter:limitShow" ng-switch="order.State">
+                    <!--<div class="weui-panel__ft weui-cells ">超时订单或已完成订单请转到我的历史订单中查看详情！
+                        <a href="javascript:void(0);" ng-click="gotoOrderDetail(order)" class="weui-cell weui-cell_access weui-cell_link" style="padding: 5px 10px">
+                                <div class="weui-cell__hd"><img src="{{order.Merchant.HeadImg| imageSrc}}" alt="" width="30px" height="30px"  style="display:block;-webkit-border-radius: 75px;border: 3px solid rgba(255,255,255,0.5);"></div>
+                                <div class="weui-cell__bd weui-cell_primary">
+                                    <p>{{order.Merchant.MName}}</p>
+                                </div>
+                                <span class=" color-green font-13">{{order.State | orderStateTip}}</span>
+                        </a>
+                    </div>-->
+                    <div class="weui-panel__ft weui-cells ">
+                        <div href="javascript:void(0);" ng-click="gotoOrderDetail(order)" class="weui-cell weui-cell_access weui-cell_link clear-border" style="padding: 5px 10px">
+                            <div class="weui-cell__hd" >
+                                <a href="#/lysinfo/{{order.funeralDir.ID}}"><img ng-src="{{order.funeralDir.HeadImg | imageSrc}}" alt="" width="30px" height="30px"  style="display:block;-webkit-border-radius: 75px;border: 3px solid rgba(255,255,255,0.5);"></a></div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <a href="#/lysinfo/{{order.funeralDir.ID}}" class="color-darkgray"> {{order.funeralDir.MName}}<i class="ui-ico-arrow"></i>　　</a>
+                            </div>
+                            <a href="#/orderdetail/{{order.ID}}" class="weui-cell__ft"><i class="ui-ico-umsg03 font-13 color-green" ng-if="order.State==0"></i> <span class=" color-green ">{{order.State | orderStateTip}}</span> <span></span></a>
+                        </div>
+                    </div>
+                    <a href="#/orderdetail/{{order.ID}}" style="color:inherit">
+                    <div class="font-13 weui-media-box clear-border" style="padding-bottom:10px;font-size: 14px;line-height: 24px;">
+
+                        <p class="text-overflow-1">订单号:<span> {{order.OCode}}</span></p>
+                        <p>预约人:<span> {{order.TrueName}}</span></p>
+                        <p>服务时间:<span> {{order.CreateDate}}</span></p>
+                        <!--<p>预约日期:<span> {{order.ServiceDate | dateformat:'yyyy-MM-dd'}}</span></p>-->
+                        <p>服务地址:<span> {{order.Address}}</span></p>
+                    </div></a>
+                    <!--<a href="#/orderdetail/{{order.ID}}" class="weui-cell weui-cell_access weui-cell_link lm-weui-cells">
+                        <div class="weui-cell__bd">查看更多{{order.State}}</div>
+                        <span class="weui-cell__ft"></span>
+                    </a>-->
+                    <div class="weui-cell font-13" style="padding: 0 15px;">
+                        <div class="weui-cell__bd" ng-if="order.State>0">
+                            <a class="" href="tel:{{order.funeralDir.Phone}}" class="">
+                                <i class="ui-ico-tel font-25  b color-green"></i> <span class="font-13 color-green" style="vertical-align: 5px;line-height:30px;">呼叫礼仪师</span>
+                            </a>
+                        </div>
+                        <div class="weui-cell__bd" >
+                           <a class="" href="javscript:;" class="" ng-if="order.State<=0">
+                                <i class="  b color-green"></i> <span class="font-13 color-green" style="vertical-align: 5px;line-height:40px;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            </a>
+                        </div>
+                        <div class="weui-cell__ft">
+                            <span class="btn-default bg-green color-white clear-border"  ng-click="orderHandle(order)" ng-if="order.State<8 && order.State>3" style="padding: 5px 10px;border-radius: 5px;font-size: 15px;">{{order.State | orderStateBtnName}}</span>
+                            <span class="btn-default" ng-click="cancelOrder(order)"  ng-if="order.State==1 || order.State==0" style="padding: 5px 10px;border-radius: 5px;font-size: 15px;">取消订单</span>
+                        </div>
+                </div>
+                </div>
+                <div >
+                    <div class="weui-loadmore weui-loadmore_line" ng-if="orders.length>2">
+                        <span class="weui-loadmore__tips">到底啦</span>
+                    </div>
+                    <br/>
+                </div>
+
+                <div ng-if="!hasOrders" style="text-align: center;">
+                    <i class="ui-ico-noorder02" style="font-size: 120px;"></i>
+                    <p>你还没有任何订单!</p>
+                    <p>先去挑选一个礼仪师吧</p>
+                    <p>&nbsp;</p>
+                    <a class="btn-default bg-white color-green" style="padding:5px 60px;" href="#/">G O</a>
+                </div>
+            </div>
+    </div>
+
+    <div class="weui-tabbar fix-bottom">
+        <a href="#/"  class="weui-tabbar__item clear-padding">
+            <div class="weui-tabbar__icon">
+                <i class="ui-ico-protocol ui-ico-fillprotocol"></i>
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item weui-bar__item--on clear-padding">
+            <div class="weui-tabbar__icon">
+                <i class="ui-ico-browse ui-ico-fillbrowse"></i>
+            </div>
+            <p class="weui-tabbar__label">订单</p>
+        </a>
+        <a href="#/user" class="weui-tabbar__item clear-padding">
+            <div class="weui-tabbar__icon">
+                <i class="ui-ico-my"></i>
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+</div>

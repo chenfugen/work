@@ -1,0 +1,67 @@
+<div class="weui-tab" ng-cloak>
+     <div class="fix-top">
+        <div class="weui-flex bg-white">
+			<div  class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="location='#/order'" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">服务评价</div>
+			</div>
+		</div>
+	</div>
+    <div class="weui-tab__bd" style="color:#999999;padding-top: 50px;">
+        <div class="">
+            <form action="#" class="">
+                <div class="weui-cell" ng-repeat="item in evaluates">
+                    <label class="weui-cell__bd">{{item.title}}</label>
+                    <div>
+                        <i class="ui-ico-grade color-red font-25" title="0" ng-class='{"ui-ico-star":score.num<=item.value}'  ng-click="setScore(score,item)" val="很差" ng-repeat="score in scores"></i>
+                    </div>
+                    <div class="color-red" style="width:60px;text-align: right;">{{item.showTip}}</div>
+                </div>
+
+                <!--<div class="weui-cell">
+                    <label class="weui-cell__bd">响应时间</label>
+                    <div >
+                        <i class="ui-ico-grade color-red font-25" title="0"  ng-click="" val="很差"></i>
+                        <i class="ui-ico-grade color-red font-25" title="1" val="一般"></i>
+                        <i class="ui-ico-grade color-red font-25 " title="2" val="好"></i>
+                        <i class="ui-ico-grade color-red font-25" title="3" val="很好"></i>
+                        <i class="ui-ico-grade color-red font-25" title="4" val="非常好"></i>
+                    </div>
+                    <div class="color-red" style="width:60px;text-align: right;">非常好</div>
+                </div>
+                <div class="weui-cell">
+                    <label class="weui-cell__bd">专业程度</label>
+                    <div class="weui-cell__ft ">
+                        <i class="ui-ico-grade color-red font-25" title="0" val="很差"></i>
+                        <i class="ui-ico-grade color-red font-25" title="1" val="一般"></i>
+                        <i class="ui-ico-grade color-red font-25 " title="2" val="好"></i>
+                        <i class="ui-ico-grade color-red font-25" title="3" val="很好"></i>
+                        <i class="ui-ico-grade color-red font-25" title="4" val="非常好"></i>
+                    </div>
+                    <div class="color-red" style="width:60px;text-align: right;">很好</div>
+                </div>
+                <div class="weui-cell">
+                    <label class="weui-cell__bd">服务态度</label>
+                    <div class="weui-cell__ft ">
+                        <i class="ui-ico-grade color-red font-25" title="0" val="很差"></i>
+                        <i class="ui-ico-grade color-red font-25" title="1" val="一般"></i>
+                        <i class="ui-ico-grade color-red font-25 " title="2" val="好"></i>
+                        <i class="ui-ico-grade color-red font-25" title="3" val="很好"></i>
+                        <i class="ui-ico-grade color-red font-25" title="4" val="非常好"></i>
+                    </div>
+                    <div class="color-red"></div>
+                </div>-->
+                <div class="weui-cell " >
+                    <textarea ng-model="content" maxlength="70" placeholder="写点评价吧，对其他小伙伴帮助很大哦" rows="5" style="width:100%;padding: 8px;height: 120px;margin: 10px 0;"></textarea>
+                </div>
+                <div class="weui-cell">
+                    <p class="ui-txt-muted">还能输入{{70-content.length}}个字</p>
+                </div>
+            </form>
+        </div>
+        <div style="margin-top:20px;padding: 0 15px;">
+            <a ng-click="submit(order)" class="weui-btn weui-btn_warn">提交</a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿<div class="weui-tab" ng-cloak>
+     <div class="fix-top">		
+       <div class="weui-flex bg-white">
+			<div class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="history.back()" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">商品详情</div>
+			</div>
+	    </div>
+	</div>
+
+    <div class="weui-tab__bd" style="padding:60px 15px 20px;">
+        <!--<img src="{{goods.MGImg | imageSrc}}" width="100%">
+        <p class="font-20 color-darkgray b">套餐名：{{goods.Class}}</p>
+        <p class="color-darkgray font-16">商品名：{{goods.MGName}}　<span class="color-red font-16">￥{{goods.MGPrice}}</span> </p>
+
+        <p class="b" style="margin:10px 0;padding:6px 0;border-bottom: solid 1px #cccccc;">商品详情</p>
+        <p class="font-13" >{{goods.MGRemark}}提供高档灵堂布置1次提供高档灵堂布置1次提供高档灵堂布置1次提供高档灵堂布置1次提供高档灵堂布置1次提供高档灵堂布置1次提供高档灵堂布置1次</p>-->
+        <div class="weui-panel weui-panel_access clear-margin clear-padding">
+            <img ng-src="{{goods.MGImg | imageSrc}}" width="100%">
+
+            <div class="weui-panel__hd">
+                <p class="color-darkgray font-16">{{goods.MGName}}　<span class="color-red font-16">￥{{goods.MGPrice}}</span> </p>
+                <p>套餐：{{goods.Class}}</p>
+            </div>
+
+        </div>
+
+        <div class="weui-panel weui-panel_access ">
+            <div class="weui-panel__hd">商品详情</div>
+            <div class="weui-panel__bd">
+                <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+                    <div class="weui-media-box__bd">
+                        <p class="weui-media-box__title font-13 color-darkgray"></p>
+                        <p style="color:#999;font-size:12px;">{{goods.MGRemark}}</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>

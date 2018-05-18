@@ -1,0 +1,166 @@
+<div class="weui-tab" ng-cloak>
+    <div class="fix-top">
+		<div class="weui-flex bg-white">
+			<div class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="location='#/order'" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">订单详情</div>
+			</div>
+		</div>
+	</div>
+    <div class="weui-tab__bd color-darkgray " style="padding-top: 40px;padding-bottom: 50px;">
+        <div class="weui-form-preview clear-bg" style="padding: 10px 15px;">
+            <div class="weui-form-preview__hd bg-white clear-border ">
+                <!--待商家接单-->
+                <div ng-if="order.State == 0 " class="c " style="padding: 10px;">
+                    <h3>{{css.title}}</h3>
+                    <p class="font-13" style="display:none;">{{css.tip}}</p>
+                    <div class="ui-sed-timebg " style="font-size: 24px;background: url(img/time_wait_bg.png);color:#000000;width:150px;height:150px;display:inline-table;-webkit-background-size:cover;margin:20px auto 0px auto;">
+                        <div style="margin-top:55px">
+                            <span id="minute_show">{{timeoutMinute}}</span>
+                            <span>:</span>
+                            <span id="second_show">{{timeoutSecond}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="c" ng-if="order.State != 0">
+                    <h3>{{css.title}}</h3>
+                    &lt;!&ndash;<i class="{{css.class}}"  ng-style="{{colorObj}}"></i>&ndash;&gt;
+                    <i class="{{css.class}}" style="color:{{css.color}}"></i>
+                    <p class="font-13 ">{{css.tip}}</p>
+                </div>-->
+
+                <div class="c" ng-if="order.State != 0">
+                    <h3>{{css.title}}</h3>
+                    <i ng-class="{'ui-ico-close  ico-big':order.State< 0 || order.State==2 || order.State==3,'ui-ico-orderreceiving  ico-big':order.State==1,'ui-ico-crp  ico-big':order.State==4,'ui-ico-subscription  ico-big':order.State==5,'ui-ico-cancel ico-big':order.State==6 || order.State==7}" ng-style="{{colorObj}}"></i>
+                    <p class="font-13 ">{{css.tip}}</p>
+                </div>
+
+
+                <!--超时订单 -->
+               <!-- <div ng-if="order.State == -3" class="c">
+                        <h3>订单已关闭</h3>
+                        <p class="font-13 ">超时未付款</p>
+                        <i class="ui-ico-close ico-big" style="color:#95a5a6;"></i>
+                </div>
+                <div ng-if="order.State == -2" class="c">
+                    <h3>订单已关闭</h3>
+                    <p class="font-13 ">商家拒绝接单</p>
+                    <i class="ui-ico-close ico-big" style="color:#95a5a6;"></i>
+                </div>
+                <div ng-if="order.State == -1" class="c">
+                    <h3>订单已关闭</h3>
+                    <i class="ui-ico-close ico-big" style="color:#95a5a6;"></i>
+                    <p class="font-13 ">客户取消预约</p>
+                </div>
+                <div ng-if="order.State == 2" class="c">
+                    <h3>订单已关闭</h3>
+
+                    <i class="ui-ico-close ico-big" style="color:#95a5a6;"></i>
+                    <p class="font-13 ">接单未付款时商家取消订单</p>
+                </div>
+                <div ng-if="order.State == 3" class="c">
+                    <h3>订单已关闭</h3>
+
+                    <i class="ui-ico-close ico-big" style="color:#95a5a6;"></i>
+                    <p class="font-13 ">接单未付款时客户取消订单</p>
+                </div>
+                &lt;!&ndash;商家已接单&ndash;&gt;
+                <div ng-if="order.State == 1" class="c" style="padding: 10px;">
+                    <h3>商家已接单</h3>
+                    <i class="ui-ico-orderreceiving ico-big" style="color:#f39c12;"></i>
+                    <p class="font-13 color-lightgray">礼仪师将上门服务，请保持电话畅通。</p>
+                </div>
+                <div ng-if="order.State == 4" class="c" style="padding:0px;">
+                    <h3>服务中</h3>
+                    <i class="ui-ico-crp ico-big"  style="color:#f39c12;"></i>
+                    <p class="font-13 color-lightgray">商家正在为您服务</p>
+                </div>
+                &lt;!&ndash;订单未付订金&ndash;&gt;
+                <div ng-if="order.State == 2" class="c">
+                    <h3>待付订金</h3>
+                    <i class="ui-ico-payment ico-big"  style="color:#95a5a6;"></i>
+                    <p class="font-13 color-lightgray">订单将在45分钟内关闭，请尽快付款</p>
+                </div>
+
+                &lt;!&ndash;请付余款 &ndash;&gt;
+                <div ng-if="order.State == 5" class="c">
+                    <h3>请付余款</h3>
+                    <i class="ui-ico-subscription ico-big"  style="color:#95a5a6;"></i>
+                    <p class="font-13">您的订单已完成，请支付余款</p>
+                </div>-->
+                <!--<div ng-if="order.State == 5" class="weui-flex">
+                    <i class="ui-ico-subscription ico-big"  style="color:#95a5a6;"></i>
+                    <div class="weui-flex__item" style="text-align: left;margin-left: 10px;margin-top: 10px;">
+                        <h3>请付余款</h3>
+                        <p class="font-13" style="line-height:18px;">您的订单已完成，请支付余款</p>
+                    </div>
+                </div>-->
+                <!--订单已完成-->
+                <!--<div ng-if="order.State == 6" class=" c">
+                    <h3>订单已完成</h3>
+                    &lt;!&ndash;<p class="ui-txt-info">来个评价吧，帮助我们做的更好</p>&ndash;&gt;
+                    <i class="ui-ico-cancel ico-big "  style="color:#95a5a6;"></i>
+                </div>-->
+            </div>
+            <!--商家信息-->
+            <!--<div class="bg-white"  style="padding: 10px 15px;margin: 10px 0;font-size: 0.9em;line-height: 2">
+                asdfjdasf;
+                </div>-->
+            <div class="bg-white color-darkgray" style="padding: 10px 15px;margin: 10px 0;font-size: 0.9em;line-height: 2">
+                <p><div class="color-darkgray b" style="width:70px;display: inline-block;">订单号</div><span >{{order.OCode}}</span></p>
+                <p><div class="color-darkgray b" style="width:70px;display: inline-block;">礼仪师</div><span>{{funeralDir.MName}}</span></p>
+                <p><div class="color-darkgray b" style="width:70px;display: inline-block;">下单时间</div><span >{{order.CreateDate}}</span></p>
+                <p><div class="color-darkgray b" style="width:70px;display: inline-block;">服务地址</div><span>{{order.Address}}</span></p>
+                <p><div class="color-darkgray b" style="width:70px;display: inline-block;">备注</div><span>{{order.Remark}}</span></p>
+                <div ng-if="order.State>0 && order.State!=2 && order.State!=3" class="btn-default bg-lightgray" href="tel:{{funeralDir.Phone}}" style="padding: 5px 0px;">
+                    <a href="tel:{{order.Extf4}}"><i class="ui-ico-tel font-25 color-green b"></i> <span class=" color-green" style="vertical-align: 0.2em;">联系礼仪师</span></a>
+                </div>
+            </div>
+            <div class="bg-white"  ng-if="goodsList.length>0" style="">
+                <p class="b c bg-lightgray color-darkgray" style="line-height: 35px;padding:5px 0px;">订单明细</p>
+                <div class="weui-form-preview__bd weui-form-preview__item " style="border-top: solid 1px #eeeeee;">
+                    <div ng-repeat="goods in goodsList">
+                        <label class="weui-form-preview__label">{{goods.GoodsName}}</label>
+                        <span class="weui-form-preview__value"><span>x{{goods.OGNum}}</span><div style="width:90px;display: inline-block;">¥{{goods.MGPrice/goods.OGNum}}</div></span>
+                    </div>
+                    <div class="weui-form-preview__item  " style="border-top: solid 1px #eeeeee;">
+                        <label class="weui-form-preview__label "></label>
+                        <span class="weui-form-preview__value color-darkgray font-20">总额：￥{{order.TotalPrice}}</span>
+                    </div>
+                    <div class="weui-form-preview__item ">
+                        <label class="weui-form-preview__label b">已付定金</label>
+                        <span class="weui-form-preview__value">￥{{order.DingPrice}}</span>
+                    </div>
+                    <div class="weui-form-preview__item color-darkgray " ng-if="order.Discount!=0">
+                        <label class="weui-form-preview__label b">优惠折扣</label>
+                        <span class="weui-form-preview__value">￥{{order.Discount |number:1}}</span>
+                    </div>         
+                    <div class="weui-form-preview__item color-darkgray b" ng-if="order.State>5">
+                        <label class="weui-form-preview__label ">实付金额：</label>
+                        <span class="weui-form-preview__value color-red" style="color:#f39c12;">￥{{order.TotalPrice-order.DingPrice-order.Discount |number:1}}</span>
+                    </div>
+                  <br/>
+                </div>
+            </div>
+            <!--<div class=" btn-default bg-lightgray color-darkgray" ng-click="payfor(order)">
+                付款
+            </div>
+            <div class=" btn-default bg-lightgray color-darkgray" ng-click="comment(order)">
+                已评
+            </div>-->
+            <div class="weui-form-preview__ft  weui-footer_fixed-bottom bg-white" style="bottom:0;z-index: 100;">
+                <a class="weui-form-preview__btn weui-form-preview__btn_default" ng-click="cancelOrder(order)" ng-if="order.State==0">取消订单</a>             
+                <button ng-if="order.State == 1" type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary color-green" href="javascript:" ng-click="cancelOrder(order)">取消订单</button>
+                <button ng-if="order.State == 4" type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary color-green" href="javascript:" ng-click="orderHandle(order)">确认订单</button>
+                <button ng-if="order.State == 5" type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary color-green" href="javascript:" ng-click="orderHandle(order)">去付款</button>
+                <button ng-if="order.State == 6" type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary color-green" href="javascript:" ng-click="orderHandle(order)">去评价</button>
+                <button ng-if="order.State == -3 || order.State == -2 || order.State == -1 || order.State == 2 || order.State == 3" type="submit" class="weui-form-preview__btn weui-form-preview__btn_primary color-green" href="javascript:" ng-click="deleteOrder(order)">删除订单</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

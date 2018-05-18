@@ -1,0 +1,42 @@
+<div class="weui-tab" ng-cloak> 
+    <div class="fix-top">
+        <div class="weui-flex bg-white">
+			<div class="color-darkgray" style="height:42px;">
+				<div style="position:absolute;top:0.4rem;left:10px;z-index:1;" onclick="history.back()" style="line-height:42px;"><i class="ui-ico-back"></i> 返回 </div>
+				<div style="position:absolute;width:100%;text-align:center;top:0.4rem;z-index:0;">立即预约</div>
+			</div>
+	    </div>
+    </div>
+    <div class="weui-tab__bd" style="color:#999999;padding-top:42px;">
+       <!--ng-if="isLogin"-->
+            <div class="weui-cells">
+                    <a href="javascript:;" onclick="javascript :history.back(-1);" class="weui-media-box weui-media-box_appmsg " style="text-align:center;padding: 0 10px;">
+                        <div style="width:20%;margin-top:5px;">
+                            <img class="" ng-src="{{merchant.HeadImg | imageSrc}}" width="30px" height="30px" style="-webkit-border-radius:75px;border: 3px solid rgba(255,255,255,0.5);">
+                        </div>
+                        <div class=" weui-media-box__bd color-darkgray" style="text-align:left;" >
+                            <span style="line-height:40px;">{{merchant.MName}}</span>
+                            <span class="float_r  font-11 text-overflow-1" style="color:#666;margin-top:15px;margin-right:15px;">{{merchant.BusName}}</span>
+                        </div>
+                    </a>
+            </div>
+            <div class="weui-cells" style="margin-top: 6px;">
+                <form action="#" autocomplete="off" >                   
+                    <div class="weui-cell" style="font-size:15px;border-bottom:1px solid #eee;">
+                        <div class="weui-cell__hd"><label class="weui-label color-darkgray">联系电话</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text"  placeholder="请输入你的电话号码" ng-model="order.Phone" >
+                        </div>
+                    </div>
+                    <div class="weui-cell" style="font-size:15px;border-bottom:1px solid #eee;">
+                        <div class="weui-cell__hd" style="font-size:15px;"><label class="weui-label color-darkgray">服务地址</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input font-15" type="text"  placeholder="请填写待服务地址"  ng-model="order.Address">
+                        </div>
+                    </div>                    
+                </form>
+                <br />
+                <div  class="btn-default bg-green color-white" ng-click="submit()" style="margin: 10px 15px 10px ;border-radius: 5px;">立即预约</div>           
+            </div>
+    </div>
+</div>

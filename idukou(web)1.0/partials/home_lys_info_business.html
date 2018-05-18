@@ -1,0 +1,109 @@
+﻿<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+<link rel="stylesheet" href="css/frozen.css">
+<link rel="stylesheet" type="text/css" href="css/style/stylesheets/style.css" />
+<header id="header" style="padding-left:10px;padding-right:10px">
+	<a href="javascript:;" onclick="history.back()" style="background:none;float: left;"><i class="iconfont icon-fangxiang" style="font-size:15px;color:#CCC;"></i><span style="color: #666;">返回</span></a>
+	<h2>商家信息</h2>
+</header>
+<section class="ui-container" id="store_msg">
+	<div class="imgbox" style="float:left;">
+		<span style="background-image:url({{company.BusinessImg | imageSrc}})"></span>
+		<div class="store_intro">
+			<h2 style="margin-top:5px;">{{company.BusinessName}}</h2>
+			<p style="padding-left:10px;padding-right:10px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{company.Summary}}</p>
+			<div class="down">
+				<i class="iconfont icon-212102"></i>
+			</div>
+			<div id="serves" style="margin-top:3px;width:100%;background: #eee;">		
+				<div style="padding:5px 10px 10px 10px;height:20px;background: white;text-align: left;border-top:3px solid #eee;">
+					<strong style="width:3px;height:20px;background:#1EBD9E;display: inline-block;float: left;margin-top:3px;"></strong> &nbsp;礼仪展示
+					<!--<span style="float: left;display: inline-block;">&nbsp;白事用品</span>-->
+					<span onclick="location='#/merchantCases'" style="float:right;text-align:right;color: #8ae6cf;font-size:12px;width:100px;height:25px;line-height:25px;">
+    			更多<i class="iconfont icon-20151209tubiaolianxizhuanhuan09-copy" style="font-size:12px;"></i>
+    		 </span>
+				</div>
+				<div id="rite"></div>
+				<ul style="width:100%;margin-top:3px;">
+					<li style="width:100%;height:93px;background: white;margin-top:2px;" ng-repeat="rite in riteList" ng-click="riteMsg(rite.ID)">
+						<div style="width:100%">
+							<div style="float: left;width:40%;height:80px;margin:7px;border-radius:3px 3px;overflow: hidden;">
+								<span style="background-image:url({{rite.IMG | imageSrc}});margin:0px;width:100%;height:80px;display:block;background-size:100% 80px"></span>
+							</div>
+							<div style="float:left;width:52%;margin:5px;height:80px;font-size:12px;line-height:20px;">
+								<!--	<p style="font-size:15px;color: #333;">{{rite.Summary}}</p>-->
+								<p style="width:100%;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:5px;">服务地址:&nbsp;{{rite.UAddress}}</p>
+								<p style="margin-top:5px;">服务礼仪师:&nbsp;{{rite.MName}}</p>
+								<p style="width:100%;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:5px;">所属公司:&nbsp;{{rite.BName}}</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div id="goodlist" style="border-top:3px solid #eee;width:100%;background: #eee;">
+				<div style="padding:5px 10px 10px 10px;height:20px;background: white;text-align: left;">
+					<strong style="width:3px;height:20px;background:#1EBD9E;display: inline-block;float: left;margin-top:3px;"></strong> &nbsp;白事用品
+					<!--<span style="float: left;display: inline-block;">&nbsp;白事用品</span>-->
+					<span onclick="location='#/feteGoods'" style="float:right;text-align:right;color: #8ae6cf;font-size:12px;width:100px;height:25px;line-height:25px;">
+    			更多<i class="iconfont icon-20151209tubiaolianxizhuanhuan09-copy" style="font-size:12px;"></i>
+    		   </span>
+				</div>
+				<div id="goods"></div>
+				<ul style="width:100%;position: relative;">
+					<li style="display:inline-block;width:45%;background:white;padding:2.5% 2.5% 2.5% 2.5%;margin-top:3px;" ng-repeat="good in goodList">
+						<div style="width:100%;height:130px;border-radius:3px 3px;overflow: hidden;">
+							<span style="background-image:url({{good.Img | imageSrc}});margin:0px;width:100%;height:130px;display: block;background-size:100% 130px;"></span>
+						</div>
+						<p style="font-size:14px;margin-top:2px;color:#333;">{{good.GName}}</p>
+						<p style="font-size:12px;margin-top:2px;width:100%;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{good.VendorName}}</p>
+						<p style="font-size:12px;margin-top:2px;">均价:<span style="color:#fa7878;display:inline">&nbsp;{{good.Price}}元</span></p>
+						<div style="position:absolute;width:1%;height:100%;background:#eee;top:0px;left:49.5%;"></div>
+					</li>
+				</ul>
+			</div>
+			<ul id="store_merchant">
+				<li class="merchant_nav"><span style="color:#7F7F7F;"><i class="iconfont icon-huawen" style="color:#1ABC9C;font-size:25px;"></i>&nbsp;&nbsp;旗下礼仪师&nbsp;&nbsp;<i class="iconfont icon-huawen" style="color: #1ABC9C;font-size: 25px;"></i></span></li>
+				<div id="merchantList"></div>
+				<li class="merchantList" ng-repeat="merchant in merchantList">
+					<div class="intro" style="width:90%;margin-left:5%;margin-bottom:2px" ng-click="learnmore(merchant)">
+						<div class="imgbox" style="float:left;">
+							<span style="background-image:url({{merchant.HeadImg | imageSrc}})"></span>
+						</div>
+						<div class="merchant_msg" style="float:right;">
+							<h3>&nbsp;{{merchant.rap.MName}}</h3>
+							<!--<h2>服务次数 <e style="color:#1EBD9E;font-size:17px;">{{merchant.rap.OrderCount}}</e> 次</h2>-->
+							<p class="rap" ng-bind-html="merchant.rstr|trust2Html"></p>
+						</div>
+						<div class="serveRap">
+							<ul>
+								<li>响应速度 <strong>{{merchant.rap.TRestimeNum.toFixed(1)}}&nbsp;</strong></li>
+								<li>专业程度 <strong>{{merchant.rap.TMajorNum.toFixed(1)}}</strong></li>
+								<li>服务态度 <strong>{{merchant.rap.TMannerNum.toFixed(1)}}</strong></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+</section>
+<script type="text/javascript">
+	var j = true;
+	$(".down").click(function() {
+		if(j) {
+			$(".store_intro p").css({ "-webkit-line-clamp": "100" })
+			$(".down").css({ 'transform': 'rotate(0deg)' });
+			j = false;
+		} else {
+			$(".store_intro p").css({
+				"-webkit-line-clamp": "3",
+				"display": "-webkit-box",
+				"-webkit-box-orient": "vertical",
+				"overflow": "hidden",
+				"text-overflow": "ellipsis"
+			});
+			$(".down").css({ 'transform': 'rotate(-180deg)' });
+			j = true;
+		}
+	})
+</script>

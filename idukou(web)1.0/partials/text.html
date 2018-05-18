@@ -1,0 +1,14 @@
+<h2>公众号ＩＤ：{{postData.gzhID}}</h2>
+<h2>商户ＩＤ：{{postData.buiness}}</h2>
+<h2>金额：{{postData.price}}</h2>
+<h2>商品名：{{postData.name}}</h2>
+
+<div ng-click="submit()" class="btn-default bg-green"><h1>统一下单 生成预付单</h1></div>
+<div ng-click="paybegin()" class="btn-default bg-green" ng-if="data.isEnbalePay"><h1>发起支付</h1></div>
+<br>
+<div ng-click="postText()" class="btn-default bg-green"><h1>POST</h1></div>
+<div style="margin:10px;white-space:normal;word-wrap : break-word ;">{{con}}</div>
+
+<div class="btn-default bg-darkgray font-16">H5手机版支付</div>
+<div ng-click="submit1()" class="btn-default bg-green"><h1>H5统一下单</h1></div>
+<div ng-click="paybegin1()" class="btn-default bg-green" ng-if="data.isEnbalePay"><h1>H5发起支付</h1></div>
