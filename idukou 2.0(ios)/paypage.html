@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>千柏渡商家版</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+		<link rel="stylesheet" href="css/frozen.css">
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+		<script src="js/zepto.min.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script src="js/angular/angular.min.js"></script>
+		<script src="js/idukou.js"></script>
+	</head>
+
+	<body ontouchstart>
+		<div ng-app="app" ng-cloak class="ng-cloak" ng-controller="privilegeCtrl">
+			<header class="ui-header ui-header-positive ui-pulic-header">
+				<a href="order_pay.html"><i class="ui-icon-return ui-header"><span style="font-size:14px">返回</span></i></a>
+				<h2>优惠管理</h2>
+			</header>
+			<section class="ui-container ui-whitespace" id="paycord">
+				<ul class="ui-whitespace order_details">
+					<li >
+						<div class="ui-text-left">订单号:</div><span>{{order.OCode}}</span></li>
+					<!--<li>
+						<div class="ui-text-left"><i class="iconfont icon-gerenkuang" style="color:#6edbc5;font-size:15px;"></i>&nbsp;{{order.TrueName}}</div>
+						<div class="ui-text-right"><i class="iconfont icon-dianhua1" style="color:#6edbc5;font-size:15px;"></i>&nbsp;{{order.Phone}}</div>
+					</li>
+					<div class="ui-text-right" style="position: absolute;top:2rem;right:10px;"><i class="iconfont icon-xiayi"></i></div>-->
+				</ul>
+				<ul class="ui-whitespace order_list">
+					<li class="ui-border-b">
+						<div class="ui-text-left"><i class="iconfont icon-dingdanguanli" style="color:#6edbc5;font-size:15px;"></i>&nbsp;&nbsp;订单明细</div>
+					</li>
+					<li ng-repeat="goods in order.OrdersDetails">
+						<ul class="ui-tiled">
+							<!--<ul class="ui-list ui-list-text ui-list-active ui-list-cover ui-border-tb">-->
+							<li>
+								<div>{{goods.GoodsName}}</div>
+							</li>
+							<li>
+								<div>{{goods.OGNum}}</div>
+							</li>
+							<li>
+								<div>¥{{goods.MGPrice}}</div>
+							</li>
+						</ul>
+					</li>
+					<li class="ui-border-t ui-center" style="height:40px;line-height:40px;">
+						<div style="font-size:1.8rem">订单总额:<span class="price">￥{{totalPrice}}</span></div>
+					</li>
+				</ul>
+				<ul class="ui-list ui-list-one ui-whitespace ui-border-dotted" style="margin-top:1rem;background:white;">
+					<li class="ui-whitespace">
+						<div class="ui-list-info">
+							<h4 class="ui-nowrap">已付订金:</h4>
+							<div class="ui-txt-info price">￥{{order.DingPrice}}</div>
+						</div>
+					</li>
+					<li class="ui-whitespace">
+						<div class="ui-list-info">
+							<h4 class="ui-nowrap">优惠:</h4>
+							<div class="ui-txt-info price">￥{{OrderCouponDataObject.Price}}</div>
+						</div>
+					</li>
+					<li class="ui-whitespace">
+						<div class="ui-list-info">
+							<h4 class="ui-nowrap">实付款:</h4>
+							<div class="ui-txt-info price totalPrice">￥{{full}}</div>
+							<div class="ui-txt-info price addPrivilege">￥<input type="text" style="width: 100px;" ng-change="changePrice(full)" ng-model="full" /></div>
+						</div>
+					</li>
+					<li class="ui-whitespace">
+						<div class="ui-list-info">
+							<button class="ui-btn" ng-click="addPrivilege()" ng-if="OrderCouponDataObject.ID==undefined">添加优惠</button>
+							<button class="ui-btn" ng-click="addPrivilege()" ng-if="OrderCouponDataObject.ID!=undefined">修改优惠</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button class="ui-btn" ng-click="affirmadd()" ng-if="OrderCouponDataObject.ID==undefined">确认添加</button>
+							<button class="ui-btn" ng-click="affirmchange(OrderCouponDataObject)" ng-if="OrderCouponDataObject.ID!=undefined">确认修改</button>
+						</div>
+					</li>
+				</ul>
+				<div class="ui-poptips ui-poptips-success hint_msg" style="display:none;">
+					<div class="ui-poptips-cnt">操作成功</div>
+				</div>
+				<div>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</div>
+			</section>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var id = window.location.search.split("=")[1]; //"b3785281-6a61-488e-8d83-32b3faaace45";
+		var requestUrl = APIaddress + "api/Orders/getOrdersInfo/" + id;
+		var myModule = angular.module("app", []);
+		myModule.controller('privilegeCtrl', ['$scope', '$http',
+			function($scope, $http) {
+				$http({
+					method: 'GET',
+					url: requestUrl
+				}).success(function(data) {
+					$scope.order = data;				
+				$http({
+					method: 'GET',
+					url: APIaddress + "api/Orders/GetOrderCouponByOid/" + id
+				}).success(function(msg) {		
+						if(msg.length!=0) {
+							$scope.OrderCouponDataObject=msg[0];
+						} else {
+					        $scope.OrderCouponDataObject={};
+							$scope.OrderCouponDataObject.Price = 0;				
+						}				
+					$http({
+						method: 'GET',
+						url: APIaddress + "api/Orders/getOrdersgoods/" + id
+					}).success(function(data){					
+						$scope.order.OrdersDetails = data;				
+						var orderprice = 0;
+						for(var i = 0; i < data.length; i++) {
+							orderprice += data[i].MGPrice * data[i].OGNum;
+						}
+						$scope.totalPrice = orderprice;
+						$scope.full=$scope.totalPrice - $scope.order.DingPrice - $scope.OrderCouponDataObject.Price;	
+					})
+					 $scope.addPrivilege = function() {
+						$(".totalPrice").css({ "display": "none" });
+						$(".addPrivilege").css({ "display": "block" });
+						var couponUrl = APIaddress + "api/Orders/CreateOrderCoupon";
+						$scope.affirmadd = function(){
+							$(".totalPrice").css({ "display": "block" });
+							$(".addPrivilege").css({ "display": "none" });
+							$scope.OrderCouponDataObject.Price = $scope.totalPrice - $scope.full-$scope.order.DingPrice;
+							$scope.OrderCouponDataObject.OID = id;
+							$scope.OrderCouponDataObject.State = 1;
+							$.post(couponUrl, $scope.OrderCouponDataObject, function(msg) {
+								if(msg) {
+									$(".hint_msg div").text('添加优惠成功');
+									$(".hint_msg").css({
+										"display": "block"
+									});
+									setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000)
+									window.location.reload();
+								}
+							})
+						}
+						$scope.affirmchange = function(e) {
+							$scope.OrderCouponDataObject=e;
+							$(".totalPrice").css({ "display": "block" });
+							$(".addPrivilege").css({ "display": "none" });
+							$scope.OrderCouponDataObject.Price =$scope.totalPrice - $scope.full - $scope.order.DingPrice;
+							$.post(APIaddress + "api/Orders/UpdateCouponDataObject", $scope.OrderCouponDataObject, function(msg) {
+								if(msg) {
+									$(".hint_msg div").text('修改优惠成功');
+									$(".hint_msg").css({
+										"display": "block"
+									});
+									setTimeout(function() {
+										$(".hint_msg").css({
+											"display": "none"
+										});
+									}, 1000)
+								}
+								window.location.reload();
+							})
+						}
+					}
+					$scope.changePrice = function(t) {
+						var isNum = /^\d+(\.\d+)?$/;
+						function isInteger(obj) {
+							return obj % 1 === 0
+						}
+						if(t != "") {
+							if(!isNum.test(t) || !isInteger(t) || t<0){
+								$(".hint_msg div").text('请填写正确的折扣金额');
+								$(".hint_msg").css({
+									"display": "block"
+								});
+								setTimeout(function() {
+									$(".hint_msg").css({
+										"display": "none"
+									});
+								}, 1000)
+								$scope.full =$scope.totalPrice - $scope.order.DingPrice - $scope.OrderCouponDataObject.Price;
+								return false;
+							}
+						}
+						if(t > $scope.totalPrice - $scope.order.DingPrice) {
+							$(".hint_msg div").text('请填写正确的折扣金额');
+							$(".hint_msg").css({
+								"display": "block"
+							});
+							setTimeout(function() {
+								$(".hint_msg").css({
+									"display": "none"
+								});
+							}, 1000)
+							$scope.full =$scope.totalPrice - $scope.order.DingPrice - $scope.OrderCouponDataObject.Price;
+							return false;
+						}
+						$scope.full = t;
+						$scope.OrderCouponDataObject.Price = $scope.totalPrice - $scope.full - $scope.order.DingPrice;
+					}
+					})
+				})
+			}
+		])
+	</script>
+
+</html>
