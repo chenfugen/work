@@ -1,0 +1,40 @@
+<div id="merchants">
+	<!--礼仪师列表-->
+	<div class="row morticianList">
+		<img src="img/loading.gif"  class="loading" ng-if="morticianLoading">
+		<div class="col-lg-3 col-sm-3 morticianInfro" ng-repeat="mortician in morticianList" ng-click="goMerchant(mortician)">
+			<div class="imgBox">
+				<img ng-src="{{mortician.HeadImg |imgsrc}}" class="imgBox"/>				
+			</div>
+			<div class="morticianMsg">
+				<div class="msgBox">
+					<h5>{{mortician.MName}}</h5>
+					<p><span>
+                            <i ng-repeat="i in mortician.Fullstar | range" class="iconfont icon-star-full"></i><i ng-repeat="i in mortician.Halfstar | range " class="iconfont icon-star-half"></i><i ng-repeat="i in mortician.Emptystar | range " class="iconfont icon-star-empty"></i>
+							</span>{{mortician.TTotalScore.toFixed(1)}}</p>
+					<p>响应速度：<span>{{mortician.TMajorNum.toFixed(1)}}</span></p>
+					<p>专业程度：<span>{{mortician.TMannerNum.toFixed(1)}}</span></p>
+					<p>服务态度：<span>{{mortician.TRestimeNum.toFixed(1)}}</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--分页-->
+	<div class="row" ng-if="pages>0">
+		<div class="col-lg-12 Page">
+			<ul>
+				<li ng-click="pre()">
+					<span aria-hidden="true">&laquo;</span>
+				</li>
+				<li ng-click="page($index)"  ng-class='{focus: $index==focus}'  ng-repeat="i in pages | num">
+				  {{i}}
+				</li>
+				<li ng-click="next()">
+					<span aria-hidden="true">&raquo;</span>
+				</li>			 
+			</ul>
+		</div>
+	</div>
+</div>
+<script src="js/common.js"></script>

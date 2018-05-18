@@ -1,0 +1,124 @@
+<!--显示框-->
+<div id="msgBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update-win-label" aria-describedby="登录框">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button id="msgClose" type="button" class="btn btn-default" style="float: right;border-radius:40px;outline:none;">x</button>
+			</div>
+			<div class="modal-body" style="text-align: center;">
+				<p>&nbsp;</p>
+                <img src="img/tips.png" style="width：25px;height: 25px;display:inline-block;margin-top:-5px;">
+				<span style="font-size:20px;"> 礼仪师联系方式 : {{merchantPhone}}</span>
+				<p>&nbsp;</p>
+			</div>			
+		</div>
+	</div>
+</div>
+<div id="combo">
+	<!--套餐说明-->
+	<div class="introduce row">
+		<div class="col-lg-5">
+			<img src="img/taocan_01.jpg" style="width: 415px; height:420px;">
+		</div>
+		<div class="col-lg-7">
+			<div class="introduce-detail">
+				<img src="img/taocan_price.png">
+				<ul>
+					<li>顾客须知：</li>
+					<li>1.套餐价格仅限套餐服务内容</li>
+					<li>2.套餐物料以实物为准</li>
+					<li>3.套餐添加其他服务，价格另议</li>
+					<li>4.最终解释权归千柏渡所有</li>
+				</ul>
+				<aside>
+					<label>
+					<input type="tel"  required  class="tel" ng-model="phone" placeholder="请输入您的手机号" />		
+					<span class="getVcode">获取验证码</span>
+					</label>
+					<p style="margin-top:5px;">
+					<input class="index-phone Vcode" ng-model="Vcode" type="text" placeholder="验证码">
+					<input class="btn btn-success" id="fortel" type="button"  value="免费咨询" ng-click="addOrder()"/>
+					</p>
+				</aside>
+			</div>
+		</div>
+	</div>
+	<div class="tiplist row">
+		<ul>
+			<li style="margin-left: 0;"><img src="img/taocan_02.png" />入殓服务</li>
+			<li><img src="img/taocan_03.png" />搭设灵堂</li>
+			<li><img src="img/taocan_04.png" />出殡火化</li>
+			<li><img src="img/taocan_05.png" />墓地落葬</li>
+			<li style="margin-right: 0;"><img src="img/taocan_06.png" />做七祭奠</li>
+		</ul>
+	</div>
+	<div class="explain row">
+		<h4>服务说明</h4>
+		<table border="1">
+			<thead>
+				<tr height="50">
+					<td width="30%">服务名称</td>
+					<td>物料说明</td>
+				</tr>
+			</thead>
+			<tbody style="font-size: 18px;">
+				<tr>
+					<td width="30%">净身穿衣</td>
+					<td>寿衣1套（分男女款）、经文被1条</td>
+				</tr>
+				<tr>
+					<td width="30%">灵堂搭设</td>
+					<td>灵堂背景装饰1套、牌位1个、无烟香2捆、蜡烛2对 银元宝10刀、香炉1个、黑伞1把
+					</td>
+				</tr>
+				<tr>
+					<td width="30%">遗像制作</td>
+					<td>遗像框1个，含照片放大</td>
+				</tr>
+				<tr>
+					<td width="30%">花圈服务</td>
+					<td>主花圈1个</td>
+				</tr>
+				<tr>
+					<td width="30%">灵棚搭设</td>
+					<td>20平方灵棚租赁，配2张桌子、20张凳子</td>
+				</tr>
+				<tr>
+					<td width="30%">五七服务</td>
+					<td>望乡台1个、大棚搭设1次</td>
+				</tr>
+				<tr>
+					<td width="30%">返主除灵</td>
+					<td>跨火盆1个、净手台1个、梯子租赁1把、稻草1捆</td>
+				</tr>
+				<tr>
+					<td width="30%">礼仪指导</td>
+					<td>做七流程指导</td>
+				</tr>
+				<tr>
+					<td width="30%">代办事宜</td>
+					<td>联系殡仪馆</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="showgoods">
+		<h4>用品展示</h4>
+		<ul>
+			<li><img src="img/taocan_goods1.png" /></li>
+			<li><img src="img/taocan_goods2.png" /></li>
+			<li><img src="img/taocan_goods3.png" /></li>
+			<li><img src="img/taocan_goods4.png" /></li>
+			<li style="margin-right: 0;"><img src="img/taocan_goods5.png" /></li>
+			<li><img src="img/taocan_goods6.png" /></li>
+			<li><img src="img/taocan_goods7.png" /></li>
+			<li><img src="img/taocan_goods8.png" /></li>
+			<li><img src="img/taocan_goods9.png" /></li>
+			<li style="margin-right: 0;"><img src="img/taocan_goods10.png" /></li>
+		</ul>
+	</div>
+</div>
+<script src="js/common.js"></script>
+
+<!--MID:d7574f90-4883-4f63-9774-0322a63b2929
+TEL:18367034444-->

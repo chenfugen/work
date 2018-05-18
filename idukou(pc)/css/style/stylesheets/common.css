@@ -1,0 +1,431 @@
+@charset "UTF-8";
+/* line 3, ../sass/common.scss */
+body {
+  font-family: "Verdana" , "微软雅黑" , "Arial Narrow";
+  margin: 0;
+  font-size: 12px;
+  color: #232323;
+  background-color: #F7F7F7;
+  position: relative;
+}
+
+/* line 12, ../sass/common.scss */
+ul {
+  list-style: none;
+}
+
+/* line 15, ../sass/common.scss */
+blockquote,
+body,
+dd,
+div,
+dl,
+dt,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+/* line 41, ../sass/common.scss */
+a {
+  text-decoration: none;
+  color: #4F4F4F;
+}
+
+/* line 45, ../sass/common.scss */
+a:link {
+  color: #636363;
+  text-decoration: none;
+}
+
+/* line 49, ../sass/common.scss */
+a:visited {
+  color: #636363;
+}
+
+/* line 52, ../sass/common.scss */
+a:hover {
+  color: #636363;
+  text-decoration: none;
+}
+
+/* line 56, ../sass/common.scss */
+a:active {
+  color: #636363;
+}
+
+/* line 59, ../sass/common.scss */
+img {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+/* line 65, ../sass/common.scss */
+select {
+  width: 60px;
+  height: 30px;
+  border-radius: 5px 5px;
+  outline: none;
+}
+
+/* line 71, ../sass/common.scss */
+header {
+  width: 100%;
+  height: 90px;
+  background: white;
+}
+/* line 78, ../sass/common.scss */
+header .row {
+  margin: 0 auto;
+  padding: 0;
+  width: 1170px;
+  height: 90px;
+  position: relative;
+}
+/* line 84, ../sass/common.scss */
+header .row img {
+  margin: 13px 0;
+}
+/* line 87, ../sass/common.scss */
+header .row .selectCity {
+  position: absolute;
+  left: 280px;
+  top: 35px;
+}
+/* line 92, ../sass/common.scss */
+header .row .header_right {
+  width: 350px;
+  height: 90px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+/* line 98, ../sass/common.scss */
+header .row .header_right .phone {
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin: 35px 0;
+}
+/* line 104, ../sass/common.scss */
+header .row .header_right label {
+  float: left;
+  margin: 35px 10px;
+  color: #13B193;
+  font-size: 20px;
+  font-family: "微软雅黑";
+}
+/* line 110, ../sass/common.scss */
+header .row .header_right label i {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 6px;
+  font-size: 24px;
+  line-height: 20px;
+}
+/* line 118, ../sass/common.scss */
+header .row .header_right .login {
+  width: 130px;
+  height: 35px;
+  border-left: 1.5px solid #eee;
+  float: right;
+  margin-top: 30px;
+  cursor: pointer;
+}
+/* line 125, ../sass/common.scss */
+header .row .header_right .login img {
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin: 2px 0px 2px 15px;
+}
+/* line 132, ../sass/common.scss */
+header .row .header_right .logged {
+  width: 130px;
+  height: 35px;
+  border-left: 1.5px solid #eee;
+  float: right;
+  margin-top: 30px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 35px;
+  font-size: 15px;
+}
+/* line 142, ../sass/common.scss */
+header .row .header_right .logged ul {
+  display: none;
+  background: white;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 10000;
+}
+/* line 149, ../sass/common.scss */
+header .row .header_right .logged ul li {
+  text-align: center;
+  line-height: 30px;
+}
+/* line 153, ../sass/common.scss */
+header .row .header_right .logged ul li:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 159, ../sass/common.scss */
+header .row .header_right .logged:hover ul {
+  display: block;
+}
+/* line 165, ../sass/common.scss */
+header .nav {
+  width: 100%;
+  height: 50px;
+  background: #13B193;
+}
+/* line 174, ../sass/common.scss */
+header .nav .mainbav {
+  height: 50px;
+  background: #13B193;
+  margin: 0;
+  padding: 0;
+  z-index: 999;
+}
+/* line 180, ../sass/common.scss */
+header .nav .mainbav li {
+  float: left;
+}
+/* line 182, ../sass/common.scss */
+header .nav .mainbav li a {
+  display: block;
+  padding: 0 20px;
+  height: 50px;
+  line-height: 50px;
+  color: white;
+  font-size: 15px;
+}
+/* line 190, ../sass/common.scss */
+header .nav .mainbav li a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* line 194, ../sass/common.scss */
+header .nav .mainbav .busness {
+  float: right;
+}
+
+/* line 201, ../sass/common.scss */
+.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* line 207, ../sass/common.scss */
+#update-win .modal-dialog, #msgBox .modal-dialog, #delOrder .modal-dialog {
+  margin-top: 150px;
+}
+/* line 210, ../sass/common.scss */
+#update-win .modal-dialog h5 img, #msgBox .modal-dialog h5 img, #delOrder .modal-dialog h5 img {
+  margin: 0 auto;
+}
+/* line 216, ../sass/common.scss */
+#update-win .modal-body ul, #msgBox .modal-body ul, #delOrder .modal-body ul {
+  margin: 10px 70px;
+}
+/* line 218, ../sass/common.scss */
+#update-win .modal-body ul li, #msgBox .modal-body ul li, #delOrder .modal-body ul li {
+  margin: 20px 0;
+  color: #333;
+}
+/* line 221, ../sass/common.scss */
+#update-win .modal-body ul li label, #msgBox .modal-body ul li label, #delOrder .modal-body ul li label {
+  font-size: 15px;
+}
+/* line 224, ../sass/common.scss */
+#update-win .modal-body ul li .telephone, #msgBox .modal-body ul li .telephone, #delOrder .modal-body ul li .telephone {
+  width: 350px;
+  height: 30px;
+  border-radius: 5px 5px;
+  border: 1px solid #ccc;
+}
+/* line 230, ../sass/common.scss */
+#update-win .modal-body ul li .authcode, #msgBox .modal-body ul li .authcode, #delOrder .modal-body ul li .authcode {
+  width: 170px;
+  height: 30px;
+  border-radius: 5px 5px;
+  border: 1px solid #ccc;
+}
+/* line 236, ../sass/common.scss */
+#update-win .modal-body ul li .getCode, #msgBox .modal-body ul li .getCode, #delOrder .modal-body ul li .getCode {
+  margin: 0 10px;
+  padding: 5px 15px;
+  background: #13B193;
+  color: white;
+  border: none;
+  border-radius: 5px 5px;
+  outline: none;
+}
+/* line 245, ../sass/common.scss */
+#update-win .modal-body ul li .getCode:active, #msgBox .modal-body ul li .getCode:active, #delOrder .modal-body ul li .getCode:active {
+  background: #eee;
+  color: #13B193;
+}
+/* line 253, ../sass/common.scss */
+#update-win .modal-footer .btn, #msgBox .modal-footer .btn, #delOrder .modal-footer .btn {
+  margin: 0 120px;
+}
+/* line 257, ../sass/common.scss */
+#update-win .modal-footer #btn-login, #msgBox .modal-footer #btn-login, #delOrder .modal-footer #btn-login {
+  margin: 0 10px;
+  padding: 5px 30px;
+  background: #13B193;
+  color: white;
+  border: none;
+  border-radius: 5px 5px;
+  outline: none;
+  font-weight: bold;
+}
+/* line 267, ../sass/common.scss */
+#update-win .modal-footer #btn-close, #msgBox .modal-footer #btn-close, #delOrder .modal-footer #btn-close {
+  padding: 5px 30px;
+  background: #13B193;
+  color: white;
+  border: none;
+  border-radius: 5px 5px;
+  outline: none;
+  font-weight: lighter;
+}
+/* line 276, ../sass/common.scss */
+#update-win .modal-footer #btn-close:active,
+#update-win .modal-footer #btn-login:active, #msgBox .modal-footer #btn-close:active,
+#msgBox .modal-footer #btn-login:active, #delOrder .modal-footer #btn-close:active,
+#delOrder .modal-footer #btn-login:active {
+  background: #eee;
+  color: #13B193;
+}
+
+/* line 285, ../sass/common.scss */
+#footer {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  background: #5c5c5c;
+}
+/* line 290, ../sass/common.scss */
+#footer .row {
+  width: 1170px;
+  margin: 0 auto;
+}
+/* line 293, ../sass/common.scss */
+#footer .row .col-lg-4 {
+  width: 33.3%;
+  height: 150px;
+}
+/* line 299, ../sass/common.scss */
+#footer .footer .logo {
+  height: 120px;
+}
+/* line 301, ../sass/common.scss */
+#footer .footer .logo img {
+  margin: 25px auto;
+  display: block;
+}
+/* line 306, ../sass/common.scss */
+#footer .footer .bottomNav {
+  height: 120px;
+}
+/* line 308, ../sass/common.scss */
+#footer .footer .bottomNav ul {
+  margin: 25px 0;
+}
+/* line 310, ../sass/common.scss */
+#footer .footer .bottomNav ul li {
+  float: left;
+  font-size: 15px;
+  margin-left: 10px;
+}
+/* line 314, ../sass/common.scss */
+#footer .footer .bottomNav ul li a {
+  color: #CCCCCC;
+}
+/* line 319, ../sass/common.scss */
+#footer .footer .bottomNav P {
+  color: #CCCCCC;
+  margin-top: 10px;
+  line-height: 25px;
+}
+/* line 323, ../sass/common.scss */
+#footer .footer .bottomNav P img {
+  display: inline-block;
+}
+/* line 328, ../sass/common.scss */
+#footer .footer .cord {
+  height: 120px;
+}
+/* line 330, ../sass/common.scss */
+#footer .footer .cord img {
+  width: 100px;
+  height: 100px;
+  margin: 12px 20px;
+}
+/* line 336, ../sass/common.scss */
+#footer .footer .cord div p {
+  color: #CCCCCC;
+  margin: 10px 20px;
+  padding-top: 20px;
+}
+/* line 343, ../sass/common.scss */
+#footer .footer .linkList {
+  margin-top: 120px;
+  border-top: 1px solid #767676;
+  width: 100%;
+}
+/* line 347, ../sass/common.scss */
+#footer .footer .linkList ul {
+  width: 100%;
+  margin: 5px;
+  position: relative;
+}
+/* line 351, ../sass/common.scss */
+#footer .footer .linkList ul li {
+  display: inline-block;
+  color: #ccc;
+  margin-left: 15px;
+  line-height: 20px;
+}
+/* line 356, ../sass/common.scss */
+#footer .footer .linkList ul li a {
+  color: #ccc;
+}
+/* line 359, ../sass/common.scss */
+#footer .footer .linkList ul li a:hover {
+  text-decoration: underline;
+}
+/* line 363, ../sass/common.scss */
+#footer .footer .linkList ul .opencloseCity, #footer .footer .linkList ul .opencloseCemetery {
+  position: absolute;
+  right: 20px;
+  top: 3px;
+  width: 30px;
+  height: 15px;
+  background: url("../../../img/openclose.png") no-repeat center 2px;
+  cursor: pointer;
+}
+/* line 373, ../sass/common.scss */
+#footer .footer .linkList .hideLinkCity, #footer .footer .linkList .hideLinkCemetery {
+  display: none;
+  width: 1030px;
+  height: 100px;
+  margin-left: 82px;
+}

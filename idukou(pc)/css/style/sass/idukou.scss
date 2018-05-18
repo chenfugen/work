@@ -1,0 +1,1427 @@
+@charset "utf-8";
+$fontFamliy: "微软雅黑";
+body {
+    position: relative;
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+}
+
+.loading {
+    width: 80px;
+    margin: 10px auto;
+}
+
+//home
+#home {
+    //右侧轮播图
+    .banner {
+        margin: 0;
+        padding: 0;
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+    //左侧信息栏
+    .consult {
+        margin: 0;
+        padding: 0;
+        height: 421px;
+        text-align: center;
+        border: 1px solid #eee;
+        h4 {
+            display: block;
+            width: 100%;
+            height: 55px;
+            line-height: 55px;
+            font-family: "黑体";
+            border-bottom: 1px solid #eee;
+            color: #13B193;
+            font-size: 20px;
+        }
+        #search {
+            width: 270px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            padding: 15px 0;
+            .phone {
+                width: 255px;
+                height: 35px;
+                border-radius: 5px;
+                border: 1px solid #eee;
+                margin-left: 15px;
+                outline: none;
+                background: white;
+                padding-left: 10px;
+            }
+            .Vcode {
+                width: 70px;
+                height: 35px;
+                outline: none;
+                border: none;
+                background: none;
+                padding-left: 10px;
+            }
+            label {
+                width: 170px;
+                height: 35px;
+                border-radius: 5px;
+                border: 1px solid #eee;
+                position: relative;
+                font-weight: lighter;
+                margin: 10px 0px 0px 10px;
+                background: white;
+                .getVcode {
+                    position: absolute;
+                    right: 5px;
+                    top: 0px;
+                    padding-left: 5px;
+                    line-height: 35px;
+                    border-left: 1px solid #eee;
+                    cursor: pointer;
+                }
+            }
+            button {
+                width: 80px;
+                height: 35px;
+                border-radius: 5px;
+                border: none;
+                background: #13B193;
+                color: white;
+                outline: none;
+                margin: 10px 0px 0px 0px;
+            }
+            button:active {
+                background: rgba(0, 0, 0, 0.1);
+            }
+        }
+        img {
+            width: 200px;
+            height: 200px;
+            margin: -10px auto;
+        }
+        p {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    }
+    //流程图
+    .Procedure {
+        img {
+            width: 100%;
+        }
+    }
+    .mortician {
+        height: 260px;
+        margin-bottom: 20px;
+        position: relative;
+        img {
+            display: block;
+            position: absolute;
+            cursor: pointer;
+        }
+        .imgOne {
+            left: 0;
+            top: 0;
+        }
+        .imgTwo {
+            left: 445px;
+            top: 0;
+        }
+        .imgThree {
+            left: 810px;
+            top: 0;
+        }
+        .imgFour {
+            left: 445px;
+            bottom: 0;
+        }
+    }
+    //导航栏
+    .subnav {
+        border-bottom: 1px solid #eee;
+        li {
+            margin: 5px 0;
+        }
+    }
+    //礼仪师列表  
+    .morticianList {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        .morticianInfro {
+            position: relative;
+            height: 170px;
+            cursor: pointer;
+            border: 1px solid #F7F7F7;
+            .imgBox {
+                position: absolute;
+                left: 4px;
+                width: 125px;
+                height: 167px;
+            }
+            .morticianMsg {
+                position: absolute;
+                left: 129px;
+                width: 160px;
+                height: 167px;
+                background: white;
+                text-align: left;
+                .msgBox {
+                    margin: 25px 15px;
+                    h5 {
+                        margin-bottom: 5px;
+                    }
+                    p {
+                        padding: 5px 0;
+                        span {
+                            color: #fa4343;
+                            i {
+                                margin-right: 2px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //品牌商家
+    .businessList {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+        .business {
+            float: left;
+            width: 225px;
+            height: 140px;
+            background: white;
+            margin: 0 4px;
+            cursor: pointer;
+            .imgBox {
+                margin: 15px 10px;
+                width: 200px;
+                height: 110px;
+            }
+        }
+    }
+    //广告位
+    .advertising {
+        width: 1170px;
+        height: 125px;
+    }
+    //精选陵园
+    .cemeteryList {
+        text-align: center;
+        .cemetery {
+            float: left;
+            width: 49.5%;
+            height: 200px;
+            position: relative;
+            background: white;
+            cursor: pointer;
+            overflow: hidden;
+            .imgBox {
+                position: absolute;
+                left: 0;
+                width: 360px;
+                height: 200px;
+                background: white;
+            }
+            .cemeteryMsg {
+                position: absolute;
+                left: 360px;
+                width: 210px;
+                height: 200px;
+                overflow: hidden;
+                .msgBox {
+                    margin: 15px;
+                    text-align: left;
+                    h5 {
+                        margin-bottom: 5px;
+                        font-weight: bold;
+                    }
+                    p {
+                        padding: 3px 0;
+                        span {
+                            color: #13B193;
+                            i {
+                                margin-right: 2px;
+                            }
+                        }
+                    }
+                    .remark {
+                        width: 200px;
+                        height: 90px;
+                        word-break: break-all;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        /** 将对象作为伸缩盒子模型显示 **/
+                        -webkit-box-orient: vertical;
+                        /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+                        -webkit-line-clamp: 4;
+                        /** 显示的行数 **/
+                        overflow: hidden;
+                        line-height: 22px;
+                    }
+                }
+            }
+        }
+        .cemetery:nth-child(1),
+        .cemetery:nth-child(3) {
+            margin: 1% 1% 0 0;
+        }
+        .cemetery:nth-child(2),
+        .cemetery:nth-child(4) {
+            margin: 1% 0 0;
+        }
+    }
+    //了解更多
+    .geomancy,
+    .news,
+    .story {
+        width: 33%;
+        float: left;
+        height: 290px;
+        cursor: pointer;
+        margin-right: 0.5%;
+        .imgBox {
+            clear: both;
+            width: 100%;
+            height: 200px;
+            position: relative;
+            span {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+            .title {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 30px;
+                background: rgba(0, 0, 0, 0.2);
+                line-height: 30px;
+                color: white;
+            }
+        }
+        .storyList {
+            margin-top: 10px;
+            li {
+                margin: 5px 10px;
+                width: 350px;
+                height: 20px;
+                word-break: break-all;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                /** 将对象作为伸缩盒子模型显示 **/
+                -webkit-box-orient: vertical;
+                /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+                -webkit-line-clamp: 1;
+                /** 显示的行数 **/
+                overflow: hidden;
+                cursor: pointer;
+            }
+            li：hover {
+                color: red;
+            }
+        }
+    }
+}
+
+//礼仪师列表页  
+#merchants {
+    .morticianList {
+        text-align: center;
+        .morticianInfro {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            height: 170px;
+            .imgBox {
+                position: absolute;
+                left: 0;
+                width: 125px;
+                height: 170px;
+                background: white;
+                span {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .morticianMsg {
+                position: absolute;
+                left: 123px;
+                width: 160px;
+                height: 170px;
+                background: white;
+                text-align: left;
+                .msgBox {
+                    margin: 25px 15px;
+                    h5 {
+                        margin-bottom: 5px;
+                    }
+                    p {
+                        padding: 5px 0;
+                        span {
+                            color: #fa4343;
+                            i {
+                                margin-right: 2px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .Page {
+        position: relative;
+        height: 30px;
+        text-align: center;
+        ul {
+            display: inline-block;
+            margin: 0 auto;
+            padding-bottom: 20px;
+            li {
+                display: inline-block;
+                width: 25px;
+                height: 25px;
+                background: white;
+                text-align: center;
+                line-height: 25px;
+                cursor: pointer;
+                margin: 0 2px;
+            }
+            li:active {
+                background: rgba(0, 0, 0, 0.1);
+            }
+            .focus {
+                background: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}
+
+//陵园列表页
+#cemetery {
+    .cemeteryList {
+        text-align: center;
+        .cemetery {
+            float: left;
+            width: 49.5%;
+            height: 200px;
+            position: relative;
+            background: white;
+            overflow: hidden;
+            cursor: pointer;
+            .imgBox {
+                position: absolute;
+                left: 0;
+                width: 360px;
+                height: 200px;
+                background: white;
+                span {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .cemeteryMsg {
+                position: absolute;
+                left: 360px;
+                width: 210px;
+                height: 200px;
+                .msgBox {
+                    margin: 15px;
+                    text-align: left;
+                    h5 {
+                        margin-bottom: 5px;
+                        font-weight: bold;
+                    }
+                    p {
+                        padding: 3px 0;
+                        span {
+                            color: #13B193;
+                            i {
+                                margin-right: 2px;
+                            }
+                        }
+                    }
+                    .remark {
+                        width: 200px;
+                        height: 90px;
+                        word-break: break-all;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        /** 将对象作为伸缩盒子模型显示 **/
+                        -webkit-box-orient: vertical;
+                        /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+                        -webkit-line-clamp: 4;
+                        /** 显示的行数 **/
+                        overflow: hidden;
+                        line-height: 22px;
+                    }
+                }
+            }
+        }
+        .cemetery:nth-child(1),
+        .cemetery:nth-child(3) {
+            margin: 1% 1% 0 0;
+        }
+        .cemetery:nth-child(2),
+        .cemetery:nth-child(4) {
+            margin: 1% 0 0;
+        }
+    }
+    .Page {
+        position: relative;
+        height: 30px;
+        margin: 10px 0 0;
+        text-align: center;
+        ul {
+            display: inline-block;
+            margin: 0 auto;
+            padding-bottom: 20px;
+            li {
+                display: inline-block;
+                width: 25px;
+                height: 25px;
+                background: white;
+                text-align: center;
+                line-height: 25px;
+                cursor: pointer;
+                margin: 0 2px;
+            }
+            li:active {
+                background: rgba(0, 0, 0, 0.1);
+            }
+            .focus {
+                background: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}
+
+//商家列表
+#business {
+    .businessList {
+        text-align: center;
+        .business {
+            float: left;
+            width: 49%;
+            height: 140px;
+            background: white;
+            margin: 10px 4px;
+            position: relative;
+            .imgBox {
+                margin: 15px 10px;
+                width: 200px;
+                height: 110px;
+            }
+            .businessMsg {
+                position: absolute;
+                text-align: left;
+                top: 0;
+                right: 10px;
+                width: 320px;
+                height: 140px;
+                h4 {
+                    margin: 20px 0 5px;
+                }
+                p {
+                    margin: 10px 0;
+                    width: 320px;
+                    word-break: break-all;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    /** 将对象作为伸缩盒子模型显示 **/
+                    -webkit-box-orient: vertical;
+                    /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+                    -webkit-line-clamp: 3;
+                    /** 显示的行数 **/
+                    overflow: hidden;
+                    line-height: 24px;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+    .Page {
+        position: relative;
+        height: 30px;
+        margin: 10px 0 0;
+        text-align: center;
+        ul {
+            display: inline-block;
+            margin: 0 auto;
+            padding-bottom: 20px;
+            li {
+                display: inline-block;
+                width: 25px;
+                height: 25px;
+                background: white;
+                text-align: center;
+                line-height: 25px;
+                cursor: pointer;
+                margin: 0 2px;
+            }
+            li:active {
+                background: rgba(0, 0, 0, 0.1);
+            }
+            .focus {
+                background: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}
+
+//套餐页
+#combo {
+    .introduce {
+        margin: 10px 0;
+        .introduce-detail {
+            img {
+                margin: 30px 0 10px;
+            }
+            ul {
+                li {
+                    line-height: 40px;
+                    font-size: 18px;
+                    font-family: "微软雅黑";
+                }
+            }
+            aside {
+                input {
+                    border: none;
+                    outline: none;
+                }
+                margin-top: 15px;
+                label {
+                    position: relative;
+                    height: 40px;
+                    width: 300px;
+                    border: 1px solid #dcdcdc;
+                    border-radius: 8px;
+                    font-weight: lighter;
+                    background: white;
+                    .tel {
+                        height: 40px;
+                        width: 150px;
+                        background: #F7F7F7;
+                        padding-left: 10px;
+                        background: none;
+                    }
+                    .getVcode {
+                        position: absolute;
+                        right: 0px;
+                        top: 0px;
+                        padding: 0 10px;
+                        line-height: 40px;
+                        border-left: 1px solid #eee;
+                    }
+                }
+                .Vcode {
+                    height: 40px;
+                    width: 150px;
+                    border: 1px solid #dcdcdc;
+                    border-radius: 8px;
+                    padding-left: 10px;
+                }
+                #fortel {
+                    width: 130px;
+                    height: 38px;
+                    line-height: 36px;
+                    background: #13B193;
+                    border-radius: 5px 5px;
+                    font-size: 18px;
+                    color: #FFFFFF;
+                    font-weight: 300;
+                    margin-left: 10px;
+                    padding-top: 2px;
+                }
+                #fortel:active {
+                    background: #eee;
+                    color: #13B193;
+                }
+            }
+        }
+    }
+    .tiplist {
+        ul {
+            overflow: hidden;
+            li {
+                float: left;
+                width: 132px;
+                margin: 20px 60px;
+                text-align: center;
+                font-size: 30px;
+                color: #666666;
+                img {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+    .explain {
+        h4 {
+            background: url("../../../img/taocan_ledgement.png") no-repeat center;
+            text-align: center;
+            font-size: 36px;
+            color: #666666;
+            margin: 20px 0;
+            color: #13B193;
+        }
+        table {
+            width: 100%;
+            height: 500px;
+            color: #666666;
+            text-align: center;
+            border: 1px solid #828282;
+            thead {
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+            }
+        }
+    }
+    .showgoods {
+        h4 {
+            background: url("../../../img/taocan_ledgement.png") no-repeat center;
+            text-align: center;
+            font-size: 36px;
+            color: #666666;
+            margin: 20px 0;
+            color: #13B193;
+        }
+        ul {
+            overflow: hidden;
+            li {
+                float: left;
+                width: 220px;
+                height: 240px;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                background: #FFFFFF;
+                line-height: 240px;
+                text-align: center;
+                img {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+//孝道故事、风水玄学、行业资讯列表页
+#sysnews {
+    .titleList {
+        text-align: center;
+        ul {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            li {
+                font-size: 2rem;
+                height: 70px;
+                line-height: 70px;
+                border-bottom: 1px dashed #CCCCCC;
+                margin: 0;
+                a {
+                    text-decoration: none;
+                    color: #6c6c6c;
+                    &:hover {
+                        color: #13B193;
+                    }
+                }
+                i {
+                    vertical-align: -4px;
+                    font-size: 20px;
+                    margin-right: 15px;
+                    font-weight: 500;
+                }
+            }
+            .titleActive {
+                a {
+                    color: #13B193;
+                }
+            }
+        }
+    }
+    .articleList {
+        .imgBox {
+            margin: 20px auto;
+            height: 100px;
+            cursor: pointer;
+            img {
+                width: 160px;
+                height: 100px;
+                float: left;
+                margin-right: 20px;
+            }
+            .title {
+                margin: 10px auto 3px;
+                font-size: 18px;
+                color: #13B193;
+            }
+            .describe {
+                font-size: 14px;
+                height: 50px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                line-height: 28px;
+            }
+        }
+    }
+    .Page {
+        position: relative;
+        height: 30px;
+        text-align: center;
+        ul {
+            display: inline-block;
+            margin: 0 auto;
+            padding-bottom: 20px;
+            li {
+                display: inline-block;
+                width: 25px;
+                height: 25px;
+                background: white;
+                text-align: center;
+                line-height: 25px;
+                cursor: pointer;
+                margin: 0 2px;
+            }
+            li:active {
+                background: rgba(0, 0, 0, 0.1);
+            }
+            .focus {
+                background: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+}
+
+//孝道故事、风水玄学、行业资讯内容页
+#sysnew {
+    .titleList {
+        text-align: center;
+        ul {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            li {
+                font-size: 2rem;
+                height: 70px;
+                line-height: 70px;
+                border-bottom: 1px dashed #CCCCCC;
+                margin: 0;
+                a {
+                    text-decoration: none;
+                    color: #6c6c6c;
+                    &:hover {
+                        color: #13B193;
+                    }
+                }
+                i {
+                    vertical-align: -4px;
+                    font-size: 20px;
+                    margin-right: 15px;
+                    color: #13B193;
+                    font-weight: 500;
+                }
+            }
+            .titleActive {
+                a {
+                    color: #13B193;
+                }
+            }
+        }
+    }
+    .imgBox {
+        margin: 20px 0;
+        line-height: 35px;
+        word-wrap: break-word;
+        overflow: hidden;
+        span {
+            display: inline-block;
+            font-size: 14px;
+            text-indent: 2em;
+            img {
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+//关于我们
+#about {
+    .nav-left {
+        height: 400px;
+        margin-top: 20px;
+        ul {
+            li {
+                width: 100%;
+                border-bottom: 1px dashed #E0E0E0;
+                height: 70px;
+                line-height: 70px;
+                text-align: center;
+                a {
+                    font-size: 20px;
+                }
+                .current {
+                    color: #13B193;
+                }
+            }
+            li:hover {
+                a {
+                    color: #13B193;
+                }
+            }
+        }
+    }
+    //公司简介
+    .infro {
+        //display: none;
+        img {
+            margin-top: 20px;
+            width: 950px;
+            height: 350px;
+        }
+        p {
+            margin: 10px 0;
+            font-size: 15px;
+            line-height: 25px;
+            text-indent: 2em;
+        }
+    }
+    //招聘信息
+    .employment {
+        display: none;
+        img {
+            margin-top: 20px;
+            width: 950px;
+            height: 350px;
+        }
+        figure {
+            margin: 10px 0;
+            figcaption,
+            p {
+                line-height: 25px;
+                font-size: 13px;
+            }
+        }
+    }
+    //联系我们
+    .connection {
+        display: none;
+        text-align: center;
+        img {
+            margin-top: 20px;
+            width: 950px;
+            height: 350px;
+        }
+        figure {
+            margin: 10px 0;
+            figcaption {
+                line-height: 25px;
+                font-size: 15px;
+            }
+            p {
+                font-size: 13px;
+            }
+        }
+    }
+    //法律细则
+    .LawRules {
+        display: none;
+    }
+    //公司动态
+    .companyMsg {
+        display: none;
+        ul {
+            margin: 50px 0;
+            li {
+                border-bottom: 1px dashed #E0E0E0;
+                height: 100px;
+                line-height: 100px;
+                font-size: 18px;
+                cursor: pointer;
+                color: #545454;
+                .f-left {
+                    width: 38%;
+                    margin-right: 2%;
+                    text-align: center;
+                }
+                .f-right {
+                    width: 60%;
+                    text-align: left;
+                }
+                .imgBox {
+                    width: 120px;
+                    height: 80px;
+                    line-height: 80px;
+                    margin-right: 20px;
+                    display: inline-block;
+                }
+            }
+            li:hover {
+                background: rgba(0, 0, 0, 0.1);
+            }
+        }
+        .Page {
+            position: relative;
+            height: 30px;
+            text-align: center;
+            ul {
+                display: inline-block;
+                margin: 0 auto;
+                padding-bottom: 20px;
+                li {
+                    display: inline-block;
+                    width: 25px;
+                    height: 25px;
+                    background: white;
+                    text-align: center;
+                    line-height: 25px;
+                    cursor: pointer;
+                    margin: 0 2px;
+                    font-size: 12px;
+                    border: none;
+                }
+                li:active {
+                    background: rgba(0, 0, 0, 0.1);
+                }
+                .focus {
+                    background: rgba(0, 0, 0, 0.1);
+                }
+            }
+        }
+    }
+}
+
+//公司新闻详情
+#companyNew {
+    p {
+        margin-top: 20px;
+        img {
+            margin: 0 auto;
+        }
+    }
+}
+
+//礼仪师详情页
+#merchantMsg {
+    .morticianInfro {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        position: relative;
+        height: 190px;
+        .imgBox {
+            position: absolute;
+            left: 0px;
+            width: 145px;
+            height: 180px;
+            border: 5px solid white;
+            display: block;
+        }
+        .morticianMsg {
+            position: absolute;
+            left: 170px;
+            width: 200px;
+            height: 180px;
+            text-align: left;
+            .msgBox {
+                margin: 25px 15px;
+                p {
+                    padding: 5px 0;
+                    span {
+                        color: #fa4343;
+                        i {
+                            margin-right: 2px;
+                        }
+                    }
+                }
+            }
+        }
+        .line {
+            position: absolute;
+            right: 0;
+            top: 20px;
+            background: #dadada;
+            width: 1px;
+            height: 150px;
+        }
+    }
+    //预约
+    .addOrder {
+        height: 180px;
+        text-align: center;
+        input {
+            display: inline-block;
+            height: 40px;
+            margin: 0px auto;
+            outline: none;
+            border: none;
+        }
+        .phone {
+            width: 260px;
+            margin-top: 40px;
+            padding-left: 15px;
+            border: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        .box {
+            display:inline-block;
+            width: 260px;
+            height: 40px;
+
+            label {
+               float: left;
+                width: 174px;
+                height: 40px;
+                background: white;
+                border: 1px solid #eee;
+                position: relative;
+                font-weight: lighter;
+                .Vcode {
+                    width:74px;
+                    background: none;
+                    padding-left: 15px;
+                    position: absolute;
+                    left: 0px;
+                }
+                .getVcode {
+                    position: absolute;
+                    right: 0px;
+                    top: 0px;
+                    padding: 0 5px;
+                    line-height: 40px;
+                    border-left: 1px solid #eee;
+                    cursor: pointer;
+                }
+            }
+            .button {
+                 float: right;
+                width: 80px;
+                height: 38px;
+                background: #13B193;
+                color: white;
+                font-size: 14px;
+            }
+            .button:active {
+                background: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+    //子导航栏
+    .subnav {
+        height: 50px;
+        background: white;
+        font-size: 20px;
+        line-height: 50px;
+        color: #13B193;
+        border-bottom: 1px solid #eee;
+        margin-top: 10px;
+    }
+    //个人简介
+    .merchantInfro {
+        background: white;
+        font-size: 13px;
+        line-height: 20px;
+        padding: 15px 0;
+        text-indent: 2em;
+    }
+    //礼仪展示
+    .riteList {
+        background: white;
+        .rite {
+            width: 33.3%;
+            display: inline-block;
+            .imgBox {
+                float: left;
+                margin: 15px 10px;
+                width: 160px;
+                height: 120px;
+                display: block;
+            }
+            .riteMsg {
+                float: right;
+                margin: 15px 0;
+                width: 180px;
+                height: 120px;
+                text-align: left;
+                p {
+                    padding: 5px 0;
+                    height: 25px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 1;
+                }
+            }
+        }
+    }
+    //服务菜单
+    .services {
+        ul {
+            padding: 15px 0;
+            background: white;
+            li {
+                display: inline-block;
+                margin: 0 20px;
+                cursor: pointer;
+                font-size: 15px;
+            }
+            li:hover {
+                color: #13B193;
+            }
+            .focus {
+                color: #13B193;
+            }
+        }
+    }
+    //商品列表
+    .goodlist {
+        ul {
+            background: white;
+            .service {
+                display: inline-block;
+                width: 234px;
+                height: 250px;
+                border-bottom: 1px dashed #eee;
+                border-right: 1px dashed #eee;
+                img {
+                    display: block;
+                    margin: 22px;
+                    width: 190px;
+                    height: 150px;
+                }
+                p {
+                    font-size: 14px;
+                    padding-left: 20px;
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}
+
+//附近礼仪师
+#nearMerchant {
+    .title {
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .imgback {
+        width: 100%;
+        top: 140px;
+        left: 0;
+        z-index: -1;
+        position: absolute;
+    }
+    .morticianList {
+        text-align: center;
+        margin-bottom: 15px;
+        .morticianInfro {
+            position: relative;
+            height: 405px;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            border: 1px dashed #eee;
+            .imgBox {
+                display: inline-block;
+                width: 98%;
+                height: 300px;
+                background: white;
+                margin-top: 15px;
+                span {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .morticianMsg {
+                display: inline-block;
+                width: 98%;
+                height: 70px;
+                background: white;
+                text-align: left;
+                article {
+                    padding: 10px 0px;
+                    span {
+                        color: #fa4343;
+                        margin: 0px 30px;
+                        i {
+                            margin-right: 2px;
+                        }
+                    }
+                }
+                p {
+                    display: inline;
+                    span {
+                        color: #13B193;
+                    }
+                }
+                aside {
+                    padding: 10px 0px;
+                }
+            }
+        }
+    }
+}
+
+//个人中心
+#personalCenter {
+    .personalNav {
+        height: 400px;
+        margin-top: 20px;
+        ul {
+            li {
+                width: 100%;
+                border-bottom: 1px dashed #E0E0E0;
+                height: 70px;
+                line-height: 70px;
+                text-align: center;
+                a {
+                    font-size: 20px;
+                }
+                .current {
+                    color: #13B193;
+                }
+            }
+            li:hover {
+                a {
+                    color: #13B193;
+                }
+            }
+        }
+    }
+    //个人资料
+    .intro {
+        ul {
+            margin: 20px auto;
+            li {
+                margin-left: 5%;
+                line-height: 60px;
+                font-size: 18px;
+                input {
+                    border-radius: 4px;
+                    text-indent: 2em;
+                    line-height: 40px;
+                    width: 60%;
+                    height: 40px;
+                    outline: none;
+                    border: 1px solid #13B193;
+                }
+                .submitBtn {
+                    margin-left: 28%;
+                    width: 20%;
+                    text-indent: 0em;
+                    border: none;
+                    background: #13B193;
+                    color: #FFFFFF;
+                }
+                .submitBtn:active {
+                    color: #13B193;
+                    background: #FFFFFF;
+                }
+                span {
+                    font-size: 14px;
+                    display: inline-block;
+                    padding-left: 10px;
+                    color: brown;
+                }
+            }
+        }
+    }
+    //订单列表
+    .orderList {
+        display: none;
+        #userOrders {
+            .userOrder {
+                font-size: 14px;
+                overflow: hidden;
+                width: 100%;
+                height: 120px;
+                margin-top: 8px;
+                background: #FFFFFF;
+                .imgBox {
+                    width: 100px;
+                    height: 110px;
+                    margin-top: 5px;
+                    overflow: hidden;
+                    img {
+                        width: 100px;
+                    }
+                }
+                .businessMsg {
+                    ul {
+                        margin-top: 20px;
+                        li {
+                            height: 26px;
+                            line-height: 26px;
+                        }
+                    }
+                }
+                .orderMsg {
+                    ul {
+                        margin-top: 10px;
+                        li {
+                            height: 25px;
+                            line-height: 25px;
+                        }
+                    }
+                }
+                #delOrder {
+                    font-size: 14px;
+                    outline: none;
+                    width: 80px;
+                    height: 30px;
+                    margin-top: 45px;
+                    border-radius: 5px 5px;
+                    border: none;
+                    color: #FFFFFF;
+                    background: #13B193;
+                }
+                #delOrder:active {
+                    background: #eee;
+                    color: #13B193;
+                }
+            }
+        }
+    }
+    //优惠券
+    .coupons {
+        display: none;
+        text-align: center;
+        margin-top: 10px;
+        .personalCoupon {
+            float: left;
+            width: 400px;
+            height: 100px;
+            background: url(../../../img/Conpou1.png);
+            background-size: cover;
+            margin: 20px;
+            aside {
+                text-align: center;
+                margin-top: 20px;
+                strong {
+                    display: block;
+                }
+            }
+        }
+    }
+}

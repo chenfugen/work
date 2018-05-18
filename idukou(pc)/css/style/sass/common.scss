@@ -1,0 +1,381 @@
+@charset "utf-8";
+//主页
+body {
+    font-family: "Verdana" , "微软雅黑" , "Arial Narrow";
+    margin: 0;
+    font-size: 12px;
+    color: #232323;
+    background-color: #F7F7F7;
+    position: relative;
+}
+
+ul {
+    list-style: none;
+}
+blockquote,
+body,
+dd,
+div,
+dl,
+dt,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+li,
+ol,
+p,
+pre,
+td,
+textarea,
+th,
+ul {
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: #4F4F4F;
+}
+a:link {
+    color: #636363;
+    text-decoration: none;
+}
+a:visited {
+    color: #636363;
+}
+a:hover {
+    color: #636363;
+    text-decoration: none;
+}
+a:active {
+    color: #636363;
+}
+img {
+    padding: 0;
+    margin: 0;
+    border: none;
+//  display: block;
+}
+select {
+    width: 60px;
+    height: 30px;
+    border-radius: 5px 5px;
+    outline: none;
+}
+header {
+//  position: fixed;
+    width: 100%;
+    height: 90px;
+//  left: 0;
+//  z-index: 999;
+    background: white;
+    .row {
+        margin: 0 auto;
+        padding: 0;
+        width: 1170px;
+        height: 90px;
+        position: relative;
+        img {
+            margin: 13px 0;
+        }
+        .selectCity {
+            position: absolute;
+            left: 280px;
+            top: 35px;
+        }
+        .header_right {
+            width: 350px;
+            height:90px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            .phone {
+                width: 30px;
+                height: 30px;
+                float: left;
+                margin: 35px 0;
+            }
+            label {
+                float: left;
+                margin: 35px 10px;
+                color: #13B193;
+                font-size: 20px;
+                font-family: "微软雅黑";
+                i{
+                    font-weight: bold;
+                    display: inline-block;
+                    margin-right: 6px;
+                    font-size:24px ;
+                    line-height: 20px;
+                }
+            }
+            .login {
+                width: 130px;
+                height: 35px;
+                border-left: 1.5px solid #eee;
+                float: right;
+                margin-top: 30px;
+                cursor: pointer;
+                img {
+                    width: 30px;
+                    height: 30px;
+                    float: left;
+                    margin: 2px 0px 2px 15px;
+                }
+            }
+            .logged{
+                width: 130px;
+                height: 35px;
+                border-left: 1.5px solid #eee;
+                float: right;
+                margin-top: 30px;
+                cursor: pointer;
+                text-align: center;
+                line-height:35px;
+                font-size: 15px;
+                ul{
+                    display: none;
+                    background: white;
+                    width: 100%;
+                    text-align: center;
+                    position: relative;
+                    z-index: 10000;
+                    li{
+                       text-align: center;
+                       line-height:30px;                      
+                    }
+                    li:hover{
+                        background: rgba(0,0,0,0.1);
+                    }
+                }
+            }
+            .logged:hover{
+                ul{
+                    display: block;
+                }
+            }
+        }
+    }
+    .nav {
+//      position: fixed;
+        width: 100%;
+        height: 50px;
+//      left: 0;
+//      top: 90px;
+//      z-index: 0;
+        background: #13B193;
+        //导航条
+        .mainbav {
+            height:50px;
+            background: #13B193;
+            margin: 0;
+            padding: 0;
+            z-index: 999;
+            li {
+                float: left;            
+                a {
+                    display: block;
+                    padding: 0 20px;
+                    height: 50px;
+                    line-height: 50px;
+                    color: white;
+                    font-size: 15px;
+                }
+                a:hover {
+                    background-color: rgba(0, 0, 0, 0.1);
+                }
+            }
+            .busness {
+                float: right;
+            }
+        }
+    }
+}
+//当页
+.active {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+//弹框
+#update-win ,#msgBox,#delOrder{
+    .modal-dialog {
+        margin-top: 150px;
+        h5 {
+            img {
+                margin: 0 auto;
+            }
+        }
+    }
+    .modal-body {
+        ul {
+            margin: 10px 70px;
+            li {
+                margin: 20px 0;
+                color: #333;
+                label {
+                    font-size: 15px;
+                }
+                .telephone {
+                    width: 350px;
+                    height: 30px;
+                    border-radius: 5px 5px;
+                    border: 1px solid #ccc;
+                }
+                .authcode {
+                    width: 170px;
+                    height: 30px;
+                    border-radius: 5px 5px;
+                    border: 1px solid #ccc;
+                }
+                .getCode {
+                    margin: 0 10px;
+                    padding: 5px 15px;
+                    background: #13B193;
+                    color: white;
+                    border: none;
+                    border-radius: 5px 5px;
+                    outline: none;
+                }
+                .getCode:active {
+                    background: #eee;
+                    color: #13B193;
+                }
+            }
+        }
+    }
+    .modal-footer {
+        .btn {
+            margin: 0 120px;
+        }
+
+        #btn-login {
+            margin: 0 10px;
+            padding: 5px 30px;
+            background: #13B193;
+            color: white;
+            border: none;
+            border-radius: 5px 5px;
+            outline: none;
+            font-weight: bold;
+        }
+        #btn-close {
+            padding: 5px 30px;
+            background: #13B193;
+            color: white;
+            border: none;
+            border-radius: 5px 5px;
+            outline: none;
+            font-weight: lighter;
+        }
+        #btn-close:active,
+        #btn-login:active {
+            background: #eee;
+            color: #13B193;
+        }
+
+    }
+}
+//底部栏
+#footer { 
+    position:absolute;
+    left: 0px;
+    width:100%;
+    background:#5c5c5c;
+    .row {
+        width: 1170px;
+        margin: 0 auto;      
+        .col-lg-4 {
+            width: 33.3%;
+            height: 150px;        
+        }
+    }
+    .footer {
+        .logo {
+            height: 120px;
+            img {
+                margin: 25px auto;
+                display: block;
+            }
+        }
+        .bottomNav {
+            height: 120px;
+            ul {
+                margin: 25px 0;
+                li {
+                    float: left;
+                    font-size: 15px;
+                    margin-left: 10px;
+                    a {
+                        color: #CCCCCC;
+                    }
+                }
+            }
+            P {
+                color: #CCCCCC;            
+                margin-top: 10px;
+                line-height: 25px;
+                img {
+                display:inline-block;
+                }
+            }
+        }
+        .cord {
+            height: 120px;
+            img {
+                width: 100px;
+                height: 100px;
+                margin: 12px 20px;
+            }
+            div {
+                p {
+                    color: #CCCCCC;
+                    margin: 10px 20px;
+                    padding-top: 20px;
+                }
+            }
+        }
+        .linkList {
+            margin-top: 120px;
+            border-top: 1px solid #767676;
+            width: 100%;
+            ul {
+                width: 100%;
+                margin:5px;
+                position: relative;
+                li {
+                    display: inline-block;
+                    color: #ccc;
+                    margin-left: 15px;
+                    line-height: 20px;
+                    a {
+                        color: #ccc;
+                    }
+                    a:hover {
+                        text-decoration: underline;
+                    }
+                }
+                .opencloseCity,.opencloseCemetery {
+                    position: absolute;
+                    right: 20px;
+                    top: 3px;
+                    width: 30px;
+                    height: 15px;
+                    background: url("../../../img/openclose.png") no-repeat center 2px;
+                    cursor: pointer;
+                }
+            }
+            .hideLinkCity,.hideLinkCemetery {
+                display: none;
+                width: 1030px;
+                height: 100px;
+                margin-left: 82px;              
+            }
+        }
+    }
+}

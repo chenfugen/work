@@ -1,0 +1,45 @@
+<div id="sysnews">
+	<!--孝道故事、风水玄学、行业资讯列表页-->
+	<div class="row sysnewsList">
+		<div class="col-lg-2 titleList">
+			<ul>
+				<li>
+					<a href="javascript:;"><i class="icon-xdgs"></i>孝道故事</a>
+				</li>
+				<li>
+					<a href="javascript:;"><i class="icon-fsxx"></i>风水玄学</a>
+				</li>
+				<li>
+					<a href="javascript:;"><i class="icon-hyzx"></i>行业资讯</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-lg-10">
+			<img src="img/loading.gif"  class="loading" ng-if="sysnewsLoading">
+			<div class="articleList">
+				<div class="imgBox row"  ng-repeat="story in storyList" ng-click="goSysnew(this.story.ID)">				
+					<img ng-src="{{story.HeadImg | imgsrc}}"/>
+					<div class="title">{{story.NTitle}}</div>
+					<div class="describe">{{story.Summary}}</div>
+				</div>
+			</div>
+			<!--分页-->
+			<div class="row" ng-if="pages>0">
+				<div class="col-lg-12 Page">
+					<ul>
+						<li ng-click="pre()">
+							<span aria-hidden="true">&laquo;</span>
+						</li>
+						<li ng-click="page($index)" ng-class='{focus: $index==focus}' ng-repeat="i in pages | num">
+							{{i}}
+						</li>
+						<li ng-click="next()">
+							<span aria-hidden="true">&raquo;</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="js/common.js"></script>

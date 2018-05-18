@@ -1,0 +1,1587 @@
+@charset "UTF-8";
+/* line 3, ../sass/idukou.scss */
+body {
+  position: relative;
+}
+
+/* line 7, ../sass/idukou.scss */
+.f-left {
+  float: left;
+}
+
+/* line 11, ../sass/idukou.scss */
+.f-right {
+  float: right;
+}
+
+/* line 15, ../sass/idukou.scss */
+.loading {
+  width: 80px;
+  margin: 10px auto;
+}
+
+/* line 23, ../sass/idukou.scss */
+#home .banner {
+  margin: 0;
+  padding: 0;
+}
+/* line 26, ../sass/idukou.scss */
+#home .banner img {
+  display: block;
+  width: 100%;
+}
+/* line 32, ../sass/idukou.scss */
+#home .consult {
+  margin: 0;
+  padding: 0;
+  height: 421px;
+  text-align: center;
+  border: 1px solid #eee;
+}
+/* line 38, ../sass/idukou.scss */
+#home .consult h4 {
+  display: block;
+  width: 100%;
+  height: 55px;
+  line-height: 55px;
+  font-family: "黑体";
+  border-bottom: 1px solid #eee;
+  color: #13B193;
+  font-size: 20px;
+}
+/* line 48, ../sass/idukou.scss */
+#home .consult #search {
+  width: 270px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  padding: 15px 0;
+}
+/* line 53, ../sass/idukou.scss */
+#home .consult #search .phone {
+  width: 255px;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  margin-left: 15px;
+  outline: none;
+  background: white;
+  padding-left: 10px;
+}
+/* line 63, ../sass/idukou.scss */
+#home .consult #search .Vcode {
+  width: 70px;
+  height: 35px;
+  outline: none;
+  border: none;
+  background: none;
+  padding-left: 10px;
+}
+/* line 71, ../sass/idukou.scss */
+#home .consult #search label {
+  width: 170px;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #eee;
+  position: relative;
+  font-weight: lighter;
+  margin: 10px 0px 0px 10px;
+  background: white;
+}
+/* line 80, ../sass/idukou.scss */
+#home .consult #search label .getVcode {
+  position: absolute;
+  right: 5px;
+  top: 0px;
+  padding-left: 5px;
+  line-height: 35px;
+  border-left: 1px solid #eee;
+  cursor: pointer;
+}
+/* line 90, ../sass/idukou.scss */
+#home .consult #search button {
+  width: 80px;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  background: #13B193;
+  color: white;
+  outline: none;
+  margin: 10px 0px 0px 0px;
+}
+/* line 100, ../sass/idukou.scss */
+#home .consult #search button:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 104, ../sass/idukou.scss */
+#home .consult img {
+  width: 200px;
+  height: 200px;
+  margin: -10px auto;
+}
+/* line 109, ../sass/idukou.scss */
+#home .consult p {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+/* line 117, ../sass/idukou.scss */
+#home .Procedure img {
+  width: 100%;
+}
+/* line 121, ../sass/idukou.scss */
+#home .mortician {
+  height: 260px;
+  margin-bottom: 20px;
+  position: relative;
+}
+/* line 125, ../sass/idukou.scss */
+#home .mortician img {
+  display: block;
+  position: absolute;
+  cursor: pointer;
+}
+/* line 130, ../sass/idukou.scss */
+#home .mortician .imgOne {
+  left: 0;
+  top: 0;
+}
+/* line 134, ../sass/idukou.scss */
+#home .mortician .imgTwo {
+  left: 445px;
+  top: 0;
+}
+/* line 138, ../sass/idukou.scss */
+#home .mortician .imgThree {
+  left: 810px;
+  top: 0;
+}
+/* line 142, ../sass/idukou.scss */
+#home .mortician .imgFour {
+  left: 445px;
+  bottom: 0;
+}
+/* line 148, ../sass/idukou.scss */
+#home .subnav {
+  border-bottom: 1px solid #eee;
+}
+/* line 150, ../sass/idukou.scss */
+#home .subnav li {
+  margin: 5px 0;
+}
+/* line 155, ../sass/idukou.scss */
+#home .morticianList {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+/* line 159, ../sass/idukou.scss */
+#home .morticianList .morticianInfro {
+  position: relative;
+  height: 170px;
+  cursor: pointer;
+  border: 1px solid #F7F7F7;
+}
+/* line 164, ../sass/idukou.scss */
+#home .morticianList .morticianInfro .imgBox {
+  position: absolute;
+  left: 4px;
+  width: 125px;
+  height: 167px;
+}
+/* line 170, ../sass/idukou.scss */
+#home .morticianList .morticianInfro .morticianMsg {
+  position: absolute;
+  left: 129px;
+  width: 160px;
+  height: 167px;
+  background: white;
+  text-align: left;
+}
+/* line 177, ../sass/idukou.scss */
+#home .morticianList .morticianInfro .morticianMsg .msgBox {
+  margin: 25px 15px;
+}
+/* line 179, ../sass/idukou.scss */
+#home .morticianList .morticianInfro .morticianMsg .msgBox h5 {
+  margin-bottom: 5px;
+}
+/* line 182, ../sass/idukou.scss */
+#home .morticianList .morticianInfro .morticianMsg .msgBox p {
+  padding: 5px 0;
+}
+/* line 184, ../sass/idukou.scss */
+#home .morticianList .morticianInfro .morticianMsg .msgBox p span {
+  color: #fa4343;
+}
+/* line 186, ../sass/idukou.scss */
+#home .morticianList .morticianInfro .morticianMsg .msgBox p span i {
+  margin-right: 2px;
+}
+/* line 196, ../sass/idukou.scss */
+#home .businessList {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+/* line 200, ../sass/idukou.scss */
+#home .businessList .business {
+  float: left;
+  width: 225px;
+  height: 140px;
+  background: white;
+  margin: 0 4px;
+  cursor: pointer;
+}
+/* line 207, ../sass/idukou.scss */
+#home .businessList .business .imgBox {
+  margin: 15px 10px;
+  width: 200px;
+  height: 110px;
+}
+/* line 215, ../sass/idukou.scss */
+#home .advertising {
+  width: 1170px;
+  height: 125px;
+}
+/* line 220, ../sass/idukou.scss */
+#home .cemeteryList {
+  text-align: center;
+}
+/* line 222, ../sass/idukou.scss */
+#home .cemeteryList .cemetery {
+  float: left;
+  width: 49.5%;
+  height: 200px;
+  position: relative;
+  background: white;
+  cursor: pointer;
+  overflow: hidden;
+}
+/* line 230, ../sass/idukou.scss */
+#home .cemeteryList .cemetery .imgBox {
+  position: absolute;
+  left: 0;
+  width: 360px;
+  height: 200px;
+  background: white;
+}
+/* line 237, ../sass/idukou.scss */
+#home .cemeteryList .cemetery .cemeteryMsg {
+  position: absolute;
+  left: 360px;
+  width: 210px;
+  height: 200px;
+  overflow: hidden;
+}
+/* line 243, ../sass/idukou.scss */
+#home .cemeteryList .cemetery .cemeteryMsg .msgBox {
+  margin: 15px;
+  text-align: left;
+}
+/* line 246, ../sass/idukou.scss */
+#home .cemeteryList .cemetery .cemeteryMsg .msgBox h5 {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+/* line 250, ../sass/idukou.scss */
+#home .cemeteryList .cemetery .cemeteryMsg .msgBox p {
+  padding: 3px 0;
+}
+/* line 252, ../sass/idukou.scss */
+#home .cemeteryList .cemetery .cemeteryMsg .msgBox p span {
+  color: #13B193;
+}
+/* line 254, ../sass/idukou.scss */
+#home .cemeteryList .cemetery .cemeteryMsg .msgBox p span i {
+  margin-right: 2px;
+}
+/* line 259, ../sass/idukou.scss */
+#home .cemeteryList .cemetery .cemeteryMsg .msgBox .remark {
+  width: 200px;
+  height: 90px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /** 将对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical;
+  /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 4;
+  /** 显示的行数 **/
+  overflow: hidden;
+  line-height: 22px;
+}
+/* line 276, ../sass/idukou.scss */
+#home .cemeteryList .cemetery:nth-child(1),
+#home .cemeteryList .cemetery:nth-child(3) {
+  margin: 1% 1% 0 0;
+}
+/* line 280, ../sass/idukou.scss */
+#home .cemeteryList .cemetery:nth-child(2),
+#home .cemeteryList .cemetery:nth-child(4) {
+  margin: 1% 0 0;
+}
+/* line 286, ../sass/idukou.scss */
+#home .geomancy,
+#home .news,
+#home .story {
+  width: 33%;
+  float: left;
+  height: 290px;
+  cursor: pointer;
+  margin-right: 0.5%;
+}
+/* line 294, ../sass/idukou.scss */
+#home .geomancy .imgBox,
+#home .news .imgBox,
+#home .story .imgBox {
+  clear: both;
+  width: 100%;
+  height: 200px;
+  position: relative;
+}
+/* line 299, ../sass/idukou.scss */
+#home .geomancy .imgBox span,
+#home .news .imgBox span,
+#home .story .imgBox span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* line 304, ../sass/idukou.scss */
+#home .geomancy .imgBox .title,
+#home .news .imgBox .title,
+#home .story .imgBox .title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  line-height: 30px;
+  color: white;
+}
+/* line 315, ../sass/idukou.scss */
+#home .geomancy .storyList,
+#home .news .storyList,
+#home .story .storyList {
+  margin-top: 10px;
+}
+/* line 317, ../sass/idukou.scss */
+#home .geomancy .storyList li,
+#home .news .storyList li,
+#home .story .storyList li {
+  margin: 5px 10px;
+  width: 350px;
+  height: 20px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /** 将对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical;
+  /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 1;
+  /** 显示的行数 **/
+  overflow: hidden;
+  cursor: pointer;
+}
+/* line 332, ../sass/idukou.scss */
+#home .geomancy .storyList li：hover,
+#home .news .storyList li：hover,
+#home .story .storyList li：hover {
+  color: red;
+}
+
+/* line 341, ../sass/idukou.scss */
+#merchants .morticianList {
+  text-align: center;
+}
+/* line 343, ../sass/idukou.scss */
+#merchants .morticianList .morticianInfro {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  height: 170px;
+}
+/* line 348, ../sass/idukou.scss */
+#merchants .morticianList .morticianInfro .imgBox {
+  position: absolute;
+  left: 0;
+  width: 125px;
+  height: 170px;
+  background: white;
+}
+/* line 354, ../sass/idukou.scss */
+#merchants .morticianList .morticianInfro .imgBox span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* line 360, ../sass/idukou.scss */
+#merchants .morticianList .morticianInfro .morticianMsg {
+  position: absolute;
+  left: 123px;
+  width: 160px;
+  height: 170px;
+  background: white;
+  text-align: left;
+}
+/* line 367, ../sass/idukou.scss */
+#merchants .morticianList .morticianInfro .morticianMsg .msgBox {
+  margin: 25px 15px;
+}
+/* line 369, ../sass/idukou.scss */
+#merchants .morticianList .morticianInfro .morticianMsg .msgBox h5 {
+  margin-bottom: 5px;
+}
+/* line 372, ../sass/idukou.scss */
+#merchants .morticianList .morticianInfro .morticianMsg .msgBox p {
+  padding: 5px 0;
+}
+/* line 374, ../sass/idukou.scss */
+#merchants .morticianList .morticianInfro .morticianMsg .msgBox p span {
+  color: #fa4343;
+}
+/* line 376, ../sass/idukou.scss */
+#merchants .morticianList .morticianInfro .morticianMsg .msgBox p span i {
+  margin-right: 2px;
+}
+/* line 385, ../sass/idukou.scss */
+#merchants .Page {
+  position: relative;
+  height: 30px;
+  text-align: center;
+}
+/* line 389, ../sass/idukou.scss */
+#merchants .Page ul {
+  display: inline-block;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+/* line 393, ../sass/idukou.scss */
+#merchants .Page ul li {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: white;
+  text-align: center;
+  line-height: 25px;
+  cursor: pointer;
+  margin: 0 2px;
+}
+/* line 403, ../sass/idukou.scss */
+#merchants .Page ul li:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 406, ../sass/idukou.scss */
+#merchants .Page ul .focus {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* line 415, ../sass/idukou.scss */
+#cemetery .cemeteryList {
+  text-align: center;
+}
+/* line 417, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery {
+  float: left;
+  width: 49.5%;
+  height: 200px;
+  position: relative;
+  background: white;
+  overflow: hidden;
+  cursor: pointer;
+}
+/* line 425, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery .imgBox {
+  position: absolute;
+  left: 0;
+  width: 360px;
+  height: 200px;
+  background: white;
+}
+/* line 431, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery .imgBox span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* line 437, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery .cemeteryMsg {
+  position: absolute;
+  left: 360px;
+  width: 210px;
+  height: 200px;
+}
+/* line 442, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery .cemeteryMsg .msgBox {
+  margin: 15px;
+  text-align: left;
+}
+/* line 445, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery .cemeteryMsg .msgBox h5 {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+/* line 449, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery .cemeteryMsg .msgBox p {
+  padding: 3px 0;
+}
+/* line 451, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery .cemeteryMsg .msgBox p span {
+  color: #13B193;
+}
+/* line 453, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery .cemeteryMsg .msgBox p span i {
+  margin-right: 2px;
+}
+/* line 458, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery .cemeteryMsg .msgBox .remark {
+  width: 200px;
+  height: 90px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /** 将对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical;
+  /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 4;
+  /** 显示的行数 **/
+  overflow: hidden;
+  line-height: 22px;
+}
+/* line 475, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery:nth-child(1),
+#cemetery .cemeteryList .cemetery:nth-child(3) {
+  margin: 1% 1% 0 0;
+}
+/* line 479, ../sass/idukou.scss */
+#cemetery .cemeteryList .cemetery:nth-child(2),
+#cemetery .cemeteryList .cemetery:nth-child(4) {
+  margin: 1% 0 0;
+}
+/* line 484, ../sass/idukou.scss */
+#cemetery .Page {
+  position: relative;
+  height: 30px;
+  margin: 10px 0 0;
+  text-align: center;
+}
+/* line 489, ../sass/idukou.scss */
+#cemetery .Page ul {
+  display: inline-block;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+/* line 493, ../sass/idukou.scss */
+#cemetery .Page ul li {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: white;
+  text-align: center;
+  line-height: 25px;
+  cursor: pointer;
+  margin: 0 2px;
+}
+/* line 503, ../sass/idukou.scss */
+#cemetery .Page ul li:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 506, ../sass/idukou.scss */
+#cemetery .Page ul .focus {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* line 515, ../sass/idukou.scss */
+#business .businessList {
+  text-align: center;
+}
+/* line 517, ../sass/idukou.scss */
+#business .businessList .business {
+  float: left;
+  width: 49%;
+  height: 140px;
+  background: white;
+  margin: 10px 4px;
+  position: relative;
+}
+/* line 524, ../sass/idukou.scss */
+#business .businessList .business .imgBox {
+  margin: 15px 10px;
+  width: 200px;
+  height: 110px;
+}
+/* line 529, ../sass/idukou.scss */
+#business .businessList .business .businessMsg {
+  position: absolute;
+  text-align: left;
+  top: 0;
+  right: 10px;
+  width: 320px;
+  height: 140px;
+}
+/* line 536, ../sass/idukou.scss */
+#business .businessList .business .businessMsg h4 {
+  margin: 20px 0 5px;
+}
+/* line 539, ../sass/idukou.scss */
+#business .businessList .business .businessMsg p {
+  margin: 10px 0;
+  width: 320px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /** 将对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical;
+  /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 3;
+  /** 显示的行数 **/
+  overflow: hidden;
+  line-height: 24px;
+  font-size: 13px;
+}
+/* line 557, ../sass/idukou.scss */
+#business .Page {
+  position: relative;
+  height: 30px;
+  margin: 10px 0 0;
+  text-align: center;
+}
+/* line 562, ../sass/idukou.scss */
+#business .Page ul {
+  display: inline-block;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+/* line 566, ../sass/idukou.scss */
+#business .Page ul li {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: white;
+  text-align: center;
+  line-height: 25px;
+  cursor: pointer;
+  margin: 0 2px;
+}
+/* line 576, ../sass/idukou.scss */
+#business .Page ul li:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 579, ../sass/idukou.scss */
+#business .Page ul .focus {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* line 588, ../sass/idukou.scss */
+#combo .introduce {
+  margin: 10px 0;
+}
+/* line 591, ../sass/idukou.scss */
+#combo .introduce .introduce-detail img {
+  margin: 30px 0 10px;
+}
+/* line 595, ../sass/idukou.scss */
+#combo .introduce .introduce-detail ul li {
+  line-height: 40px;
+  font-size: 18px;
+  font-family: "微软雅黑";
+}
+/* line 601, ../sass/idukou.scss */
+#combo .introduce .introduce-detail aside {
+  margin-top: 15px;
+}
+/* line 602, ../sass/idukou.scss */
+#combo .introduce .introduce-detail aside input {
+  border: none;
+  outline: none;
+}
+/* line 607, ../sass/idukou.scss */
+#combo .introduce .introduce-detail aside label {
+  position: relative;
+  height: 40px;
+  width: 300px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-weight: lighter;
+  background: white;
+}
+/* line 615, ../sass/idukou.scss */
+#combo .introduce .introduce-detail aside label .tel {
+  height: 40px;
+  width: 150px;
+  background: #F7F7F7;
+  padding-left: 10px;
+  background: none;
+}
+/* line 622, ../sass/idukou.scss */
+#combo .introduce .introduce-detail aside label .getVcode {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  padding: 0 10px;
+  line-height: 40px;
+  border-left: 1px solid #eee;
+}
+/* line 631, ../sass/idukou.scss */
+#combo .introduce .introduce-detail aside .Vcode {
+  height: 40px;
+  width: 150px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding-left: 10px;
+}
+/* line 638, ../sass/idukou.scss */
+#combo .introduce .introduce-detail aside #fortel {
+  width: 130px;
+  height: 38px;
+  line-height: 36px;
+  background: #13B193;
+  border-radius: 5px 5px;
+  font-size: 18px;
+  color: #FFFFFF;
+  font-weight: 300;
+  margin-left: 10px;
+  padding-top: 2px;
+}
+/* line 650, ../sass/idukou.scss */
+#combo .introduce .introduce-detail aside #fortel:active {
+  background: #eee;
+  color: #13B193;
+}
+/* line 658, ../sass/idukou.scss */
+#combo .tiplist ul {
+  overflow: hidden;
+}
+/* line 660, ../sass/idukou.scss */
+#combo .tiplist ul li {
+  float: left;
+  width: 132px;
+  margin: 20px 60px;
+  text-align: center;
+  font-size: 30px;
+  color: #666666;
+}
+/* line 667, ../sass/idukou.scss */
+#combo .tiplist ul li img {
+  margin-bottom: 10px;
+}
+/* line 674, ../sass/idukou.scss */
+#combo .explain h4 {
+  background: url("../../../img/taocan_ledgement.png") no-repeat center;
+  text-align: center;
+  font-size: 36px;
+  color: #666666;
+  margin: 20px 0;
+  color: #13B193;
+}
+/* line 682, ../sass/idukou.scss */
+#combo .explain table {
+  width: 100%;
+  height: 500px;
+  color: #666666;
+  text-align: center;
+  border: 1px solid #828282;
+}
+/* line 688, ../sass/idukou.scss */
+#combo .explain table thead {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+/* line 696, ../sass/idukou.scss */
+#combo .showgoods h4 {
+  background: url("../../../img/taocan_ledgement.png") no-repeat center;
+  text-align: center;
+  font-size: 36px;
+  color: #666666;
+  margin: 20px 0;
+  color: #13B193;
+}
+/* line 704, ../sass/idukou.scss */
+#combo .showgoods ul {
+  overflow: hidden;
+}
+/* line 706, ../sass/idukou.scss */
+#combo .showgoods ul li {
+  float: left;
+  width: 220px;
+  height: 240px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background: #FFFFFF;
+  line-height: 240px;
+  text-align: center;
+}
+/* line 715, ../sass/idukou.scss */
+#combo .showgoods ul li img {
+  display: inline-block;
+}
+
+/* line 725, ../sass/idukou.scss */
+#sysnews .titleList {
+  text-align: center;
+}
+/* line 727, ../sass/idukou.scss */
+#sysnews .titleList ul {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 730, ../sass/idukou.scss */
+#sysnews .titleList ul li {
+  font-size: 2rem;
+  height: 70px;
+  line-height: 70px;
+  border-bottom: 1px dashed #CCCCCC;
+  margin: 0;
+}
+/* line 736, ../sass/idukou.scss */
+#sysnews .titleList ul li a {
+  text-decoration: none;
+  color: #6c6c6c;
+}
+/* line 739, ../sass/idukou.scss */
+#sysnews .titleList ul li a:hover {
+  color: #13B193;
+}
+/* line 743, ../sass/idukou.scss */
+#sysnews .titleList ul li i {
+  vertical-align: -4px;
+  font-size: 20px;
+  margin-right: 15px;
+  font-weight: 500;
+}
+/* line 751, ../sass/idukou.scss */
+#sysnews .titleList ul .titleActive a {
+  color: #13B193;
+}
+/* line 758, ../sass/idukou.scss */
+#sysnews .articleList .imgBox {
+  margin: 20px auto;
+  height: 100px;
+  cursor: pointer;
+}
+/* line 762, ../sass/idukou.scss */
+#sysnews .articleList .imgBox img {
+  width: 160px;
+  height: 100px;
+  float: left;
+  margin-right: 20px;
+}
+/* line 768, ../sass/idukou.scss */
+#sysnews .articleList .imgBox .title {
+  margin: 10px auto 3px;
+  font-size: 18px;
+  color: #13B193;
+}
+/* line 773, ../sass/idukou.scss */
+#sysnews .articleList .imgBox .describe {
+  font-size: 14px;
+  height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 28px;
+}
+/* line 785, ../sass/idukou.scss */
+#sysnews .Page {
+  position: relative;
+  height: 30px;
+  text-align: center;
+}
+/* line 789, ../sass/idukou.scss */
+#sysnews .Page ul {
+  display: inline-block;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+/* line 793, ../sass/idukou.scss */
+#sysnews .Page ul li {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: white;
+  text-align: center;
+  line-height: 25px;
+  cursor: pointer;
+  margin: 0 2px;
+}
+/* line 803, ../sass/idukou.scss */
+#sysnews .Page ul li:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 806, ../sass/idukou.scss */
+#sysnews .Page ul .focus {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* line 815, ../sass/idukou.scss */
+#sysnew .titleList {
+  text-align: center;
+}
+/* line 817, ../sass/idukou.scss */
+#sysnew .titleList ul {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+/* line 820, ../sass/idukou.scss */
+#sysnew .titleList ul li {
+  font-size: 2rem;
+  height: 70px;
+  line-height: 70px;
+  border-bottom: 1px dashed #CCCCCC;
+  margin: 0;
+}
+/* line 826, ../sass/idukou.scss */
+#sysnew .titleList ul li a {
+  text-decoration: none;
+  color: #6c6c6c;
+}
+/* line 829, ../sass/idukou.scss */
+#sysnew .titleList ul li a:hover {
+  color: #13B193;
+}
+/* line 833, ../sass/idukou.scss */
+#sysnew .titleList ul li i {
+  vertical-align: -4px;
+  font-size: 20px;
+  margin-right: 15px;
+  color: #13B193;
+  font-weight: 500;
+}
+/* line 842, ../sass/idukou.scss */
+#sysnew .titleList ul .titleActive a {
+  color: #13B193;
+}
+/* line 848, ../sass/idukou.scss */
+#sysnew .imgBox {
+  margin: 20px 0;
+  line-height: 35px;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+/* line 853, ../sass/idukou.scss */
+#sysnew .imgBox span {
+  display: inline-block;
+  font-size: 14px;
+  text-indent: 2em;
+}
+/* line 857, ../sass/idukou.scss */
+#sysnew .imgBox span img {
+  margin: 0 auto;
+}
+
+/* line 866, ../sass/idukou.scss */
+#about .nav-left {
+  height: 400px;
+  margin-top: 20px;
+}
+/* line 870, ../sass/idukou.scss */
+#about .nav-left ul li {
+  width: 100%;
+  border-bottom: 1px dashed #E0E0E0;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+}
+/* line 876, ../sass/idukou.scss */
+#about .nav-left ul li a {
+  font-size: 20px;
+}
+/* line 879, ../sass/idukou.scss */
+#about .nav-left ul li .current {
+  color: #13B193;
+}
+/* line 884, ../sass/idukou.scss */
+#about .nav-left ul li:hover a {
+  color: #13B193;
+}
+/* line 893, ../sass/idukou.scss */
+#about .infro img {
+  margin-top: 20px;
+  width: 950px;
+  height: 350px;
+}
+/* line 898, ../sass/idukou.scss */
+#about .infro p {
+  margin: 10px 0;
+  font-size: 15px;
+  line-height: 25px;
+  text-indent: 2em;
+}
+/* line 906, ../sass/idukou.scss */
+#about .employment {
+  display: none;
+}
+/* line 908, ../sass/idukou.scss */
+#about .employment img {
+  margin-top: 20px;
+  width: 950px;
+  height: 350px;
+}
+/* line 913, ../sass/idukou.scss */
+#about .employment figure {
+  margin: 10px 0;
+}
+/* line 915, ../sass/idukou.scss */
+#about .employment figure figcaption,
+#about .employment figure p {
+  line-height: 25px;
+  font-size: 13px;
+}
+/* line 923, ../sass/idukou.scss */
+#about .connection {
+  display: none;
+  text-align: center;
+}
+/* line 926, ../sass/idukou.scss */
+#about .connection img {
+  margin-top: 20px;
+  width: 950px;
+  height: 350px;
+}
+/* line 931, ../sass/idukou.scss */
+#about .connection figure {
+  margin: 10px 0;
+}
+/* line 933, ../sass/idukou.scss */
+#about .connection figure figcaption {
+  line-height: 25px;
+  font-size: 15px;
+}
+/* line 937, ../sass/idukou.scss */
+#about .connection figure p {
+  font-size: 13px;
+}
+/* line 943, ../sass/idukou.scss */
+#about .LawRules {
+  display: none;
+}
+/* line 947, ../sass/idukou.scss */
+#about .companyMsg {
+  display: none;
+}
+/* line 949, ../sass/idukou.scss */
+#about .companyMsg ul {
+  margin: 50px 0;
+}
+/* line 951, ../sass/idukou.scss */
+#about .companyMsg ul li {
+  border-bottom: 1px dashed #E0E0E0;
+  height: 100px;
+  line-height: 100px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #545454;
+}
+/* line 958, ../sass/idukou.scss */
+#about .companyMsg ul li .f-left {
+  width: 38%;
+  margin-right: 2%;
+  text-align: center;
+}
+/* line 963, ../sass/idukou.scss */
+#about .companyMsg ul li .f-right {
+  width: 60%;
+  text-align: left;
+}
+/* line 967, ../sass/idukou.scss */
+#about .companyMsg ul li .imgBox {
+  width: 120px;
+  height: 80px;
+  line-height: 80px;
+  margin-right: 20px;
+  display: inline-block;
+}
+/* line 975, ../sass/idukou.scss */
+#about .companyMsg ul li:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 979, ../sass/idukou.scss */
+#about .companyMsg .Page {
+  position: relative;
+  height: 30px;
+  text-align: center;
+}
+/* line 983, ../sass/idukou.scss */
+#about .companyMsg .Page ul {
+  display: inline-block;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+/* line 987, ../sass/idukou.scss */
+#about .companyMsg .Page ul li {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: white;
+  text-align: center;
+  line-height: 25px;
+  cursor: pointer;
+  margin: 0 2px;
+  font-size: 12px;
+  border: none;
+}
+/* line 999, ../sass/idukou.scss */
+#about .companyMsg .Page ul li:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 1002, ../sass/idukou.scss */
+#about .companyMsg .Page ul .focus {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* line 1012, ../sass/idukou.scss */
+#companyNew p {
+  margin-top: 20px;
+}
+/* line 1014, ../sass/idukou.scss */
+#companyNew p img {
+  margin: 0 auto;
+}
+
+/* line 1022, ../sass/idukou.scss */
+#merchantMsg .morticianInfro {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  height: 190px;
+}
+/* line 1027, ../sass/idukou.scss */
+#merchantMsg .morticianInfro .imgBox {
+  position: absolute;
+  left: 0px;
+  width: 145px;
+  height: 180px;
+  border: 5px solid white;
+  display: block;
+}
+/* line 1035, ../sass/idukou.scss */
+#merchantMsg .morticianInfro .morticianMsg {
+  position: absolute;
+  left: 170px;
+  width: 200px;
+  height: 180px;
+  text-align: left;
+}
+/* line 1041, ../sass/idukou.scss */
+#merchantMsg .morticianInfro .morticianMsg .msgBox {
+  margin: 25px 15px;
+}
+/* line 1043, ../sass/idukou.scss */
+#merchantMsg .morticianInfro .morticianMsg .msgBox p {
+  padding: 5px 0;
+}
+/* line 1045, ../sass/idukou.scss */
+#merchantMsg .morticianInfro .morticianMsg .msgBox p span {
+  color: #fa4343;
+}
+/* line 1047, ../sass/idukou.scss */
+#merchantMsg .morticianInfro .morticianMsg .msgBox p span i {
+  margin-right: 2px;
+}
+/* line 1054, ../sass/idukou.scss */
+#merchantMsg .morticianInfro .line {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  background: #dadada;
+  width: 1px;
+  height: 150px;
+}
+/* line 1064, ../sass/idukou.scss */
+#merchantMsg .addOrder {
+  height: 180px;
+  text-align: center;
+}
+/* line 1067, ../sass/idukou.scss */
+#merchantMsg .addOrder input {
+  display: inline-block;
+  height: 40px;
+  margin: 0px auto;
+  outline: none;
+  border: none;
+}
+/* line 1074, ../sass/idukou.scss */
+#merchantMsg .addOrder .phone {
+  width: 260px;
+  margin-top: 40px;
+  padding-left: 15px;
+  border: 1px solid #eee;
+  margin-bottom: 20px;
+}
+/* line 1081, ../sass/idukou.scss */
+#merchantMsg .addOrder .box {
+  display: inline-block;
+  width: 260px;
+  height: 40px;
+}
+/* line 1086, ../sass/idukou.scss */
+#merchantMsg .addOrder .box label {
+  float: left;
+  width: 174px;
+  height: 40px;
+  background: white;
+  border: 1px solid #eee;
+  position: relative;
+  font-weight: lighter;
+}
+/* line 1094, ../sass/idukou.scss */
+#merchantMsg .addOrder .box label .Vcode {
+  width: 74px;
+  background: none;
+  padding-left: 15px;
+  position: absolute;
+  left: 0px;
+}
+/* line 1101, ../sass/idukou.scss */
+#merchantMsg .addOrder .box label .getVcode {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  padding: 0 5px;
+  line-height: 40px;
+  border-left: 1px solid #eee;
+  cursor: pointer;
+}
+/* line 1111, ../sass/idukou.scss */
+#merchantMsg .addOrder .box .button {
+  float: right;
+  width: 80px;
+  height: 38px;
+  background: #13B193;
+  color: white;
+  font-size: 14px;
+}
+/* line 1119, ../sass/idukou.scss */
+#merchantMsg .addOrder .box .button:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 1125, ../sass/idukou.scss */
+#merchantMsg .subnav {
+  height: 50px;
+  background: white;
+  font-size: 20px;
+  line-height: 50px;
+  color: #13B193;
+  border-bottom: 1px solid #eee;
+  margin-top: 10px;
+}
+/* line 1135, ../sass/idukou.scss */
+#merchantMsg .merchantInfro {
+  background: white;
+  font-size: 13px;
+  line-height: 20px;
+  padding: 15px 0;
+  text-indent: 2em;
+}
+/* line 1143, ../sass/idukou.scss */
+#merchantMsg .riteList {
+  background: white;
+}
+/* line 1145, ../sass/idukou.scss */
+#merchantMsg .riteList .rite {
+  width: 33.3%;
+  display: inline-block;
+}
+/* line 1148, ../sass/idukou.scss */
+#merchantMsg .riteList .rite .imgBox {
+  float: left;
+  margin: 15px 10px;
+  width: 160px;
+  height: 120px;
+  display: block;
+}
+/* line 1155, ../sass/idukou.scss */
+#merchantMsg .riteList .rite .riteMsg {
+  float: right;
+  margin: 15px 0;
+  width: 180px;
+  height: 120px;
+  text-align: left;
+}
+/* line 1161, ../sass/idukou.scss */
+#merchantMsg .riteList .rite .riteMsg p {
+  padding: 5px 0;
+  height: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+/* line 1175, ../sass/idukou.scss */
+#merchantMsg .services ul {
+  padding: 15px 0;
+  background: white;
+}
+/* line 1178, ../sass/idukou.scss */
+#merchantMsg .services ul li {
+  display: inline-block;
+  margin: 0 20px;
+  cursor: pointer;
+  font-size: 15px;
+}
+/* line 1184, ../sass/idukou.scss */
+#merchantMsg .services ul li:hover {
+  color: #13B193;
+}
+/* line 1187, ../sass/idukou.scss */
+#merchantMsg .services ul .focus {
+  color: #13B193;
+}
+/* line 1194, ../sass/idukou.scss */
+#merchantMsg .goodlist ul {
+  background: white;
+}
+/* line 1196, ../sass/idukou.scss */
+#merchantMsg .goodlist ul .service {
+  display: inline-block;
+  width: 234px;
+  height: 250px;
+  border-bottom: 1px dashed #eee;
+  border-right: 1px dashed #eee;
+}
+/* line 1202, ../sass/idukou.scss */
+#merchantMsg .goodlist ul .service img {
+  display: block;
+  margin: 22px;
+  width: 190px;
+  height: 150px;
+}
+/* line 1208, ../sass/idukou.scss */
+#merchantMsg .goodlist ul .service p {
+  font-size: 14px;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+/* line 1220, ../sass/idukou.scss */
+#nearMerchant .title {
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+/* line 1227, ../sass/idukou.scss */
+#nearMerchant .imgback {
+  width: 100%;
+  top: 140px;
+  left: 0;
+  z-index: -1;
+  position: absolute;
+}
+/* line 1234, ../sass/idukou.scss */
+#nearMerchant .morticianList {
+  text-align: center;
+  margin-bottom: 15px;
+}
+/* line 1237, ../sass/idukou.scss */
+#nearMerchant .morticianList .morticianInfro {
+  position: relative;
+  height: 405px;
+  background: white;
+  cursor: pointer;
+  text-align: center;
+  border: 1px dashed #eee;
+}
+/* line 1244, ../sass/idukou.scss */
+#nearMerchant .morticianList .morticianInfro .imgBox {
+  display: inline-block;
+  width: 98%;
+  height: 300px;
+  background: white;
+  margin-top: 15px;
+}
+/* line 1250, ../sass/idukou.scss */
+#nearMerchant .morticianList .morticianInfro .imgBox span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* line 1256, ../sass/idukou.scss */
+#nearMerchant .morticianList .morticianInfro .morticianMsg {
+  display: inline-block;
+  width: 98%;
+  height: 70px;
+  background: white;
+  text-align: left;
+}
+/* line 1262, ../sass/idukou.scss */
+#nearMerchant .morticianList .morticianInfro .morticianMsg article {
+  padding: 10px 0px;
+}
+/* line 1264, ../sass/idukou.scss */
+#nearMerchant .morticianList .morticianInfro .morticianMsg article span {
+  color: #fa4343;
+  margin: 0px 30px;
+}
+/* line 1267, ../sass/idukou.scss */
+#nearMerchant .morticianList .morticianInfro .morticianMsg article span i {
+  margin-right: 2px;
+}
+/* line 1272, ../sass/idukou.scss */
+#nearMerchant .morticianList .morticianInfro .morticianMsg p {
+  display: inline;
+}
+/* line 1274, ../sass/idukou.scss */
+#nearMerchant .morticianList .morticianInfro .morticianMsg p span {
+  color: #13B193;
+}
+/* line 1278, ../sass/idukou.scss */
+#nearMerchant .morticianList .morticianInfro .morticianMsg aside {
+  padding: 10px 0px;
+}
+
+/* line 1288, ../sass/idukou.scss */
+#personalCenter .personalNav {
+  height: 400px;
+  margin-top: 20px;
+}
+/* line 1292, ../sass/idukou.scss */
+#personalCenter .personalNav ul li {
+  width: 100%;
+  border-bottom: 1px dashed #E0E0E0;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+}
+/* line 1298, ../sass/idukou.scss */
+#personalCenter .personalNav ul li a {
+  font-size: 20px;
+}
+/* line 1301, ../sass/idukou.scss */
+#personalCenter .personalNav ul li .current {
+  color: #13B193;
+}
+/* line 1306, ../sass/idukou.scss */
+#personalCenter .personalNav ul li:hover a {
+  color: #13B193;
+}
+/* line 1314, ../sass/idukou.scss */
+#personalCenter .intro ul {
+  margin: 20px auto;
+}
+/* line 1316, ../sass/idukou.scss */
+#personalCenter .intro ul li {
+  margin-left: 5%;
+  line-height: 60px;
+  font-size: 18px;
+}
+/* line 1320, ../sass/idukou.scss */
+#personalCenter .intro ul li input {
+  border-radius: 4px;
+  text-indent: 2em;
+  line-height: 40px;
+  width: 60%;
+  height: 40px;
+  outline: none;
+  border: 1px solid #13B193;
+}
+/* line 1329, ../sass/idukou.scss */
+#personalCenter .intro ul li .submitBtn {
+  margin-left: 28%;
+  width: 20%;
+  text-indent: 0em;
+  border: none;
+  background: #13B193;
+  color: #FFFFFF;
+}
+/* line 1337, ../sass/idukou.scss */
+#personalCenter .intro ul li .submitBtn:active {
+  color: #13B193;
+  background: #FFFFFF;
+}
+/* line 1341, ../sass/idukou.scss */
+#personalCenter .intro ul li span {
+  font-size: 14px;
+  display: inline-block;
+  padding-left: 10px;
+  color: brown;
+}
+/* line 1351, ../sass/idukou.scss */
+#personalCenter .orderList {
+  display: none;
+}
+/* line 1354, ../sass/idukou.scss */
+#personalCenter .orderList #userOrders .userOrder {
+  font-size: 14px;
+  overflow: hidden;
+  width: 100%;
+  height: 120px;
+  margin-top: 8px;
+  background: #FFFFFF;
+}
+/* line 1361, ../sass/idukou.scss */
+#personalCenter .orderList #userOrders .userOrder .imgBox {
+  width: 100px;
+  height: 110px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+/* line 1366, ../sass/idukou.scss */
+#personalCenter .orderList #userOrders .userOrder .imgBox img {
+  width: 100px;
+}
+/* line 1371, ../sass/idukou.scss */
+#personalCenter .orderList #userOrders .userOrder .businessMsg ul {
+  margin-top: 20px;
+}
+/* line 1373, ../sass/idukou.scss */
+#personalCenter .orderList #userOrders .userOrder .businessMsg ul li {
+  height: 26px;
+  line-height: 26px;
+}
+/* line 1380, ../sass/idukou.scss */
+#personalCenter .orderList #userOrders .userOrder .orderMsg ul {
+  margin-top: 10px;
+}
+/* line 1382, ../sass/idukou.scss */
+#personalCenter .orderList #userOrders .userOrder .orderMsg ul li {
+  height: 25px;
+  line-height: 25px;
+}
+/* line 1388, ../sass/idukou.scss */
+#personalCenter .orderList #userOrders .userOrder #delOrder {
+  font-size: 14px;
+  outline: none;
+  width: 80px;
+  height: 30px;
+  margin-top: 45px;
+  border-radius: 5px 5px;
+  border: none;
+  color: #FFFFFF;
+  background: #13B193;
+}
+/* line 1399, ../sass/idukou.scss */
+#personalCenter .orderList #userOrders .userOrder #delOrder:active {
+  background: #eee;
+  color: #13B193;
+}
+/* line 1407, ../sass/idukou.scss */
+#personalCenter .coupons {
+  display: none;
+  text-align: center;
+  margin-top: 10px;
+}
+/* line 1411, ../sass/idukou.scss */
+#personalCenter .coupons .personalCoupon {
+  float: left;
+  width: 400px;
+  height: 100px;
+  background: url(../../../img/Conpou1.png);
+  background-size: cover;
+  margin: 20px;
+}
+/* line 1418, ../sass/idukou.scss */
+#personalCenter .coupons .personalCoupon aside {
+  text-align: center;
+  margin-top: 20px;
+}
+/* line 1421, ../sass/idukou.scss */
+#personalCenter .coupons .personalCoupon aside strong {
+  display: block;
+}

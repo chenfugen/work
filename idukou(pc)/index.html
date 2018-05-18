@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="IDukou">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<!--如果支持Grome插件，就用插件来渲染。若为IE浏览器就用IE最高版本来渲染，这样只要浏览器版本较高-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="keywords" content="杭州花圈店,杭州白事,杭州丧事,杭州一条龙,杭州白事一条龙,杭州丧事一条龙,杭州灵堂布置,遗体,公墓,陵园,墓地,殡仪,礼仪,祭奠,殡葬,殡仪,花圈店" />
+		<meta name="description" content="千柏渡是中国满意度最高的同城白事一条龙平台，汇聚全城老牌花圈店、优秀礼仪师、品牌殡仪服务供应商。在这里我们通过互联网来改善殡葬行业的服务质量，为每一个生命站好最后一班岗。" />
+		<link rel="icon" type="image/png" href="img/title.png">
+		<title>杭州花圈店,杭州白事,杭州丧事,杭州一条龙,杭州白事一条龙,杭州丧事一条龙,杭州灵堂布置,遗体,公墓,陵园,墓地,殡仪,礼仪,祭奠,殡葬,殡仪,花圈店</title>
+		<link rel="icon" href="img/title.png" mce_href="img/title.png" type="image/x-icon">
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="css/iconcss.css" />
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/style/stylesheets/idukou.css" />
+	</head>
+
+	<body ng-controller="AppController">
+		<!--头部-->
+		<header>
+			<div class="row">
+				<img src="img/logo.png" alt="logo"  ng-click="goHome()"/>
+				<select class="selectCity">
+					<option value="0" style=" height: 50px;">杭州市</option>
+					<option value="1" style=" height: 50px;">上海市</option>
+				</select>
+				<div class="header_right">
+					<label><i class="icon-telephone"></i><b>0571-85020445</b></label>
+					<div class="login">
+						<img src="img/operson.png" />
+						<span class="btn  btn-large btn-login" style="color: #3B3B3B; font-size: 1.4rem;line-height:25px;">未登录</span>
+					</div>
+					<div class="logged">
+						<span class="userName"></span>
+						<i class='icon-pullDown'></i>
+						<ul>
+							<li><i class="icon-aboutus"></i>
+								<a href="#/personalCenter">&nbsp;个人中心</a>
+							</li>
+							<li onclick="exit()"><i class="icon-loginout"></i>
+								<a href="javascript:;">&nbsp;退出登录</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="nav">
+				<!--导航栏-->
+				<div class="row">
+					<ul class="col-lg-12 mainbav">
+						<li>
+							<a href="#/">首页</a>
+						</li>
+						<li>
+							<a href="#/merchants">白事预约</a>
+						</li>
+						<li>
+							<a href="#/cemeteries">购墓服务</a>
+						</li>
+						<li>
+							<a href="#/about/1" >关于我们</a>
+						</li>
+						<li class="busness">
+							<a href="http://www.idukou.com/entrance.html" target="_blank">商家管理平台</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</header>
+		<!--登录框-->
+		<div id="update-win" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update-win-label" aria-describedby="登录框">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="update-win-label">
+                     <img  src="img/logo.png" alt="logo" />
+                 </h5>
+					</div>
+					<div class="modal-body">
+						<ul>
+							<li><label>手机号码&nbsp;  <input type="tel" required class="telephone" /></label></li>
+							<label class="phoneWarn" style="color:red;font-size:12px;display: none;">&nbsp;*手机号码格式不正确</label>
+							<li><label>&nbsp;&nbsp;&nbsp;验证码&nbsp; <input type="text" required class="authcode" /><input class="getCode" type="button"  value="获取验证码"/></label></li>
+							<label class="codeWarn" style="color:red;font-size:12px;display: none;">&nbsp;*请输入正确验证码</label>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button id="btn-login" type="button" class="btn btn-success" ng-click="login()">登 录</button>
+						<button id="btn-close" type="button" class="btn btn-default">关 闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<div style="width:100%;height:140px;"></div>-->
+		<div class="container" ng-view></div>
+		<!--底部栏-->
+		<div id="footer" class="container">
+			<div class="row footer">
+				<div class="col-lg-4 logo">
+					<img src="img/logo.png" />
+				</div>
+				<div class="col-lg-4 bottomNav">
+					<ul>
+						<li ng-click="goAbout(1)">
+							<a href="javascript:;">关于我们</a>
+						</li>
+						<li ng-click="goAbout(2)">
+							<a href="javascript:;">加入我们</a>
+						</li>
+						<li ng-click="goAbout(3)">
+							<a href="javascript:;">联系我们</a>
+						</li>
+						<li ng-click="goAbout(4)">
+							<a href="javascript:;">法律免责</a>
+						</li>
+						<li ng-click="goAbout(5)">
+							<a href="javascript:;">公司动态</a>
+						</li>
+					</ul>
+					<p>Copyright&copy;2008-2017杭州八度时空网络科技有限公司版权所有 浙ICP备17052863号-1&nbsp;&nbsp;<span style="position: relative;z-index:10000;width:10px;height:10px;"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256300988'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/stat.php%3Fid%3D1256300988%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></span></p>
+				</div>
+				<div class="col-lg-4 f-left cord">
+					<img class="f-left" src="img/pc_ewm.jpg" alt="二维码">
+					<div class="f-left">
+						<p>咨询电话：0571-85020445</p>
+						<p>（周一至周五 9:00-18:00）</p>
+					</div>
+				</div>
+				<div class="linkList">
+					<ul>
+						<li>热门城市 : </li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">全国花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com/hz/index.html" target="_blank">杭州花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">上海花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">全国花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">上海花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com/hz/index.html" target="_blank">杭州花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">北京花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">广州花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">武汉花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">福州花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南京花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">重庆花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">成都花圈店</a>
+						</li>
+						<li class="opencloseCity"></li>
+					</ul>
+					<ul class="hideLinkCity">
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长沙花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">金华花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">石家庄花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">西安花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">太原花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">济南花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">兰州花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">沈阳花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长春花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">哈尔滨花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">郑州花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">昆明花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">贵阳花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">海口花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南昌花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">合肥花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">全国白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">上海白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com/hz/index.html" target="_blank">杭州白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">北京白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">广州白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">武汉白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">福州白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南京白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">重庆白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">成都白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长沙白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">金华白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">石家庄白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">西安白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">太原白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">济南白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">兰州白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">沈阳白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长春白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">哈尔滨白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">郑州白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">昆明白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">贵阳白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">海口白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南昌白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">合肥白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">全国丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">上海丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com/hz/index.html" target="_blank">杭州丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">北京丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">广州丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">武汉丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">福州丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南京丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">重庆丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">成都丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长沙丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">金华丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">石家庄丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">西安丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">太原丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">济南丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">兰州丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">沈阳丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长春丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">哈尔滨丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">郑州丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">昆明丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">贵阳丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">海口丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南昌丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">合肥丧事</a>
+						</li>
+					</ul>
+					<ul>
+						<li>热门陵园 :</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">全国墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">上海墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com/hz/index.html" target="_blank">杭州墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">北京墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">广州墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">武汉墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">福州墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南京墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">重庆墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">成都墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长沙墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">金华墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">石家庄墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">西安墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">太原墓地</a>
+						</li>
+						<li class="opencloseCemetery"></li>
+					</ul>
+					<ul class="hideLinkCemetery">
+						<li>
+							<a href="http://www.idukou.com" target="_blank">济南墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">兰州墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">沈阳墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长春墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">哈尔滨墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">郑州墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">昆明墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">贵阳墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">海口墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南昌墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">合肥墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">全国陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">上海陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com/hz/index.html" target="_blank">杭州陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">北京陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">广州陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">武汉陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">福州陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南京陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">重庆陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">成都陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长沙陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">金华陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">石家庄陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">西安陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">太原陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">济南陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">兰州陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">沈阳陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长春陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">哈尔滨陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">郑州陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">昆明陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">贵阳陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">海口陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南昌陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">合肥陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">全国公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">上海公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com/hz/index.html" target="_blank">杭州公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">北京公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">广州公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">武汉公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">福州公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南京公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">重庆公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">成都公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长沙公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">金华公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">石家庄公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">西安公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">太原公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">济南公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">兰州公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">沈阳公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">长春公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">哈尔滨公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">郑州公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">昆明公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">贵阳公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">海口公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">南昌公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com" target="_blank">合肥公墓</a>
+						</li>
+					</ul>
+					<ul>
+						<li>热门搜索 :</li>
+						<li>
+							<a href="http://www.idukou.com">花圈店</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">殡仪馆</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">白事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">丧事</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">一条龙</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">花圈</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">遗体接运</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">灵堂布置</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">入殓师</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">礼仪服务</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">公墓</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">陵园</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">墓地</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">祭奠</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">殡葬</a>
+						</li>
+						<li>
+							<a href="http://www.idukou.com">殡仪</a>
+						</li>
+					</ul>
+					<ul>
+						<li>友情链接：</li>
+						<li>
+							<a href="http://www.zgbzxh.org" target="_blank">中国殡葬协会</a>
+						</li>
+						<li>
+							<a href="http://www.zjbzxh.org" target="_blank">浙江省殡葬协会</a>
+						</li>
+						<li>
+							<a href="http://www.shbx.org" target="_blank">上海市殡葬协会</a>
+						</li>
+						<li>
+							<a href="http://www.hzbzxh.org" target="_blank">杭州市殡葬协会 </a>
+						</li>
+						<li>
+							<a href="http://www.jidianol.cn" target="_blank">中国祭奠网</a>
+						</li>
+						<li class="noborder">
+							<a href="http://www.handsnet.cn" target="_blank">杭州汉之网络科技有限公司</a>
+						</li>
+					</ul>
+					<ul style="margin-bottom: 20px;">
+						<li class="fsize-12 mr-10">移动平台：</li>
+						<li>
+							<a href="http://wx.idukou.com" target="_blank">千柏渡一站式殡葬服务平台</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/angular/angular-1.5.8.min.js"></script>
+		<script src="js/angular/angular-route-1.5.8.min.js"></script>
+		<script src="js/angular/angular-resource-1.5.8.min.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.0&key=402a66ea45ea79960fc0f8591fffb804"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6Dzd2aVFKWL8AvzHNFp39VHbtgTsLf7D"></script>
+	</body>
+
+</html>

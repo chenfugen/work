@@ -1,0 +1,25 @@
+<div id="nearMerchant">
+	<!--礼仪师列表-->
+	<div class="row title">
+		附近礼仪师
+	</div>
+	<div class="row morticianList">
+		<img src="img/loading.gif" class="loading" ng-if="morticianLoading">
+		<div class="col-lg-3 morticianInfro" ng-repeat="mortician in morticianList" ng-click="goMerchant(mortician)">
+			<img ng-src="{{mortician.HeadImg |imgsrc}}" class="imgBox" />
+
+			<div class="morticianMsg">
+				<article>
+					<p style="font-weight:bold;">{{mortician.MName}}</p>
+					<span><i ng-repeat="i in mortician.Fullstar | range" class="iconfont icon-star-full"></i><i ng-repeat="i in mortician.Halfstar | range " class="iconfont icon-star-half"></i><i ng-repeat="i in mortician.Emptystar | range " class="iconfont icon-star-empty"></i></span>
+					<p>{{mortician.TTotalScore.toFixed(1)}}</p>
+				</article>
+				<p>&nbsp;响应速度:<span>{{mortician.TMajorNum.toFixed(1)}}</span></p>
+				<p>&nbsp;专业程度:<span>{{mortician.TMannerNum.toFixed(1)}}</span></p>
+				<p>&nbsp;服务态度:<span>{{mortician.TRestimeNum.toFixed(1)}}</span></p>
+				<aside><i class="icon-adress"></i> 距离{{mortician.Distance.toFixed(1)}}公里左右</aside>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="js/common.js"></script>

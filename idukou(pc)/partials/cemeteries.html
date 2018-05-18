@@ -1,0 +1,39 @@
+<div id="cemetery">
+	<div class="row cemeteryList">
+		<img src="img/loading.gif" / class="loading" ng-if="cemeteryLoading">
+		<ul>
+			<li class="cemetery" ng-repeat="cemetery in cemeteryList" ng-click="goCemeteryMap(cemetery.ID)">
+				<div class="imgBox">
+					<img ng-src="{{cemetery.CemImg |imgsrc}}" class="imgBox"/>
+				</div>
+				<div class="cemeteryMsg">
+					<div class="msgBox">
+						<h5>{{cemetery.CemName}}</h5>
+						<p ng-if="cemetery.Average!=0">均价：{{cemetery.Average}}</p>
+						<p ng-if="cemetery.Average==0">均价： --元</p>
+						<p class="remark">简介：{{cemetery.Remark}}</p>
+						<p><i class="iconfont icon-adress"></i>:<span>杭州市{{cemetery.CemAddr}}</span></p>
+						<p><span>{{cemetery.CemeTel}}</span></p>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!--分页-->
+	<div class="row" ng-if="pages>0">
+		<div class="col-lg-12 Page">
+			<ul>
+				<li ng-click="pre()">
+					<span aria-hidden="true">&laquo;</span>
+				</li>
+				<li ng-click="page($index)"  ng-class='{focus: $index==focus}'  ng-repeat="i in pages | num">
+				  {{i}}
+				</li>
+				<li ng-click="next()">
+					<span aria-hidden="true">&raquo;</span>
+				</li>			 
+			</ul>
+		</div>
+	</div>
+</div>
+<script src="js/common.js"></script>

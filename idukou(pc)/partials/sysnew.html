@@ -1,0 +1,23 @@
+<div id="sysnew">
+	<!--孝道故事、风水玄学、行业资讯列表页-->
+	<div class="row sysnewsList">
+		<div class="col-lg-2 titleList">
+			<ul>
+				<li ng-click="goSysnews(0)">
+					<a href="javascript:;"><i class="icon-xdgs"></i>孝道故事</a>
+				</li>
+				<li ng-click="goSysnews(1)">
+					<a href="javascript:;"><i class="icon-fsxx"></i>风水玄学</a>
+				</li>
+				<li ng-click="goSysnews(2)">
+					<a href="javascript:;"><i class="icon-hyzx"></i>行业资讯</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-lg-10 ">
+			<img src="img/loading.gif" class="loading" ng-if="sysnewLoading">
+			<div class="imgBox" ng-bind-html="sysnew|trust2Html"></div>
+		</div>
+	</div>
+</div>
+<script src="js/common.js"></script>

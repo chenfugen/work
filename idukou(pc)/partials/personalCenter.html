@@ -1,0 +1,106 @@
+<div id="personalCenter">
+	<div class="row">
+		<!--左导航栏-->
+		<div class="col-lg-2 personalNav">
+			<ul>
+				<li>
+					<a href="javascript:;" class="current"><i class="icon-aboutus"></i> &nbsp;&nbsp;个人资料</a>
+				</li>
+				<li>
+					<a href="javascript:;"><i class="icon-orders"></i> &nbsp;&nbsp;订单列表</a>
+				</li>
+				<li>
+					<a href="javascript:;"><i class="icon-coupon"></i> &nbsp;&nbsp; 优&nbsp;惠&nbsp;券</a>
+				</li>
+			</ul>
+		</div>
+		<!--右内容栏-->
+		<div class="col-lg-10 content">
+			<div class="intro">
+				<img src="img/loading.gif" class="loading" ng-if="introLoading">
+				<!--修改资料成功弹出框-->
+				<div id="successAfter" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update-win-label" aria-describedby="登录框">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button id="msgClose" type="button" class="btn btn-default" style="float: right;border-radius:40px;outline:none;">x</button>
+							</div>
+							<div class="modal-body" style="text-align: center;">
+								<p>&nbsp;</p>
+								<img src="img/tips.png" style="width：25px;height: 25px;display:inline-block;margin-top:-5px;">
+								<span style="font-size:20px;">您的资料修改成功</span>
+								<p>&nbsp;</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ul>
+					<li>用户姓名：<input type="tel" ng-model="personalMsg.TrueName" /><span>*必填项</span></li>
+					<li>手&nbsp;机&nbsp;号&nbsp;：<input type="tel" ng-model="personalMsg.Phone" /><span>*必填项</span></li>
+					<li>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码 ：<input type="tel" ng-model="personalMsg.Password" /></li>
+					<li>用户地址：<input type="tel" ng-model="personalMsg.Address" /><span>*必填项</span></li>
+					<li><input class="submitBtn" type="button" value="确定修改" /></li>
+				</ul>
+
+			</div>
+			<div class="orderList" style="text-align: left;">
+				<!--<img src="img/loading.gif" class="loading" ng-if="userOrdersLoading">-->
+				<!--删除订单弹出框-->
+				<div id="delForOrder" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update-win-label" aria-describedby="登录框">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button id="msgClose" type="button" class="btn btn-default" style="float: right;border-radius:40px;outline:none;">x</button>
+							</div>
+							<div class="modal-body" style="text-align: center;">
+								<p>&nbsp;</p>
+								<img src="img/tips.png" style="width：25px;height: 25px;display:inline-block;margin-top:-5px;">
+								<span style="font-size:20px;"> 订单已成功删除</span>
+								<p>&nbsp;</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--用户订单列表-->
+				<div id="userOrders">
+					<img src="img/loading.gif" class="loading" ng-if="userOrdersLoading">
+					<div class="userOrder row" ng-repeat="userOrder in userOrderList">
+						<div class="col-lg-2 imgBox">
+							<img ng-src="{{userOrder.merchant.HeadImg | imgsrc}}" />
+						</div>
+						<div class="col-lg-3 businessMsg">
+							<ul>
+								<li>{{userOrder.merchant.MName}}</li>
+								<li>{{userOrder.merchant.BusName}}</li>
+							</ul>
+						</div>
+						<div class="col-lg-5 orderMsg">
+							<ul>
+								<li>订单号：{{userOrder.OCode}}</li>
+								<li>预约人：{{userOrder.TrueName}}</li>
+								<li>预约时间：{{userOrder.CreateDate}}</li>
+								<li>状态：{{userOrder.State}}</li>
+							</ul>
+						</div>
+						<div class="col-lg-2">
+							<input type="button" id="delOrder" ng-click="delOrder(userOrder.ID)" value="删除订单" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="coupons">
+				<img src="img/loading.gif" class="loading" ng-if="couponLoading" />
+				<div class="personalCoupon row" ng-repeat="coupon in couponList">
+					<aside class="col-md-4">
+						<strong>&yen;{{coupon.ConditionPrice}}</strong><br />
+						<span>{{coupon.Name}}</span>
+					</aside>
+					<ul class="col-md-8">
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<script src="js/common.js"></script>

@@ -1,0 +1,101 @@
+<!--主要内容-->
+<div id="merchantMsg">
+	<div class="row morticianInfro">
+		<div class="col-lg-4">
+			<img ng-src="{{merchant.HeadImg | imgsrc}}" class="imgBox" />
+			<div class="morticianMsg">
+				<div class="msgBox">
+					<p>{{merchant.MName}}&nbsp;<span>
+                            <i ng-repeat="i in merchant.Fullstar | range" class="iconfont icon-star-full"></i><i ng-repeat="i in merchant.Halfstar | range " class="iconfont icon-star-half"></i><i ng-repeat="i in merchant.Emptystar | range " class="iconfont icon-star-empty"></i>
+							</span>&nbsp;{{merchant.TTotalScore.toFixed(1)}}</p>
+					<p>响应速度：<span>{{merchant.TMajorNum.toFixed(1)}}</span></p>
+					<p>专业程度：<span>{{merchant.TMannerNum.toFixed(1)}}</span></p>
+					<p>服务态度：<span>{{merchant.TRestimeNum.toFixed(1)}}</span></p>
+					<p>{{merchant.BusName}}</p>
+				</div>
+			</div>
+			<div class="line"></div>
+		</div>
+		<div class="col-lg-4 addOrder">
+			<input type="text" class="phone" ng-model="phone" placeholder="请输入电话号码" />
+			<span class="box">
+			<label>			
+			<input class="index-phone Vcode" ng-model="Vcode" type="text" placeholder="验证码">
+			<span class="getVcode">获取验证码</span>
+			</label>
+			<input type="button" class="button" value="电话预约" ng-click="addOrder(merchant)" />
+			</span>
+		</div>
+	</div>
+	<div class="row subnav">
+		<div class="col-lg-12">
+			<p>个人简介</p>
+		</div>
+	</div>
+	<div class="row merchantInfro">
+		<p ng-hide="merchant.Remark" style="text-align: center;text-indent:0em;">暂无数据</p>
+		<div class="col-lg-12">
+			<p>{{merchant.Remark}}</p>
+		</div>
+	</div>
+	<div class="row subnav">
+		<div class="col-lg-12">
+			<p>礼仪展示</p>
+		</div>
+	</div>
+	<div class="row riteList">
+		<p ng-hide="riteList" style="margin: 15px auto;background: white;text-align: center;">暂无数据</p>
+		<div class="rite" ng-repeat="rite in riteList" ng-if="rite.State==1">
+			<img ng-src="{{rite.IMG | imgsrc}}" class="imgBox" />
+			<div class="riteMsg">
+				<p style="margin-top:8px;">家属姓名：{{rite.UName}}</p>
+				<p>所属小区:{{rite.UAddress}}</p>
+				<p>礼仪师：{{rite.MName}}</p>
+				<p>所属商家：{{rite.BName}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="row subnav">
+		<div class="col-lg-12">
+			<p>服务菜单</p>
+		</div>
+	</div>
+	<div class="row services">
+		<ul>
+			<p ng-hide="services" style="text-align: center;">暂无数据</p>
+			<li ng-repeat="service in services" ng-class='{focus: $index==focus}' ng-click="selectSevice($index)">{{service.TName}}</li>
+		</ul>
+	</div>
+	<div class="goodlist" ng-repeat="service in services">
+		<div class="row subnav">
+			<div class="col-lg-12">
+				<p>{{service.TName}}</p>
+			</div>
+		</div>
+		<ul class="row">
+			<li class="service" ng-repeat="merchantGoods in service.merchantGoods">
+				<img ng-src="{{merchantGoods.MGImg | imgsrc}}" />
+				<p>{{merchantGoods.MGName}}</p>
+				<p>价格:{{merchantGoods.MGPrice}}</p>
+			</li>
+
+		</ul>
+	</div>
+</div>
+<!--显示框-->
+<div id="msgBox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="update-win-label" aria-describedby="登录框">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button id="msgClose" type="button" class="btn btn-default" style="float: right;border-radius:40px;outline:none;">x</button>
+			</div>
+			<div class="modal-body" style="text-align: center;">
+				<p>&nbsp;</p>
+				<img src="img/tips.png" style="width：25px;height: 25px;display:inline-block;margin-top:-5px;">
+				<span style="font-size:20px;"> 礼仪师联系方式 : {{merchantPhone}}</span>
+				<p>&nbsp;</p>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="js/common.js"></script>

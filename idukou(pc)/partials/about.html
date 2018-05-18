@@ -1,0 +1,98 @@
+<div id="about">
+	<div class="row">
+		<!--左导航栏-->
+		<div class="col-lg-2 nav-left">
+			<ul>
+				<li>
+					<a href="javascript:;" class="current"><i class="icon-aboutus"></i> &nbsp;&nbsp;关于我们</a>
+				</li>
+				<li>
+					<a href="javascript:;"><i class="icon-joinus"></i> &nbsp;&nbsp;加入我们</a>
+				</li>
+				<li>
+					<a href="javascript:;"><i class="icon-contact"></i> &nbsp;&nbsp;联系我们</a>
+				</li>
+				<li>
+					<a href="javascript:;"><i class="icon-law"></i> &nbsp;&nbsp;法律免责</a>
+				</li>
+				<li>
+					<a href="javascript:;"><i class="icon-hyzx"></i> &nbsp;&nbsp;公司动态</a>
+				</li>
+			</ul>
+		</div>
+		<!--右内容栏-->
+		<div class="col-lg-10 content">
+			<div class="infro">
+				<img src="img/aboutus.jpg" />
+				<p>杭州八度时空网络科技有限公司旗下白事服务平台“千柏渡”,汇聚了全城老牌花圈店、优秀礼仪师、品牌殡仪服务供应商，旨在为客户提供中国同城白事一条龙服务。在这里我们通过互联网来改善殡葬行业的服务质量，为每一个生命站好最后一班岗。</p>
+			</div>
+			<div class="employment" style="text-align: left;">
+				<img src="img/joinus.jpg">
+				<figure>
+					<h3>Hr联系方式</h3>
+					<p>13588412211</p>
+				</figure>
+				<figure>
+					<h3>前端工程师</h3>
+					<figcaption>岗位要求</figcaption>
+					<p>1、精通html、DIVCSS能够独立完成网站的规划和静态页面制作，熟悉javascript优先；<br/>2、熟练掌握W3C标准，规范化代码书写，标准化设计和制作网页；<br/>3、熟练运用Dreamweaver、Photoshop等编辑软件有专业网页制作经验一年以上；<br/>4、熟练掌握浏览器兼容性；<br/>5、讲诚信，有责任心，工作效率高，团队合作意识强；<br/>6、优秀的学习能力与创新能力，能尽快适应节奏快的工作环境；<br/>7、熟悉网站建设流程及构架，有SEO经验者优先</p>
+				</figure>
+				<figure>
+					<h3>.NET程序员（后台构架）</h3>
+					<figcaption>岗位职责</figcaption>
+					<p>负责网站、管理系统后台开发、JS脚本编写、日常维护。</p>
+					<figcaption>技能要求</figcaption>
+					<p>1、熟练运用C语言进行开发，熟练使用jQuery框架编写脚本。<br/>2、掌握xml、JSON等网络传输常用数据格式。<br/>3、有良好的编码习惯（给难懂的算法添加注释，对修改的地方添加修改人姓名，修改时间和修改内容注释等）、命名习惯（尽量做到见名知意，使代码语义化），增加代码的可读性。<br/>4、熟悉常用的设计模式并能合理使用，如工厂模式、单件模式、委托模式等<br/>5、热爱技术，责任心强，积极主动、认真踏实、有良好的沟通能力和团队合作精神</p>
+				</figure>
+				<figure>
+					<h3>运营专员</h3>
+					<figcaption>岗位职责</figcaption>
+					<p>1、负责网站的设计、建设及日常维护与更新；<br/>2、对网站系统数据库进行日常管理，统计数据库中相关信息；<br/>3、负责网站的运营能力，盈利能力提升，网站运营机制的规则制定，网站运营质量监控及网站运营的支持；<br/>4、负责公司网站运营及公司品牌与业务推广；<br/>5、负责网站运行的安全性、可靠性及稳定性；</p>
+					<figcaption>任职资格</figcaption>
+					<p>1、计算机及市场营销相关专业，大专及以上学历；<br/>2、有一年以上网站建设经验，有大型网站工作经验者优先考虑；<br/>3、熟悉使用photoshop、flash、dreamweaver等公具，熟悉ASP、JAVA、SQL、HTML等开发语言；<br/>4、可以独立完成网站前后台工作，熟悉互联网B2B，B2C网站的运营及推广营销；<br/>5、良好的沟通能力及团队协作能力，思维敏捷，富有创新、责任心，对数据敏感，学习能力强，良好的分析判断能力。</p>
+				</figure>
+			</div>
+			<div class="connection">
+				<img src="img/contentus.jpg">
+				<figure>
+					<figcaption>杭州八度时空网络科技有限公司地址</figcaption>
+					<p style="text-align: center;">浙江省杭州市拱墅区新青年广场A座1604</p>
+					<figcaption>商务合作联系电话</figcaption>
+					<p style="text-align: center;">13336013519 13588412211</p>
+				</figure>
+			</div>
+			<div class="LawRules">
+
+			</div>
+			<div class="companyMsg">
+				<ul>
+					<li ng-repeat="msg in MsgList" ng-click="goMsg(msg.ID)">
+						<div class="f-left">
+							<img ng-src="{{msg.HeadImg | imgsrc}}" class="imgBox" /> {{(msg.CreateDate).substring(0,11)}}
+						</div>
+						<div class="f-right">
+							{{msg.NTitle}}
+						</div>
+					</li>
+				</ul>
+				<!--分页-->
+				<div ng-if="pages>0">
+					<div class="col-lg-12 Page">
+						<ul>
+							<li ng-click="pre()">
+								<span aria-hidden="true">&laquo;</span>
+							</li>
+							<li ng-click="page($index)" ng-class='{focus: $index==focus}' ng-repeat="i in pages | num">
+								{{i}}
+							</li>
+							<li ng-click="next()">
+								<span aria-hidden="true">&raquo;</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="js/common.js"></script>

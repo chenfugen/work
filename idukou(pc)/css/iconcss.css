@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?xwx97w');
+  src:  url('../fonts/icomoon.eot?xwx97w#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?xwx97w') format('truetype'),
+    url('../fonts/icomoon.woff?xwx97w') format('woff'),
+    url('../fonts/icomoon.svg?xwx97w#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-orders:before {
+  content: "\e90d";
+}
+.icon-coupon:before {
+  content: "\e90c";
+}
+.icon-contact:before {
+  content: "\e90b";
+}
+.icon-joinus:before {
+  content: "\e90a";
+}
+.icon-aboutus:before {
+  content: "\e909";
+}
+.icon-law:before {
+  content: "\e908";
+}
+.icon-adress:before {
+  content: "\e907";
+  color: #17b293;
+}
+.icon-more:before {
+  content: "\e906";
+}
+.icon-fsxx:before {
+  content: "\e905";
+}
+.icon-hyzx:before {
+  content: "\e904";
+}
+.icon-xdgs:before {
+  content: "\e903";
+}
+.icon-loginout:before {
+  content: "\e902";
+}
+.icon-pullDown:before {
+  content: "\e901";
+}
+.icon-telephone:before {
+  content: "\e900";
+}
+.icon-star-empty:before {
+  content: "\e9d7";
+}
+.icon-star-half:before {
+  content: "\e9d8";
+}
+.icon-star-full:before {
+  content: "\e9d9";
+}
