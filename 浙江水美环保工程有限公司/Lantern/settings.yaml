@@ -1,0 +1,11 @@
+addr: 127.0.0.1:61042
+autoLaunch: true
+autoReport: true
+language: zh-CN
+localHTTPToken: 0a584452e8439891cc49112f549d577d
+proxyAll: false
+socksAddr: 127.0.0.1:61045
+systemProxy: true
+uiAddr: 127.0.0.1:62532
+userID: 18589064
+userToken: XBCrv8BFFJNVAZCnzLWPHN24o5AbKEhOv8fEXH0iPbycZSt-ZOFAVA

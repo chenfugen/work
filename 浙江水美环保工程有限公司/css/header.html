@@ -1,0 +1,189 @@
+<div style="height:36px; background-color:#eeeeee; overflow:hidden;">
+<div style="width:1210px; margin:0 auto; line-height:38px;">
+	<ul style="float:left;">
+<li class="dull" style="background:url('./images/tl1.png') no-repeat left center; color:#6f6f6f; font-size:14px; padding-left:28px; float:left; padding-right:26px;">+86 571 88855904</li>
+<li class="dulr" style="background:url('./images/tl2.png') no-repeat left center; color:#6f6f6f; font-size:14px; padding-left:28px; float:left;">sm@zjsupermax.com</li>
+</ul> 
+<div style="float:right;" class="cne"><a href="#" class="tcn">中文版</a> / <a href="#" class="ten">English</a></div></div>
+</div>
+
+<style>
+body{ padding-top:126px;}
+.header{ height:126px; position:fixed; left:0px; top:0px; width:100%; background-color:#fff; z-index:1000;}
+.cne a{}
+.cne a:hover{ color:#04599b;}
+</style>
+
+<div class="head">
+		<div class="logo"><a href="{$web_dir}"><img src="./images/logo.png"/></a></div>
+		<div class="nav">
+		  <ul>
+		     <li><a href="{$web_dir}" class="{if $web_view==index}navo{/if}">首页</a></li>
+			 <li><a href="{tag name=url mod=about}" class="{if $web_view==about||$web_view==structure||$web_view==honor||$web_view==culture}navo{/if}">关于水美</a>
+			 <div class="dao">
+			  <div class="daon">
+			    <div class="daol">
+				  {get_data item=data table='about' where="isshow=1 ORDER BY sortid ASC,id DESC"}
+                 <a href="{tag name=url mod=about id=$data.id}"  class="{if $info_data.id==$data.id}xdao{/if}">{$data.title}</a>
+                  {/get_data}
+	             <a href="{tag name=url mod=structure}">组织架构</a>
+	             <a href="{tag name=url mod=honor}">资质荣誉</a>
+	             <a href="{tag name=url mod=culture}" >企业文化</a>
+				</div>
+				 {get_data item=data table='about' where="isshow=1 ORDER BY sortid ASC,id DESC" name=foo}
+				<div class="daor" {if $tpl.foreach.foo.iteration==1}style="display:block;"{/if}>
+				<a href="{tag name=url mod=about id=$data.id}">
+				 <div><img src="{tag name=get_pic pic=$data.navpic}" width="300" height="130"/></div>
+				 <span>{$data.title}</span>
+				 </a>
+				</div>
+				{/get_data}
+                
+                {get_data item=data table='category' where="isshow=1 AND moduleid=3 AND id=17"}		
+				<div class="daor">
+				<a href="{tag name=url mod=structure}">
+				 <div><img src="{tag name=get_pic pic=$data.navpic}" width="300" height="130"/></div>
+				  <span>{$data.title}</span>
+				  </a>
+				</div>
+				{/get_data}
+                
+                {get_data item=data table='category' where="isshow=1 AND moduleid=4 AND id=18"}	
+				<div class="daor">
+				<a href="{tag name=url mod=honor}">
+				 <div><img src="{tag name=get_pic pic=$data.navpic}" width="300" height="130"/></div>
+				  <span>{$data.title}</span>
+				  </a>
+				</div>
+			     {/get_data}
+                 
+            {get_data item=data table='category' where="isshow=1 AND moduleid=2 AND id=1"}	
+				<div class="daor">
+				<a href="{tag name=url mod=culture}">
+				 <div><img src="{tag name=get_pic pic=$data.navpic}" width="300" height="130"/></div>
+				  <span>{$data.title}</span>
+				  </a>
+				</div>
+		    {/get_data}
+                
+				</div>
+			  </div>
+			 </li>
+			 <li><a href="{tag name=url mod=news}" class="{if $web_view==news||$web_view==newsdet}navo{/if}">新闻中心</a>
+			  <div class="dao">
+			  <div class="daon">
+			    <div class="daol">
+                {get_data item=data table='category' where="isshow=1 AND moduleid=5 ORDER BY sortid ASC, id DESC"}
+				   <a href="{tag name=url mod=news typeid=$data.id}" class="{if $typeid==$data.id}xdao{/if}">{$data.title}</a>
+				  {/get_data}
+				</div>
+				{get_data item=data table='category' where="isshow=1 AND moduleid=5 ORDER BY sortid ASC, id DESC" name=foo}
+				<div class="daor" {if $tpl.foreach.foo.iteration==1}style="display:block;"{/if}>
+				<a href="{tag name=url mod=news typeid=$data.id}">
+				 <div><img src="{tag name=get_pic pic=$data.navpic}" width="300" height="130"/></div>
+				 <span>{$data.title}</span>
+				 </a>
+				</div>
+				{/get_data}
+				
+				
+				</div>
+			  </div>
+			 </li>
+			 <li><a href="{tag name=url mod=areas}" class="{if $web_view==areas||$web_view==areaslist||$web_view==areasdet}navo{/if}">业务领域</a>
+			 <div class="dao" style="height:260px;">
+			  <div class="daon" style="height:260px;">
+			    <div class="daol" style="height:230px;">
+                {get_data item=data table='category' where="isshow=1 AND moduleid=6 ORDER BY sortid ASC,id DESC"}
+				   <a href="{tag name=url mod=areaslist typeid=$data.id}" class="{if $typeid==$data.id}xdao{/if}">{$data.title}</a>
+				 {/get_data}
+				</div>
+				{get_data item=data table='category' where="isshow=1 AND moduleid=6 ORDER BY sortid ASC,id DESC" name=foo}
+				<div class="daor" {if $tpl.foreach.foo.iteration==1}style="display:block;"{/if}>
+				<a href="{tag name=url mod=areaslist typeid=$data.id}">
+				 <div><img src="{tag name=get_pic pic=$data.navpic}" width="300" height="130"/></div>
+				 <span>{$data.title}</span>
+				 </a>
+				</div>
+				 {/get_data}
+				<!---->
+				
+				</div>
+			  </div>
+			 </li>
+			 <li><a href="{tag name=url mod=model}" class="{if $web_view==model||$web_view==modeldet}navo{/if}">商业模式</a>
+			 <div class="dao">
+			  <div class="daon">
+			    <div class="daol">
+                {get_data item=data table='model' where="isshow=1 ORDER BY sortid ASC,id DESC"}
+				   <a href="{tag name=url mod=modeldet id=$data.id}" class="{if $info_data.id==$data.id}xdao{/if}">{$data.title}</a>
+				 {/get_data}
+				</div>
+				{get_data item=data table='model' where="isshow=1 ORDER BY sortid ASC,id DESC" name=foo}
+				<div class="daor" {if $tpl.foreach.foo.iteration==1}style="display:block;"{/if}>
+				<a href="{tag name=url mod=modeldet id=$data.id}">
+				 <div><img src="{tag name=get_pic pic=$data.navpic}" width="300" height="130"/></div>
+				 <span>{$data.title}</span>
+				 </a>
+				</div>
+				{/get_data}
+				
+				
+				</div>
+			  </div>
+			 </li>
+			 <li><a href="{tag name=url mod=project}" class="{if $web_view==project}navo{/if}">工程业绩</a>
+			 <div class="dao">
+			  <div class="daon">
+			    <div class="daol">
+                {get_data item=data table='category' where="isshow=1 AND moduleid=8 ORDER BY sortid ASC,id DESC"}
+				   <a href="{tag name=url mod=project typeid=$data.id}" class="{if $typeid==$data.id}xdao{/if}">{$data.title}</a>
+				{/get_data}
+				</div>
+				{get_data item=data table='category' where="isshow=1 AND moduleid=8 ORDER BY sortid ASC,id DESC" name=foo}
+				<div class="daor" {if $tpl.foreach.foo.iteration==1}style="display:block;"{/if}>
+				<a href="{tag name=url mod=project typeid=$data.id}">
+				 <div><img src="{tag name=get_pic pic=$data.navpic}" width="300" height="130"/></div>
+				 <span>{$data.title}</span>
+				 </a>
+				</div>
+				{/get_data}
+				
+				
+				</div>
+			  </div>
+			 </li>
+			 <li><a href="{tag name=url mod=contact}" class="{if $web_view==job||$web_view==contact}navo{/if}">联系我们</a>
+			 <div class="dao">
+			  <div class="daon">
+			    <div class="daol">
+                 <a href="{tag name=url mod=contact}" class="{if $web_view==contact}xdao{/if}">联系方式</a>
+				   <a href="{tag name=url mod=job}" class="{if $web_view==job}xdao{/if}">人才招聘</a>
+				  
+				</div>
+                 {get_data item=data table='category' where="isshow=1 AND moduleid=9 AND id=20"}
+				<div class="daor" style="display:block;">
+				<a href="{tag name=url mod=contact}">
+				 <div><img src="{tag name=get_pic pic=$data.navpic}" width="300" height="130"/></div>
+				  <span>{$data.title}</span>
+				  </a>
+				</div>
+				{/get_data}
+                
+				 {get_data item=data table='category' where="isshow=1 AND moduleid=10 AND id=21"}
+				<div class="daor" >
+				<a href="{tag name=url mod=job}">
+				 <div><img src="{tag name=get_pic pic=$data.navpic}" width="300" height="130"/></div>
+				 <span>{$data.title}</span>
+				 </a>
+				</div>
+				{/get_data}
+                
+               
+                
+				</div>
+			  </div>
+			 </li>
+		  </ul>
+		</div>
+	</div>

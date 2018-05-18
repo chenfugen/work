@@ -1,0 +1,80 @@
+
+.main { margin-top:-1px; height:366px;}
+.pro-switch {
+	position: relative;
+	width:100%;
+	margin: 0 auto; height:366px; overflow: hidden;
+}
+.flexslider {
+	margin: 0;
+	padding: 0;
+}
+
+.flexslider {
+	
+	margin: 0 auto;
+	position: relative;
+	width:100%;
+	zoom: 1;
+}
+.flex-viewport {
+	width:100%; 
+	overflow: hidden;  
+}
+
+.flex-direction-nav a {
+	width: 60px;
+	height: 90px;
+	margin: -40px 0 0;
+	display: block;
+	background: url(../images/ad_ctr.png) no-repeat 0 0;
+	position: absolute;
+	top: 50%;
+	z-index: 10;
+	cursor: pointer;
+	text-indent: -9999px;
+}
+.flex-direction-nav .flex-next {
+	background-position: 0 -90px;
+	right:-60px;
+}
+.flex-direction-nav .flex-prev {
+	left:-60px;
+}
+.flexslider:hover .flex-next {
+	opacity: 0.8;
+	filter:alpha(opacity=25);
+}
+.flexslider:hover .flex-prev {
+	opacity: 0.8;
+	filter:alpha(opacity=25);
+}
+.flexslider:hover .flex-next:hover, .flexslider:hover .flex-prev:hover {
+	opacity: 1;
+	filter:alpha(opacity=50);
+}
+.flex-control-nav {
+	width: 100%;
+	position: absolute;
+	bottom:12px;
+	text-align: center;
+}
+.flex-control-nav li {
+	margin: 0 3px;
+	display: inline-block;
+	zoom: 1;
+*display: inline;
+}
+.flex-control-paging li a {
+	background: url(../images/dot.png) no-repeat 0 -16px;
+	display:block;
+	height: 16px;
+	overflow: hidden;
+	text-indent:-99em;
+	width: 16px;
+	cursor: pointer;
+}
+.flex-control-paging li a.flex-active {
+	background-position: 0 1px;
+}
+.autoMaxWidth{ overflow:hidden;}

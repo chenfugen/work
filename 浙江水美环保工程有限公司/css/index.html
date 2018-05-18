@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页 - {$web_config.web_title}</title>
+
+{include file="libs/script.html"}
+</head>
+<body class="bg">
+<!--header-->
+<header class="header">
+	{include file=libs/header.html}
+</header>
+<!--header-->
+<div class="banner">
+<section id="banner">
+	<ul class="slides">
+   {get_data item=data table='banner' where="isshow=1 AND typeid=15 ORDER BY sortid ASC, id DESC" name=foo}
+	 <li><img src="{tag name=get_pic pic=$data.img}"/>
+	<div class="obje{$tpl.foreach.foo.iteration}" style="background:url({tag name=get_pic pic=$data.pic}) no-repeat;"></div>
+	</li>
+    {/get_data}
+	<!--<li><img src="./images/banner2.png"/>
+	<div class="obje2" style="background:url(templates/default/images/st1.png) no-repeat;"></div>
+	</li>
+	<li><img src="./images/banner3.png"/>
+	<div class="obje3" style="background:url(templates/default/images/st1.png) no-repeat;"></div>
+	</li>-->
+		<!--{get_data item=data table='banner' where="isshow=1 AND typeid=15 ORDER BY sortid ASC, id DESC"}
+		<li><img src="{tag name=get_pic pic=$data.img}"/></li>
+		{/get_data}-->
+</ul>
+</section>
+</div>
+
+
+<div class="demn">
+<div id="demo" style="overflow:hidden;height:30px;">
+<ul id="demo1">  
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+<li><time>2015/10/10</time><a href="#">浙江两会热议治水 兴源过滤等多家公司有望受益...</a></li>
+</ul> 
+<ul id="demo2"></ul>
+</div> 
+<script> 
+var speed=60
+var demo=document.getElementById("demo"); 
+var demo2=document.getElementById("demo2"); 
+var demo1=document.getElementById("demo1"); 
+demo2.innerHTML=demo1.innerHTML 
+function Marquee(){ 
+if(demo2.offsetTop-demo.scrollTop<=0) 
+  demo.scrollTop-=demo1.offsetHeight 
+else{ 
+  demo.scrollTop++ 
+} 
+} 
+var MyMar=setInterval(Marquee,speed) 
+demo.onmouseover=function() {clearInterval(MyMar)} 
+demo.onmouseout=function() {MyMar=setInterval(Marquee,speed)} 
+</script> 
+</div>
+
+{get_data item=data table='index_ab' where="isshow=1 AND id=1"}
+<div class="saen">{$data.entitle}</div>
+<div class="sabt">{$data.title}</div>
+<div class="sabz">{$data.contenta}
+</div>
+<div class="saz">{$data.contentb}</div>
+{/get_data}
+<div class="satw">
+<div class="sleft" id="prev"></div>
+<div class="sat">
+<div id="box">
+  <ul>
+  {get_data item=data table='category' where="isshow=1 AND moduleid=6 ORDER BY sortid ASC,id DESC"}
+      <li><a href="{tag name=url mod=areaslist typeid=$data.id}"><img src="{tag name=get_pic pic=$data.pic}" width="278" height="446"/>
+	  <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td valign="middle" align="center" width="100%">
+	  <div class="ndiv">
+	  <div class="ndivn">
+	  <span>{$data.intitle}</span>
+	  <b>{$data.entitle}</b>
+	  </div>
+	  </div></td>
+	</tr>
+</table>
+	  </a></li>
+     {/get_data} 
+	 
+  </ul>
+  </div>
+</div> 
+<div class="sright" id="next"></div> 
+</div>
+
+<script type="text/javascript" src="./js/jcarousellite.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+$("#box").jCarouselLite({
+btnPrev: "#prev",
+btnNext: "#next",
+auto: 2000, //图片停留时间
+scroll: 1, //每次滚动覆盖的图片个数
+speed: 1000, //设置速度，0是不动。其次就是数字越大 ，移动越慢。
+vertical: false, //横向（true），竖向（false）
+visible: 4, //显示的数量
+circular: true //是否循环
+});
+});
+</script>
+
+
+<div class="snbt">新闻中心</div>
+<div class="snlist">
+ <div class="snlistn">
+  {foreach item=data from=$data_indexnews}
+   <ul class="snu">
+   <a href="{tag name=url mod=newsdet id=$data.id}">
+       <li class="snul"><img src="{tag name=get_pic pic=$data.pic}" width="260" height="160"/></li>
+	   <li class="snur">
+	     <time>{$data.addtime|date_format:Y / m / d}</time>
+		 <b>{$data.title|truncate:40}</b>
+		 <span>{$data.content|truncate:80}</span>
+	   </li>
+	</a>
+   </ul>
+   {/foreach}
+  <!---->
+ </div>
+</div>
+
+<!--footer-->
+{include file=libs/footer.html}
+<!--footer-->
+</body>
+</html>

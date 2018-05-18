@@ -1,0 +1,21 @@
+.mod_focus_show { width: 660px; height:380px; position: relative; overflow: hidden; margin: 0 auto; }
+.mod_focus_show .mod_focus_pic { display: block; width: 660px; height: 320px; }
+.mod_focus_show .mod_focus_pic li, .mod_focus_show .mod_focus_pic a, .mod_focus_show .mod_focus_pic img { display: block; width: 660px; height: 380px; }
+.mod_focus_show .mod_focus_pic li { position: absolute; left: 0; top: 0; }
+.mod_focus_show .mod_focus_title { position: absolute; z-index: 1; left: 0; bottom: 95px; overflow: hidden; zoom: 1; width: 660px; }
+:root .mod_focus_title { filter: none; }
+.mod_focus_show .mod_focus_title li h3 a { color: #fff; font-size:20px; font-family:"微软雅黑"; font-weight:bold; }
+
+.focus_switch {}
+.focus_switch a{ width: 29px; height: 29px; background-image: url(../images/icon_focus_switch.png); background-repeat: no-repeat; cursor: pointer; }
+.focus_switch .icon_prev {position:absolute; left:0px; top:0px; width: 29px; height: 29px; display:block;}
+.focus_switch .icon_next { background-position: -60px 0;  position:absolute; right:0px; top:0px; width: 29px; height: 29px; display:block;}
+
+
+.mod_focus_show .mod_focus_list { padding:0; overflow: hidden; height:95px; position:absolute; left:2px; bottom:0px;}
+.mod_focus_show .mod_focus_list li { width: 163px; height: 93px; float: left; margin: 0; position: relative; *display: inline; margin-right:1px;}
+.mod_focus_show .mod_focus_list li a { display: block; width:100%; height:100%; }
+.mod_focus_show .mod_focus_list li img { display: block; width: 163px; height: 93px; }
+.mod_focus_show .mod_focus_list li a:hover { _background: none; }
+.mod_focus_show .mod_focus_list li a:hover .mask, .mod_focus_show .mod_focus_list .current .mask { display: none; }
+.mod_focus_show .mod_focus_list li .mask { display: block; height:71px; width: 133px; padding:0px 15px; padding-top:22px; position: absolute; top:0px;  bottom:0; background:url(../images/ntm.png); color:#fff; line-height:17px; font-size:14px;}

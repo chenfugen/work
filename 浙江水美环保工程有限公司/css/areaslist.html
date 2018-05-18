@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>业务领域 - {$web_config.web_title}</title>
+
+{include file="libs/script.html"}
+
+</head>
+<body class="bg">
+<!--header-->
+<header class="header">
+	{include file="libs/header.html"}
+</header>
+<!--header-->
+
+{get_data item=data table='banner' where="isshow=1 AND typeid=16 AND id=7"}
+<div class="ban" style="background:url({tag name=get_pic pic=$data.img}) no-repeat center top;"></div>
+	{/get_data}
+
+<div class="cen" style="overflow: initial;">
+ <div class="path"><span>当前位置：<a href="{$web_dir}">首页</a>&nbsp;>&nbsp;<a href="{tag name=url mod=areas}">业务领域</a>&nbsp;>&nbsp;<a href="{tag name=url mod=areaslist}" class="patho">市政污水综合治理</a></span>业务领域</div>
+ 
+ <ul class="ndh">
+ {get_data item=data table='category' where="isshow=1 AND moduleid=6 ORDER BY sortid ASC,id DESC"}
+     <li><a href="{tag name=url mod=areaslist typeid=$data.id}" class="{if $typeid==$data.id}ndho{/if}">{$data.title}</a></li>
+	{/get_data}
+ </ul>
+ 
+<div class="arelist">
+{foreach item=data from=$info_data}
+  <ul><a href="{tag name=url mod=areasdet id=$data.id}">
+      <li class="ares"><img src="{tag name=get_pic pic=$data.pic}" width="372" height="254"/></li>
+	  <li class="arez">{$data.title}</li>
+	  <li class="arex">{$data.content|truncate:80}</li>
+	  </a>
+  </ul>
+{/foreach}
+  <!---->
+</div>
+ 
+ 
+ <div class="fy">
+   {$pagestr}
+ </div>
+ 
+
+ 
+</div>
+
+<!--footer-->
+{include file="libs/footer.html"}
+<!--footer-->
+</body>
+</html>

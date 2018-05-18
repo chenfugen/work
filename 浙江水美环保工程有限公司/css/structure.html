@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>组织架构 - {$web_config.web_title}</title>
+
+{include file="libs/script.html"}
+</head>
+<body class="bg">
+<!--header-->
+<header class="header">
+	{include file="libs/header.html"}
+</header>
+<!--header-->
+
+ {get_data item=data table='banner' where="isshow=1 AND typeid=16 AND id=5"}
+<div class="ban" style="background:url({tag name=get_pic pic=$data.img}) no-repeat center top;"></div>
+	{/get_data}
+
+<div class="cen">
+ <div class="path"><span>当前位置：<a href="{$web_dir}">首页</a>&nbsp;>&nbsp;<a href="{tag name=url mod=about}">关于水美</a>&nbsp;>&nbsp;<a href="{tag name=url mod=structure}" class="patho">组织架构</a></span>关于水美</div>
+ 
+ <ul class="ndh">
+ {get_data item=data table='about' where="isshow=1 ORDER BY sortid ASC,id DESC"}
+     <li><a href="{tag name=url mod=about id=$data.id}">{$data.title}</a></li>
+{/get_data}
+	 <li><a href="{tag name=url mod=structure}" class="ndho">组织架构</a></li>
+	 <li><a href="{tag name=url mod=honor}">资质荣誉</a></li>
+	 <li><a href="{tag name=url mod=culture}" >企业文化</a></li>
+ </ul>
+ 
+ 
+ <div class="ssbg">
+<div class="hbbt"><span>兴源环境</span></div>
+<div class="sbgz"></div> 
+<div class="hbbt"><span>水美环保</span></div>
+<ul class="hbn">
+    <li class="hbno" id="hbn1">分公司</li>
+	<li id="hbn2">宁波分公司</li>
+	<li id="hbn3">子公司</li>
+	<li id="hbn4">印尼水美</li>
+	<li id="hbn5">杞县水美</li>
+    <li>国内业务部</li>
+	<li>国际业务部</li>
+	<li>设计部</li>
+	<li>技术研发部</li>
+	<li>工程部</li>
+	<li>投资运营部</li>
+	<li>管理部</li>
+</ul>
+</div>
+ 
+<div class="hbbt" style="display:none;"><span>水美环保</span></div>
+<ul class="hbn" style="display:none;">
+{foreach item=data from=$data_structure key=k}
+    <li {if $k==0}class="hbno"{/if}>{$data.title}</li>
+{/foreach}
+</ul>
+
+{foreach item=data from=$data_structure key=k}
+<div class="bm" {if $k==0}style="display:block;"{/if}>
+     <div class="bmbt">{$data.title}</div>
+	 <div class="bmn">{$data.content}</div>
+</div>
+{/foreach}
+
+</div>
+
+<!--footer-->
+{include file="libs/footer.html"}
+<!--footer-->
+</body>
+</html>
