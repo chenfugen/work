@@ -1,0 +1,636 @@
+@charset "utf-8";
+$fontFamliy: "微软雅黑";
+$fontColor: #7f7f7f;
+$background: #F7F7F7;
+@media screen and (min-width:320px) {
+    html {
+        font-size: 10px!important;
+    }
+}
+
+@media screen and (min-width:360px) {
+    html {
+        font-size: 11.25px!important;
+    }
+}
+
+@media screen and (min-width:400px) {
+    html {
+        font-size: 12.5px!important;
+    }
+}
+
+@media only screen and (min-width:481px) {
+    html {
+        font-size: 94%!important;
+    }
+}
+
+@media only screen and (min-width: 561px) {
+    html {
+        font-size: 109%!important;
+    }
+}
+
+@media screen and (min-width:640px) {
+    html {
+        font-size: 20px!important;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+    html {
+        font-size: 22px!important;
+    }
+}
+
+*,
+*:after,
+*:before {
+    // -webkit-user-select: none;
+    //字体不能被选择（复制等）
+    // -moz-user-select: -moz-none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    //只用于iOS (iPhone和iPad) 点击一个链接或者通过Javascript定义的可点击元素的时候，它就会出现一个半透明的灰色背景
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+    //  box-sizing: border-box;
+    //  //并排两个带边框的框
+    //  -webkit-box-sizing: border-box;
+    //  -moz-box-sizing: border-box;
+    -webkit-touch-callout: none;
+    //当你触摸并按住触摸目标时候，禁止或显示系统默认菜单。
+    margin: 0;
+    padding: 0;
+    -ms-touch-action: pan-y;
+    //可以在父级元素内进行垂直移动的手势操作。在IE11使用属性，在IE10应使用-ms-touch-action，IE10之前的浏览器不支持
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background: #eee;
+    overflow-y: auto;
+    color: $fontColor;
+    -webkit-text-size-adjust: none;
+    //解决IPHONE网页兼容（部分字号变大）
+}
+
+//登录页
+#loginPage {
+    section {
+        form {
+            margin-top: 10px;
+            .itemc {
+                input {
+                    border: none;
+                    width: 100%;
+                    height: 40px;
+                    text-indent: 1em;
+                    margin: 10px auto;
+                    font-size: 12px;
+                    color: #bdbdbd;
+                    background: white;
+                    border: 1px solid #bbb;
+                }
+                img {
+                    float: left;
+                    margin: 10px 5%;
+                    height: 40px;
+                }
+                a {
+                    float: left;
+                    margin: 10px 0px;
+                    height: 40px;
+                    line-height: 40px;
+                    color: #000;
+                }
+            }
+            .check {
+                clear: both;
+                input {
+                    float: left;
+                    height: 25px;
+                    margin-right: 10px;
+                    span {
+                        display: inline;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//个人中心
+#user {
+    .ui-list {
+        height: 120px;
+        .memberavatar {
+            margin: 20px 0px;
+            height: 80px;
+            width: 80px;
+        }
+        .ui-list-info {
+            margin-left: 20px;
+            color: white;
+        }
+    }
+    .nav {
+        li {
+            float: left;
+            width: 33.1%;
+            line-height: 40px;
+            text-align: center;
+            background: white;
+        }
+    }
+}
+
+//优惠券
+#myCoupon {
+    section {
+        .nav {
+            position: fixed;
+            top: 45px;
+            width: 100%;
+            z-index: 999;
+            .focus {
+                background: #bbb;
+                color: white;
+                .line {
+                    display: none;
+                }
+            }
+            li {
+                width: 33.3%;
+                float: left;
+                line-height: 35px;
+                background: white;
+                text-align: center;
+                position: relative;
+                .line {
+                    width: 1px;
+                    height: 25px;
+                    top: 5px;
+                    right: 0px;
+                    position: absolute;
+                    background: #eee;
+                }
+            }
+        }
+        .couponlist {
+            margin-top: 40px;
+            li {
+                position: relative;
+                height: 9rem;
+                margin: 1rem auto;
+                img {
+                    width: 100%;
+                    height: 9rem;
+                    border: none;
+                }
+                .couponMsg {
+                    position: absolute;
+                    width: 70%;
+                    height: 9rem;
+                    left: 35%;
+                    top: 0px;
+                    p {
+                        font-size: 1rem;
+                        margin: 0.2rem auto;
+                    }
+                    .ui-btn-s {
+                        border-radius: 10px 10px;
+                        border: 1px solid #eee;
+                        background: white;
+                        margin: 0.6rem 0.5rem 0.5rem 0px;
+                    }
+                    .ui-btn-s:active {
+                        background: rgba(0, 0, 0, 0.1);
+                    }
+                    .line {
+                        width: 95%;
+                        height: 1px;
+                        border-bottom: 1px dashed #eee;
+                    }
+                    .detail {
+                        width: 4rem;
+                        height: 2rem;
+                        text-align: center;
+                        font-size: 1rem;
+                        line-height: 2rem;
+                        display: inline-block;
+                        border-left: 1px solid #eee;
+                        float: right;
+                        color: $fontColor;
+                        margin: 0.5rem 0.5rem 0px 0px;
+                    }
+                    .detail:active {
+                        color: red;
+                    }
+                }
+                .moneyMsg {
+                    position: absolute;
+                    left: 3%;
+                    top: 0px;
+                    width: 30%;
+                    height: 9rem;
+                    text-align: center;
+                    color: white;
+                    p {
+                        margin: 1rem auto;
+                        font-size: 1.2rem
+                    }
+                }
+            }
+        }
+    }
+    .cordbox {
+        width: 24rem;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -12rem;
+        margin-top: -12rem;
+        background: white;
+        z-index: 999;
+        border-radius: 5px 5px;
+        text-align: center;
+    }
+}
+
+//账户中心
+#myAccount {
+    .navList {
+        li {
+            border-bottom: 1px solid #eee;
+        }
+        li:active {
+            background: rgba(0, 0, 0, 0.1);
+        }
+    }
+}
+
+//领券中心
+#getCoupon {
+    section {
+        .couponlist {
+            li {
+                position: relative;
+                height: 8.5rem;
+                margin: 1rem auto;
+                img {
+                    width: 100%;
+                    height: 8.5rem;
+                    border: none;
+                }
+                .couponMsg {
+                    position: absolute;
+                    width: 65%;
+                    height: 8.5rem;
+                    left: 35%;
+                    top: 0px;
+                    text-align: left;
+                    p {
+                        font-size: 1rem;
+                        margin: 0.2rem auto;
+                    }
+                    #triangle-topright {
+                        position: absolute;
+                        top: 0px;
+                        right: 0px;
+                        width: 0;
+                        height: 0;
+                        border-top: 40px solid #fa4141;
+                        border-left: 40px solid transparent;
+                    }
+                    .text {
+                        position: absolute;
+                        top: 2.5px;
+                        right: 4px;
+                        color: white;
+                        font-size: 1rem;
+                        font-weight: bold;
+                        transform: rotate(45deg);
+                    }
+                }
+                .moneyMsg {
+                    position: absolute;
+                    left: 3%;
+                    top: 0px;
+                    width: 30%;
+                    height: 8.5rem;
+                    text-align: center;
+                    color: white;
+                    p {
+                        margin: 1rem auto;
+                        font-size: 1.2rem
+                    }
+                }
+            }
+        }
+        //活动简介
+        .activityMsg {
+            width: 100%;
+            background: url(../../../img/mat.jpg);
+            background-size: 100% 100%;
+            text-align: center;
+            padding: 10px 0px;
+            .ActName {
+                color: white;
+                font-family: Georgia;
+                font-style: oblique;
+                letter-spacing: 5pt;
+                font-size: 35px;
+                font-weight: bold;
+                margin-top: 10px;
+                -webkit-text-stroke: 1px #B74C3C;
+            }
+            .StoreName {
+                color: #B74C3C;
+                font-size: 12px;
+                margin-top: 5px;
+            }
+            .ActTime {
+                font-size: 12px;
+                color: #B74C3C;
+                margin-top: 5px;
+            }
+            .coupon {
+                display: inline-block;
+                width: 100px;
+                padding: 2px 20px;
+                background: #F65354;
+                border-radius: 10px;
+                margin-top: 7px;
+                color: white;
+                font-weight: bold;
+                letter-spacing: 2pt;
+            }
+        }
+    }
+    .cordbox {
+        width: 24rem;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -12rem;
+        margin-top: -12rem;
+        background: white;
+        z-index: 999;
+        border-radius: 5px 5px;
+        text-align: center;
+    }
+    .tip {
+        position: fixed;
+        top: 30%;
+        left: 50%;
+        margin-left: -40%;
+        width: 80%;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+    }
+    footer {
+        height: 45px;
+        .acquire {
+            width: 100px;
+            line-height: 45px;
+        }
+    }
+    footer:active {
+        background: rgba(0, 0, 0, 0.1);
+    }
+}
+
+//个人详情
+#userMsg {
+    ul {
+        margin-top: 10px;
+        li {
+            border-bottom: 1px solid #eee;
+        }
+        input {
+            float: right;
+            width: 60%;
+            margin-left: 2rem;
+            border: none;
+            color: $fontColor;
+        }
+    }
+}
+
+//订单列表
+#order {
+    .orderList {
+        width: 100%;
+        background: white;
+        margin-top: 10px;
+        .orderHeader {
+            width: 100%;
+            height: 3rem;
+            line-height: 3rem;
+            font-size: 1.2rem;
+            color: #000;
+        }
+        .orderContent {
+            width: 95%;
+            margin-left: 4%;
+            border-bottom: 1px solid #eee;
+            border-top: 1px solid #eee;
+            position: relative;
+            .imgbox {
+                display: inline-block;
+                width: 7rem;
+                height: 7rem;
+                margin: 1.3rem 0rem;
+            }
+            .msgbox {
+                position: absolute;
+                width: 67%;
+                top: 1rem;
+                left: 8rem;
+                h5 {
+                    margin-bottom: 5px;
+                    color: #000;
+                }
+                p {
+                    font-size: 1.3rem;
+                    margin-top: 5px;
+                    .MarketPrice {
+                        text-decoration: line-through;
+                        font-size: 1rem;
+                        color: #ccc;
+                    }
+                    .DiscountPrice {
+                        color: #7f7f7f;
+                    }
+                }
+            }
+        }
+        .orderContent:active {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .orderCheck {
+            p {
+                text-align: right;
+                font-size: 1.2rem;
+                line-height: 3rem;
+            }
+        }
+    }
+}
+
+//订单详情
+#orderMsg {
+    .title {
+        width: 100%;
+        height: 3rem;
+        line-height: 3rem;
+        background: white;
+        margin-top: 10px;
+        color: #7F7F7F;
+        border-bottom: 1px solid #eee;
+    }
+    .orderMsg {
+        width: 100%;
+        height: 7.5rem;
+        background: white;
+        li {
+            border-bottom: 1px dashed #eee;
+            line-height: 2.5rem;
+            font-size: 1.3rem;
+        }
+    }
+    .orderContent {
+        width: 100%;
+        background: white;
+        position: relative;
+        .imgbox {
+            display: inline-block;
+            width: 7rem;
+            height: 7rem;
+            margin: 1.2rem 1rem;
+        }
+        .msgbox {
+            position: absolute;
+            width: 63%;
+            height: 7rem;
+            top: 1rem;
+            left: 9rem;
+            h5 {
+                margin-bottom: 5px;
+                color: #000;
+            }
+            p {
+                font-size: 1.3rem;
+                margin-top: 3px;
+                .MarketPrice {
+                    text-decoration: line-through;
+                    font-size: 1rem;
+                    color: #ccc;
+                }
+                .DiscountPrice {
+                    color: #7f7f7f;
+                }
+            }
+        }
+    }
+    .costMsg {
+        background: white;
+        li {
+            border-bottom: 1px dashed #eee;
+            line-height: 2.5rem;
+            font-size: 1.3rem;
+            span {
+                float: right;
+            }
+        }
+        div {
+            line-height: 3rem;
+            font-size: 1.3rem;
+            text-align: right;
+        }
+        .money {
+            color: #FA4141;
+        }
+    }
+    .shipping {
+        background: white;
+        margin-bottom: 10px;
+        li {
+            border-bottom: 1px dashed #eee;
+            line-height: 2.5rem;
+            font-size: 1.3rem;
+        }
+    }
+}
+
+//短信登录
+#smsLogin {
+    width: 100%;
+    form {
+        margin-top: 10px;
+        input {
+            border: none;
+            height: 40px;
+            font-size: 12px;
+            text-indent: 1em;
+            background: white;
+            border: 1px solid #bbb;
+            outline: none;
+        }
+        .phone {
+            width: 100%;
+            margin: 10px 0;
+        }
+        label {
+            display: inline-block;
+            width: 100%;
+            border: none;
+            height: 40px;
+            font-size: 12px;
+            margin: 10px 0;
+            position: relative;
+            font-weight: lighter;
+        }
+        .Vcode {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            border: 1px solid #bbb;
+            background: white;
+            width: 60%;
+        }
+        .getCode {
+            position: absolute;
+            line-height: 42px;
+            padding: 0px 15px 0px 0px;
+            height: 42px;
+            left: 60%;
+            top: 0px;
+            border: 1px solid #bbb;
+            background: white;
+        }
+        span:active {
+            background: rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+    }
+}
+
+//修改密码
+#alterPassword {
+    .code {
+        width: 200px;
+    }
+    .getVcode {
+        position: absolute;
+        z-index: 99;
+        right: 15px;
+        top: 100px;
+        border: none;
+        background: none;
+        font-size: 1.3rem;
+        color: #00C795;
+    }
+}
