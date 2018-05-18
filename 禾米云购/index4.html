@@ -1,0 +1,156 @@
+ <!DOCTYPE html>
+<html>
+<head>
+	<title></title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"  charset="utf-8">
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css"> 
+     @media screen and (min-width: 600px){
+       *{
+      margin:0px;
+      padding: 0px;
+    }
+      #zong{
+      width:600px;
+      margin: 0 auto;
+      position: relative;
+    }
+    #head{
+      width:600px;
+    }
+  }
+   @media screen and (max-width: 600px){
+    *{
+      margin:0px;
+      padding: 0px;
+    }
+      #zong{
+      width:100%;
+      margin: 0 auto;
+      position: relative;
+    }
+  } 
+  #head{ 
+       height: 45px;
+       border-bottom: 1px solid #ccc;
+       font-size: 20px;
+       line-height: 2.5em;
+       text-align: center;
+       position: fixed;
+       top: 0px;
+       background:white;
+       z-index: 5; 
+    }  
+    #head span{
+      margin-left: -45px;
+    }
+
+  #head a{
+      float: left;
+      display:inline-block;
+      width:45px;
+      height: 45px;
+      background: url(img/2.png) no-repeat 0px 10px;
+      background-size: 25px 25px;
+    }
+      #list{
+      position: absolute;
+      top:45px;
+    }
+    .img{
+      float: left;
+      width: 80px;
+      height: 120px;
+    }
+    .box{
+      width: 100%;
+      margin-top:10px;
+      height:220px;
+      border-top:1px solid #ccc;
+      border-bottom:1px solid #ccc;
+    }
+    .top{
+      float: left;
+      height: 30px;
+      width: 70%;
+      border-top:1px solid #ccc;
+      border-bottom:1px solid #ccc;
+      margin-top: 10px;
+      line-height: 2em;
+    }
+    .usename{
+       color: blue;
+       float: left;
+    }
+    .timestr{
+      font-size: 12px;
+      float: right;
+    }
+    .main{
+      float: left;
+      margin-top:10px;
+      width: 70%;
+    }
+   .main img{
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin-top: -5px;
+   }
+</style>
+<body>
+<div id="zong" >    
+<div class="container nvaBackground">
+   <div class="row">
+   <div class="col-xs-12 " id="head">
+   <a href="index1.html"></a>
+   <span>晒单列表</span>
+   </div>
+   </div> 
+   <div class="row" >
+   <div class="col-xs-12 " id="list">
+    
+   </div>   
+   </div>
+   </div>
+</div> 
+</body>
+<script type="text/javascript">
+var datas={pageNum:"1"};
+    $.ajax({
+        type:"GET",
+        url:"http://120.55.86.40:81/yiyuanapi/shaidan/getShaidanList",
+        data:datas,
+        dataType:"json",
+        error:function(errormsg){
+           console.log(errormsg);
+        },
+        success:function(successmsg){
+          if(successmsg.data.length==0){
+            $("#goods").text("暂无消息");
+            $("#goods").css({"text-align":"center","font-size":"20px","color":"#333"}) 
+          }else{
+          for (var i = 0; i < 6; i++) {
+            $("#list").append("<div class='box'>")
+            $("#list .box").eq(i).append("<img class='img'>");
+            $("#list .box .img").eq(i).attr("src","img/14.jpg");
+            $("#list .box").eq(i).append("<div class='top'>");
+            $("#list .box .top").eq(i).append("<span class='usename'>");
+            $("#list .box .top .usename").eq(i).text("小鸡炖蘑菇");
+            $("#list .box .top").eq(i).append("<span class='timestr'>");
+            $("#list .box .top .timestr").eq(i).text(successmsg.data[i].sdTimeStr);
+            $("#list .box").eq(i).append("<div class='main'>");
+            $("#list .box .main").eq(i).append("<p class='title'>");
+            $("#list .box .main p").eq(i).html(successmsg.data[i].title+"<br>"+"期号:"+successmsg.data[i].sdQishu+"<br>"+"宝塔镇河妖。。。爆款");
+            $("#list .box .main").eq(i).append("<img class='imgs'>");
+            $("#list .box .main .imgs").eq(i).attr("src","img/11.jpg");
+          } 
+        }
+}
+})
+
+</script>
+</html>

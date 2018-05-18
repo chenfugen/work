@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+       @media screen and (max-width: 600px){
+	     *{
+			margin:0px;
+			padding: 0px;
+		}
+        #zong{
+			width: 100%;
+			margin: 0 auto;
+			position: relative;
+		}
+		#head,#foot{
+			width: 100%;
+		}
+	}  
+	   @media screen and (min-width: 600px){
+	     *{
+			margin:0px;
+			padding: 0px;
+		}
+        #zong{
+			width: 600px;
+			margin: 0 auto;
+			position: relative;
+		}
+		#head,#foot{
+		 width: 600px;
+		}
+	} 
+		#head{			
+			height: 40px;
+			color: white;
+			text-align: center;
+			background-color: #f2473d;
+			font-size: 20px;
+			line-height: 2em;
+			position: fixed;
+			top: 0px;
+			z-index:5;
+		}
+		#main{
+			position: absolute;
+			top:40px;
+			height:60px;
+            left:15px;
+			background: white;
+			border: 1px solid #ccc;
+			line-height:18px;
+		}
+		#main span{
+			color:black;
+		}
+		#main p{
+			color:#333;
+			font-size:10px;
+		}
+   #foot{
+     	height: 60px;
+     	border-top:1px solid #ccc;
+        position: fixed;
+        bottom: 0px;
+        background: white;
+        z-index: 5;
+       }
+    .navfoot{
+    	height:50px;
+    	margin-top: 10px;
+    	text-align: center;
+    }
+    .navfoot a{
+    	font-size: 15px;
+    	color: #333;
+    	text-decoration: none;
+    }
+    #foot img{
+	   width: 30px;
+	   height: 30px;
+	}   
+	</style>
+	</head>
+<body>
+<div id="zong">
+	<div class="container">
+		<div class="row ">
+		  <div class="col-xs-12 text-center" id="head">
+			发现
+		</div>
+		</div>
+	</div>
+	<div class="row col-xs-12" id="main">
+		 <a href="index4.html">
+			<div class="col-xs-2">
+				<img src="img/find1.png"/>
+			</div>
+	        <div class="col-xs-8">
+				<span>晒单分享 </span><br>
+				<p>挖宝强中奖率实在太高啦，朋友们赶快一起寻宝吧！</p>
+			</div>
+			<div class="col-xs-2">
+				<img src="img/connect.png"/>
+			</div>
+			</a>
+	  </div>
+
+    <div class="row col-xs-12">
+    	<div class="col-xs-12" id="foot">
+    		<div class="col-xs-3 navfoot">
+    			<a href="index1.html">
+    			<img src="img/foot1.png"/>
+    			<p>首页</p>
+    			</a>
+    		</div>
+    		<div class="col-xs-3 navfoot">
+    			<a href="index7.html">
+    			<img src="img/22.png"/>
+    			<p>最新揭晓</p>
+    		</div>
+    		<div class="col-xs-3 navfoot">
+    			<a href="index8.html">
+    			<img src="img/foot3.png"/>
+    			 <p>发现</p>
+    		</div>
+    		<div class="col-xs-3 navfoot">
+    			<a href="index9.html">
+    			<img src="img/foot4.png"/>
+    			<p>个人中心</p>
+    		</div>
+    	</div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+	$("#foot p:eq(2)").css({"color":"red"})
+    $("#main img").eq(0).css({"width":"40px","heigth":"40px","margin":"5px"})
+    $("#main img").eq(1).css({"width":"10px","heigth":"10px","margin":"20px"})
+</script>
+</html>

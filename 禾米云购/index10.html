@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<style type="text/css">
+			@media screen and (min-width: 600px) {
+				* {
+					margin: 0px;
+					padding: 0px;
+				}
+				#zong {
+					width: 600px;
+					margin: 0 auto;
+					position: relative;
+				}
+				#head {
+					width: 600px;
+				}
+			}
+			
+			@media screen and (max-width: 600px) {
+				* {
+					margin: 0px;
+					padding: 0px;
+				}
+				#zong {
+					width: 100%;
+					margin: 0 auto;
+					position: relative;
+				}
+			}
+			
+			#head {
+				height: 45px;
+				border-bottom: 1px solid #ccc;
+				font-size: 20px;
+				line-height: 2.5em;
+				text-align: center;
+				position: fixed;
+				top: 0px;
+				background: white;
+				z-index: 5;
+			}
+			
+			#head span {
+				margin-left: -45px;
+			}
+			
+			#head a {
+				float: left;
+				display: inline-block;
+				width: 45px;
+				height: 45px;
+				background: url(img/2.png) no-repeat 0px 10px;
+				background-size: 25px 25px;
+			}
+			
+			#inputs {
+				height: 152px;
+				position: absolute;
+				top: 45px;
+				background: #f5f5f5;
+				border-bottom: 1px solid #ccc;
+			}
+			
+			#inputs input {
+				outline: none;
+				width: 70%;
+				height: 40px;
+				border: none;
+				background: #f5f5f5;
+				margin-top: 10px;
+			}
+			
+			#inputs img {
+				width: 20px;
+				height: 20px;
+			}
+			
+			#inputs #code {
+				float: left;
+				width: 60%;
+				height: 40px;
+				text-align: center;
+				border-top: 1px solid #ccc;
+			}
+			
+			#inputs #security {
+				float: left;
+				width: 39%;
+				height: 40px;
+				background-color: #4A98EF;
+				color: white;
+				text-align: center;
+			}
+			
+			#inputs .input {
+				border-bottom: 1px solid #B5D8FF;
+			}
+			
+			#submit {
+				height: 60px;
+				position: absolute;
+				top: 195px;
+			}
+			
+			.submit {
+				width: 80%;
+				height: 30px;
+				background: red;
+				color: white;
+				outline: none;
+				border: none;
+				border-radius: 5px 5px;
+				margin-top: 15px;
+			}
+			
+			#pact {
+				position: absolute;
+				width: 90%;
+				height: 60px;
+				color: #333;
+				top: 240px;
+				left: 10%;
+				font-size: 12px;
+				text-align: center;
+				line-height: 2em;
+			}
+			
+			#prompt {
+				position: absolute;
+				width: 50%;
+				height: 30px;
+				background: #333333;
+				color: white;
+				border-radius: 5px 5px;
+				top: 450px;
+				left: 25%;
+				text-align: center;
+				display: none;
+				line-height: 2em;
+			}
+		</style>
+
+		<body>
+			<div id="zong">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 " id="head">
+							<a href="index1.html"></a>
+							<span>用户注册</span>
+						</div>
+					</div>
+					<div class="row col-xs-12 text-center" id="inputs">
+						<div class="input">
+							<img src="img/username.png" />
+							<input type="text" class="name" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" id="username" placeholder="请输入手机号" />
+							<img src="img/login-del.png" onclick="dome()" />
+						</div>
+						<div>
+							<img src="img/password.png" />
+							<input type="password" class="password" placeholder="请输入6-15位密码" />
+							<img src="img/login-see.png" onclick="show()" />
+						</div>
+						<div>
+							<input type="text" placeholder="请输入验证码" name="code" id="code">
+							<input type="text" value="动态验证码" id="security" readonly="true">
+						</div>
+					</div>
+					<div class="row col-xs-12 text-center" id="submit">
+						<input type="submit" class="submit" value="注册">
+					</div>
+					<div id="pact">
+						<input type="checkbox" style="float: left;margin-top:8px">
+						<span style="float: left;margin-left:2% ;">点击左边按钮，即表示您同意《<a href="http://m.hemixb.com/?/mobile/user/agreement" class="blue">网站名服务协议</a>》
+				    </div>
+				    <div id="prompt"></div>
+			</div>
+            </div>
+     </body>
+         <script type="text/javascript">
+     	function dome(){
+     		$(".name").val("");
+     	}
+     	var str=true;
+     	function show(){
+     		if(str){
+            $(".password").attr("type", "text")
+            str=false;
+        }
+        else {
+            $(".password").attr("type", "password")
+            str=true;
+        }
+     	}
+         var time=null;
+     	$(".submit").click(function(){
+     		test();
+     	});
+     	$("#security").click(function(){
+     		if($(".name").val()==""){
+     		$("#prompt").text("你的手机输入有误")
+     		$("#prompt").css({"display":"block"});
+     		hide();
+     	}else{
+     	if($(".name").val().length!=11){
+  		    $("#prompt").text("你的手机格式有误")
+     		$("#prompt").css({"display":"block"}); 
+     		hide();
+     	}
+     	else{
+     	 if($(".password").val()==""){
+     		$("#prompt").text("你的密码为空")
+     		$("#prompt").css({"display":"block"});
+     		hide();
+     	}
+     	}
+     	}
+     	});
+     	function test(){  		    	
+     	if($(".name").val()==""){
+     		$("#prompt").text("你的手机输入有误")
+     		$("#prompt").css({"display":"block"});
+     		hide();
+     	}else{
+     	if($(".name").val().length!=11){
+  		    $("#prompt").text("你的手机格式有误")
+     		$("#prompt").css({"display":"block"}); 
+     		hide();
+     	}
+     	else{
+     	 if($(".password").val()==""){
+     		$("#prompt").text("你的密码为空")
+     		$("#prompt").css({"display":"block"});
+     		hide();
+     	}
+     	 else{
+     	 	 location.href ="index1.html";
+     	 }
+     	}
+     	}
+     	}
+     	   function hide(){
+     	  time=setTimeout(function(){
+     	    $("#prompt").text("");	
+     	    $("#prompt").css({"display":"none"}); 
+     	    },1000)
+     	 }
+     	
+     </script>
+     </html>

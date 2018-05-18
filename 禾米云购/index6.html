@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<style type="text/css">
+			@media screen and (min-width: 600px) {
+				* {
+					margin: 0px;
+					padding: 0px;
+				}
+				#zong {
+					width: 600px;
+					margin: 0 auto;
+					position: relative;
+				}
+				#head ,#foot{
+					width: 600px;
+				}
+				#img_box {
+					width: 300px;
+				}
+				#imglist img {
+					width: 300px;
+				}
+				#buttons {
+					width: 150px;
+					left: 250px;
+				}
+			}
+			
+			@media screen and (max-width: 600px) {
+				* {
+					margin: 0px;
+					padding: 0px;
+				}
+				#zong {
+					width: 100%;
+					margin: 0 auto;
+					position: relative;
+				}
+				#head,#foot{
+					width: 100%;
+				}
+				#img_box {
+					width: 70%;
+				}
+				#buttons {
+					width: 35%;
+					left: 33%;
+				}
+			}
+			
+			#head {
+				height: 45px;
+				border-bottom: 1px solid #ccc;
+				font-size: 20px;
+				line-height: 2.5em;
+				text-align: center;
+				position: fixed;
+				top: 0px;
+				background: white;
+				z-index: 5;
+			}
+			
+			#head span {
+				margin-left: -45px;
+			}
+			
+			#head a {
+				float: left;
+				display: inline-block;
+				width: 45px;
+				height: 45px;
+				background: url(img/2.png) no-repeat 0px 10px;
+				background-size: 25px 25px;
+			}
+			
+			#imglist {
+				position: absolute;
+				z-index: 5;
+				width: 1510px;
+				height: 300px;
+			}
+			
+			#img_box {
+				position: absolute;
+				height: 300px;
+				z-index: 9;
+				top: 45px;
+				left: 13%;
+				overflow: hidden;
+			}
+			
+			#imglist img {
+				float: left;
+				height: 300px;
+			}
+			
+			#buttons {
+				position: absolute;
+				top: 345px;
+				height: 20px;
+			}			
+			#buttons span {
+				float: left;
+				margin-left: 5px;
+				width: 20px;
+				height: 20px;
+				border: 1px solid #ccc;
+				border-radius: 50%;
+				background: #fff;
+				cursor: pointer;
+				text-align: center;
+			}
+			
+			#buttons .on {
+				background: red;
+			}
+			#details{
+				position: absolute;
+				top: 365px;
+				height:150px;					
+			}
+			.underway{
+				float: left;
+				margin-left:5%;
+				width:60px;
+				height: 30px;
+				text-align: center;
+				line-height: 2em;
+				background: red;
+				color: white;
+				border-radius: 5px 5px;
+			}
+			.title{
+				float: left;
+				margin-left:10px;
+				width:60%;
+				height: 30px;
+				line-height: 2em;
+				color: #333;
+				font-size: 15px;
+			}
+            .number,.tempo{
+            	margin-left:5%;
+            	margin-top:2%;
+            }
+            #bar{
+			   margin-left:5%;
+               width:300px;
+               height: 5px;
+               background: #ccc;
+               border-radius: 3px 3px;
+            }
+            #allnum{   
+                float: left;      	
+            	margin-top:20px;
+            	margin-left:5%;
+            	width: 100px;
+            	height: 20px; 	
+            }
+            #num{
+            	float: right;
+            	margin-top:20px;
+            	margin-right:5%;
+            	width: 100px;
+            	height: 20px; 
+            }
+            #list{
+            	position: absolute;
+                left:7%; 
+            	width:85%;
+            	height:40px;
+            	border-bottom: 1px solid #ccc;
+            	top:515px;
+            }
+            #list2{ 
+                position: absolute;       	
+            	left:7%;
+            	width:85%;
+            	height:40px;
+            	top:555px;
+            	border-bottom: 1px solid #ccc;
+            }
+            #list a, #list2 a{
+            	line-height:3em;
+            	color: #333;
+            	text-decoration: none;
+            }
+       .listtext span{
+    	 float: right;
+		 display: inline-block;
+		 width:45px;
+         height: 45px;
+         background: url(img/connect.png) no-repeat 0px 10px;
+         background-size: 15px 20px;
+       }
+       #foot{
+       	position:fixed;
+       	height: 30px;
+       	bottom:0px;
+       	z-index:9;
+       }
+       #partin{
+       	width: 80px;
+       	height: 30px;
+       	color: white;
+        background: red;
+       	text-align: center;
+       	float:right;
+       	line-height: 2em;
+       }
+		</style>
+		<body>
+			<div id="zong">
+				<div class="container ">
+					<div class="row">
+						<div class="col-xs-12" id="head">
+							<a href="index1.html"></a>
+							<span>商品详情</span>
+						</div>
+					</div>
+					<div class="row ">
+						<div class="col-xs-12 text-center">
+							<div id="img_box">
+								<div id="imglist">
+									<img src="img/21.jpg" alt="1">
+									<img src="img/22.jpg" alt="2">
+									<img src="img/23.jpg" alt="3">
+									<img src="img/24.jpg" alt="4">
+									<img src="img/21.jpg" alt="1">
+								</div>
+							</div>
+							<div id="buttons">
+								<span class="on">1</span>
+								<span>2</span>
+								<span>3</span>
+								<span>4</span>
+							</div>
+						</div>
+					</div>
+					<div class="row col-xs-12" id="details">
+						
+					</div>
+					
+					<div class="row col-xs-12" id="list">
+						<a href=""http://m.hemixb.com/?/mobile/mobile/graphic/820">
+						<div class="listtext">商品介绍
+						<span ></span>
+						</div>						
+						</a>
+					</div>
+					<div class="row col-xs-12" id=list2>
+						<a href="index7.html">
+						<div class="listtext">往期揭晓
+						<span ></span>
+						</div>						
+						</a>
+					</div>                   	               													
+					<div class="row col-xs-12" id="foot" >
+					   <div id="partin">
+						立即参与
+					   </div>
+					</div>
+
+
+				</div>
+			</div>
+		</body>
+		<script type="text/javascript">
+			var Times = null;
+			//延时开启定时器
+			var delayTimes = null;
+			var index = 0;
+			var divsList;
+			var imglist;
+			window.onload = function() {
+				//滚动高度
+				var scrollWidth = 0;
+				var bottom = document.getElementById('img_box');
+
+				bottom.innerHTML += bottom.innerHTML;
+
+				times = setInterval(startmove, 10);
+				bottom.onmouseover = function() {
+
+					clearTimeout(delayTimes);
+					clearInterval(times);
+
+				}
+				bottom.onmouseout = function() {
+
+					times = setInterval(startmove, 20);
+				}
+				var bs = document.getElementById("buttons");
+				divsList = bs.getElementsByTagName('span');
+
+				var ps = document.getElementById("imglist");
+
+				imglist = ps.getElementsByTagName('img');
+
+				for(var i = 0; i < divsList.length; i++) {
+                      
+					divsList[i].in = i;
+ 
+					divsList[i].onclick = function() {
+
+						index = this.in;
+
+						scrollWidth = index * 300;
+
+						for(var j = 0; j < divsList.length; j++) {
+
+							if(divsList[j] != this) {
+
+								divsList[j].style.backgroundColor = '#fff';
+
+							} else {
+								divsList[j].style.backgroundColor = 'red';
+							}
+						}
+					}
+				}
+                
+				function startmove() {
+
+					if(scrollWidth % 300 == 0 && scrollWidth != 0) {
+						clearInterval(times);
+						delayTimes = setTimeout(function() {
+							times = setInterval(startmove, 10);
+						}, 1000);
+					}
+					if(scrollWidth == 1200) {
+						bottom.scrollLeft = scrollWidth;
+						scrollWidth = 0;
+						var k = Math.floor(scrollWidth / 300);
+						divsList[k].style.backgroundColor = 'red';
+						divsList[3].style.backgroundColor = '#fff';
+					} else {
+						bottom.scrollLeft = scrollWidth;
+						scrollWidth += 5;
+						var k = Math.floor(scrollWidth / 300);
+						if(k != 0 && k != 4) {
+							divsList[k].style.backgroundColor = 'red';
+							divsList[k - 1].style.backgroundColor = '#fff';
+						}
+					}
+				}
+			}
+			
+			var datas={goodsId:"817"};
+			$.ajax({
+	     	type:"GET",
+	     	url:"http://120.55.86.40:81/yiyuanapi/goods/getGoodsDetailById",
+	     	data:datas,
+	     	dataType:"json",
+	     	error:function(errormsg){
+	     		 console.log(errormsg);
+	     	},
+	     	success:function(successmsg){
+                 console.log(successmsg.data)
+	          	$("#details").append("<div class='underway'>");
+                $("#details .underway").text("进行中")
+                $("#details").append("<div class='title'>");
+                $("#details .title").text(successmsg.data.title);
+                $("#details").append("<p class='number'>");
+                $("#details .number").html("<br><br>"+"期号："+successmsg.data.qishu);
+                $("#details").append("<p class='tempo'>");
+	     			$("#details .tempo").html('开奖进度:'+"<span style='color: deepskyblue'>"+successmsg.data.perRenshu+"%"+"</span>");
+	     			$("#details").append("<div id='bar'>");
+	     			$("#details #bar").append("<div>");
+	     		    $("#details #bar div").css({"width":successmsg.data.perRenshu/100*180+'px',"height":"5px","background":"red"});
+	     		    $("#details").append("<div id='allnum'>");
+	     		     $("#details #allnum").text("总需"+successmsg.data.zongrenshu+"人次");
+	     		     $("#details").append("<div id='num'>");
+	     		     $("#details #num").html("还需"+successmsg.data.shenyurenshu+"人次"); 
+	     		     
+			}   
+			});
+		</script>
+
+</html>

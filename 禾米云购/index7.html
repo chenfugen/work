@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style type="text/css">
+
+       @media screen and (max-width: 600px){
+	     *{
+			margin:0px;
+			padding: 0px;
+		}
+        #zong{
+			width: 100%;
+			margin: 0 auto;
+			position: relative;
+		}
+		#head,#foot{
+			width: 100%;
+		}
+	}  
+	   @media screen and (min-width: 600px){
+	     *{
+			margin:0px;
+			padding: 0px;
+		}
+        #zong{
+			width: 600px;
+			margin: 0 auto;
+			position: relative;
+		}
+		#head,#foot{
+		 width: 600px;
+		}
+	} 
+		#head{			
+			height: 40px;
+			color: white;
+			text-align: center;
+			background-color: #f2473d;
+			font-size: 20px;
+			line-height: 2em;
+			position: fixed;
+			top: 0px;
+			z-index:5;
+		}
+		#main{
+			position: absolute;
+			top:40px;
+			height:710px;
+		}
+		 #main .box{
+        	text-align:left;
+            float:left;
+            width:50%;
+            height:215px;
+        }
+        #main .box {
+        	padding-left:5px;        	
+        }
+        #main a{
+        	text-decoration: none;
+        	color: blue;
+        }
+        .goodsname{
+        	font-size:12px;
+        	color: black;
+        }
+        .details{
+        	margin-top: -10px;
+        	font-size:10px;
+        	color: #333;
+        }
+        #main img{
+        	margin-left:20%;
+        	width: 80px;
+        	height:100px;
+        }
+        
+   #foot{
+     	height: 60px;
+     	border-top:1px solid #ccc;
+        position: fixed;
+        bottom: 0px;
+        background: white;
+        z-index: 5;
+       }
+    .navfoot{
+    	height:50px;
+    	margin-top: 10px;
+    	text-align: center;
+    }
+    .navfoot a{
+    	font-size: 15px;
+    	color: #333;
+    	text-decoration: none;
+    }
+    #foot img{
+	   width: 30px;
+	   height: 30px;
+	}   
+	</style>
+	</head>
+<body>
+<div id="zong">
+	<div class="container">
+		<div class="row ">
+		  <div class="col-xs-12 text-center" id="head">
+			最新揭晓
+			</div>
+		</div>
+	</div>
+	<div class="row col-xs-12">
+		<div class="col-xs-12" id="main">
+			
+		</div>	
+	</div>
+		
+    <div class="row col-xs-12">
+    	<div class="col-xs-12" id="foot">
+    		<div class="col-xs-3 navfoot">
+    			<a href="index1.html">
+    			<img src="img/foot1.png"/>
+    			<p>首页</p>
+    			</a>
+    		</div>
+    		<div class="col-xs-3 navfoot">
+    			<a href="">
+    			<img src="img/foot2.png"/>
+    			<p>最新揭晓</p>
+    		</div>
+    		<div class="col-xs-3 navfoot">
+    			<a href="index8.html">
+    			<img src="img/23.png"/>
+    			 <p>发现</p>
+    		</div>
+    		<div class="col-xs-3 navfoot">
+    			<a href="index9.html">
+    			<img src="img/foot4.png"/>
+    			<p>个人中心</p>
+    		</div>
+    	</div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+	$("#foot p:eq(1)").css({"color":"red"})
+	var datas={pageNum:"1"}
+	 $.ajax({
+	     	type:"GET",
+	     	url:"http://120.55.86.40:81/yiyuanapi/goods/getGoodsListForNoShengYu",
+	     	data:datas,
+	     	dataType:"json",
+	     	error:function(errormsg){
+	     		 console.log(errormsg);
+	     	},
+	     	success:function(successmsg){
+                  	if(successmsg.data.length==0){
+                   $("#main").text("暂无消息");
+                   $("#main").css({"text-align":"center","font-size":"20px","color":"#333"})	
+                }else{
+                   for (var i = 0; i < 5; i++) {
+                   	$("#main").append("<div class='box'>");
+                   	if (i%2==0) {
+	     			    $("#main .box").eq(i).css({"border-right":"1px solid #ccc","border-bottom":"1px solid #ccc"})
+	     			}else{
+	     			    $("#main .box").eq(i).css({"border-bottom":"1px solid #ccc"})	     				
+	     			}
+	     			$("#main .box").eq(i).append("<img>");
+	     			$("#main .box img").eq(i).attr("src","img/16.jpg");
+	     			$("#main .box").eq(i).append("<p class='goodsname'>");
+	     			$("#main .box .goodsname").eq(i).html(successmsg.data[i].title.substring(0,10)+"...")
+	     			$("#main .box").eq(i).append("<p class='details'>");
+	     			$("#main .box .details").eq(i).html("期号:"+successmsg.data[i].qishu+"<br>"+"中奖用户："+"<a href=''>小瘪三</a>"
+	     			+"<br>"+"参与人数:"+successmsg.data[i].zongrenshu+"<br>"+"幸运号码:"+"<span style='color:red'>"+successmsg.data[i].winningCode+"</span>"
+	     			+"<br>"+"揭晓时间:"+successmsg.data[i].winningTime);
+                   }
+                }
+            } 
+          })
+</script>
+</html>
