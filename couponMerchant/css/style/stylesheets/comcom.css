@@ -1,0 +1,434 @@
+@media screen and (min-width: 320px) {
+  /* line 6, ../sass/comcom.scss */
+  html {
+    font-size: 10px !important;
+  }
+}
+@media screen and (min-width: 360px) {
+  /* line 12, ../sass/comcom.scss */
+  html {
+    font-size: 11.25px !important;
+  }
+}
+@media screen and (min-width: 400px) {
+  /* line 18, ../sass/comcom.scss */
+  html {
+    font-size: 12.5px !important;
+  }
+}
+@media only screen and (min-width: 481px) {
+  /* line 24, ../sass/comcom.scss */
+  html {
+    font-size: 94% !important;
+  }
+}
+@media only screen and (min-width: 561px) {
+  /* line 30, ../sass/comcom.scss */
+  html {
+    font-size: 109% !important;
+  }
+}
+@media screen and (min-width: 640px) {
+  /* line 36, ../sass/comcom.scss */
+  html {
+    font-size: 20px !important;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  /* line 42, ../sass/comcom.scss */
+  html {
+    font-size: 22px !important;
+  }
+}
+/* line 47, ../sass/comcom.scss */
+*,
+*:after,
+*:before {
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  margin: 0;
+  padding: 0;
+  -ms-touch-action: pan-y;
+}
+
+/* line 68, ../sass/comcom.scss */
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #eee;
+  overflow-y: auto;
+  color: #7f7f7f;
+  -webkit-text-size-adjust: none;
+}
+
+/* line 82, ../sass/comcom.scss */
+#loginPage section form {
+  margin-top: 10px;
+}
+/* line 85, ../sass/comcom.scss */
+#loginPage section form .itemc input {
+  border: none;
+  width: 100%;
+  height: 40px;
+  text-indent: 1em;
+  margin: 10px auto;
+  font-size: 12px;
+  color: #bdbdbd;
+  background: white;
+  border: 1px solid #bbb;
+}
+/* line 96, ../sass/comcom.scss */
+#loginPage section form .itemc img {
+  float: left;
+  margin: 10px 5%;
+  height: 40px;
+}
+/* line 101, ../sass/comcom.scss */
+#loginPage section form .itemc a {
+  float: left;
+  margin: 10px 0px;
+  height: 40px;
+  line-height: 40px;
+  color: #000;
+}
+/* line 109, ../sass/comcom.scss */
+#loginPage section form .check {
+  clear: both;
+}
+/* line 111, ../sass/comcom.scss */
+#loginPage section form .check input {
+  float: left;
+  height: 25px;
+  margin-right: 10px;
+}
+/* line 115, ../sass/comcom.scss */
+#loginPage section form .check input span {
+  display: inline;
+}
+
+/* line 126, ../sass/comcom.scss */
+#user .ui-list {
+  height: 120px;
+}
+/* line 128, ../sass/comcom.scss */
+#user .ui-list .memberavatar {
+  margin: 20px 0px;
+  height: 80px;
+  width: 80px;
+}
+/* line 133, ../sass/comcom.scss */
+#user .ui-list .ui-list-info {
+  margin-left: 20px;
+  color: white;
+}
+/* line 139, ../sass/comcom.scss */
+#user .nav li {
+  float: left;
+  width: 49.5%;
+  line-height: 40px;
+  text-align: center;
+  background: white;
+}
+
+/* line 151, ../sass/comcom.scss */
+#cancelCoupon .text {
+  margin: 6% 10px 0px 15px;
+}
+/* line 154, ../sass/comcom.scss */
+#cancelCoupon .coupons {
+  margin: 6% 10px 10px 15px;
+  border: none;
+  border: 1px solid #eee;
+  width: 65%;
+  line-height: 3.5rem;
+  padding-left: 10px;
+  border-radius: 3px 3px;
+  font-size: 1.3rem;
+}
+/* line 164, ../sass/comcom.scss */
+#cancelCoupon .cancel {
+  margin: 20px 0px 0px 0px;
+  width: 15%;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #bbb;
+  border: none;
+  border: 1px solid #eee;
+}
+/* line 175, ../sass/comcom.scss */
+#cancelCoupon #scanQRCode1 i:active {
+  background: #E0E0E0;
+}
+
+/* line 182, ../sass/comcom.scss */
+#couponRecord .couponList {
+  width: 100%;
+  background: white;
+  border-radius: 5px 5px;
+}
+/* line 186, ../sass/comcom.scss */
+#couponRecord .couponList li {
+  margin: 10px 0px;
+}
+/* line 188, ../sass/comcom.scss */
+#couponRecord .couponList li .number {
+  width: 100%;
+  border-bottom: 1px dashed #eee;
+  padding-left: 10px;
+  line-height: 30px;
+  font-size: 1.3rem;
+}
+/* line 195, ../sass/comcom.scss */
+#couponRecord .couponList li .money {
+  display: inline-block;
+  width: 35%;
+  text-align: center;
+}
+/* line 199, ../sass/comcom.scss */
+#couponRecord .couponList li .money p {
+  margin: 3px 0px;
+  font-size: 1.5rem;
+}
+/* line 204, ../sass/comcom.scss */
+#couponRecord .couponList li .userMsg {
+  display: inline-block;
+}
+/* line 206, ../sass/comcom.scss */
+#couponRecord .couponList li .userMsg h5 {
+  color: #000000;
+  margin-top: 10px;
+}
+/* line 210, ../sass/comcom.scss */
+#couponRecord .couponList li .userMsg p {
+  font-size: 1.3rem;
+  margin: 5px 0px;
+}
+
+/* line 221, ../sass/comcom.scss */
+#register .nav {
+  width: 100%;
+  position: fixed;
+  top: 45px;
+}
+/* line 225, ../sass/comcom.scss */
+#register .nav li {
+  float: left;
+  width: 50%;
+  line-height: 35px;
+  text-align: center;
+  background: white;
+  position: relative;
+}
+/* line 232, ../sass/comcom.scss */
+#register .nav li .line {
+  width: 1px;
+  height: 25px;
+  top: 5px;
+  right: 0px;
+  position: absolute;
+  background: #eee;
+}
+/* line 241, ../sass/comcom.scss */
+#register .nav .focus {
+  background: #bbb;
+  color: white;
+}
+/* line 246, ../sass/comcom.scss */
+#register ul {
+  width: 100%;
+}
+/* line 248, ../sass/comcom.scss */
+#register ul .Mactivities {
+  width: 100%;
+  background: url(../../../img/cat.jpg);
+  background-size: 100% 100%;
+  margin-top: 10px;
+  text-align: center;
+  padding: 10px 0px;
+  word-break: break-all;
+}
+/* line 256, ../sass/comcom.scss */
+#register ul .Mactivities .ActName {
+  color: #FFFE74;
+  font-family: Georgia;
+  font-style: oblique;
+  letter-spacing: 5pt;
+  font-size: 35px;
+  -webkit-text-stroke: 1px white;
+}
+/* line 264, ../sass/comcom.scss */
+#register ul .Mactivities .StoreName {
+  width: 100%;
+  color: white;
+  font-size: 12px;
+  margin-top: 5px;
+}
+/* line 270, ../sass/comcom.scss */
+#register ul .Mactivities .ActTime {
+  font-size: 12px;
+  color: white;
+  margin-top: 5px;
+}
+/* line 275, ../sass/comcom.scss */
+#register ul .Mactivities input {
+  width: 100px;
+  padding: 4px 15px;
+  outline: none;
+  border: none;
+  background: white;
+  border-radius: 10px;
+  margin-top: 7px;
+  color: #7f7f7f;
+  font-size: 1.2rem;
+}
+/* line 286, ../sass/comcom.scss */
+#register ul .Mactivities input:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+/* line 290, ../sass/comcom.scss */
+#register ul .Sactivities {
+  width: 100%;
+  background: url(../../../img/mat.jpg);
+  background-size: 100% 100%;
+  margin-top: 10px;
+  text-align: center;
+  padding: 10px 0px;
+}
+/* line 297, ../sass/comcom.scss */
+#register ul .Sactivities .ActName {
+  color: white;
+  font-family: Georgia;
+  font-style: oblique;
+  letter-spacing: 5pt;
+  font-size: 35px;
+  font-weight: bold;
+  margin-top: 2px;
+  -webkit-text-stroke: 2px #500B12;
+}
+/* line 307, ../sass/comcom.scss */
+#register ul .Sactivities .StoreName {
+  color: #591217;
+  font-size: 12px;
+  margin-top: 5px;
+}
+/* line 312, ../sass/comcom.scss */
+#register ul .Sactivities .ActTime {
+  font-size: 12px;
+  color: #591217;
+  margin-top: 5px;
+}
+/* line 317, ../sass/comcom.scss */
+#register ul .Sactivities input {
+  width: 100px;
+  padding: 4px 15px;
+  outline: none;
+  border: none;
+  background: white;
+  border-radius: 10px;
+  margin-top: 7px;
+  color: white;
+  background: #EA7777;
+  font-size: 1.2rem;
+}
+/* line 329, ../sass/comcom.scss */
+#register ul .Sactivities input:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* line 337, ../sass/comcom.scss */
+#smsLogin {
+  width: 100%;
+}
+/* line 339, ../sass/comcom.scss */
+#smsLogin form {
+  margin-top: 10px;
+}
+/* line 341, ../sass/comcom.scss */
+#smsLogin form input {
+  border: none;
+  height: 40px;
+  font-size: 12px;
+  text-indent: 1em;
+  background: white;
+  border: 1px solid #bbb;
+  outline: none;
+}
+/* line 350, ../sass/comcom.scss */
+#smsLogin form .phone {
+  width: 100%;
+  margin: 10px 0;
+}
+/* line 354, ../sass/comcom.scss */
+#smsLogin form label {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  height: 40px;
+  font-size: 12px;
+  margin: 10px 0;
+  position: relative;
+  font-weight: lighter;
+}
+/* line 364, ../sass/comcom.scss */
+#smsLogin form .Vcode {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  border: 1px solid #bbb;
+  background: white;
+  width: 60%;
+}
+/* line 372, ../sass/comcom.scss */
+#smsLogin form .getCode {
+  position: absolute;
+  line-height: 42px;
+  padding: 0px 15px 0px 0px;
+  height: 42px;
+  left: 60%;
+  top: 0px;
+  border: 1px solid #bbb;
+  background: white;
+}
+/* line 382, ../sass/comcom.scss */
+#smsLogin form span:active {
+  background: rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+/* line 391, ../sass/comcom.scss */
+#userRecord .nav {
+  line-height: 35px;
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+  background: white;
+  margin-top: 10px;
+}
+/* line 397, ../sass/comcom.scss */
+#userRecord .nav tr {
+  border-bottom: 1px dashed #eee;
+}
+/* line 399, ../sass/comcom.scss */
+#userRecord .nav tr td {
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+/* line 409, ../sass/comcom.scss */
+#alterPassword .code {
+  width: 200px;
+}
+/* line 412, ../sass/comcom.scss */
+#alterPassword .getVcode {
+  position: absolute;
+  z-index: 99;
+  right: 15px;
+  top: 100px;
+  border: none;
+  background: none;
+  font-size: 1.3rem;
+  color: #00C795;
+}

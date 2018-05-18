@@ -1,0 +1,41 @@
+<div id="user">
+	<header class="ui-header ui-header-positive ui-border-b">
+		<h1>个人中心</h1>
+	</header>
+	<section class="ui-container">
+		<ul class="ui-list ui-list-link  ui-border-tb" style="background:url(img/memberBg.png);background-size:100% 100%;" onclick="location='#/myAccount'">
+			<li>
+				<div>
+					<img src="/mobile/images/member.png" class="memberavatar">
+				</div>
+				<div class="ui-list-info">
+					<h4 class="ui-nowrap"><i class="iconfont icon-yonghu-" style="font-size:14px;"></i>&nbsp;{{myName}}</h4>
+					<!-- <h4 class="ui-nowrap"><i class="iconfont icon-dianhua" style="font-size:15px;"></i>&nbsp;{{Mobile}}</h4>-->
+				</div>
+			</li>
+		</ul>
+		<ul class="nav">
+			<li style="border-right:1px solid #eee">
+				<a href="#/cancelCoupon">
+					<i class="iconfont icon-phonedateicon20" style="font-size:20px;color:#F43D30;"></i> 优惠券核销
+				</a>
+			</li>
+			<li>
+				<a href="#/register">
+					<i class="iconfont icon-wodezhanghu" style="font-size:20px;color:#13B193;"></i> 活动登记 
+				</a>
+			</li>
+		</ul>
+		<p>&nbsp;</p>	
+		<div class="ui-btn-wrap" ng-click="goCouponRecord()">
+			<button class="ui-btn-lg" style="margin-top:10px;">核销记录</button>
+		</div>
+		<!--<div class="ui-btn-wrap" onclick="location='#/myAccount'">
+			<button class="ui-btn-lg" style="margin-top:10px;">我的账号</button>
+		</div>-->
+		
+		<div class="ui-btn-wrap" ng-click="exit()">
+			<button class="ui-btn-lg" style="margin-top:10px;">退出</button>
+		</div>
+	</section>
+</div>
