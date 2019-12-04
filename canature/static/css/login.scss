@@ -1,0 +1,58 @@
+.login_box {
+	margin: 1rem 0.15rem 0px 0.15rem;
+	background: white;
+	height: auto;
+	padding: 0.4rem 0.15rem;
+	position: relative;
+	.logo {
+		width: 0.8rem;
+		height: 0.8rem;
+		border-radius: 0.4rem 0.4rem;
+		overflow: hidden;
+		position: absolute;
+		top: -0.4rem;
+		left: 50%;
+		z-index: 999;
+		margin-left: -0.4rem;
+		box-shadow: #e9f3ff 0px 10px 30px 2px;
+	}
+	.van-hairline--top-bottom::after {
+		border-width: 0px 0px;
+	}
+	.van-tabs__line {
+		background: #267cfb;
+	}
+	.login_tab {
+		padding: 0.1rem 0px;
+		.login_title {
+			background: white;
+			padding: 5px 15px;
+			font-size: 0.12rem;
+			color: #666;
+			text-align: left;
+		}
+		.van-cell {padding: 5px 15px;}
+	}
+	.formInput{
+            margin:0px 15px;
+            width:92%;
+            height:1px;
+            background:#e9f3ff;
+        }
+      .login_button button{
+          margin:0.2rem 0.15rem;
+          width:92%;
+          background: #267cfb;
+          border: 0px;
+          color:white;    
+          display: block;  
+      }
+      .login_hint{   
+          text-align: center;
+          color:#8f8f8f;
+          font-size: 0.12rem;
+          a{
+              color:#3786fc;
+          }
+      }
+}
