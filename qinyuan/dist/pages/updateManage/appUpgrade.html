@@ -1,0 +1,407 @@
+<div id="appUpgrade">
+	<p class="breadcrumb">当前位置: APP升级</p>
+	<div class="layui-tab" lay-filter="test">
+		<ul class="layui-tab-title">
+			<li class="layui-this">版本管理</li>
+			<li>升级管理</li>
+		</ul>
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+				<select name="modules" class="select" lay-verify="required" ng-model="form.forceUpgrade ">
+					<option value="">更新方式</option>
+					<option ng-value="1">强制更新</option>、
+					<option ng-value="0">非强制更新</option>
+				</select>
+				<div class="layui-input-inline">
+					<input type="text" ng-model="form.versionCode" lay-verify="title" autocomplete="off" placeholder="版本号" class="layui-input" style="margin:-5px 0px 0px 10px;">
+				</div>
+				<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='init(1,10,form,true)'>查询</button>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>版本号</th>
+							<th>版本链接</th>
+							<th>更新说明</th>
+							<th>备注</th>
+							<th>版本更新时间</th>
+							<th ng-show="isDelete" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='item in versionList'>
+							<td>{{$index+1}}</td>
+							<td>{{item.versionCode | nullDeal}}</td>
+							<td>{{item.url | nullDeal}}</td>
+							<td>{{item.explain | nullDeal}}</td>
+							<td>{{item.remark | nullDeal}}</td>
+							<td>{{item.createTime | nullDeal}}</td>
+							<td ng-show="isDelete">
+								<button class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog('delete',item.id)">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show="versionList.length==0" class="noData">暂无数据</p>
+				<div ng-show="versionList.length>0" id="appVersion" class="paging"></div>
+				<div style="margin:10px 10px;" ng-show="isAdd">
+					<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('add',1)">新增</button>
+				</div>
+				<p>&nbsp;</p>
+			</div>
+			<div class="layui-tab-item">
+				<div class="layui-tab" lay-filter="test" style="padding: 0 20px;">
+					<ul class="layui-tab-title">
+						<li ng-click="versionInit(1,10,1,'officialVersion')" class="layui-this">正式版本</li>
+						<li ng-click="versionInit(1,10,2,'userVersion')">部分用户</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+							<!--全部-->
+							<div class="tab">
+								<span>当前版本</span>
+							</div>
+							<table class="layui-table">
+								<thead>
+									<tr>
+										<th>操作</th>
+										<th>更新方式</th>
+										<th>更新版本</th>
+										<th>更新时间</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td ng-show="forceUp.id!='-'"><span style="color:#009bde;cursor: pointer;" ng-click="dialog('empty',forceUp.id)">置空</span></td>
+										<td ng-show="forceUp.id=='-'"><span>--</span></td>
+										<td>强制更新</td>
+										<td>{{forceUp.versionCode | nullDeal}}</td>
+										<td>{{forceUp.createTime | nullDeal}}</td>
+									</tr>
+									<tr>
+										<td ng-show="nomal.id!='-'"><span style="color:#009bde;cursor: pointer;" ng-click="dialog('empty',nomal.id)">置空</span></td>
+										<td ng-show="nomal.id=='-'"><span>--</span></td>
+										<td>非强制更新</td>
+										<td>{{nomal.versionCode | nullDeal}}</td>
+										<td>{{nomal.createTime | nullDeal}}</td>
+									</tr>
+								</tbody>
+							</table>
+							<button ng-show="isAdd" class="layui-btn layui-btn-sm layui-btn-normal" style="margin:10px 10px;" ng-click="dialog('versionAdd',1)">编辑</button>
+							<hr />
+							<div class="tab">
+								<span>说明</span>
+							</div>
+							<textarea rows="2" cols="20" class="layui-textarea textarea" style="margin:0 20px;width:98%;height:160px;">1、假设用户当前处于1.0版本
+2、后台升级管理-强制升级选项中选择了2.0版本
+3、用户收到升级推送
+4、若用户关闭升级推送弹窗，则强制退出 APP 且在下次进入时仍然弹出强制升级弹窗提醒
+5、若在后台非强制升级选项中重新选择版本3..0
+6、在使用2.0版本的用户收到升级提醒，当用户关闭升级提醒弹窗时，用户仍然可以正常使用APP；在使用1.0版本的用户收到强制升级的升级提示框，若此时用户点击升级，自动升级到3.0版本，无需升级到2.0后做二次升级。以APP中的version为标准，升级至选择的最高版本</textarea>
+
+							<hr />
+							<div class="tab">历史版本</div>
+							<table class="layui-table">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>版本号</th>
+										<th>更新方式</th>
+										<th>备注</th>
+										<th>发布时间</th>
+										<th ng-show="isDelete" class="noExl">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat='item in history'>
+										<td>{{$index+1}}</td>
+										<td>{{item.versionCode | nullDeal}}</td>
+										<td>{{item.forceUpgrade=="0"?"非强制更新":"强制更新"}}</td>
+										<td>{{item.remark | nullDeal}}</td>
+										<td>{{item.createTime | nullDeal}}</td>
+										<td ng-show="isDelete">
+											<button ng-show="!item.id" class="layui-btn layui-btn-sm layui-btn-disabled">删除</button>
+											<button ng-show="item.id" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog('verDelete',item.id)">删除</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<p ng-show="history.length==0" class="noData">暂无数据</p>
+							<div ng-show="history.length>0" id="officialVersion" class="paging"></div>
+						</div>
+						<div class="layui-tab-item">
+							<!--全部-->
+							<div class="tab">
+								<span>当前版本</span>
+							</div>
+							<table class="layui-table">
+								<thead>
+									<tr>
+										<th>操作</th>
+										<th>更新方式</th>
+										<th>更新版本</th>
+										<th>更新时间</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td ng-show="forceUp.id!='-'"><span style="color:#009bde;cursor: pointer;" ng-click="dialog('empty',forceUp.id)">置空</span></td>
+										<td ng-show="forceUp.id=='-'"><span>--</span></td>
+										<td>强制更新</td>
+										<td>{{forceUp.versionCode | nullDeal}}</td>
+										<td>{{forceUp.createTime | nullDeal}}</td>
+									</tr>
+									<tr>
+										<td ng-show="nomal.id!='-'"><span style="color:#009bde;cursor: pointer;" ng-click="dialog('empty',nomal.id)">置空</span></td>
+										<td ng-show="nomal.id=='-'"><span>--</span></td>
+										<td>非强制更新</td>
+										<td>{{nomal.versionCode | nullDeal}}</td>
+										<td>{{nomal.createTime | nullDeal}}</td>
+									</tr>
+								</tbody>
+							</table>
+							<button ng-show="isAdd" class="layui-btn layui-btn-lg layui-btn-normal" style="margin:10px 20px;" ng-click="dialog('userAdd',2)">编辑</button>
+							<hr />
+							<div class="tab">
+								<span>说明</span>
+							</div>
+							<textarea rows="2" cols="20" class="layui-textarea textarea" style="margin:0 20px;width:98%;height:160px;">1、假设用户当前处于1.0版本
+2、后台升级管理-强制升级选项中选择了2.0版本
+3、用户收到升级推送
+4、若用户关闭升级推送弹窗，则强制退出 APP 且在下次进入时仍然弹出强制升级弹窗提醒
+5、若在后台非强制升级选项中重新选择版本3..0
+6、在使用2.0版本的用户收到升级提醒，当用户关闭升级提醒弹窗时，用户仍然可以正常使用APP；在使用1.0版本的用户收到强制升级的升级提示框，若此时用户点击升级，自动升级到3.0版本，无需升级到2.0后做二次升级。以APP中的version为标准，升级至选择的最高版本</textarea>
+							<hr />
+							<div class="tab">历史版本</div>
+							<table class="layui-table">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>版本号</th>
+										<th>更新方式</th>
+										<th>备注</th>
+										<th>部分用户</th>
+										<th>发布时间</th>
+										<th ng-show="isDelete" class="noExl">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat='item in history' ng-show='item.upgradeObject!=""'>
+										<td>{{$index+1}}</td>
+										<td>{{item.versionCode | nullDeal}}</td>
+										<td>{{item.forceUpgrade=="0"?"非强制更新":"强制更新"}}</td>
+										<td>{{item.remark | nullDeal}}</td>
+										<td>
+											<span style="color: #009BDE;text-decoration: underline;cursor: pointer;" ng-click="dialog('showUser',item.jsonStr)">部分用户</span>
+										</td>
+										<td>{{item.createTime | nullDeal}}</td>
+										<td ng-show="isDelete">
+											<button ng-show="!item.id" class="layui-btn layui-btn-sm layui-btn-disabled">删除</button>
+											<button ng-show="item.id" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog('verDelete',item.id)">删除</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<p ng-show="history.length==0" class="noData">暂无数据</p>
+							<div ng-show="history.length>0" id="userVersion" class="paging"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+		<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-show="fun!=null" ng-style="dialogStyle">
+			<div class="layui-layer-title cursor" ng-show='fun=="delete" || fun=="verDelete" || fun=="userAdd" || fun=="versionAdd"'>{{fun=="delete"?'删除':fun=="verDelete"?'删除':'编辑'}}</div>
+			<div class="layui-layer-title cursor" ng-show='fun=="showUser"'>查看更新用户</div>
+			<div class="layui-layer-title cursor" ng-show='fun=="add"'>新增</div>
+			<div class="layui-layer-title cursor" ng-show='fun=="empty"'>置空</div>
+			<!-- 固件控制-->
+			<div ng-show='fun=="showUser"' id="LAY_layuipro" class="layui-layer-content">
+				<div style="padding:20px 20px;">
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>手机号</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat='item in users track by $index'>
+								<td>{{$index+1}}</td>
+								<td>{{item.phone | nullDeal | phone}}</td>
+							</tr>
+						</tbody>
+					</table>
+					<p ng-show="users.length==0" class="noData">暂无数据</p>
+					<div ng-show="users.length>0" id="users" class="paging"></div>
+				</div>
+			</div>
+			<!-- 删除-->
+			<div ng-show='fun=="delete" || fun=="verDelete"' id="LAY_layuipro" class="layui-layer-content">
+				<div style="padding:20px 20px;">
+					<div style="text-align: center;">您确定要删除该版本吗？</div>
+				</div>
+			</div>
+			<!-- 置空-->
+			<div ng-show='fun=="empty"' id="LAY_layuipro" class="layui-layer-content">
+				<div style="padding:20px 20px;">
+					<div style="text-align: center;">您确定要置空该版本吗？</div>
+				</div>
+			</div>
+			<!-- 更换详情-->
+			<div ng-show='fun=="add"' id="LAY_layuipro" class="layui-layer-content" style="max-height:400px;">
+				<div style="padding:20px 20px;">
+					<div class="layui-form-item" style="margin-top:20px;">
+						<label class="layui-form-label"><span class="mustIn">* </span>版本号：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="newForm.versionCode" lay-verify="title" autocomplete="off" placeholder="请输入版本号" class="layui-input" style="height:31px;margin-top:5px;">
+						</div>
+					</div>
+					<div class="layui-form-item" style="margin-top:30px;">
+						<label class="layui-form-label"><span class="mustIn">* </span>app文件：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="newForm.fileId" readonly="readonly" lay-verify="title" autocomplete="off" class="layui-input" style="width:130px;margin-top:5px;">
+							<div class="layui-upload" style="display: inline-block;">
+								<a href='javascript:void(0);' class="blueButton" id="testList">上传</a>
+							</div>
+							<p style="color:#FD482C;text-align: left;">(文件大小必须小于80M)</p>
+						</div>
+					</div>
+					<div class="layui-progress" style="width:150px;position:absolute;display:none;top:125px;right:15px;">
+						<div class="layui-progress-bar layui-bg-red progress"></div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>版本备注：</label>
+						<div class="layui-input-inline">
+							<textarea rows="2" cols="20" ng-model="newForm.remark " class="layui-textarea  textarea" placeholder="请输入版本备注" wrap="hard"></textarea>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>更新说明：</label>
+						<div class="layui-input-inline">
+							<textarea rows="2" cols="20" ng-model="newForm.explain" class="layui-textarea  textarea" placeholder="请输入更新说明" wrap="hard"></textarea>
+						</div>
+					</div>
+					<div class="layui-form-item" style="padding:0px 30px;" ng-show="upObject=='1'">
+						<div class="layui-input-inline" style="margin:5px 0px 5px 0px;">
+							<input ng-model='userFilter.phone' type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input" placeholder="用户手机">
+						</div>
+						<div class="layui-input-inline" style="margin:5px 0px 5px 10px;">
+							<button class="layui-btn layui-btn-lg layui-btn-normal" ng-click='getUserList()'>添加</button>
+						</div>
+						<table class="layui-table">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>手机号</th>
+									<th class="noExl">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat='item in userList track by $index'>
+									<td>{{$index+1}}</td>
+									<td>{{item.phone | nullDeal | phone}}</td>
+									<td>
+										<button class="layui-btn layui-btn-sm layui-btn-danger" ng-click="remove(false,$index)">删除</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div ng-show='fun=="versionAdd"' id="LAY_layuipro" class="layui-layer-content" style="max-height:400px;">
+				<div style="padding:20px 20px;">
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>更新方式：</label>
+						<div class="layui-input-inline" style="margin:20px 0px 0px -10px">
+							<select name="modules" class="select" lay-verify="required" ng-model="addForm.forceUpgrade ">
+								<option value="">更新方式</option>
+								<option ng-value="1">强制更新</option>、
+								<option ng-value="0">非强制更新</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>版本号：</label>
+						<div class="layui-input-inline" style="margin:20px 0px 0px -10px">
+							<select name="modules" class="select" lay-verify="required" ng-model="addForm.versionCode">
+								<option value="">版本号</option>
+								<option ng-value="item" ng-repeat="item in versionCode">{{item}}</option>
+							</select>
+						</div>
+					</div>
+					<!--<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>升级时间：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="date" id="datessss" lay-verify="date" placeholder="app升级时间" autocomplete="off" class="layui-input" style="margin-top:15px;">
+						</div>
+					</div>-->
+				</div>
+			</div>
+			<div ng-show='fun=="userAdd"' id="LAY_layuipro" class="layui-layer-content" style="max-height:400px;">
+				<div style="padding:20px 20px;">
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>更新方式：</label>
+						<div class="layui-input-inline" style="margin:-5px 0px 0px -10px">
+							<select name="modules" class="select" lay-verify="required" ng-model="addForm.forceUpgrade ">
+								<option value="">更新方式</option>
+								<option ng-value="1">强制更新</option>、
+								<option ng-value="0">非强制更新</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>版本号：</label>
+						<div class="layui-input-inline" style="margin:-5px 0px 0px -10px">
+							<select name="modules" class="select" lay-verify="required" ng-model="addForm.versionCode">
+								<option value="">版本号</option>
+								<option ng-value="item" ng-repeat="item in versionCode">{{item}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>更新用户：</label>
+						<div class="layui-input-inline">
+							<textarea rows="2" cols="20" ng-model="phoneList" class="layui-textarea  textarea" placeholder="请输入用户号码，例如：****,****" wrap="hard"></textarea>
+						</div>
+					</div>
+					<!--<div class="layui-form-item">
+						<label class="layui-form-label"><span class="mustIn">* </span>用户号码：</label>
+					</div>
+					<div class="layui-form-item" ng-repeat="item in numList track by $index">
+						<label class="layui-form-label"><span class="mustIn">* </span>用户{{$index+1}}：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="item.phone" lay-verify="title" autocomplete="off" placeholder="手机号码" class="layui-input" style="height:31px;margin-top:5px;">
+							<span ng-if="$index>0" style="line-height:38px;margin-left:5px;"><i class="iconfont icon-jian iconStyle"  ng-click="removeEnum($index)"></i></span>
+						</div>
+					</div>
+					<div class="layui-btn-group" style="margin-left:20px;cursor: pointer;">
+						<i class="iconfont icon-jiahao iconStyle;" style="font-size:20px;color:#1E9FFF;" ng-click="addEnum()"></i>
+					</div>-->
+				</div>
+			</div>
+			<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+			<div class="layui-layer-btn layui-layer-btn-c" ng-show="fun!='showUser'">
+				<a class="layui-layer-btn0" ng-click="save()">确定</a>
+				<a class="layui-layer-btn1" ng-click="close()">取消</a>
+			</div><span class="layui-layer-resize"></span>
+		</div>
+	</div>
+	<script type="text/javascript">
+		//selec默认颜色
+		var unSelected = "#bababa";
+		var selected = "#505050";
+		$(function() {
+			$("select").css("color", unSelected);
+			$("option").css("color", selected);
+			$("select").change(function() {
+				var selItem = $(this).val();
+				if (selItem == $(this).find('option:first').val()) {
+					$(this).css("color", unSelected);
+				} else {
+					$(this).css("color", selected);
+				}
+			});
+		})
+	</script>

@@ -1,0 +1,351 @@
+<div id="cardManage" class="cardManage">
+	<p class="breadcrumb">当前位置: 操作历史</p>
+	<div class="layui-tab" lay-filter="test" style="background: white;margin: 0 30px;padding:0 20px;">
+		<div style='padding:15px;'>
+			<select name="modules" class="select formItem" lay-verify="required" ng-model="form.productType">
+				<option value="">产品类型</option>
+				<option ng-value="x.productType" ng-repeat="x in productTypeList">{{x.productType}}</option>
+			</select>
+			<select name="modules" class="select formItem" lay-verify="required" ng-model="form.productKey">
+				<option value="">产品型号</option>
+				<option ng-value="x.productKey" ng-repeat="x in productList">{{x.productModel}}</option>
+			</select>
+			<select name="modules" class="select formItem" lay-verify="required" class="laySelect" ng-model="form.cardStatus">
+				<option value="">物联网卡状态</option>
+				<option ng-value="x.value" ng-repeat="x in cardStatusList">{{x.label}}</option>
+			</select>
+			<input ng-model="form.iccid" type="text" placeholder="物联网卡ICCID" autocomplete="off" class="layui-input">
+			<input type="text" ng-model="form.identityId" lay-verify="title" autocomplete="off" placeholder="物联网卡IMEI" class="layui-input">
+			<input type="text" ng-model="form.snCode" lay-verify="title" autocomplete="off" placeholder="产品SN" class="layui-input">
+		</div>
+		<div style='margin:20px 0 0 10px;'>
+			<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 10px;" ng-click='handleSearch()'>查询</button>
+		</div>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>ICCID</th>
+							<th>IMEI</th>
+							<th>SN</th>
+							<th>产品类型</th>
+							<th>产品型号</th>
+							<th>操作</th>
+							<th>状态</th>
+							<th>操作时间</th>
+							<th>操作用户</th>
+						</tr>
+					<tbody>
+						<tr ng-repeat='item in CardList'>
+							<td>{{$index+1}}</td>
+							<td style="font-weight:bold;"><a style='color:blue;' class="cursor" ng-click='handleInfo(item)'>{{item.iccid | nullDeal}}</a></td>
+							<td style="font-weight:bold;"><a style='color:blue;' class="cursor" ng-click='handleInfo(item)'>{{item.identityId | nullDeal}}</a></td>
+							<td style="font-weight:bold;"><a style='color:blue;' class="cursor" ng-click='handleInfo(item)'>{{item.snCode | nullDeal}}</a></td>
+							<td>{{item.productType | nullDeal}}</td>
+							<td>{{item.productModel | nullDeal}}</td>
+							<td>{{item.operateDesc | nullDeal}}</td>
+							<td ng-class='[item.operateStatus==1?"colorStart":"colorStop"]'>
+								{{item.operateStatus==1?'成功':'失败' | nullDeal}}
+							</td>
+							<td>{{item.operateTime | nullDeal}}</td>
+							<td>{{item.userName | nullDeal}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='CardList.length==0' class="noData">暂无数据</p>
+				<div ng-show='CardList.length>0' id="CardList" class="paging"></div>
+			</div>
+		</div>
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-show="dialogInfoVisiable" ng-style="dialogStyle">
+		<div class="layui-layer-title cursor">详情</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div style='margin:20px;position:relative;height:500px;overflow:auto;'>
+			<!-- 图 -->
+			<div class="flowChatA">
+				<div class="flowSpanA">当月流量</div>
+				<div class="flowSpanB">{{simInfo.currentMouthDataTraffic}}KB</div>
+			</div>
+			<div class="flowChatB">
+				<div class="flowSpanA">连续</div>
+				<div class="flowSpanB">{{simInfo.unusedMonths}}个月</div>
+				<div class="flowSpanC">无流量</div>
+			</div>
+			<!-- 图 -->
+			<h1 style="font-size:20px;">SIM卡详情</h1>
+			<div class="dialogForm">
+				<div class='dialogFormItem'>
+					<span>ICCID：</span>
+					<span>{{simInfo.iccid | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>IMEI：</span>
+					<span>{{simInfo.identityId | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>状态（生命周期）：</span>
+					<span>{{simInfo.lifeCycle | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>开户时间：</span>
+					<span>{{simInfo.openTime | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>激活时间：</span>
+					<span>{{simInfo.activeTime | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>停复机状态：</span>
+					<span>{{simInfo.cardStatus | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>卡类型：</span>
+					<span>{{simInfo.cardType | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>归属地：</span>
+					<span>{{simInfo.address | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>开关机状态：</span>
+					<span>{{simInfo.stopState | nullDeal}}</span>
+				</div>
+			</div>
+			<h1 style="font-size:20px;">设备信息</h1>
+			<div class="dialogForm">
+				<div class='dialogFormItem'>
+					<span>SN：</span>
+					<span>{{simInfo.snCode | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>设备名称：</span>
+					<span>{{simInfo.deviceName | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>运行状态：</span>
+					<span>{{deviceInfo.deviceDetail.workingState | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>激活时间：</span>
+					<span>{{deviceInfo.deviceDetail.activeTime | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>最后上线时间：</span>
+					<span>{{deviceInfo.deviceDetail.lastOnlineTime | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>在线状态：</span>
+					<span>{{deviceInfo.deviceDetail.status | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>产品名称：</span>
+					<span>{{deviceInfo.deviceDetail.productName | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>产品型号：</span>
+					<span>{{deviceInfo.deviceDetail.productModel | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>产品类型：</span>
+					<span>{{deviceInfo.deviceDetail.productType | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>通信类型：</span>
+					<span>{{deviceInfo.deviceDetail.netType | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>租售类型：</span>
+					<span>{{deviceInfo.deviceDetail.leaseType | nullDeal}}</span>
+				</div>
+			</div>
+			<h1 style="font-size:20px;">位置信息</h1>
+			<div class="dialogForm">
+				<div class='dialogFormItem'>
+					<span>省：</span>
+					<span>{{deviceInfo.deviceDetail.province | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>市：</span>
+					<span>{{deviceInfo.deviceDetail.city | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>区：</span>
+					<span>{{deviceInfo.deviceDetail.region | nullDeal}}</span>
+				</div>
+				<div class='dialogFormItem'>
+					<span>详细信息：</span>
+					<span>{{deviceInfo.deviceDetail.address | nullDeal}}</span>
+				</div>
+			</div>
+			<h1 style="font-size:20px;">套餐信息</h1>
+			<table class="layui-table">
+				<thead>
+					<tr>
+						<th>套餐名称</th>
+						<th>套餐生效时间</th>
+						<th>套餐失效时间</th>
+						<th>套餐月费（元）</th>
+						<th>产品类型</th>
+					</tr>
+				<tbody>
+					<tr ng-repeat='item in packageInfo'>
+						<td>{{item.prodname | nullDeal}}</td>
+						<td>{{item.prodinstefftime | nullDeal}}</td>
+						<td>{{item.prodinstexptime | nullDeal}}</td>
+						<td>{{item.mealName | nullDeal}}</td>
+						<td>{{item.productType | nullDeal}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<h1 style="font-size:20px;">近六月流量走势</h1>
+			<table class="layui-table" style='width:400px;'>
+				<thead>
+					<tr>
+						<th>月份</th>
+						<th>月流量总计(KB)</th>
+					</tr>
+				<tbody>
+					<tr ng-repeat='item in flowInfo'>
+						<td>{{item.month | nullDeal}}</td>
+						<td>{{item.flow | nullDeal}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div><span class="layui-layer-resize"></span>
+</div>
+<script type="text/javascript">
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>
+<style media="screen">
+	.cardManage .operation {
+		z-index: 999;
+		position: absolute;
+		background: #fff;
+		width: 96px;
+		border-left: 1px solid #979797;
+		border-right: 1px solid #979797;
+		border-bottom: 1px solid #979797;
+	}
+
+	.cardManage .operation li {
+		text-align: center;
+		cursor: pointer;
+		color: blue;
+	}
+
+	.dialogMain {
+		padding: 20px;
+		text-align: center;
+		font-size: 16px;
+	}
+
+	.topCardItem {
+		font-weight: 700;
+		display: inline-block;
+		width: 33%;
+		text-align: center;
+	}
+
+	.title {
+		font-size: 20px;
+		font-weight: 700;
+	}
+
+	.cursor {
+		cursor: pointer;
+	}
+
+	.dialogForm {
+		width: 80%;
+		font-size: 22px !important;
+	}
+
+	.dialogFormItem {
+		width: 31%;
+		display: inline-block;
+	}
+
+	.flowChatA {
+		position: absolute;
+		top: 0px;
+		right: 20px;
+		width: 200px;
+		height: 200px;
+		border: 1px solid #333;
+		border-radius: 100px;
+	}
+
+	.flowChatA .flowSpanA {
+		position: absolute;
+		width: 100%;
+		font-size: 27px;
+		top: 40px;
+		text-align: center;
+	}
+
+	.flowChatA .flowSpanB {
+		position: absolute;
+		width: 100%;
+		font-size: 27px;
+		top: 90px;
+		text-align: center;
+	}
+
+	.flowChatB {
+		position: absolute;
+		top: 250px;
+		right: 20px;
+		width: 200px;
+		height: 200px;
+		border: 1px solid #333;
+		border-radius: 100px;
+	}
+
+	.flowChatB .flowSpanA {
+		position: absolute;
+		width: 100%;
+		font-size: 27px;
+		top: 40px;
+		text-align: center;
+	}
+
+	.flowChatB .flowSpanB {
+		position: absolute;
+		width: 100%;
+		font-size: 27px;
+		top: 90px;
+		text-align: center;
+	}
+
+	.flowChatB .flowSpanC {
+		position: absolute;
+		width: 100%;
+		font-size: 27px;
+		top: 140px;
+		text-align: center;
+	}
+
+	.select {
+		color: #333 !important;
+	}
+</style>

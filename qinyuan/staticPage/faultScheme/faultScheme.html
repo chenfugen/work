@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/2.0.2/jquery.js"></script>
+    <title>预处理方案</title>
+</head>
+
+<body>
+    <div id="body">
+    </div>
+</body>
+<script>
+    let arr = window.location.href.split('id=');
+    id = arr[1]
+    let api ='/web/api/common/getPretreatmentList'
+    $.ajax({
+        type: 'get',
+        url: api,
+        data: {
+            id:id
+        },
+        async: false,
+        dataType: 'json',
+        success: function(res) {
+            document.getElementById("body").innerHTML=res.data.list[0].resolution
+        },
+        error: function(err) {
+            console.log(err)
+        }
+    });
+</script>
+
+</html>

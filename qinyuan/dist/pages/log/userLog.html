@@ -1,0 +1,62 @@
+<div id="userLog">
+	<p class="breadcrumb">当前位置: 用户日志</p>
+	<div class="layui-tab pageContent" lay-filter="test" style="padding-top:20px;">
+		<div class="layui-input-inline">
+			<input ng-model='filter.phone' type="text" id="title" lay-verify="title" placeholder="用户手机" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px">
+		</div>
+		<div class="layui-input-inline">
+			<input ng-model='filter.startTime' type="text" name="date" id="date" lay-verify="date" placeholder="操作开始/结束时间" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px;width: 300px">
+		</div>
+		<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='getListData({
+			pageNum:1,
+			pageSize:10,
+		},true)'>查询</button>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>用户手机</th>
+							<th>用户操作</th>
+							<th>操作时间</th>
+							<th class="noExl" ng-show="isDetail">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='(index, item) in listData'>
+							<td>{{index+1}}</td>
+							<td>{{item.phone | nullDeal}}</td>
+							<td>{{item.methodName | nullDeal}}</td>
+							<td>{{item.createTime | nullDeal}}</td>
+							<td class="noExl" ng-show="isDetail">
+								<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog(item.id)">详情</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				<div id="userLogPage" class="paging"></div>
+			</div>
+		</div>
+		<!--<div ng-show="isExcel" style="margin:10px 10px;">
+			<button class="layui-btn layui-btn-lg layui-btn-normal" onclick="toExcel('用户日志')">导出</button>
+		</div>-->
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width: 500px; height:400px; top:20%; left:50%;margin-left:-150px;display: none;">
+		<div class="layui-layer-title cursor">详情</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="height:380px;">
+			<div style="padding:10px 20px;font-size:15px;" class="popout">
+				<p>用户名：{{infoData.phone | nullDeal}}</p>
+				<p>操作内容：{{infoData.methodName | nullDeal}}</p>
+				<p>IP地址：{{infoData.ip | nullDeal}}</p>
+				<p>操作时间：{{infoData.createTime | nullDeal}}</p>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+
+	</div>
+</div>

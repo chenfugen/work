@@ -1,0 +1,92 @@
+<div id="faultTrend">
+	<p class="breadcrumb">当前位置: 故障趋势</p>
+	<div class="layui-tab" lay-filter="test">
+		<ul class="layui-tab-title">
+			<li lay-id="notYet" class="layui-this" ng-click='changeDayTab(1)'>今日</li>
+			<li lay-id="allready" ng-click='changeDayTab(2)'>7天</li>
+			<li lay-id="allready" ng-click='changeDayTab(3)'>30天</li>
+		</ul>
+		<div class="layui-tab-content">
+			<!--全部-->
+			<div class="layui-tab-item layui-show">
+				<ul class="productDate" style="margin-top:10px;">
+					<li class="proNum">
+						<p>{{count.deviceErrorCount}}</p>
+						<p>故障新增</p>
+					</li>
+					<li class="proBuy">
+						<p>{{count.deviceRepairCount}}</p>
+						<p>报修新增</p>
+					</li>
+				</ul>
+				<div class="layui-tab" lay-filter="test">
+					<!--<ul class="layui-tab-title">
+						<li lay-id="notYet" class="layui-this" ng-click='changeTab(0)'>未报修</li>
+						<li lay-id="allready" ng-click='changeTab(1)'>已报修</li>
+					</ul>-->
+					<!--全部-->
+					<div class="layui-tab-item layui-show">
+						<!-- <select name="modules" class="select" lay-verify="required">
+							<option value="">区域</option>
+							<option value="1">全部</option>
+						</select> -->
+						<!-- <button class="layui-btn layui-btn-lg layui-btn-normal searchBth">查询</button> -->
+						<table class="layui-table" style="margin:0px 0px;">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>产品名称</th>
+									<th>故障名称</th>
+									<th>设备名称</th>
+									<th>MAC/IMEI</th>
+									<th>SN</th>
+									<th>绑定用户</th>
+									<!-- <th>处理进度</th> -->
+									<th>故障等级</th>
+									<th>通信方式</th>
+									<th>详细地址</th>
+									<th>上报时间</th>
+									<th ng-show="isDetail" class="noExl">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat='(index, item) in listData'>
+									<!-- 序号 -->
+									<td>{{index+1}}</td>
+									<!-- 产品名称 -->
+									<td>{{item.productName | nullDeal}}</td>
+									<!-- 故障名称 -->
+									<td>{{item.errorName | nullDeal}}</td>
+									<!-- 设备地址 -->
+									<td>{{item.deviceName | nullDeal}}</td>
+									<!-- MAC地址 -->
+									<td>{{item.identityId | nullDeal}}</td>
+									<!-- SN码 -->
+									<td>{{item.sncode | nullDeal}}</td>
+									<!-- 绑定用户 -->
+									<td>{{item.phone | nullDeal}}</td>
+									<!-- <th>处理进度</th> -->
+									<!-- <td>{{item.status==1?'未处理':'已处理'}}</td> -->
+									<!-- 故障等级 -->
+									<td>{{item.rank | nullDeal}}</td>
+									<!-- 通信方式 -->
+									<td>{{item.netType | nullDeal}}</td>
+									<!-- 详细地址 -->
+									<td>{{item.address | nullDeal}}</td>
+									<!-- 上报时间 -->
+									<td>{{item.createTime | nullDeal}}</td>
+									<td ng-show="isDetail" class="noExl">
+										<a href="#/faultDetails/{{item.errorCode+'/'+item.deviceId}}" class="layui-btn layui-btn-sm layui-btn-normal">详情</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<p ng-show='listData.length==0' class="noData">暂无数据</p>
+						<div id="faultTrendPage" class="paging"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+</div>

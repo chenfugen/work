@@ -1,0 +1,438 @@
+#faultDetails {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#faultDetails .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 190px;
+    padding: 0 30px;
+}
+
+#faultDetails .productDate li {
+    width: 24%;
+    height: 180px;
+    display: block;
+    background: white;
+}
+
+#faultDetails .productDate li p {
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+}
+
+#faultDetails .productDate li i {
+    font-size: 20px;
+    color: #1E9FFF;
+}
+
+#faultDetails .productDate li .radius {
+    width: 130px;
+    height: 130px;
+    border-radius: 130px 130px;
+    background: #1E9FFF;
+    border: 1px solid #eee;
+    box-shadow: 1px 3px 6px #8C8C8C;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+#faultDetails .productDate li .radius h1 {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    top: 45px;
+    text-align: center;
+}
+
+#faultDetails .productDate li .radius p {
+    font-size: 15px;
+    margin-top: 70px;
+}
+
+#faultDetails .productDate li .radius .semi-circle {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-radius: 130px 130px 0 0;
+    width: 130px;
+    height: 65px;
+    background: #9ACDEF;
+}
+
+#faultDetails .progress {
+    line-height: 45px;
+}
+
+#faultDetails .progress .layui-progress {
+    display: inline-block;
+    width: 70%;
+    margin-left: 100px;
+}
+
+#faultDetails .layui-tab {
+    padding: 0px 0px;
+    margin-top: -20px;
+}
+
+#faultDetails .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#faultDetails .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#faultDetails .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#faultDetails .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#faultDetails .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+#faultDetails .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}
+
+#faultDetails .filterRelate {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+#faultDetails .filterRelate li {
+    float: left;
+    width: 33%;
+    margin: 10px 0px;
+}
+
+#faultDetails .filterRelate li .layui-input-block {
+    margin: 7px 0px;
+}
+
+#faultDetails .label {
+    width: 100px;
+    padding: 9px 5px 0px 15px;
+}
+
+#faultList {
+    min-width: 1200px;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#faultList .select {
+    float: left;
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 20px 0px 10px 13px;
+}
+
+#faultList .popout p {
+    line-height: 40px;
+}
+
+#faultMaintain {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#faultMaintain .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 0px 10px 0px 0px;
+}
+
+#faultRepair {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#faultRepair .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 0px 10px 0px 0px;
+}
+
+#faultScheme {
+    width: 100%;
+    min-width: 100px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+    /*分页控件*/
+}
+
+#faultScheme .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#faultScheme .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#faultScheme .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#faultScheme .productDate .proNum {
+    background: #009BDE;
+}
+
+#faultScheme .productDate .proBuy {
+    background: #DB527D;
+}
+
+#faultScheme .productDate .proHire {
+    background: #5ABF89;
+}
+
+#faultScheme .layui-tab {
+    padding: 0 30px;
+}
+
+#faultScheme .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#faultScheme .layui-tab .layui-tab-title li:last-child {
+    border-right: none;
+}
+
+#faultScheme .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#faultScheme .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#faultScheme .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#faultScheme .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+#faultScheme .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}
+
+#faultScheme .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 10px 13px 20px 0px;
+}
+
+#faultScheme .layui-field-box p {
+    line-height: 30px;
+}
+
+#faultScheme .source {
+    border: 1px solid #e6e6e6;
+    padding: 10px 10px;
+    margin: 10px 0px 10px 20px;
+}
+
+#faultScheme #productAll select {
+    margin: 0;
+    padding: 0;
+    padding: 3px 0px;
+}
+
+#faultTrend {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#faultTrend .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#faultTrend .productDate li {
+    width: 49%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#faultTrend .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#faultTrend .productDate .proNum {
+    background: #20A8D8;
+}
+
+#faultTrend .productDate .proBuy {
+    background: #FFAC5E;
+}
+
+#faultTrend .productDate .proHire {
+    background: #FF6868;
+}
+
+#faultTrend .layui-tab {
+    padding: 0 30px;
+}
+
+#faultTrend .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#faultTrend .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#faultTrend .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#faultTrend .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#faultTrend .layui-tab-item .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 10px 0px 20px 20px;
+}
+
+#faultTrend .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+#faultTrend .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}
+
+#faultTrend .popout p {
+    line-height: 40px;
+}
+
+#faultSetUp {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#faultSetUp .popout p {
+    line-height: 40px;
+}
+
+#faultSetUp .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 5px 0px 5px 10px;
+}

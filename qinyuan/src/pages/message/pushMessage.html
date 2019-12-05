@@ -1,0 +1,142 @@
+<div id="pushMessage">
+	<p class="breadcrumb">当前位置: 即时消息推送</p>
+	<div style="margin:0 30px;padding:10px 20px;background: white;">
+		<!-- 产品类型 -->
+		<!-- <div class="layui-inline">
+			<label class="layui-form-label" style="line-height:30px;margin-top:10px;">产品名称：</label>
+			<div class="layui-input-inline">
+				<select name="quiz" class="select" ng-model='messageForm.productKey'>
+					<option value="">产品名称</option>
+					<option ng-repeat='item in productList' value="{{item.productKey}}">{{item.productName}}</option>
+				</select>
+			</div>
+		</div> -->
+		<!-- 消息类型 -->
+		<div class="layui-inline" style="display: block;">
+			<label class="layui-form-label" style="line-height:30px;margin-top:10px;"><span class="mustIn">* </span>消息类型：</label>
+			<div class="layui-input-inline">
+				<select name="quiz" class="select" ng-model='messageForm.msgType' style="margin-left:0px;">
+					<option value="">消息类型</option>
+					<option ng-repeat='item in msgTypeList' value="{{item.id}}">{{item.typeName}}</option>
+				</select>
+			</div>
+		</div>
+		<!-- 推送内容： -->
+		<div class="layui-form-item layui-form-text" style="margin-top:40px;">
+			<label class="layui-form-label"><span class="mustIn">* </span>推送内容：</label>
+			<div class="layui-input-block">
+				<textarea ng-model='messageForm.msgContent' placeholder="请输入长度少于500个字符的内容" class="layui-textarea" name="desc"></textarea>
+			</div>
+		</div>
+		<!-- 推送对象： -->
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label" style="line-height:44px;margin-top:10px;"><span class="mustIn">* </span>推送对象：</label>
+				<div class="layui-input-inline" style="line-height:41px;width:100px;margin-top:20px;">
+					<input type="radio" name="sex" value="0" checked="" ng-model='pushObject'> 方式一：
+				</div>
+				<div ng-show='pushObject==0' class="layui-input-inline">
+					<select name="quiz" class="select" style="margin-top:25px;" ng-model='messageForm.platformType'>
+						<option value="">用户类型</option>
+						<option value="all">全部</option>
+						<option value="ios">iOS</option>
+						<option value="android">安卓</option>
+					</select>
+				</div>
+				<div ng-show='pushObject==0' class="layui-input-inline">
+					<select name="quiz" class="select" style="margin-top:25px;" ng-model='address'>
+						<option value="">请选择用户</option>
+						<option value="all">所有用户</option>
+						<option value="region">区域用户</option>
+					</select>
+				</div>
+				<div ng-show="pushObject==0 && address=='region'" style="margin-top:29px;" class="layui-input-inline">
+					<citys></citys>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<div class="layui-input-inline" style="line-height:41px;width:100px;margin:0px 0px 0px 110px;">
+					<input type="radio" name="sex" value="1" checked="" ng-model='pushObject'> 方式二：
+				</div>
+			</div>
+			<div ng-show='pushObject==1' style='width:700px;box-shadow: 0 1px 2px 4px rgba(0,0,0,.05);margin:0px 0px 0px 110px;'>
+				<input ng-model='userFilter.phone' style='margin:15px 0 0 15px;' type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input" placeholder="用户手机">
+				<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click='getUserList()'>添加</button>
+				<div class="layui-card-body">
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>手机号</th>
+								<th class="noExl">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat='item in userList track by $index'>
+								<td>{{$index+1}}</td>
+								<td>{{item.phone | nullDeal | phone}}</td>
+								<td>
+									<button class="layui-btn layui-btn-sm layui-btn-danger" ng-click="remove(false,$index)">删除</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<button class="layui-btn layui-btn-sm layui-btn-danger" ng-click="remove(true)">全部删除</button>
+				</div>
+			</div>
+		</div>
+		<!-- 推送时间 -->
+		<div class="layui-inline" style="margin-top: 30px;">
+			<label class="layui-form-label"><span class="mustIn">* </span>推送时间：</label>
+		</div>
+		<div class="layui-inline" style="margin-top: 30px;">
+			<div class="layui-input-inline">
+				<div>
+					<input type="radio" name="sendType" value="0" checked="" ng-model='messageForm.scheduled'> 立即发送
+				</div>
+			</div>
+		</div>
+		<div style="margin:30px 0px 0px 115px;">
+			<div class="layui-input-inline">
+				<div style="position:relative">
+					<input type="radio" name="sendType" value="1" checked="" ng-model='messageForm.scheduled'> 定时发送
+					<input ng-show='messageForm.scheduled==1' style="position:relative;left: 20px;" ng-model='messageForm.scheduledTime' type="text" name="date2" id="date" lay-verify="date2" placeholder="绝对时间" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+		</div>
+		<!-- 推送方式 -->
+		<div class="layui-form-item" style="margin-top: 30px;">
+			<label class="layui-form-label"><span class="mustIn">* </span>推送方式：</label>
+			<div class="layui-input-block">
+				<ul class="checks">
+					<li><input ng-model='pushWayList.app' type="checkbox" lay-skin="primary" title="APP" checked="" ng-change="checks()"> APP
+						<ul style="margin-left:20px;">
+							<li><input ng-model='pushWayList.wayA' type="checkbox" lay-skin="primary" title="APP" checked="" ng-change="checkWay()"> 消息中心(推送到消息中心，APP内可以查收到，推送消息会有小红点状态标记)</li>
+							<li><input ng-model='pushWayList.wayB' type="checkbox" lay-skin="primary" title="APP" checked="" ng-change="checkWay()"> 应用推送(推送至手机通知栏及消息中心，未开启APP也可以收到)</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<button class="layui-btn layui-btn-fluid" style="margin-top:40px;" ng-click="Verification()">发送</button>
+	</div>
+</div>
+<script type="text/javascript">
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

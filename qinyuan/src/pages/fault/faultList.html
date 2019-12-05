@@ -1,0 +1,115 @@
+<div id="faultList">
+	<p class="breadcrumb">当前位置: 故障列表</p>
+	<div class="layui-tab" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px;">
+		<select ng-model='filter.productKey' class="select" name="modules" lay-verify="required" style="margin-left:10px;">
+			<option value="">产品名称</option>
+			<option ng-repeat='item in productList' value="{{item.productKey}}">{{item.productName}}</option>
+		</select>
+		<select ng-model='filter.errorCode' class="select" name="modules" lay-verify="required">
+			<option value="">故障名称</option>
+			<option ng-repeat='item in errorList' value="{{item.errorId}}">{{item.errorName}}</option>
+		</select>
+		<select ng-model='filter.status' class="select" name="modules" lay-verify="required">
+			<option value="">处理进度</option>
+			<option value="1">待处理</option>
+			<option value="2">已处理</option>
+		</select>
+		<div class="layui-input-inline">
+			<input type="text" name="title" id="title" ng-model='filter.identityId' lay-verify="title" placeholder="MAC/IMEI" autocomplete="off" class="layui-input" style="margin:20px 0px 0px 10px">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" ng-model="filter.snCode" lay-verify="title" autocomplete="off" placeholder="SN" class="layui-input" style="margin:20px 0px 0px 10px">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" name="title" id="title" ng-model='filter.deviceName' lay-verify="title" placeholder="设备名称" autocomplete="off" class="layui-input" style="margin:20px 0px 0px 10px">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" ng-model="filter.productModel" lay-verify="title" autocomplete="off" placeholder="产品型号" class="layui-input" style="margin:20px 0px 0px 10px">
+		</div>
+		<div class="layui-input-inline">
+			<input ng-model='filter.startTime' type="text" name="date" id="date" lay-verify="date" placeholder="请选择开始/结束时间" autocomplete="off" class="layui-input" style="margin:20px 0px 0px 10px; width:300px;">
+		</div>
+		<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:20px 0px 0px 20px;" ng-click='getListData({
+			pageNum:1,
+			pageSize:10,
+		},true)'>查询</button>
+		<button class="layui-btn layui-btn-sm layui-btn-normal" style="margin:20px 0px 0px 20px;" ng-click='goHistory()'>历史记录</button>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>故障代码</th>
+							<th>故障名称</th>
+							<th>设备名称</th>
+							<th>产品名称</th>
+							<th>产品型号</th>
+							<th>处理进度</th>
+							<!-- <th>故障等级</th>
+							<th>通信方式</th> -->
+							<th>MAC/IMEI</th>
+							<th>SN</th>
+							<th>上报时间</th>
+							<th ng-show="isList || isDelete" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='(index, item) in listData'>
+							<th>{{item.no}}</th>
+							<th>{{item.errorCode | nullDeal}}</th>
+							<th>{{item.errorName| nullDeal}}</th>
+							<th>{{item.deviceName| nullDeal}}</th>
+							<th>{{item.productName| nullDeal}}</th>
+							<th>{{item.productModel| nullDeal}}</th>
+							<th>{{item.dealStatus | status}}</th>
+							<!-- <th>{{item.rank}}</th>
+							<th>{{item.address}}</th>
+							<th>{{item.netType}}</th> -->
+							<th>{{item.identityId | nullDeal}}</th>
+							<th>{{item.sncode | nullDeal}}</th>
+							<th>{{item.reportTime | nullDeal}}</th>
+							<td class="noExl" ng-show="isList || isDelete">
+								<a ng-show="isList" href="#/faultDetails/{{item.errorCode+'/'+item.deviceId}}" class="layui-btn layui-btn-sm layui-btn-normal">详情</a>
+								<button ng-show="isDelete" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog(item.id, item.errorName)">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				<div ng-show='listData.length!=0' id="faultListPage" class="paging"></div>
+			</div>
+		</div>
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page delete" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width:400px; height:200px; top:50%; left:50%;margin-left:-200px;margin-top:-100px;display: none;">
+		<div class="layui-layer-title cursor">请确认</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="height:450px;">
+			<p style="text-align:center;margin:30px auto 30px auto;">确认删除该条数据(故障:{{deleteName}})？！</p>
+			<div class="layui-layer-btn layui-layer-btn-c">
+				<button class="layui-btn layui-btn-lg layui-btn-danger" ng-click='delete()'>确认</button>
+				<button class="layui-btn layui-btn-lg layui-btn-primary" ng-click="close()">取消</button>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+	</div>
+</div>
+<script type="text/javascript">
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

@@ -1,0 +1,184 @@
+#pushRule,
+#messageFeedback,
+#pushMessage {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#pushRule .select,
+#messageFeedback .select,
+#pushMessage .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 20px 0px 0px 10px;
+}
+
+#pushRule .checks li,
+#messageFeedback .checks li,
+#pushMessage .checks li {
+    line-height: 40px;
+}
+
+#pushRule .popout p,
+#messageFeedback .popout p,
+#pushMessage .popout p {
+    line-height: 40px;
+}
+
+#pushRule .lookRule,
+#messageFeedback .lookRule,
+#pushMessage .lookRule {
+    display: inline-block;
+    color: #FD482C;
+    margin: 0px 0px 0px 10px;
+    height: 30px;
+    line-height: 50px;
+}
+
+#pushRule .lookRule span,
+#messageFeedback .lookRule span,
+#pushMessage .lookRule span {
+    cursor: pointer;
+    color: #666;
+}
+
+#pushRule .lookRule span:hover,
+#messageFeedback .lookRule span:hover,
+#pushMessage .lookRule span:hover {
+    color: #FD482C;
+}
+
+#messageList {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#messageList .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 20px 0px 0px 10px;
+}
+
+#messageList .popout p {
+    line-height: 40px;
+}
+
+#setUp {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#setUp .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#setUp .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#setUp .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#setUp .productDate .proNum {
+    background: #20A8D8;
+}
+
+#setUp .productDate .proBuy {
+    background: #5ABF89;
+}
+
+#setUp .productDate .proHire {
+    background: #0CCCDA;
+}
+
+/* line 1356, ../sass/style.scss */
+#setUp .layui-tab {
+    padding: 0 30px;
+}
+
+/* line 1359, ../sass/style.scss */
+#setUp .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+/* line 1363, ../sass/style.scss */
+#setUp .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+/* line 1368, ../sass/style.scss */
+#setUp .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+/* line 1374, ../sass/style.scss */
+#setUp .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+/* line 1386, ../sass/style.scss */
+#setUp .layui-tab-item .select {
+    border: 1px solid #e6e6e6;
+    padding: 10px 10px;
+    margin: 10px 0px 10px 20px;
+}
+
+/* line 1391, ../sass/style.scss */
+#setUp .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+/* line 1395, ../sass/style.scss */
+#setUp .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}
+
+#pushObject {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}

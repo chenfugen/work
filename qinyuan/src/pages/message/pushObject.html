@@ -1,0 +1,68 @@
+<div id="pushObject">
+	<p class="breadcrumb">当前位置: 消息推送方式</p>
+
+	<div class="layui-tab" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px;">
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>系统名称</th>
+							<th>链接</th>
+							<th ng-show="isSave || isDelete" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='(index, item) in listData'>
+							<td>{{index+1}}</td>
+							<td>{{item.systemName==null?'--':item.systemName}}</td>
+							<td>{{item.systemUrl==null?'--':item.systemUrl}}</td>
+							<td ng-show="isSave || isDelete" class="noExl">
+								<button ng-show="isSave" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('edit', item.id)">编辑</button>
+								<button ng-show="isDelete" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog('delete', item.id)">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				<div id="puObjectPage" class="paging"></div>
+			</div>
+		</div>
+		<div style="margin:10px 10px;">
+			<button ng-show="isSave" class="layui-btn layui-btn-lg layui-btn-normal" ng-click='dialog("add")'>新增</button>
+		</div>
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-style="dialogStyle">
+		<div ng-show='fun=="add"' class="layui-layer-title cursor">新增</div>
+		<div ng-show='fun=="edit"' class="layui-layer-title cursor">编辑</div>
+		<div ng-show='fun=="delete"' class="layui-layer-title cursor">删除</div>
+		<!-- 编辑/新增 -->
+		<div ng-show='fun=="add"||fun=="edit"' id="LAY_layuipro" class="layui-layer-content" style="height:200px;">
+			<div style="padding:20px 20px;">
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>系统名称：</label>
+					<div class="layui-input-block">
+						<input ng-model='form.systemName' type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入系统名称" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item" style="margin-top: 30px;">
+					<label class="layui-form-label"><span class="mustIn">* </span>链接：</label>
+					<div class="layui-input-block">
+						<input ng-model='form.systemUrl' type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入链接" class="layui-input">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 删除 -->
+		<div ng-show='fun=="delete"' style="margin-left:80px;margin-top:20px;">确认删除该推送方式？</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="Verification()">{{fun=="add" || fun=="edit"?'保存':fun=="delete"?'确定 ':''}}</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+</div>

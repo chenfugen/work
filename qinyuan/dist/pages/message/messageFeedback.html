@@ -1,0 +1,102 @@
+<div id="messageFeedback">
+	<p class="breadcrumb">当前位置: 意见反馈</p>
+	<div class="layui-tab" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px;">
+		<select name="modules" class="select" lay-verify="required" ng-model="filter.status">
+			<option value="">全部</option>
+			<option value="1">已回复</option>
+			<option value="0">未回复</option>
+		</select>
+		<!-- 日期选择器 -->
+		<div class="layui-input-inline">
+			<input type="text" ng-model='filter.startTime' name="date" id="date" lay-verify="date" placeholder="开始/结束时间" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px;width:300px;">
+		</div>
+		<div class="layui-input-inline" style="margin-left:20px;">
+			<input type="text" name="title" lay-verify="title" ng-model='filter.phone' autocomplete="off" placeholder="手机号" class="layui-input" style="margin:-5px 0px 0px -10px;">
+		</div>
+		<div class="layui-input-inline" style="margin-left:20px;">
+			<input type="text" name="title" lay-verify="title" ng-model='filter.feedBackUser' autocomplete="off" placeholder="用户名" class="layui-input" style="margin:-5px 0px 0px -10px;">
+		</div>
+		<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='getListData({
+			pageNum:1,
+			pageSize:10
+		},true)'>查询</button>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>手机号</th>
+							<th>反馈时间</th>
+							<th>反馈内容</th>
+							<th>回复状态</th>
+							<th ng-show="feedBack || isDetail" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='(index, item) in listData'>
+							<td>{{index+1}}</td>
+							<td>{{item.phone | nullDeal | phone}}</td>
+							<td>{{item.askTime | nullDeal}}</td>
+							<td style="max-width:600px">{{item.askContent | nullDeal}}</td>
+							<td>{{item.status==1?'已回复':'未回复'}}</td>
+							<td ng-show="feedBack || isDetail">
+								<button ng-show='feedBack && item.status==0' class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('reply', item.id)">回复</button>
+								<button ng-show='feedBack && item.status==1' class="layui-btn layui-btn-sm layui-btn-disabled">回复</button>
+								<button ng-show='isDetail  && item.status==1' class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('info', item.id)">详情</button>
+								<button ng-show='isDetail  && item.status==0' class="layui-btn layui-btn-sm layui-btn-disabled">详情</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				<div id="messageFeedbackPage" class="paging"></div>
+			</div>
+		</div>
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page popoutOne" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width:600px; height:250px; top:30%; left:50%;margin-left:-200px;display: none;">
+		<div class="layui-layer-title cursor">{{fun=='reply'?'回复':'详情'}}</div>
+		<div ng-show='fun=="info"' id="LAY_layuipro" class="layui-layer-content" style="height:150px;">
+			<div style="padding:10px 20px;" class="popout">
+				<p>回复内容：{{form.feedBackContent | nullDeal}}</p>
+				<p>回复人：{{form.feedBackUser | nullDeal}}</p>
+				<p>回复时间：{{form.feedBackTime | nullDeal}}</p>
+			</div>
+		</div>
+		<div ng-show='fun=="reply"' id="LAY_layuipro" class="layui-layer-content" style="height:150px;">
+			<div style="padding:10px 20px;">
+				<div class="layui-form-item layui-form-text" style="margin-top:15px;">
+					<label class="layui-form-label"><span class="mustIn">* </span>回复内容：</label>
+					<div class="layui-input-block">
+						<textarea ng-model='form.content' placeholder="请输入字符长度少于100的内容" class="layui-textarea" name="desc" style="margin:-30px 0px 0px 10px;"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a ng-show='fun=="reply"' class="layui-layer-btn0" ng-click="save()">保存</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+</div>
+<script type="text/javascript">
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

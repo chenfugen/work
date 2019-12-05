@@ -1,0 +1,249 @@
+<div id="deviceMap">
+	<p class="breadcrumb">当前位置: 设备地图 / <span class="navHeader">列表模式</span></p>
+	<p class="deviceNav1"><button class="layui-btn layui-btn-sm layui-btn-normal " onclick="modeSelect(1)">地图模式</button> </p>
+	<p class="deviceNav2"><button class="layui-btn layui-btn-sm layui-btn-normal " onclick="modeSelect(2)">列表模式</button> </p>
+	<div class="selectbox">
+		<select name="modules" class="select" lay-verify="required" class="laySelect" ng-model="name" style="margin-left:30px;">
+			<option value="">产品名称</option>
+			<option ng-repeat="x in productNameList" ng-value="x.productName">{{x.productName}}</option>
+		</select>
+		<select name="modules" class="select" lay-verify="required" class="laySelect" ng-model="status" style="margin-left:10px;">
+			<option value="">状态</option>
+			<option value="1">在线</option>
+			<option value="3">离线</option>
+		</select>
+		<select name="modules" class="select" lay-verify="required" class="laySelect" ng-model="errorStatus" style="margin-left:10px;">
+			<option value="">故障状态</option>
+			<option value="0">正常</option>
+			<option value="1">故障</option>
+		</select>
+		<select name="modules" class="select" lay-verify="required" class="laySelect" ng-model="filterStatus" style="margin:0px 10px 0px 10px;">
+			<option value="">滤芯状态</option>
+			<option value="0">正常</option>
+			<option value="1">需要更换</option>
+			<option value="2">即将到期</option>
+		</select>
+		<citys></citys>
+		<div class="layui-input-inline">
+			<input type="text" ng-model="mac" lay-verify="title" autocomplete="off" placeholder="MAC/IMEI" class="layui-input" id="mac" style="margin:-5px 0px 0px 10px">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" ng-model="sncode" lay-verify="title" autocomplete="off" placeholder="SN" class="layui-input" id="sn" style="margin:-5px 0px 0px 10px">
+		</div>
+		<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" ng-click="searchs()" style="margin:-5px 0px 0px 20px">查询</button>
+	</div>
+	<div id="container"></div>
+	<div class="deviceTable">
+		<table class="layui-table">
+			<thead>
+				<tr style="color:black;">
+					<th>序号</th>
+					<th>设备名称</th>
+					<th>产品名称</th>
+					<th>MAC/IMEI</th>
+					<th>SN</th>
+					<th>区域</th>
+					<th>在线状态</th>
+					<th class="noExl">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="device in devices">
+					<td>{{$index+1}}</td>
+					<td>{{device.deviceName | nullDeal}}</td>
+					<td>{{device.name}}</td>
+					<td>{{device.mac | nullDeal}}</td>
+					<td>{{device.sncode | nullDeal}}</td>
+					<td>{{device.province+device.city | nullDeal}}</td>
+					<td>
+						<span ng-show='device.status=="在线"' class="colorStart">{{device.status}}</span>
+						<span ng-show='device.status=="离线"' class="colorStop">{{device.status}}</span>
+					</td>
+					<td class="noExl">
+						<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="goDetail(device.deviceId)">详情</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p ng-show="devices.length==0" class="noData">暂无数据</p>
+		<div ng-hide="devices.length==0" class="noData paging" id="productAll"></div>
+	</div>
+</div>
+<script type="text/javascript">
+	function maps(a) {
+		var cluster, markers = [];
+		var map = new AMap.Map("container", {
+			resizeEnable: true,
+			center: [105, 34],
+			zoom: 4,
+		});
+		var infoWindow = new AMap.InfoWindow({
+			offset: new AMap.Pixel(5, -10)
+		});
+		for (var i = 0; i < a.length; i += 1) {
+			if (a[i].longitude != null && a[i].longitude != "") {
+				var marker = new AMap.Marker({
+					position: [a[i].longitude, a[i].latitude],
+					map: map,
+					icon: new AMap.Icon({
+						size: new AMap.Size(19, 31), //图标大小
+						image: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+					}),
+					//title:"设备名称："+a[i].deviceName+"/n"+"mac地址："+a[i].mac+"/n"+"设备状态："+a[i].errorStatus,
+					offset: new AMap.Pixel(-15, -15)
+				})
+				if (a[i].mac == "" || a[i].mac == undefined) {
+					a[i].mac = "--";
+				}
+				marker.content = "<p>详情</p><hr/>" + "<p>" + "设备名称：" + a[i].deviceName + "</p>" + "<p>" + "mac地址：" + a[i].mac + "</p>" + "<p>" + "设备状态：" + a[i].errorStatus + "</p>";
+				marker.msg = "<hr/>" + "<p>" + "设备名称：" + a[i].deviceName + "</p>" + "<p>" + "mac地址：" + a[i].mac + "</p>" + "<p>" + "设备状态：" + a[i].errorStatus + "</p>";
+				marker.on('click', markerClick);
+				marker.emit('click', {
+					target: marker
+				});
+				markers.push(marker);
+			}
+		}
+
+		function markerClick(e) {
+			infoWindow.setContent(e.target.content);
+			infoWindow.open(map, e.target.getPosition());
+		}
+		map.setFitView();
+		var count = markers.length;
+		var _renderCluserMarker = function(context) {
+			var factor = Math.pow(context.count / count, 1 / 18)
+			var div = document.createElement('div');
+			var Hue = 180 - factor * 180;
+			var bgColor = 'hsla(' + Hue + ',100%,50%,0.7)';
+			var fontColor = 'hsla(' + Hue + ',100%,20%,1)';
+			var borderColor = 'hsla(' + Hue + ',100%,40%,1)';
+			var shadowColor = 'hsla(' + Hue + ',100%,50%,1)';
+			div.style.backgroundColor = bgColor
+			var size = Math.round(30 + Math.pow(context.count / count, 1 / 5) * 20);
+			div.style.width = div.style.height = size + 'px';
+			div.style.border = 'solid 1px ' + borderColor;
+			div.style.borderRadius = size / 2 + 'px';
+			div.style.boxShadow = '0 0 1px ' + shadowColor;
+			div.innerHTML = context.count;
+			div.style.lineHeight = size + 'px';
+			div.style.color = fontColor;
+			div.style.fontSize = '14px';
+			div.style.textAlign = 'center';
+			context.marker.setOffset(new AMap.Pixel(-size / 2, -size / 2));
+			context.marker.setContent(div)
+		}
+		addCluster(1);
+
+		function addCluster() {
+			if (cluster) {
+				cluster.setMap(null);
+			}
+			cluster = new AMap.MarkerClusterer(map, markers, {
+				gridSize: 80
+			});
+			cluster.on('click', function(e) {
+				if (map.getZoom() == 18) {
+					var div = "<p>详情</p>";
+					for (var i = 0; i < e.markers.length; i += 1) {
+						div += e.markers[i].msg;
+					}
+					infoWindow.setContent(div);
+					infoWindow.open(map, e.markers[1].getPosition())
+				}
+			});
+		}
+	}
+	//var position=[{latitude: "29.879572",longitude: "121.630515"},{latitude: "29.889572",longitude: "121.650515"}];
+	//获取经纬度
+	function initMap(a, b, c, d, e, f, g, k) {
+		dataRequest("GET", "manage/device/map", {
+			"name": a,
+			"status": b,
+			"provinceId": c,
+			"cityId": d,
+			"filterStatus": e,
+			"errorStatus": f,
+			"mac": g,
+			"sncode": k
+		}, function(msg) {
+			maps(msg.data);
+		})
+	}
+	//select默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+	//查询
+	$(".searchBth").click(function() {
+		var productName = $('.select').eq(0).val();
+		var status = $('.select').eq(1).val();
+		var filterStatus = $('.select').eq(3).val();
+		var errorStatus = $('.select').eq(2).val();
+		if ($("#citybox").val() == "" || $("#citybox").val() == undefined) {
+			var provinceId = undefined;
+			var cityId = undefined;
+		}
+		var provinceId = $('.province').text();
+		var cityId = $('.city').text();
+		var mac = $('#mac').val();
+		var sncode = $('#sn').val();
+		initMap(productName, status, provinceId, cityId, filterStatus, errorStatus, mac, sncode);
+	})
+	//导航模式选择
+	function modeSelect(e) {
+		var productName = $('.select').eq(0).val();
+		var status = $('.select').eq(1).val();
+		var filterStatus = $('.select').eq(3).val();
+		var errorStatus = $('.select').eq(2).val();
+		if ($("#citybox").val() == "" || $("#citybox").val() == undefined) {
+			var provinceId = undefined;
+			var cityId = undefined;
+		}
+		var provinceId = $('.province').text();
+		var cityId = $('.city').text();
+		var mac = $('#mac').val();
+		var sncode = $('#sn').val();
+		if (e == 1) {
+			initMap(productName, status, provinceId, cityId, filterStatus, errorStatus, mac, sncode);
+			$(".navHeader").text("地图模式");
+			$('.deviceNav1').css({
+				'display': "none"
+			});
+			$('.deviceTable').css({
+				'display': "none"
+			});
+			$('.deviceNav2').css({
+				'display': "block"
+			});
+			$('#container').css({
+				'display': "block"
+			});
+		} else {
+			$(".navHeader").text("列表模式");
+			$('.deviceNav2').css({
+				'display': "none"
+			});
+			$('.deviceNav1').css({
+				'display': "block"
+			});
+			$('.deviceTable').css({
+				'display': "block"
+			});
+			$('#container').css({
+				'display': "none"
+			});
+		}
+	}
+</script>

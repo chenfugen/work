@@ -1,0 +1,75 @@
+<div id="faultRepair">
+	<p class="breadcrumb">当前位置: 报修记录</p>
+	<div class="layui-tab" lay-filter="test" style="background: white;margin: 0 30px;padding:20px 20px;">
+		<div class="layui-input-inline">
+			<input type="text" name="title" id="title" ng-model='deviceName' lay-verify="title" placeholder="设备名称" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" name="title" id="title" ng-model="appealId" lay-verify="title" placeholder="工单号" autocomplete="off" class="layui-input" style="margin:-5px 10px 0px 10px">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" name="title" id="title" ng-model='userPhone' lay-verify="title" placeholder="联系方式" autocomplete="off" class="layui-input" style="margin:-5px 10px 0px 0px">
+		</div>
+		<select ng-model='reportType' class="select" name="modules" class="layui-input">
+			<option value="">报修类型</option>
+			<option value="1">APP端上报csm</option>
+			<option value="2">系统自动上报csm</option>
+		</select>
+		<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" ng-click="search()" style="margin:-5px 10px 0px 10px">查询</button>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>设备名称</th>
+							<th>工单号</th>
+							<th>工单类型</th>
+							<th>报修类型</th>
+							<th>报修时间</th>
+							<th>受理状态</th>
+							<th>联系方式</th>
+							<th>报修人</th>
+							<th>详细地址</th>
+							<th>报修内容</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in breakList">
+							<td>{{$index+1}}</td>
+							<td>{{item.deviceName |nullDeal}}</td>
+							<td>{{item.appealId}}</td>
+							<td>{{item.dealType==2?'报修单':'保养单'}}</td>
+							<td>{{item.reportType==1?'APP端上报csm':'系统自动上报csm'}}</td>
+							<td>{{item.dealTime}}</td>
+							<td>{{item.statusdDescription}}</td>
+							<td>{{item.userPhone}}</td>
+							<td>{{item.repairPhone}}</td>
+							<td>{{item.address |nullDeal}}</td>
+							<td>{{item.breakdownDescription |nullDeal}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-if="breakList.length==0" class="noData">暂无数据</p>
+				<div ng-if="breakList.length!=0" id="repairAll" class="paging"></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		//selec默认颜色
+		var unSelected = "#bababa";
+		var selected = "#505050";
+		$(function() {
+			$("select").css("color", unSelected);
+			$("option").css("color", selected);
+			$("select").change(function() {
+				var selItem = $(this).val();
+				if (selItem == $(this).find('option:first').val()) {
+					$(this).css("color", unSelected);
+				} else {
+					$(this).css("color", selected);
+				}
+			});
+		})
+	</script>

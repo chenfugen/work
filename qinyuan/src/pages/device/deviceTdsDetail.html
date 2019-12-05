@@ -1,0 +1,54 @@
+<div id="addAttridute">
+	<p class="breadcrumb">当前位置: 水质地图</p>
+	<div class="layui-tab" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px;">
+		<div class="layui-input-inline">
+			<input ng-model='filter.time' type="text" name="date" id="date" lay-verify="date1" placeholder="操作时间" autocomplete="off" class="layui-input" style="margin:15px 20px 0px 10px;width:300px">
+		</div>
+		<button class="layui-btn layui-btn-lg layui-btn-normal searchBth" style="margin:18px 0px 0px 20px;" ng-click='search()'>查询</button>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>区域</th>
+							<th>水质</th>
+							<th>全省平均值</th>						
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in cityList">
+							<td>{{$index+1}}</td>		
+							<td ng-if="item.tds"><span style="color:#009BDE;">{{item.name}}</span></td>					
+							<td ng-if="!item.tds">{{item.province+item.name}}</td>	
+							<td>{{item.tds |nullDeal}}</td>
+							<td>{{item.avg |nullDeal}}</td>							
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='propertyList.length==0' class="noData">暂无数据</p>		
+			</div>
+		</div>
+		<p>&nbsp;</p>
+	</div>
+
+</div>
+<script type="text/javascript">
+
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if(selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

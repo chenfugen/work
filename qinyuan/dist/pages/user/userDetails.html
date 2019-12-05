@@ -1,0 +1,124 @@
+<div id="userDetails">
+	<div class="layui-row" style="padding: 0 30px;margin-bottom:20px;">
+		<div class="layui-col-md12">
+			<div class="layui-card" style="margin: 20px 0px 0px 0px">
+				<div class="layui-card-header" style="font-weight:bold;">基础信息</div>
+				<div class="layui-card-body">
+					<ul class="basicInfro">
+						<li>手机号：{{userInfo.phone | nullDeal}}</li>
+						<!--	<li>用户昵称：{{userInfo.nickName | nullDeal}}</li>-->
+						<li>用户类型：{{userInfo.appType=='2'?'iOS':userInfo.appType=='1'?'安卓':'--'}}</li>
+						<li>注册时间：{{userInfo.createTime | nullDeal}}</li>
+						<li>最后登录时间：{{userInfo.lastOnlineTime | nullDeal}}</li>
+						<li>是否绑定设备：{{userInfo.bindStatus==0?'否':'是'}}</li>
+						<li>性别：{{userInfo.sex=='1'?'男':userInfo.sex==2?'女':'--'}}</li>
+						<li>详细地址：{{(userInfo.province + userInfo.city + userInfo.region + userInfo.address)==0?'--':(userInfo.province + userInfo.city)}}</li>
+						<li>绑定微信：{{userInfo.haveWechat==1?'是':'否'}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="layui-tab" lay-filter="test">
+			<ul class="layui-tab-title">
+				<li class="layui-this">绑定设备</li>
+				<li>被分享设备</li>
+			</ul>
+			<div class="layui-tab-content">
+				<!--绑定设备-->
+				<div class="layui-tab-item layui-show">
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>产品名称</th>
+								<th>MAC/IMEI</th>
+								<th>设备名称</th>
+								<th>绑定时间</th>
+								<th>是否分享</th>
+								<th class="noExl">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat='(index,item) in listData'>
+								<td>{{index+1}}</td>
+								<td>{{item.productName | nullDeal}}</td>
+								<td>{{item.identityId | nullDeal}}</td>
+								<td>{{item.deviceName | nullDeal}}</td>
+								<td>{{item.activeTime | nullDeal}}</td>
+								<td>{{item.bindType==1?'未分享':item.bindType==2?'已分享':'--'}}</td>
+								<td>
+									<a href="#/deviceDetail/{{item.deviceId}}" class="layui-btn layui-btn-sm layui-btn-normal">详情</a>
+									<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click='dialog("untie",item.deviceId)'>解绑</button>
+									<button class="layui-btn layui-btn-sm layui-btn-normal" ng-show='item.bindType=="2"' ng-click="dialog('share',item.deviceId)">查看分享用户</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				</div>
+				<div class="layui-tab-item">
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>产品名称</th>
+								<th>设备名称</th>
+								<th>MAC/IMEI</th>
+								<th>分享时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat='item in shareUser'>
+								<td>{{$index+1}}</td>
+								<td>{{item.name}}</td>
+								<td>{{item.deviceName}}</td>
+								<td>{{item.identityId | nullDeal}}</td>
+								<td>{{item.createTime}}</td>
+								<td>
+									<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click='dialog("unbind",item.deviceId)'>解绑</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<p ng-show='shareUser.length==0' class="noData">暂无数据</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-style="dialogStyle">
+		<div class="layui-layer-title cursor">{{fun=='share'?'查看分享':'解绑'}}</div>
+		<div ng-show='fun=="share"' id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>分享用户</th>
+							<th>分享时间</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='item in sharelist'>
+							<td>{{$index+1}}</td>
+							<td>{{item.userPhone }}</td>
+							<td>{{item.createTime}}</td>
+							<td><a href="#/userDetails/{{item.userId}}" class="layui-btn layui-btn-sm layui-btn-normal">详情</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div ng-show='fun=="untie" || fun=="unbind" ' style="text-align: center;margin-top: 20px;">确定解绑该设备！？</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c" ng-show='fun!="share"'>
+			<a class="layui-layer-btn0" ng-click='save()'>确定</a>
+			<a class="layui-layer-btn0" ng-click='close()'>取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+</div>

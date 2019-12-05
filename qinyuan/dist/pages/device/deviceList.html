@@ -1,0 +1,315 @@
+<div id="deviceList">
+	<p class="breadcrumb">当前位置: 设备列表</p>
+	<ul class="productDate">
+		<li class="proNum">
+			<p>{{deviceNum.total}}</p>
+			<p>设备总数</p>
+		</li>
+		<li class="proBuy">
+			<p>{{deviceNum.active}}</p>
+			<p>激活设备</p>
+		</li>
+		<li class="proHire">
+			<p>{{deviceNum.online}}</p>
+			<p>在线设备</p>
+		</li>
+	</ul>
+	<div class="layui-tab" style="z-index:2;">
+		<ul class="layui-tab-title">
+			<li class="layui-this">全部</li>
+			<!--<li>故障报警</li>
+			<li>滤芯报警</li>-->
+		</ul>
+		<div class="layui-tab-content">
+			<!--全部-->
+			<div class="layui-tab-item layui-show" style="position:relative;">
+				<citys class="citys"></citys>
+				<select name="interest" class="select" lay-filter="aihao" class="laySelect" ng-model="leaseType">
+					<option value="">默认租售类型</option>
+					<option value="1">售卖</option>
+					<option value="2">租赁</option>
+				</select>
+				<select name="modules" class="select" lay-verify="required" class="laySelect" ng-model="status">
+					<option value="">在线状态</option>
+					<option value="1">在线</option>
+					<option value="3">离线</option>
+				</select>
+				<select name="modules" class="select" lay-verify="required" class="laySelect" ng-model="errorStatus">
+					<option value="">运行状态</option>
+					<option value="0">正常</option>
+					<option value="1">故障</option>
+				</select>
+				<select name="modules" class="select" lay-verify="required" class="laySelect" ng-model="filterStatus">
+					<option value="">滤芯状态</option>
+					<option value="0">正常</option>
+					<option value="1">需要更换</option>
+					<option value="2">即将到期</option>
+				</select>
+				<div class="layui-input-inline">
+					<input type="text" ng-model="deviceName" lay-verify="title" autocomplete="off" placeholder="设备名称" class="layui-input">
+				</div>
+				<div class="layui-input-inline">
+					<input type="text" ng-model="productModel" lay-verify="title" autocomplete="off" placeholder="产品型号" class="layui-input">
+				</div>
+				<div class="layui-input-inline">
+					<input type="text" ng-model="mac" lay-verify="title" autocomplete="off" placeholder="MAC/IMEI" class="layui-input">
+				</div>
+				<div class="layui-input-inline">
+					<input type="text" ng-model="sncode" lay-verify="title" autocomplete="off" placeholder="设备SN" class="layui-input">
+				</div>
+				<button class="layui-btn layui-btn-lg layui-btn-normal searchBth" ng-click="searchDevice()">查询</button>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>产品型号</th>
+							<th>通信类型</th>
+							<th>DeviceName</th>
+							<th>产品名称</th>
+							<th>MAC/IMEI</th>
+							<th>SN</th>
+							<th>默认租售类型</th>
+							<th>在线状态</th>
+							<th>运行状态</th>
+							<th>滤芯状态</th>
+							<th>设备地址</th>
+							<th>最后上线时间</th>
+							<th>操作</th>
+							<!--<th ng-if="isDetail" class="noExl" >操作&nbsp;<i ng-show="unfold" class="iconfont icon-shuangyoujiantou-"></i><i ng-hide="unfold" class="iconfont icon-double-left" style="float:right;margin-right:15px;"></i></th>-->
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="device in devices">
+							<td>{{$index+1}}</td>
+							<td>{{device.productModel | nullDeal}}</td>
+							<td>{{device.netType | nullDeal}}</td>
+							<td>{{device.deviceName | nullDeal}}</td>
+							<td>{{device.name | nullDeal}}</td>
+							<td>{{device.mac |nullDeal}}</td>
+							<td>{{device.sncode |nullDeal}}</td>
+							<td>{{device.leaseType | nullDeal}}</td>
+							<td>
+								<span ng-show='device.status=="在线"' class="colorStart">{{device.status}}</span>
+								<span ng-show='device.status=="离线"' class="colorStop">{{device.status}}</span>
+							</td>
+							<td>
+								<span ng-show='device.errorStatus=="正常"' class="colorStart">{{device.errorStatus}}</span>
+								<span ng-show='device.errorStatus=="故障"' class="colorStop">{{device.errorStatus}}</span>
+							</td>
+							<td>
+								<span ng-show='device.filterStatus=="正常"|| device.filterStatus=="即将到期"' class="colorStart">{{device.filterStatus}}</span>
+								<span ng-show='device.filterStatus=="需要更换"' class="colorStop">{{device.filterStatus}}</span>
+							</td>
+							<td>{{device.province+device.city | nullDeal}}</td>
+							<td>{{device.lastOnlineTime | nullDeal}}</td>
+							<td>
+								<button class="layui-btn layui-btn-lg layui-btn-normal operationButton" ng-click="onOff($index,device.deviceName,device.productKey,device.netType)">操作 <i class="layui-icon layui-icon-triangle-d"></i></button>
+								<ul class="operation" ng-show="unfold=={{$index}}">
+									<li ng-click="goDetail(device.deviceId)"><span><i class="iconfont icon-xiangqing icons"></i></span> 详情</li>
+									<li ng-click="handleClearError(device)"><span><i class="iconfont icon-jihuo icons"></i></span> 清除故障</li>
+									<li ng-show="device.netType=='NET_GPRS'" ng-click="dialog('on',device)"><span><i class="iconfont icon-kaiqi icons"></i></span> {{deviceInfo.PowerSwitch.value==1?"关机":"开机"}}</li>
+									<li ng-show="device.netType=='NET_GPRS'" ng-click="dialog('unlock',device)"><span><i class="iconfont icon-jiesuo icons"></i></span> 租期修改</li>
+									<li ng-show="device.netType=='NET_GPRS'" ng-click="dialog('updateLease',device)"><span><i class="iconfont icon-kaishi icons"></i></span> 更新租期状态</li>
+									<li ng-show="device.netType=='NET_GPRS'" ng-click="dialog('WaterType',device)"><span><i class="iconfont icon-shuidi icons"></i></span> 出水方式</li>
+									<li ng-show="device.netType=='NET_GPRS'" ng-click="dialog('heat',device)"><span><i class="iconfont icon-wenkongqi icons"></i></span> 温控</li>
+									<li ng-show="device.netType=='NET_GPRS'" ng-click="dialog('lift',device)"><span><i class="iconfont icon-tongsuoON icons"></i></span> 童锁{{deviceInfo.ChildLockSwitch.value==1?"关闭":"开启"}}</li>
+									<li ng-show="device.netType=='NET_GPRS'" ng-click="dialog('time',device)"><span><i class="iconfont icon-shijian  icons"></i></span> 自动节能时间&nbsp;</li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show="devices.length==0" class="noData">暂无数据</p>
+				<div class="paging" ng-hide="devices.length==0" id="productAll"></div>
+			</div>
+			<!--购买-->
+			<div class="layui-tab-item">2</div>
+			<!--租赁-->
+			<div class="layui-tab-item">3</div>
+		</div>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page func" id="layui-layer" type="page" times="1" showtime="0" contype="string" ng-show="fun!=null" ng-style="dialogStyle">
+		<!-- 开关-->
+		<div class="layui-layer-title cursor" ng-show="fun=='on' || fun=='off'">开关</div>
+		<div ng-show="fun=='on' || fun=='off'" id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<div style="text-align: center;">您确定要{{deviceInfo.PowerSwitch.value==1?'关闭':'开启'}}该设备吗？</div>
+			</div>
+		</div>
+		<!-- 清除故障 -->
+		<div class="layui-layer-title cursor" ng-show="fun=='clear'">清除故障</div>
+		<div ng-show="fun=='clear'" id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<div style="text-align: center;">您确定要清除该设备的故障吗？</div>
+			</div>
+		</div>
+		<!-- 解锁/解绑/解童锁-->
+		<div class="layui-layer-title cursor" ng-show="fun=='unlink' || fun=='unlock' || fun=='lift'">{{fun=='unlink'?'解绑':fun=='unlock'?'租期修改':'解锁童锁'}}</div>
+		<div ng-show="fun=='unlink' || fun=='lift'" id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<div style="text-align: center;">您确定要{{fun=='unlink'?'解绑':'解锁童锁'}}该设备吗？</div>
+			</div>
+		</div>
+		<div ng-show="fun=='unlock'" id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<div class="layui-form-item" style="margin-top:40px;">
+					<label class="layui-form-label" style="width:120px;"><span class="mustIn">* </span>租赁时间：</label>
+					<div class="layui-input-inline">
+						<input type="text" name="date" id="datessss" lay-verify="date" placeholder="开始时间-结束时间" autocomplete="off" class="layui-input" style="width:300px;margin:5px 0px 0px 0px;">
+						<p style='color:#e2e2e2'>当前租期时间</p>
+						<p style='color:#e2e2e2'>开始：{{leaseHisTime.startTime}}</p>
+						<p style='color:#e2e2e2'>结束：{{leaseHisTime.endTime}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-layer-title cursor" ng-show="fun=='updateLease'">更新租赁状态</div>
+		<div ng-show="fun=='updateLease'" id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<div class="layui-form-item">
+					<label class="layui-form-label" style="width:120px;"><span class="mustIn">* </span>租赁状态：</label>
+					<div class="layui-input-inline">
+						<select name="modules" class="selectStyle" lay-verify="required" ng-model="leaseStatus">
+							<option value="">请选择</option>
+							<option value="0">未租赁状态</option>
+							<option value="1">租赁中</option>
+							<option value="2">租赁逾期</option>
+							<option value="3">异常状态</option>
+							<option value="4">租赁买断</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 出水方式/温控-->
+		<div class="layui-layer-title cursor" ng-show="fun=='WaterType'|| fun=='heat'">{{fun=='WaterType'?'出水方式':'温控'}}</div>
+		<div ng-show="fun=='WaterType'" id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<div class="layui-block">
+					<div style="text-align: center;line-height: 40px;">
+						方式一：混合。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="sendType" ng-value="1" checked="" ng-model='method'>
+					</div>
+				</div>
+				<div class="layui-block">
+					<div style="text-align: center;line-height: 40px;">
+						方式二：短按出水短按停水。<input type="radio" name="sendType" ng-value="2" checked="" ng-model='method'>
+					</div>
+				</div>
+				<div class="layui-block">
+					<div style="text-align: center;line-height: 40px;">
+						方式三：长按出水,松开停水。<input type="radio" name="sendType" ng-value="3" checked="" ng-model='method'>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 更换详情-->
+		<div ng-show='fun=="heat"' id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>方式：</label>
+					<div class="layui-input-inline">
+						<select name="modules" class="selectStyle" lay-verify="required" ng-model="oprateWay" ng-change="selectSwitch()">
+							<option value="">请选择</option>
+							<option value="0">加热</option>
+							<option value="1">制冷</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>温度：</label>
+					<div class="layui-input-inline">
+						<select name="modules" class="selectStyle" lay-verify="required" ng-model="temp">
+							<option value="">请选择</option>
+							<option ng-show="oprateWay==0" value="{{item}}" ng-repeat="item in numList">{{item}}°C</option>
+						</select>
+					</div>
+				</div>
+				<form class="layui-form">
+					<div class="layui-form-item">
+						<label class="layui-form-label"><span class="mustIn">* </span>状态：</label>
+						<div class="layui-input-block" id="HeatingSwitch">
+							<input type="checkbox" name="close" lay-skin="switch" lay-text="开|关" style="display:none;">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--自动解锁-->
+		<div class="layui-layer-title cursor" ng-if="fun=='time'">自动节能时间</div>
+		<div ng-show="fun=='time'" id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<form class="layui-form">
+					<div class="layui-form-item">
+						<label class="layui-form-label"><span class="mustIn">* </span>控制：</label>
+						<div class="layui-input-block" id="timeSwitch">
+							<input type="checkbox" name="open" lay-skin="switch" lay-text="开|关" style="opacity:0;margin-bottom:-15px;" lay-filter="switchTest">
+						</div>
+					</div>
+				</form>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>时间：</label>
+					<div class="layui-input-inline">
+						<select name="modules" id="timeSelect" class="selectStyle" lay-verify="required" ng-model="$parent.energyTime">
+							<option value="">请选择</option>
+							<option value="{{item}}" ng-repeat="item in 23 | num">{{item}}h</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>说明：</label>
+					<div class="layui-input-inline" style="margin-top:10px;">
+						这里是预留的说明位置。。。。。。。
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="save()">确定</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+	<div class="layui-layer layui-layer-page heating" id="layui-layer" type="page" times="1" showtime="0" contype="string" style="z-index:19891015;width:400px;height:100px;top:30%;left:50%;margin-left:-200px;display: none;">
+		<div id="LAY_layuipro" class="layui-layer-content">
+			<p style="text-align: center;line-height:100px;font-size:20px;"><span><i class="iconfont icon-dianjiare"></i></span> 加热中 。。。</p>
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" type="text/css" href="../../js/dependency/css/layui.css" />
+<link rel="stylesheet" type="text/css" href="../../css/style/stylesheets/style.css">
+<script type="text/javascript" src="../../js/dependency/layui.js"></script>
+<script type="text/javascript">
+	layui.use('form', function() {
+		var form = layui.form;
+		//监听指定开关
+		$("#timeSelect").attr("disabled", "disabled");
+		form.on('switch(switchTest)', function(data) {
+			if (!this.checked) {
+				$("#timeSelect").attr("disabled", "disabled");
+			} else {
+				$("#timeSelect").removeAttr("disabled");
+			}
+		});
+	});
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>
+<style media="screen">
+	.citys {
+		margin-right: 5px;
+	}
+</style>

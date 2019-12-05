@@ -1,0 +1,594 @@
+#productAdd {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#productAdd .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding-left: 5px;
+    margin: 0px 0px 20px 10px;
+}
+
+#productAdd .searchBth {
+    float: right;
+    margin-right: 30px;
+}
+
+#productAdd .head {
+    padding: 5px 30px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#productAdd .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#productAdd .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#productAdd .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#productAdd .productDate .proNum {
+    background: #20A8D8;
+}
+
+#productAdd .productDate .proBuy {
+    background: #FF6868;
+}
+
+#productAdd .productDate .proHire {
+    background: #FFAC5E;
+}
+
+#productAdd .selfDefined li {
+    display: inline-block;
+    width: 100%;
+    line-height: 40px;
+}
+
+#productAdd .proList li {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0px;
+}
+
+#productAdd .proList li h3 {
+    line-height: 40px;
+}
+
+#productAdd .proList li p {
+    line-height: 30px;
+}
+
+#productAdd .attrMsg {
+    margin: 20px 0px;
+}
+
+#productAdd .layui-form-label {
+    width: 90px;
+    margin-left: -10px;
+}
+
+#productAdd .layui-input-block {
+    top: 3px;
+}
+
+#productAdd .attribute .layui-input-block {
+    top: 3px;
+}
+
+#productAdd .attribute .layui-input-inline {
+    top: 4px;
+}
+
+#productAdd .waterBox li {
+    line-height: 40px;
+    padding: 0px 20px;
+}
+
+#productAdd .waterBox li span {
+    margin: 0px 10px;
+}
+
+#productAdd .waterBox li .unit {
+    color: #ccc;
+}
+
+#productAdd .layui-select-title {
+    border: 1px solid #eee;
+    width: 200px;
+    margin-top: -15px;
+}
+
+#productAdd .layui-select-title .layui-input {
+    border: none;
+}
+
+#productAdd .layui-this {
+    background: #009BDE;
+}
+
+#productAdd .filterRelate {
+    width: 100%;
+}
+
+#productAdd .filterRelate li {
+    float: left;
+    width: 33%;
+    margin: 10px 0px;
+}
+
+#productDetail {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#productDetail .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 0px 0px 20px 30px;
+}
+
+#productDetail .searchBth {
+    float: right;
+    margin-right: 30px;
+}
+
+#productDetail .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#productDetail .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#productDetail .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#productDetail .productDate .proNum {
+    background: #20A8D8;
+}
+
+#productDetail .productDate .proBuy {
+    background: #FF6868;
+}
+
+#productDetail .productDate .proHire {
+    background: #FFAC5E;
+}
+
+#productDetail .selfDefined li {
+    display: inline-block;
+    width: 100%;
+    line-height: 40px;
+}
+
+#productDetail .selfDefined li .fileName {
+    display: inline-block;
+    vertical-align: middle;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#productDetail .proList li {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0px;
+}
+
+#productDetail .proList li h3 {
+    line-height: 40px;
+}
+
+#productDetail .proList li p {
+    line-height: 30px;
+}
+
+#productDetail .waterBox li {
+    line-height: 40px;
+    padding: 0px 20px;
+}
+
+#productDetail .waterBox li span {
+    margin: 0px 10px;
+}
+
+#productDetail .waterBox li .unit {
+    color: #ccc;
+}
+
+#productDetail .allocation table {
+    width: 100%;
+}
+
+#productDetail .allocation table td {
+    padding: 5px 10px;
+    border: 1px solid #e6e6e6;
+}
+
+#productEdit {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#productEdit .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding-left: 5px;
+    margin: 0px 0px 20px 10px;
+}
+
+#productEdit .searchBth {
+    float: right;
+    margin-right: 30px;
+}
+
+#productEdit .head {
+    padding: 5px 30px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#productEdit .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#productEdit .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#productEdit .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#productEdit .productDate .proNum {
+    background: #20A8D8;
+}
+
+#productEdit .productDate .proBuy {
+    background: #FF6868;
+}
+
+#productEdit .productDate .proHire {
+    background: #FFAC5E;
+}
+
+#productEdit .selfDefined li {
+    display: inline-block;
+    width: 100%;
+    line-height: 40px;
+}
+
+#productEdit .proList li {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0px;
+}
+
+#productEdit .proList li h3 {
+    line-height: 40px;
+}
+
+#productEdit .proList li p {
+    line-height: 30px;
+}
+
+#productEdit .attrMsg {
+    margin: 20px 0px;
+}
+
+#productEdit .layui-form-label {
+    width: 90px;
+    margin-left: -10px;
+}
+
+#productEdit .layui-input-block {
+    top: 3px;
+}
+
+#productEdit .attribute .layui-input-block {
+    top: 3px;
+}
+
+#productEdit .attribute .layui-input-inline {
+    top: 4px;
+}
+
+#productEdit .waterBox li {
+    line-height: 40px;
+    padding: 0px 20px;
+}
+
+#productEdit .waterBox li span {
+    margin: 0px 10px;
+}
+
+#productEdit .waterBox li .unit {
+    color: #ccc;
+}
+
+#productEdit .layui-select-title {
+    border: 1px solid #eee;
+    width: 200px;
+    margin-top: -15px;
+}
+
+#productEdit .layui-select-title .layui-input {
+    border: none;
+}
+
+#productEdit .layui-this {
+    background: #009BDE;
+}
+
+#productEdit .filterRelate {
+    width: 100%;
+}
+
+#productEdit .filterRelate li {
+    float: left;
+    width: 33%;
+    margin: 10px 0px;
+}
+
+#productList {
+    width: 100%;
+    min-width: 100px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+    /*分页控件*/
+}
+
+#productList .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#productList .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#productList .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#productList .productDate .proNum {
+    background: #009BDE;
+}
+
+#productList .productDate .proBuy {
+    background: #DB527D;
+}
+
+#productList .productDate .proHire {
+    background: #5ABF89;
+}
+
+#productList .layui-tab {
+    padding: 0 30px;
+}
+
+#productList .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#productList .layui-tab .layui-tab-title li:last-child {
+    border-right: none;
+}
+
+#productList .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#productList .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#productList .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#productList .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+#productList .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}
+
+#productList .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 10px 13px 20px 0px;
+}
+
+#productList .layui-field-box p {
+    line-height: 30px;
+}
+
+#productList .source {
+    border: 1px solid #e6e6e6;
+    padding: 10px 10px;
+    margin: 10px 0px 10px 20px;
+}
+
+#productList #productAll select {
+    margin: 0;
+    padding: 0;
+    padding: 3px 0px;
+}
+
+#productList .layui-form-label {
+    width: 120px;
+    text-align: right;
+    color: #666;
+}
+
+#productList .requstPro,
+#productList .addPro {
+    margin: 10px 0px 20px 0px;
+    color: #ccc;
+}
+
+#productList .tab {
+    width: 100%;
+    margin: 0 auto;
+    height: 40px;
+}
+
+#productList .tab li {
+    float: left;
+    width: 90px;
+    margin: 0px 60px 0px 60px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#productList .tab .tab-this {
+    color: #009BDE;
+    border-bottom: 2px solid #009BDE;
+}
+
+#productList .tabContent {
+    margin: 10px 0px 10px 10px;
+    width: 350px;
+}
+
+#addAttridute {
+    min-width: 1000px;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#addAttridute .select {
+    float: left;
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 20px 0px 10px 13px;
+}
+
+#addAttridute .popout p {
+    line-height: 40px;
+}
+
+#addAttridute .layui-select-title {
+    border: 1px solid #eee;
+    width: 200px;
+    margin-top: -15px;
+}
+
+#addAttridute .layui-select-title .layui-input {
+    border: none;
+}
+
+#addAttridute .layui-this {
+    background: #009BDE;
+}
+
+#addAttridute .upDown {
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
+#addAttridute .upDown span {
+    cursor: pointer;
+    display: inline-block;
+    transform: rotate(90deg);
+}

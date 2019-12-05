@@ -1,0 +1,154 @@
+#faultLog {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#faultLog .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+}
+
+#administratorsLog {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#administratorsLog .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 20px 0px 0px 20px;
+}
+
+#administratorsLog .popout p {
+    line-height: 40px;
+}
+
+#waterIntakeLog,
+#userLog {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#waterIntakeLog .select,
+#userLog .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 31px;
+    padding: 0px 5px;
+    margin: 20px 0px 0px 10px;
+}
+
+#waterIntakeLog .popout p,
+#userLog .popout p {
+    line-height: 40px;
+}
+
+#waterIntakeLog .roleList,
+#userLog .roleList {
+    float: left;
+    width: 93%;
+    background: white;
+    margin: 0px 30px;
+    padding: 0 20px;
+    position: relative;
+}
+
+#waterIntakeLog .roleList .back,
+#userLog .roleList .back {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#waterIntakeLog .limit,
+#userLog .limit {
+    display: none;
+    width: 20%;
+    float: left;
+    height: auto;
+    background: white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#waterIntakeLog .limit .limitHeader,
+#userLog .limit .limitHeader {
+    line-height: 40px;
+    font-size: 20px;
+    color: white;
+    background: #009BDE;
+    padding: 0px 10px;
+    text-align: left;
+}
+
+#faultLogDetails {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#faultLogDetails .layui-tab {
+    padding: 0 30px;
+    margin-top: 10px;
+}
+
+#faultLogDetails .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#faultLogDetails .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#faultLogDetails .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#faultLogDetails .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#faultLogDetails .layui-tab-item select {
+    border: 1px solid #e6e6e6;
+    padding: 10px 10px;
+    margin: 10px 0px 10px 20px;
+}
+
+#faultLogDetails .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+#faultLogDetails .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}

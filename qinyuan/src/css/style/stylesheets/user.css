@@ -1,0 +1,248 @@
+/* line 1921, ../sass/style.scss */
+#usedList {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+/* line 1927, ../sass/style.scss */
+#usedList .layui-tab {
+    padding: 0 30px;
+}
+
+/* line 1930, ../sass/style.scss */
+#usedList .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+/* line 1934, ../sass/style.scss */
+#usedList .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+/* line 1938, ../sass/style.scss */
+#usedList .layui-tab .layui-tab-content .select {
+    border: 1px solid #e6e6e6;
+    padding: 5px 10px;
+    margin: 10px 10px 0px 0px;
+}
+
+/* line 1944, ../sass/style.scss */
+#usedList .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+/* line 1950, ../sass/style.scss */
+#usedList .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+/* line 1583, ../sass/style.scss */
+#userList {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+/* line 1589, ../sass/style.scss */
+#userList .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+/* line 1600, ../sass/style.scss */
+#userList .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+/* line 1605, ../sass/style.scss */
+#userList .productDate li table {
+    width: 100%;
+}
+
+/* line 1607, ../sass/style.scss */
+#userList .productDate li table td {
+    width: 33%;
+    text-align: center;
+    font-size: 20px;
+    text-align: center;
+}
+
+/* line 1612, ../sass/style.scss */
+#userList .productDate li table td p {
+    margin-top: 20px;
+}
+
+/* line 1618, ../sass/style.scss */
+#userList .productDate .proNum {
+    background: #009BDE;
+}
+
+/* line 1621, ../sass/style.scss */
+#userList .productDate .proBuy {
+    background: #DB527D;
+}
+
+/* line 1624, ../sass/style.scss */
+#userList .productDate .proHire {
+    background: #5ABF89;
+}
+
+/* line 1628, ../sass/style.scss */
+#userList .select {
+    border: 1px solid #e6e6e6;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 20px 0px 0px 10px;
+}
+
+#userList #userListPage select {
+    padding: 0;
+    margin: 0;
+}
+
+#userTrend {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#userTrend .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+/* line 1696, ../sass/style.scss */
+#userTrend .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#userTrend .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#userTrend .productDate .proNum {
+    background: #20A8D8;
+}
+
+#userTrend .productDate .proBuy {
+    background: #0CCCDA;
+}
+
+#userTrend .productDate .proHire {
+    background: #5ABF89;
+}
+
+#userTrend .layui-tab {
+    padding: 0 30px;
+}
+
+#userTrend .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#userTrend .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#userTrend .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#userTrend .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#userDetails {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#userDetails .layui-tab {
+    padding: 0 30px;
+}
+
+#userDetails .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#userDetails .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#userDetails .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#userDetails .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}

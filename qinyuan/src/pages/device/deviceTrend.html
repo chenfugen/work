@@ -1,0 +1,231 @@
+<div id="deviceTrend">
+	<p class="breadcrumb">当前位置: 设备趋势 </p>
+	<div class="layui-tab" lay-filter="test">
+		<ul class="layui-tab-title">
+			<li class="layui-this" ng-click="selectTime(1)">周</li>
+			<li ng-click="selectTime(2)">月</li>
+			<li ng-click="selectTime(3)">年</li>
+		</ul>
+		<div class="layui-tab-content">
+			<!--全部-->
+			<div class="layui-tab-item layui-show">
+				<ul class="productDate" style="margin-top:10px;">
+					<li class="proNum">
+						<p>{{deviceCount.deviceCount}}</p>
+						<p>设备新增</p>
+					</li>
+					<li class="proBuy">
+						<p>{{deviceCount.deviceRepairCount}}</p>
+						<p>报修新增</p>
+					</li>
+					<li class="proHire">
+						<p>{{deviceCount.deviceErrorCount}}</p>
+						<p>故障新增</p>
+					</li>
+				</ul>
+				<div class="layui-tab" lay-filter="test">
+					<ul class="layui-tab-title">
+						<li class="layui-this" ng-click="selectNav(1)">设备新增</li>
+						<li ng-click="selectNav(2)">报修新增</li>
+						<li ng-click="selectNav(3)">故障新增</li>
+					</ul>
+					<div class="layui-tab-content">
+						<!--全部-->
+						<div class="layui-tab-item layui-show">
+							<div style="margin:5px 0px;">
+								<select name="modules" class="select" lay-verify="required" ng-model="producType">
+									<option value="">产品类型</option>
+									<option ng-value="x.productType" ng-repeat="x in productTypeList">{{x.productType}}</option>
+								</select>
+								<div class="layui-input-inline">
+									<input type="text" name="title" id="title" ng-model='deviceName' lay-verify="title" placeholder="设备名称" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px">
+								</div>
+								<div class="layui-input-inline">
+									<input type="text" ng-model="mac" lay-verify="title" autocomplete="off" placeholder="MAC/IMEI" class="layui-input" style="margin:-5px 0px 0px 10px">
+								</div>
+								<div class="layui-input-inline">
+									<input type="text" ng-model="sncode" lay-verify="title" autocomplete="off" placeholder="SN" class="layui-input"  style="margin:-5px 0px 0px 10px">
+								</div>
+								<div class="layui-input-inline">
+									<input type="text" class="layui-input" id="test1" placeholder="激活时间" style="margin:-5px 10px 0px 10px;">
+								</div>
+								<div class="layui-input-inline" ng-if="times==1">
+									<citys></citys>
+								</div>
+								<button class="layui-btn layui-btn-lg layui-btn-normal searchBth" ng-click="search(1)">查询</button>
+							</div>
+							<table class="layui-table" ng-if="times==1">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>MAC/IMEI</th>
+										<th>设备名称</th>
+										<th>产品类型</th>
+										<th>SN</th>
+										<th>激活地区</th>
+										<th>激活时间</th>
+										<th class="noExl">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="device in devices">
+										<td>{{$index+1}}</td>
+										<td>{{device.mac | nullDeal}}</td>
+										<td>{{device.deviceName |nullDeal}}</td>
+										<td>{{device.productType}}</td>
+										<td>{{device.sncode | nullDeal}}</td>
+										<td>{{device.region |nullDeal}}</td>
+										<td>{{device.activeTime}}</td>
+										<td class="noExl">
+											<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="goDetail(device.deviceId)">详情</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<p ng-show="devices.length==0" class="noData">暂无数据</p>
+							<div ng-hide="devices.length==0" id="productAll" class="paging"></div>
+						</div>
+						<div class="layui-tab-item">
+							<div style="margin:5px 0px;">
+								<select name="modules" class="select" lay-verify="required" ng-model="status">
+									<option value="">受理状态</option>
+									<option value="0">待处理</option>
+									<option value="1">已受理</option>
+									<option value="2">已确认</option>
+									<option value="3">已派工</option>
+									<option value="5">已接单</option>
+									<option value="6">已退单</option>
+									<option value="7">已拒绝</option>
+									<option value="9">已完工</option>
+									<option value="11">待回访</option>
+									<option value="13">已结案</option>
+									<option value="14">已关闭</option>
+									<option value="99">人工关闭</option>
+								</select>
+								<div class="layui-input-inline">
+									<input type="text" name="title" id="title" ng-model='deviceName' lay-verify="title" placeholder="设备名称" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px">
+								</div>
+								<div class="layui-input-inline">
+									<input type="text" name="title" id="title" ng-model='userPhone' lay-verify="title" placeholder="联系方式" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px">
+								</div>
+								<div class="layui-input-inline">
+									<input type="text" name="date1" id="date1" placeholder="报修时间" class="layui-input" style="margin:-5px 10px 0px 10px;">
+								</div>
+								<button class="layui-btn layui-btn-lg layui-btn-normal searchBth" ng-click="search(2)">查询</button>
+							</div>
+							<table class="layui-table" ng-if="times==2">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>设备名称</th>
+										<th>报修时间</th>
+										<th>受理状态</th>
+										<th>联系方式</th>
+										<th>报修人</th>
+										<th>详细地址</th>
+										<th>报修内容</th>
+										<th>详情</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in breakList">
+										<td>{{$index+1}}</td>
+										<td>{{item.deviceName |nullDeal}}</th>
+											<td>{{item.dealTime}}</td>
+											<td>{{item.statusdDescription}}</td>
+											<td>{{item.userPhone | phone}}</td>
+											<td>{{item.repairPhone | phone}}</td>
+											<td>{{item.address |nullDeal}}</td>
+											<td>{{item.breakdownDescription |nullDeal}}</td>
+											<td>
+												<a href="#/deviceDetail/{{item.deviceId}}" class="layui-btn layui-btn-sm layui-btn-normal">详情</a>
+											</td>
+									</tr>
+								</tbody>
+							</table>
+							<p ng-if="breakList.length==0" class="noData">暂无数据</p>
+							<div ng-if="breakList.length!=0" id="repairAll" class="paging"></div>
+						</div>
+						<div class="layui-tab-item">
+							<div style="margin:5px 10px;">
+								<select ng-model='level' name="modules" class="select" lay-verify="required">
+									<option value="">故障等级</option>
+									<option ng-repeat='item in rankList' value="{{item}}">{{item}}</option>
+								</select>
+								<select ng-model='errorName' class="select" name="modules" lay-verify="required">
+									<option value="">故障名称</option>
+									<option ng-repeat='item in errorList' value="{{item.errorName}}">{{item.errorName}}</option>
+								</select>
+								<div class="layui-input-inline">
+									<input type="text" id="date2" placeholder="上报时间" class="layui-input" style="margin:-5px 10px 0px 10px;">
+								</div>
+								<div class="layui-input-inline" ng-if="times==3">
+									<citys></citys>
+								</div>
+								<button class="layui-btn layui-btn-lg layui-btn-normal searchBth" ng-click="search(3)">查询</button>
+							</div>
+							<table class="layui-table" ng-if="times==3">
+								<thead>
+									<tr>
+										<th>序号</th>
+										<th>MAC地址</th>
+										<th>故障名称</th>
+										<th>故障等级</th>
+										<th>详细地址</th>
+										<th>上报时间</th>
+										<th class="noExl">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="device in deviceerror">
+										<td>{{$index+1}}</td>
+										<td>{{device.identityId | nullDeal}}</td>
+										<td>{{device.errorName | nullDeal}}</td>
+										<td>{{device.rank | nullDeal}}</td>
+										<td>{{device.address | nullDeal}}</td>
+										<td>{{device.createTime | nullDeal}}</td>
+										<td class="noExl">
+											<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="goFault(device.errorCode,device.deviceId)">详情</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<p ng-show="deviceerror.length==0" class="noData">暂无数据</p>
+							<div ng-hide="deviceerror.length==0" id="deviceAll" class="paging"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	layui.use('laydate', function() {
+		var laydate = layui.laydate;
+		//日期时间选择器
+		laydate.render({
+			elem: '#test1',
+		});
+		laydate.render({
+			elem: '#date1',
+		});
+		laydate.render({
+			elem: '#date2',
+		});
+	});
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if(selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="qinYuan">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>沁园管理系统</title>
+		<meta name="renderer" content="webkit">
+		<link rel="icon" href="images/favicon.ico" mce_href="images/favicon.ico" type="image/x-icon">
+	</head>
+	<style type="text/css">
+		/**{
+			margin: 0px;
+			padding: 0px;
+		}*/
+		body{
+			background: rgba(0,0,0);
+		}
+        .pic{
+        	max-height:900px;
+        	margin: auto;
+        	position: absolute;
+        	top: 0px;
+        	left: 0px;        	
+        	bottom: 0px;   
+        	right: 0px;     	
+        }
+	</style>
+
+	<body ng-controller="imgViewC">
+			<img src="{{imgUrL}}"  class="pic"/>
+		<script src="js/dependency/jquery.min.js" charset="utf-8"></script>
+		<script src="js/dependency/layui.js" charset="utf-8"></script>
+		<script src="js/dependency/layui.all.js" charset="utf-8"></script>
+		<script src="js/dependency/angular-1.5.8.min.js" charset="utf-8"></script>
+		<script src="js/dependency/angular-route-1.5.8.min.js" charset="utf-8"></script>
+		<script src="js/dependency/angular-resource-1.5.8.min.js" charset="utf-8"></script>
+		<script src="js/cookie.js" charset="utf-8"></script>
+		<script src="js/config.js" charset="utf-8"></script>
+		<script src="js/controllers.js" charset="utf-8"></script>
+
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('qinYuan', []);
+		//登录
+		app.controller('imgViewC', function($scope, $http, $location) {		
+		$scope.imgUrL="https://"+window.location.host +"/web/api/common/getFiles/"+ window.location.search.split("?")[1];	
+		})
+	</script>
+
+</html>

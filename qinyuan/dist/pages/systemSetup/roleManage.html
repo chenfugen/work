@@ -1,0 +1,114 @@
+<div id="roleManage">
+	<p class="breadcrumb">当前位置: 角色管理</p>
+	<div class="layui-tab roleList" lay-filter="test">
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show clearfix">
+				<select name="modules" class="select" lay-verify="required" ng-model="rolename" style="margin:10px 0px 10px 0px;">
+					<option value="">角色类型</option>
+					<option ng-repeat="role in roleList" ng-value="role.roleName">{{role.roleName}}</option>
+				</select>
+				<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click="search()">查询</button>
+				<button class="layui-btn layui-btn-sm layui-btn-normal right" style="margin:10px 0px 0px 20px;" ng-click="add()">新增</button>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>角色名称</th>
+							<th>创建时间</th>
+							<th>系统用户列表</th>
+							<th>权限</th>
+							<th class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='(index, item) in listData'>
+							<!-- 序号 -->
+							<td>{{index+1}}</td>
+							<!-- 角色名 -->
+							<td>{{item.roleName}}</td>
+							<!-- 创建时间 -->
+							<td>{{item.createTime}}</td>
+							<!-- 管员理列表 -->
+							<td>
+								<a href="javascript:;" ng-click="goManage(item.roleName)">查看</a>
+							</td>
+							<!-- 权限 -->
+							<td>
+								<a href="javascript:;" ng-click="lookOver(item.roleName,item.id)">查看</a>
+							</td>
+							<td class="noExl">
+								<button ng-show="isUpdate" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="edit(item.roleName,item.id)">编辑</button>
+								<button ng-show="isDelete" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="delete(item.roleName,item.id)">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="roleList" class="paging"></div>
+			</div>
+		</div>
+		<p>&nbsp;</p>
+		<div class="back"></div>
+	</div>
+	<div class="limit">
+		<p class="limitHeader">新增</p>
+		<input type="text" name="text" ng-model="roleName" autocomplete="off" placeholder="请输入新角色名字" class="layui-input" style="width:100%;border:none;border-bottom:1px solid #eee;">
+		<div style="text-align: left;padding-left:8px;line-height:25px;">
+			<input type="checkbox" id="treeCheck" ng-model="expression" ng-change="checkAll()" /> 全选
+		</div>
+		<ul id="treeDemo" class="ztree"></ul>
+		<div class="buttonBox" style="display: inline-block;margin:10px 0px;">
+			<button ng-if="saveButton" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="saveRole()">保存</button>
+			<button class="layui-btn layui-btn-sm layui-btn-primary" ng-click="clear()">取消</button>
+		</div>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page popoutOne" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width:400px; height:180px; top:30%; left:50%;margin-left:-200px;display: none;">
+		<div class="layui-layer-title cursor">提示</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="height:70px;">
+			<div style="padding:20px 20px;font-size:15px;">
+				<p style="text-align: center;line-height:30px;"> 您确定要删除?</p>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="save()">保存</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+</div>
+<link rel="stylesheet" href="css/zTreeStyle.css" type="text/css">
+<script type="text/javascript">
+	layui.use(['form', 'layedit', 'laydate'], function() {
+		var form = layui.form,
+			layer = layui.layer,
+			layedit = layui.layedit,
+			laydate = layui.laydate;
+
+		//日期
+		laydate.render({
+			elem: '#date'
+		});
+		laydate.render({
+			elem: '#date1'
+		});
+		laydate.render({
+			elem: '#date2'
+		});
+
+	});
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

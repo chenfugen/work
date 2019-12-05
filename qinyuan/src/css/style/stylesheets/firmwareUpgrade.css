@@ -1,0 +1,31 @@
+#firmwareVersion {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#firmwareVersion .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 20px 0px 0px 10px;
+}
+
+#upgradeTask {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#upgradeTask .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 20px 0px 0px 10px;
+}

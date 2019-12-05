@@ -1,0 +1,388 @@
+<div id="addAttridute">
+	<p class="breadcrumb">当前位置: 自定义属性</p>
+	<div class="layui-tab pageContent" lay-filter="test">
+		<div class="filter clearfix">
+			<select ng-model="dataTypes" class="filterSelect" name="modules" lay-verify="required">
+				<option value="">请选择</option>
+				<option value="int">整数型</option>
+				<option value="float">浮点型</option>
+				<option value="enum">枚举型</option>
+				<option value="bool">布尔型</option>
+				<option value="text">字符串</option>
+				<option value="url">外链</option>
+				<option value="struct">复合型</option>
+			</select>
+			<div class="layui-input-inline">
+				<input type="text" name="title" id="title" ng-model='attributeName' lay-verify="title" placeholder="属性名称" autocomplete="off" class="layui-input filterInput">
+			</div>
+			<button class="layui-btn layui-btn-sm layui-btn-normal filterSearchBth" ng-click='search()'>查询</button>
+			<button ng-show="isSave" class="layui-btn layui-btn-sm layui-btn-normal right" style='margin-right:10px;' ng-click='addAttr()'>新增</button>
+		</div>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>属性名称</th>
+							<th>标识符</th>
+							<th>数据类型</th>
+							<th>数据内容</th>
+							<th ng-show="isSave || isDelete" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="property in propertyList">
+							<td>{{$index+1}}</td>
+							<td>{{property.attr.name}}</td>
+							<td>{{property.attr.identifier}}</td>
+							<td>{{property.attr.dataType.type}}</td>
+							<td>{{property.attr.dataType.specs}}</td>
+							<td ng-show="isSave || isDelete" style="min-width:120px;">
+								<button ng-show="isSave" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="edit(property)">编辑</button>
+								<button ng-show="isDelete" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="delete(property.id)">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='propertyList.length==0' class="noData">暂无数据</p>
+				<div id="attributeList" class="paging"></div>
+			</div>
+		</div>
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page delete" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width:400px; height:200px; top:50%; left:50%;margin-left:-200px;margin-top:-100px;display: none;">
+		<div class="layui-layer-title cursor">删除</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="height:450px;">
+			<p style="text-align:center;margin:30px auto 30px auto;">确认要删除该条数据？</p>
+			<div class="layui-layer-btn layui-layer-btn-c">
+				<button class="layui-btn layui-btn-lg layui-btn-danger" ng-click='remove()'>确认</button>
+				<button class="layui-btn layui-btn-lg layui-btn-primary" ng-click="close()">取消</button>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+	</div>
+	<div class="layui-layer layui-layer-page attribute" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width:800px;height:500px;top:50%;left:50%;margin-left:-400px;margin-top:-250px;display: none;">
+		<div class="layui-layer-title cursor">编辑</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="height:370px;">
+			<div style="padding:20px 20px;" class="attrBox">
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>地址码：</label>
+					<div class="layui-input-block">
+						<input type="text" name="addressCode" ng-model="property.addressCode" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;margin-top:5px;">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>属性名称：</label>
+					<div class="layui-input-block">
+						<input type="text" name="attrName" ng-model="property.name" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width:200px;margin-top:5px;">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>标识符：</label>
+					<div class="layui-input-block">
+						<input type="text" name="identifier" ng-model="property.identifier" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;margin-top:5px;">
+					</div>
+				</div>
+				<div class="layui-form-item" style="margin-top:-20px;">
+					<div class="layui-inline">
+						<label class="layui-form-label" style="line-height:60px;"><span class="mustIn">* </span>数据类型：</label>
+						<div class="layui-input-inline">
+							<select name="quiz" class="select" style="margin: 25px 0px 10px 0px;" ng-model="type" ng-change="dataType(1)">
+								<option value="">请选择</option>
+								<option value="int">整数型</option>
+								<option value="float">浮点型</option>
+								<option value="enum">枚举型</option>
+								<option value="bool">布尔型</option>
+								<option value="text">字符串</option>
+								<option value="url">外链</option>
+								<option value="struct">复合型</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<hr class="layui-bg-gray">
+				<!--整数型-->
+				<div class="arrMsg int">
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label"><span class="mustIn">* </span>取值范围：</label>
+							<div class="layui-input-inline" style="width:100px;top:3px;">
+								<input type="text" name="price_min" ng-model="min" placeholder="最小值" autocomplete="off" class="layui-input">
+							</div>
+							<div class="layui-form-mid" style="margin-left:60px;">-</div>
+							<div class="layui-input-inline" style="width:100px;top:3px;">
+								<input type="text" name="price_max" ng-model="max" placeholder="最大值" autocomplete="off" class="layui-input">
+							</div>
+						</div>
+					</div>
+					<!--<div class="layui-form-item">
+						<label class="layui-form-label"><span class="mustIn">* </span>步长：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="username" ng-model="step" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;">
+						</div>
+					</div>-->
+					<div class="layui-inline" style="margin-top:-10px;">
+						<label class="layui-form-label" style="line-height:50px;"><span class="mustIn">* </span>单位：</label>
+						<div class="layui-input-inline">
+							<select name="modules" ng-model="unit" lay-verify="required" class="select" style="margin: 20px 0px 10px 0px;">
+								<option value="">请选择</option>
+								<option ng-repeat="item in units" ng-value="item.name+'('+item.symbol+')'">{{item.name+'('+item.symbol+')'}}</option>
+							</select>
+						</div>
+						<div class="layui-btn-group" style="margin:13px 0px 0px 20px;cursor: pointer;">
+							<i class="iconfont icon-jiahao iconStyle;" style="font-size:20px;color:#1E9FFF;" ng-click="showUnit()"></i>
+							<i class="layui-icon layui-icon-delete iconStyle;" style="font-size:20px;color:#FD482C;margin-left:10px;" ng-click="reduceUnit()"></i>
+						</div>
+					</div>
+
+					<!--新增单位-->
+					<div class="layui-form-item" style="margin-top:10px;" ng-show="addUnit">
+						<label class="layui-form-label"></label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="unitName" lay-verify="required" placeholder="请输入单位名称" autocomplete="off" class="layui-input">
+						</div>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="unitSymbol" lay-verify="required" placeholder="请输入单位符号" autocomplete="off" class="layui-input">
+						</div>
+						<button class="layui-btn layui-btn-normal layui-btn-sm" ng-click="addUnits()">添加</button>
+					</div>
+					<!--删除单位-->
+					<div class="layui-form-item" style="margin-top:10px;" ng-show="removeUnit">
+						<label class="layui-form-label"></label>
+						<select name="modules" ng-model="unitId" lay-verify="required" class="select" style="margin:0px 0px 10px 0px;">
+							<option value="">请选择</option>
+							<option ng-repeat="item in units" ng-value="item.id">{{item.name+'('+item.symbol+')'}}</option>
+						</select>
+						<button class="layui-btn layui-btn-danger layui-btn-sm" style="margin-left:30px;" ng-click="removeUnits()">删除</button>
+					</div>
+				</div>
+				<!--枚举型-->
+				<div class="enum arrMsg" style="display: none;">
+					<div ng-repeat="item in attrNum" class="layui-form-item">
+						<label class="layui-form-label">枚举型{{$index+1}}：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="username" id="enum{{$index}}" ng-model="item.name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;" readonly="readonly">
+						</div>
+						<label class="layui-form-label"><span class="mustIn">* </span>标识符{{$index+1}}：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="username" id="TAG{{$index}}" ng-model="item.value" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;">
+						</div>
+						<span ng-if="$index>0" style="line-height:38px;padding-left:20px;"><i class="iconfont icon-jian iconStyle" ng-click="removeEnum($index)"></i></span>
+					</div>
+					<div class="layui-btn-group" style="margin-left:20px;cursor: pointer;">
+						<i class="iconfont icon-jiahao iconStyle;" style="font-size:20px;color:#1E9FFF;" ng-click="addEnum()"></i>
+					</div>
+				</div>
+				<!--布尔型-->
+				<div class="bool arrMsg" style="display:none;">
+					<div class="layui-form-item">
+						<label class="layui-form-label">对应值：</label>
+						<div class="layui-input-inline" style="line-height:35px;">
+							<input type="text" name="对应值" ng-model="value1" class="layui-input" value="0" readonly="readonly">
+						</div>
+						<label class="layui-form-label"><span class="mustIn">* </span>名称1：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="username" ng-model="bName1" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">对应值：</label>
+						<div class="layui-input-inline" style="line-height:35px;">
+							<input type="text" name="对应值2" ng-model="value2" class="layui-input" value="1" readonly="readonly">
+						</div>
+						<label class="layui-form-label"><span class="mustIn">* </span>名称2：</label>
+						<div class="layui-input-inline">
+							<input type="text" name="username" ng-model="bName2" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;">
+						</div>
+					</div>
+				</div>
+				<!--字符串-->
+				<div class="text arrMsg" style="display:none;">
+					<div class="layui-form-item">
+						<label class="layui-form-label"><span class="mustIn">* </span>长度：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="length" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;">
+						</div>
+					</div>
+				</div>
+				<!--外链-->
+				<div class="url arrMsg" style="display: none;">
+					<div class="layui-form-item">
+						<label class="layui-form-label"><span class="mustIn">* </span>URL：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="URL" lay-verify="required" placeholder="请输入url地址,如:http://..." autocomplete="off" class="layui-input" style="width:200px;">
+						</div>
+					</div>
+				</div>
+				<!--复合型-->
+				<div class="struct arrMsg" style="display:none;">
+					<div ng-repeat="item in attributes" ng-init="outIndex = $index">
+						<i class="layui-icon layui-icon-close" style="font-size:20px;color:#f33012;float:right;cursor:pointer;" ng-show="attributes.length>1" ng-click="removeSet($index)"> </i>
+						<div class="layui-form-item">
+							<label class="layui-form-label"><span class="mustIn">* </span>属性名称：</label>
+							<div class="layui-input-block">
+								<input type="text" name="attrName" ng-model="item.name" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width:200px;margin-top:5px;">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label"><span class="mustIn">* </span>标识符：</label>
+							<div class="layui-input-block">
+								<input type="text" name="identifier" ng-model="item.identifier" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;margin-top:5px;">
+							</div>
+						</div>
+						<div class="layui-form-item" style="margin-top:-20px;">
+							<div class="layui-inline">
+								<label class="layui-form-label" style="line-height:60px;"><span class="mustIn">* </span>数据类型：</label>
+								<div class="layui-input-inline">
+									<select name="quiz" class="select" style="margin: 25px 0px 10px 0px;" ng-model="item.dataType.type" ng-change="dataType(2,$index)">
+										<option value="">请选择</option>
+										<option value="int">整数型</option>
+										<option value="float">浮点型</option>
+										<option value="enum">枚举型</option>
+										<option value="bool">布尔型</option>
+										<option value="text">字符串</option>
+										<option value="url">外链</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="setMsg{{$index}} intType{{$index}}">
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label"><span class="mustIn">* </span>取值范围：</label>
+									<div class="layui-input-inline" style="width:100px;top:3px;">
+										<input type="text" name="price_min" ng-model="item.dataType.specs.min" placeholder="最小值" autocomplete="off" class="layui-input">
+									</div>
+									<div class="layui-form-mid" style="margin-left:60px;">-</div>
+									<div class="layui-input-inline" style="width:100px;top:3px;">
+										<input type="text" name="price_max" ng-model="item.dataType.specs.max" placeholder="最大值" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+							</div>
+							<div class="layui-inline" style="margin-top:-10px;">
+								<label class="layui-form-label" style="line-height:50px;"><span class="mustIn">* </span>单位：</label>
+								<div class="layui-input-inline">
+									<select name="modules" ng-model="item.units" lay-verify="required" class="select" style="margin: 20px 0px 10px 0px;">
+										<option value="">请选择</option>
+										<option ng-repeat="item in units" ng-value="item.name+'('+item.symbol+')'">{{item.name+'('+item.symbol+')'}}</option>
+									</select>
+								</div>
+								<div class="layui-btn-group" style="margin:13px 0px 0px 20px;cursor: pointer;">
+									<i class="iconfont icon-jiahao iconStyle;" style="font-size:20px;color:#1E9FFF;" ng-click="showUnit($index)"></i>
+									<i class="layui-icon layui-icon-delete iconStyle;" style="font-size:20px;color:#FD482C;margin-left:10px;" ng-click="reduceUnit($index)"></i>
+								</div>
+							</div>
+							<!--新增单位-->
+							<div class="layui-form-item" style="margin-top:10px;" ng-show="item.addUnit">
+								<label class="layui-form-label"></label>
+								<div class="layui-input-inline">
+									<input type="text" ng-model="item.unitName" lay-verify="required" placeholder="请输入单位名称" autocomplete="off" class="layui-input">
+								</div>
+								<div class="layui-input-inline">
+									<input type="text" ng-model="item.unitSymbol" lay-verify="required" placeholder="请输入单位符号" autocomplete="off" class="layui-input">
+								</div>
+								<button class="layui-btn layui-btn-normal layui-btn-sm" ng-click="addUnits($index)">添加</button>
+							</div>
+							<!--删除单位-->
+							<div class="layui-form-item" style="margin-top:10px;" ng-show="item.removeUnit">
+								<label class="layui-form-label"></label>
+								<select name="modules" ng-model="item.unitId" lay-verify="required" class="select" style="margin:0px 0px 10px 0px;">
+									<option value="">请选择</option>
+									<option ng-repeat="item in units" ng-value="item.id">{{item.name+'('+item.symbol+')'}}</option>
+								</select>
+								<button class="layui-btn layui-btn-danger layui-btn-sm" style="margin-left:30px;" ng-click="removeUnits($index)">删除</button>
+							</div>
+						</div>
+						<!--枚举型-->
+						<div class="enumType{{$index}} setMsg{{$index}}" style="display: none;">
+							<div ng-repeat="item in item.attrNum" class="layui-form-item">
+								<label class="layui-form-label">枚举型{{$index+1}}：</label>
+								<div class="layui-input-inline">
+									<input type="text" name="username" id="enum{{$index}}" ng-model="item.name" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;" readonly="readonly">
+								</div>
+								<label class="layui-form-label"><span class="mustIn">* </span>标识符{{$index+1}}：</label>
+								<div class="layui-input-inline">
+									<input type="text" name="username" id="TAG{{$index}}" ng-model="item.value" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;">
+								</div>
+								<span ng-if="$index>0" style="line-height:38px;padding-left:20px;"><i class="iconfont icon-jian iconStyle" ng-click="removeEnum($index,outIndex)"></i></span>
+							</div>
+							<div class="layui-btn-group" style="margin-left:20px;cursor: pointer;">
+								<i class="iconfont icon-jiahao iconStyle;" style="font-size:20px;color:#1E9FFF;" ng-click="addEnum($index)"></i>
+							</div>
+						</div>
+						<!--布尔型-->
+						<div class="boolType{{$index}} setMsg{{$index}}" style="display:none;">
+							<div class="layui-form-item">
+								<label class="layui-form-label">对应值：</label>
+								<div class="layui-input-inline" style="line-height:35px;">
+									<input type="text" name="对应值" ng-model="value1" class="layui-input" value="0" readonly="readonly">
+								</div>
+								<label class="layui-form-label"><span class="mustIn">* </span>名称1：</label>
+								<div class="layui-input-inline">
+									<input type="text" name="username" ng-model="item.dataType.specs.bName1" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;">
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<label class="layui-form-label">对应值：</label>
+								<div class="layui-input-inline" style="line-height:35px;">
+									<input type="text" name="对应值2" ng-model="value2" class="layui-input" value="1" readonly="readonly">
+								</div>
+								<label class="layui-form-label"><span class="mustIn">* </span>名称2：</label>
+								<div class="layui-input-inline">
+									<input type="text" name="username" ng-model="item.dataType.specs.bName2" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;">
+								</div>
+							</div>
+						</div>
+						<!--字符串-->
+						<div class="textType{{$index}} setMsg{{$index}}" style="display:none;">
+							<div class="layui-form-item">
+								<label class="layui-form-label"><span class="mustIn">* </span>长度：</label>
+								<div class="layui-input-inline">
+									<input type="text" ng-model="item.dataType.specs.length" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width:200px;">
+								</div>
+							</div>
+						</div>
+						<!--外链-->
+						<div class="urlType{{$index}} setMsg{{$index}}" style="display: none;">
+							<div class="layui-form-item">
+								<label class="layui-form-label"><span class="mustIn">* </span>URL：</label>
+								<div class="layui-input-inline">
+									<input type="text" ng-model="item.dataType.specs.URL" lay-verify="required" placeholder="请输入url地址,如:http://..." autocomplete="off" class="layui-input" style="width:200px;">
+								</div>
+							</div>
+						</div>
+						<div style="border-top:#ccc 1px dashed; overflow:hidden; height:1px;margin:10px 0px;"></div>
+					</div>
+					<i class="layui-icon  layui-icon-add-1" style="font-size:20px;color:#1E9FFF;float:right;cursor:pointer;" ng-click="addSet()"> </i>
+				</div>
+				<p class="upDown" ng-click="upDown()"><span><i class="layui-icon layui-icon-next"></i></span></p>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="save()">确定</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+</div>
+
+<script type="text/javascript">
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

@@ -1,0 +1,129 @@
+<div id="waterIntakeLog">
+	<p class="breadcrumb">当前位置: 取水日志</p>
+	<div class="layui-tab" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px;">
+		<select name="modules" class="select" lay-verify="required" ng-model="productName">
+			<option value="">产品名称</option>
+			<option ng-repeat="x in productList" ng-value="x.productName">{{x.productName}}</option>
+		</select>
+		<div class="layui-input-inline">
+			<input type="text" ng-model="productModel" lay-verify="title" autocomplete="off" placeholder="产品型号" class="layui-input" style="margin:-5px 0px 0px 10px;">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" name="title" ng-model="deviceName" id="title" lay-verify="title" placeholder="设备名称" autocomplete="off" class="layui-input" style="margin:-4px 0px 0px 10px">
+		</div>
+		<!--<div class="layui-input-inline">
+			<input type="text" name="title" ng-model="sncode" id="title" lay-verify="title" placeholder="SN" autocomplete="off" class="layui-input" style="margin:-4px 0px 0px 10px">
+		</div>	-->
+		<div class="layui-input-inline">
+			<input type="text" name="title" ng-model="quantity" lay-verify="title" placeholder="取水量" autocomplete="off" class="layui-input" style="margin:-4px 0px 0px 10px">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" name="title" ng-model="temperature" lay-verify="title" placeholder="水温" autocomplete="off" class="layui-input" style="margin:-4px 0px 0px 10px">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" name="date" id="date" lay-verify="date" placeholder="取水时间" autocomplete="off" class="layui-input" style="margin:-4px 0px 0px 10px;width:300px;">
+		</div>
+		<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-4px 0px 0px 20px;" ng-click="search()">查询</button>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>产品名称</th>
+							<th>产品型号</th>
+							<!--	<th>MAC/IMEI</th>-->
+							<th>取水水量</th>
+							<th>取水水温</th>
+							<th>设备名称</th>
+							<th>取水时间</th>
+							<th ng-show="isDetail" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in waterList">
+							<td>{{$index+1}}</td>
+							<td>{{item.productName |nullDeal}}</td>
+							<td>{{item.productModel |nullDeal}}</td>
+							<!--		<td style="max-width:600px;overflow: hidden;">{{item.macAddress |nullDeal}}</td>						-->
+							<td>{{item.quantity |nullDeal}}</td>
+							<td>{{item.waterTemperature |nullDeal}}</td>
+							<td>{{item.deviceName |nullDeal}}</td>
+							<td>{{item.reportTime}}</td>
+							<td ng-show="isDetail" class="noExl">
+								<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="lookDetail(item)">详情</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show="waterList.length==0" class="noData">暂无数据</p>
+				<div ng-hide="waterList.length==0" id="waterAll" class="paging"></div>
+			</div>
+		</div>
+		<!--<div ng-show="isExcel && waterList.length>0" style="margin:10px 10px;">
+			<button class="layui-btn layui-btn-lg layui-btn-normal" onclick="toExcel('取水日志')">导出</button>
+		</div>-->
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade" id="layui-layer-shade1" times="1" style="z-index:19891014; background-color: rgb(0, 0, 0); opacity: 0.5;"></div>
+	<div class="layui-layer layui-layer-page detail" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width: 500px; height:450px; top:20%; left:50%;margin-left:-150px;display: none;">
+		<div class="layui-layer-title cursor">详情</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="height:400px;">
+			<div style="padding:10px 20px;font-size:15px;" class="popout">
+				<p>设备名称：{{waterDetail.deviceName |nullDeal}}</p>
+				<p>产品名称：{{waterMsg.productName |nullDeal}}</p>
+				<!--<p>MAC地址：{{waterDetail.macAddress |nullDeal}}</p>
+				<p>SN：{{waterDetail.sncode |nullDeal}}</p>-->
+				<p>绑定用户：{{waterDetail.phone | nullDeal}}</p>
+				<p>地址：{{waterDetail.address | nullDeal}}</p>
+				<p>IP地址：{{waterDetail.ip |nullDeal}}</p>
+				<p>取水时间：{{waterDetail.reportTime |nullDeal}}</p>
+				<p>净水TDS：{{waterDetail.tds |nullDeal}}</p>
+				<p>取水量：{{waterMsg.quantity |nullDeal}}</p>
+				<p>取水温度：{{waterDetail.waterTemperature |nullDeal}}</p>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+	</div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width: 500px; height:auto; top:20%; left:50%;margin-left:-150px;">
+		<div class="layui-layer-title cursor">查询</div>
+		<div id="LAY_layuipro" class="layui-layer-content">
+			<div class="layui-form-item">
+				<label class="layui-form-label" style="line-height:50px;"><span class="mustIn">* </span>产品名称：</label>
+				<div class="layui-input-inline" style="margin-left:-20px;">
+					<select name="modules" class="select" lay-verify="required" ng-model="productKey">
+						<option value="">产品名称</option>
+						<option ng-repeat="x in productList" ng-value="x.productKey">{{x.productName}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label"><span class="mustIn">* </span>取水日期：</label>
+				<div class="layui-input-inline" style="margin:5px 0px 0px -10px;">
+					<input type="text" name="date1" id="date1" lay-verify="date" placeholder="取水时间" autocomplete="off" class="layui-input" style="width:300px;">
+				</div>
+			</div>
+		</div>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="searchs()">查询</a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

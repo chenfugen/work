@@ -1,0 +1,158 @@
+<div id="firmwareVersion">
+    <p class="breadcrumb">当前位置: 固件列表</p>
+    <div class="layui-tab clearfix" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px;">
+        <select name="modules" class="select" lay-verify="required" ng-model="form.productKey">
+            <option value="">产品型号</option>
+            <option ng-value="item.productKey" ng-repeat="item in productNameList">{{item.productModel}}</option>
+        </select>
+        <div class="layui-input-inline">
+            <input type="text" ng-model="form.firmwareVersion" lay-verify="title" autocomplete="off" placeholder="固件版本" class="layui-input" style="margin:-5px 0px 0px 10px;">
+        </div>
+        <button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='init(1,10,form,true)'>查询</button>
+        <button class="layui-btn layui-btn-sm layui-btn-normal right" style="margin:20px 10px 0px 0px ;" ng-click="dialog('add',1)">新增</button>
+        <div class="layui-tab-content">
+            <!--故障报警-->
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>固件类型</th>
+                            <th>版本号</th>
+                            <th>产品型号</th>
+                            <th>上传时间</th>
+                            <th>启用时间</th>
+                            <th>URL</th>
+                            <th>状态</th>
+                            <th ng-show="isDetail || isDetail==undefined || isDelete || isDelete==undefined" class="noExl">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat='item in firmwareList'>
+                            <td>{{$index+1}}</td>
+                            <td>{{item.type==1?'模组':item.type==2?'主板':'--'}}</td>
+                            <td>{{item.firmwareVersion | nullDeal}}</td>
+                            <td>{{item.productModel | nullDeal}}</td>
+                            <td>{{item.createTime | nullDeal}}</td>
+                            <td>{{item.updateTime | nullDeal}}</td>
+                            <td>{{item.downLoadUrl | nullDeal}}</td>
+                            <td>
+                                <span ng-show='item.status==1' class="colorStart">启用</span>
+                                <span ng-show='item.status==0' class="colorStop">停用</span>
+                            </td>
+                            <td>
+                                <button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('edit',item.id)">编辑</button>
+                                <button ng-if="item.status==0" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('on',item.id)">启用</button>
+                                <button ng-if="item.status==1" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog('off',item.id)">禁用</button>
+                                <button class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog('delete',item.id)">删除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p ng-show="firmwareList.length==0" class="noData">暂无数据</p>
+                <div ng-show="firmwareList.length>0" id="firmwareList" class="paging"></div>
+            </div>
+        </div>
+        <p>&nbsp;</p>
+    </div>
+    <div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+    <div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-show="fun!=null" ng-style="dialogStyle">
+        <div class="layui-layer-title cursor" ng-show='fun=="add" || fun=="edit" || fun=="delete"'>{{fun=="add"?'新增':fun=="edit"?'编辑':'删除'}}</div>
+        <div class="layui-layer-title cursor" ng-show='fun=="on"|| fun=="off"'>{{fun=="on"?'启用':'禁用'}}</div>
+        <!-- 固件控制-->
+        <div ng-show='fun=="on" || fun=="off"' id="LAY_layuipro" class="layui-layer-content">
+            <div style="padding:20px 20px;">
+                <div style="text-align: center;">您确定要{{fun=="on"?'启用':'禁用'}}该固件吗？</div>
+            </div>
+        </div>
+        <!-- 删除-->
+        <div ng-show='fun=="delete"' id="LAY_layuipro" class="layui-layer-content">
+            <div style="padding:20px 20px;">
+                <div style="text-align: center;">您确定要删除该固件吗？</div>
+            </div>
+        </div>
+        <!-- 更换详情-->
+        <div ng-show='fun=="edit" || fun=="add"' id="LAY_layuipro" class="layui-layer-content" style="max-height:350px;">
+            <div style="padding:20px 20px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>产品型号：</label>
+                    <div class="layui-input-inline" style="margin-left:-20px;">
+                        <select name="modules" class="select" lay-verify="required" ng-model="newForm.productModel" style="margin:15px 0px 0px 20px;">
+                            <option value="">产品型号</option>
+                            <option ng-repeat="x in productNameList" ng-value="x.productModel">{{x.productModel}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item" ng-show='fun=="add"'>
+                    <label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>固件类型：</label>
+                    <div class="layui-input-inline" style="margin-left:-20px;">
+                        <select name="modules" class="select" lay-verify="required" ng-model="newForm.typeName" style="margin:15px 0px 0px 20px;">
+                            <option value="">固件类型</option>
+                            <option ng-value="'模组'">模组</option>
+                            <option ng-value="'主板'">主板</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item" style="margin-top:30px;">
+                    <label class="layui-form-label"><span class="mustIn">* </span>固件版本：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" ng-model="newForm.firmwareVersion" lay-verify="title" autocomplete="off" placeholder="请输入固件版本" class="layui-input" style="height:31px;margin-top:5px;">
+                    </div>
+                </div>
+                <div class="layui-form-item" style="margin-top:30px;" ng-show='newForm.typeName!="模组"'>
+                    <label class="layui-form-label"><span class="mustIn">* </span>CRC：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" ng-model="newForm.crcSign" lay-verify="title" autocomplete="off" placeholder="请输入CRC" class="layui-input" style="height:31px;margin-top:5px;">
+                    </div>
+                </div>
+                <div class="layui-form-item" style="margin-top:30px;" ng-show='newForm.typeName!="模组"'>
+                    <label class="layui-form-label"><span class="mustIn">* </span>文件长度：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" ng-model="newForm.fileSize" lay-verify="title" autocomplete="off" placeholder="请输入文件长度" class="layui-input" style="height:31px;margin-top:5px;">
+                    </div>
+                </div>
+                <div class="layui-form-item" style="margin-top:30px;position:relative">
+                    <label class="layui-form-label"><span class="mustIn">* </span>新固件：</label>
+                    <div class="layui-input-inline">
+                        <input type="text" ng-model="newForm.downLoadUrl" readonly="readonly" lay-verify="title" autocomplete="off" class="layui-input" style="width:130px;margin-top:5px;">
+                        <div class="layui-upload" style="display: inline-block;">
+                            <a href='javascript:void(0);' class="blueButton" id="testList">上传</a>
+                        </div>
+                        <p style="color:#FD482C;text-align: left;">(文件大小必须小于80M)</p>
+                    </div>
+                    <div class="layui-progress" style="width:150px;position:absolute;display:none;top:20px;right:-5px;">
+                        <div class="layui-progress-bar layui-bg-red progress"></div>
+                    </div>
+                </div>
+                <div class="layui-form-item" style="margin-top:30px;">
+                    <label class="layui-form-label"><span class="mustIn">* </span>描述：</label>
+                    <div class="layui-input-inline">
+                        <textarea placeholder="请输入内容" class="layui-textarea" style="width:300px;" ng-model="newForm.description"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+        <div class="layui-layer-btn layui-layer-btn-c">
+            <a class="layui-layer-btn0" ng-click="save()">确定</a>
+            <a class="layui-layer-btn1" ng-click="close()">取消</a>
+        </div><span class="layui-layer-resize"></span>
+    </div>
+</div>
+<script type="text/javascript">
+    //selec默认颜色
+    var unSelected = "#bababa";
+    var selected = "#505050";
+    $(function() {
+        $("select").css("color", unSelected);
+        $("option").css("color", selected);
+        $("select").change(function() {
+            var selItem = $(this).val();
+            if (selItem == $(this).find('option:first').val()) {
+                $(this).css("color", unSelected);
+            } else {
+                $(this).css("color", selected);
+            }
+        });
+    })
+</script>

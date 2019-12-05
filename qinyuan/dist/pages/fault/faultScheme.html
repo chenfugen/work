@@ -1,0 +1,112 @@
+<div id="faultScheme">
+	<p class="breadcrumb">当前位置: 设置 / 预处理设置</p>
+	<div class="layui-row" style="padding: 0 30px;margin-bottom:20px;">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header" style="font-weight:bold;">基础信息</div>
+				<div class="layui-card-body">
+					<ul class="basicInfro">
+						<li>故障名称：{{infoData.errorName}}</li>
+						<li>故障等级：{{infoData.rank}}</li>
+						<li>故障ID：{{infoData.errorId}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-tab" lay-filter="test">
+		<ul class="layui-tab-title">
+			<li class="layui-this">预处理方案</li>
+		</ul>
+		<div class="layui-tab-content">
+			<!--预处理方案-->
+			<div class="layui-tab-item layui-show">
+				<select name="interest" lay-filter="aihao" class="select" ng-model='filter.productKey' placeholder='' style="margin-left:20px;">
+					<option value="">产品名称</option>
+					<option ng-repeat='item in productList' value="{{item.productKey}}">{{item.productName}}</option>
+				</select>
+				<button class="layui-btn layui-btn-lg layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='handleSearch(1)'>查询</button>
+				<table class="layui-table" style="margin-top: 10px;">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>产品名称</th>
+							<th>最后修改人</th>
+							<th>修改时间</th>
+							<th>预处理方案</th>
+							<th>状态</th>
+							<th ng-show="isUpdatePretreatment || isdeletePretreatment" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='(index,item) in listData'>
+							<!-- 序号 -->
+							<td>{{index+1}}</td>
+							<!-- 产品名称 -->
+							<td>{{item.productName==null?'--':item.productName}}</td>
+							<!-- 最后修改人 -->
+							<td>{{item.updateBy==null?'--':item.updateBy}}</td>
+							<!-- 修改时间 -->
+							<td>{{item.updateTime==null?'--':item.updateTime}}</td>
+							<!-- 预处理方案 -->
+							<td>
+								<button ng-class="btnNormal" ng-click='dialog("info", item.productKey, item.productName, item.resolution)'>查看</button>
+							</td>
+							<!-- 状态 -->
+							<td style="color:#009BDE" ng-show='item.status=="1"'>启动</td>
+							<td style="color:#FF5722" ng-show='item.status!="1"'>停用</td>
+							<td ng-show="isUpdatePretreatment || isdeletePretreatment">
+								<button class="layui-btn layui-btn-sm  layui-btn-danger" ng-show='item.status=="1" && isUpdatePretreatment' ng-click='dialog("stop", item.productKey,item.productName,item.id)'>停用</button>
+								<button class="layui-btn layui-btn-sm" ng-show='item.status!="1" && isUpdatePretreatment' ng-click='dialog("start", item.productKey, item.productName,item.id)'>启动</button>
+								<button ng-disabled='item.status=="1" && isUpdatePretreatment' ng-class="{{item.status=='1'?btnDisable:btnNormal}}" ng-click='dialog("edit", item.productKey,item.productName,item.id)'>编辑</button>
+								<button ng-disabled='item.status=="1" && isdeletePretreatment' ng-class="{{item.status=='1'?btnDisable:btnDanger}}" ng-click='dialog("delete", item.productKey, item.productName,item.id)'>删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				<div id="faultSchemePage" class="paging"></div>
+				<div ng-show="isCreatePretreatment" style="margin:10px 20px;">
+					<button class="layui-btn layui-btn-lg layui-btn-normal" ng-click="dialog('add')">新增</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-style="dialogStyle">
+		<div class="layui-layer-title cursor">{{dialogTitle=='add'?'新增':dialogTitle=='stop'?'停用':dialogTitle=='start'?'启用':dialogTitle=='edit'?'编辑':dialogTitle=='info'?'查看效果':'删除'}}</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="max-height:450px;">
+			<div ng-show='dialogTitle=="edit"||dialogTitle=="add"' style="padding:20px 20px;">
+				<div class="layui-form-item">
+					<label class="layui-form-label" style="float:left;">产品名称：</label>
+					<div class="layui-input-inline">
+						<select ng-disabled='fun=="edit"' ng-model='form.productKey' name="interest" lay-filter="aihao" style="margin-left:0px;padding:8px 20px;border:1px solid #eee;">
+							<option value="">产品名称</option>
+							<option ng-repeat='item in productList' value="{{item.productKey}}">{{item.productName}}</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<!-- 富文本编辑器 -->
+					<div id="editor" v-model='form.resolution'></div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label" style="width: 100px;">客服电话：</label>
+					<div class="layui-input-block">
+						<input ng-model='form.phoneNum' type="text" name="title" lay-verify="title" autocomplete="off" placeholder="4000000000" class="layui-input">
+					</div>
+				</div>
+			</div>
+			<div ng-show='dialogTitle=="delete"' style="text-align:center;margin-top:20px;">确定删除该条数据({{productName}})？</div>
+			<div ng-show='dialogTitle=="stop"' style="text-align:center;margin-top:20px;">确定停用该处理方案({{productName}})？</div>
+			<div ng-show='dialogTitle=="start"' style="text-align:center;margin-top:20px;">确定启用该处理方案({{productName}})？</div>
+			<div ng-show='dialogTitle=="info"' style="margin:55px 0px 0px 23px;" ng-bind-html='resolution | resolution'></div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div ng-show='dialogTitle!="info"' class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="save()">保存</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+</div>
+</div>

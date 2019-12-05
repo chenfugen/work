@@ -1,0 +1,434 @@
+#deviceDetail {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#deviceDetail .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 220px;
+    padding: 0 30px;
+}
+
+#deviceDetail .productDate li {
+    width: 32%;
+    height: 200px;
+    border-radius: 5px;
+    display: block;
+    background: white;
+}
+
+#deviceDetail .productDate li p {
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+}
+
+#deviceDetail .productDate li i {
+    font-size: 20px;
+    color: #1E9FFF;
+}
+
+#deviceDetail .productDate li .radius {
+    width: 130px;
+    height: 130px;
+    border-radius: 130px 130px;
+    background: #1E9FFF;
+    border: 1px solid #eee;
+    box-shadow: 1px 3px 6px #8C8C8C;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+#deviceDetail .productDate li .radius h1 {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    top: 30px;
+    text-align: center;
+    font-size: 30px;
+}
+
+#deviceDetail .productDate li .radius p {
+    font-size: 15px;
+    margin-top: 70px;
+}
+
+#deviceDetail .productDate li .radius .semi-circle {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-radius: 130px 130px 0 0;
+    width: 130px;
+    height: 65px;
+    background: #9ACDEF;
+}
+
+#deviceDetail .progress {
+    line-height: 45px;
+}
+
+#deviceDetail .progress .layui-progress {
+    display: inline-block;
+    width: 70%;
+    margin-left: 100px;
+}
+
+#deviceDetail .layui-tab {
+    padding: 0px 0px;
+    margin-top: -20px;
+}
+
+#deviceDetail .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#deviceDetail .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#deviceDetail .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#deviceDetail .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#deviceDetail .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+#deviceDetail .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}
+
+#deviceDetail .filterRelate {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+#deviceDetail .filterRelate li {
+    float: left;
+    width: 33%;
+    margin: 10px 0px;
+}
+
+#deviceDetail .filterRelate li .layui-input-block {
+    margin: 7px 0px;
+}
+
+#deviceDetail .label {
+    width: 100px;
+    padding: 9px 5px 0px 15px;
+}
+
+#deviceList {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#deviceList .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#deviceList .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#deviceList .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#deviceList .productDate .proNum {
+    background: #20A8D8;
+}
+
+#deviceList .productDate .proBuy {
+    background: #5ABF89;
+}
+
+/* line 733, ../sass/style.scss */
+#deviceList .productDate .proHire {
+    background: #0CCCDA;
+}
+
+/* line 737, ../sass/style.scss */
+#deviceList .layui-tab {
+    padding: 0 30px;
+}
+
+#deviceList .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#deviceList .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#deviceList .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#deviceList .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#deviceList .layui-tab-item .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 10px 10px 20px 0px;
+}
+
+#deviceList .selectStyle {
+    margin: 5px 0px 0px 0px;
+    width: 120px;
+    height: 30px;
+    border: 1px solid #e6e6e6;
+}
+
+#deviceList .operationButton {
+    position: relative;
+}
+
+#deviceList .operation {
+    background: white;
+    position: absolute;
+    z-index: 100000;
+    top: 40px;
+    border: 1px solid #eee;
+    border-radius: 3px 3px;
+}
+
+#deviceList .operation li {
+    width: 120px;
+    line-height: 35px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+/* line 805, ../sass/style.scss */
+#deviceList .operation li:hover {
+    background: #eee;
+}
+
+#deviceMap {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+    position: relative;
+}
+
+#deviceMap .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 0px 0px 0px 30px;
+}
+
+#deviceMap .deviceNav1 {
+    margin: 0 30px;
+    line-height: 40px;
+    color: #1E9FFF;
+    cursor: pointer;
+}
+
+#deviceMap .deviceNav2 {
+    margin: 0 30px;
+    line-height: 40px;
+    color: #1E9FFF;
+    cursor: pointer;
+    display: none;
+}
+
+#deviceMap .deviceID {
+    margin: 0px 0px 10px 20px;
+    border: 1px solid #eee;
+    height: 31px;
+    margin-top: 5px;
+}
+
+#deviceMap .searchBth {
+    margin: -5px 30px;
+}
+
+#deviceMap .selectbox {
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    top: 120px;
+    left: 0px;
+    z-index: 888;
+}
+
+#deviceMap .deviceTable {
+    margin: 70px 30px;
+    background: white;
+    padding: 10px 20px;
+    overflow: hidden;
+}
+
+#deviceMap #container {
+    position: absolute;
+    width: 100%;
+    height: 700px;
+    top: 170px;
+    left: 0px;
+    display: none;
+}
+
+#deviceTrend {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#deviceTrend .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#deviceTrend .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#deviceTrend .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#deviceTrend .productDate .proNum {
+    background: #20A8D8;
+}
+
+#deviceTrend .productDate .proBuy {
+    background: #FFAC5E;
+}
+
+#deviceTrend .productDate .proHire {
+    background: #FF6868;
+}
+
+#deviceTrend .layui-tab {
+    padding: 0 30px;
+}
+
+#deviceTrend .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#deviceTrend .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#deviceTrend .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#deviceTrend .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#deviceTrend .layui-tab-item .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 10px 0px 10px 20px;
+}
+
+#deviceTrend .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+#deviceTrend .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}

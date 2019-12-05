@@ -1,0 +1,27 @@
+<div class="layui-input-inline" style="position:relative;margin-top:-10px;">
+	<input type="text" ng-model="region" lay-verify="title" autocomplete="off" placeholder="请选择区域" class="layui-input cityselect" style="margin:10px 0px 0px 0px;width:200px;">
+	<i class="iconfont icon--xiala dropDown"></i>
+	<div class="cityList">
+		<ul ng-if="!isRegion" class="cityNav">
+			<li ng-click="provinces(0)" class='pitch'>省</li>
+			<li>市</li>
+		</ul>
+		<ul ng-if="isRegion" class="regionNav">
+			<li ng-click="provinces(0)" class='pitch'>省</li>
+			<li ng-click="provinces(1)">市</li>
+			<li>区</li>
+		</ul>
+		<ul class="cityMsg" ng-show="citybox==0">
+			<li ng-click="selectPro(province)" ng-repeat="province in cityList">{{province.province}}</li>
+		</ul>
+		<ul class="cityMsg" ng-show="citybox==1">
+			<li ng-click="selectPro(province)" ng-repeat="province in citys">{{province.name}}</li>
+		</ul>
+		<ul class="cityMsg" ng-show="citybox==2">
+			<li ng-click="selectPro(province)" ng-repeat="province in regions">{{province.region}}</li>
+		</ul>
+	</div>
+	<p style="display: none;" class="province">{{provinceId}}</p>
+	<p style="display: none;" class="city">{{cityId}}</p>
+	<p style="display: none;" class="region">{{regionId}}</p>
+</div>

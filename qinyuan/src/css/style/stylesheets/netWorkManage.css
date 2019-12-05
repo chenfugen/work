@@ -1,0 +1,329 @@
+#cardDetails {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#cardDetails .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 190px;
+    padding: 0 30px;
+}
+
+#cardDetails .productDate li {
+    width: 24%;
+    height: 180px;
+    display: block;
+    background: white;
+}
+
+#cardDetails .productDate li p {
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+}
+
+#cardDetails .productDate li i {
+    font-size: 20px;
+    color: #1E9FFF;
+}
+
+#cardDetails .productDate li .radius {
+    width: 130px;
+    height: 130px;
+    border-radius: 130px 130px;
+    background: #1E9FFF;
+    border: 1px solid #eee;
+    box-shadow: 1px 3px 6px #8C8C8C;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+#cardDetails .productDate li .radius h1 {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    top: 45px;
+    text-align: center;
+}
+
+#cardDetails .productDate li .radius p {
+    font-size: 15px;
+    margin-top: 70px;
+}
+
+#cardDetails .productDate li .radius .semi-circle {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    border-radius: 130px 130px 0 0;
+    width: 130px;
+    height: 65px;
+    background: #9ACDEF;
+}
+
+#cardDetails .progress {
+    line-height: 45px;
+}
+
+#cardDetails .progress .layui-progress {
+    display: inline-block;
+    width: 70%;
+    margin-left: 100px;
+}
+
+#cardDetails .layui-tab {
+    padding: 0px 0px;
+    margin-top: -20px;
+}
+
+#cardDetails .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#cardDetails .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#cardDetails .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#cardDetails .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#cardDetails .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+#cardDetails .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}
+
+#cardDetails .filterRelate {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+#cardDetails .filterRelate li {
+    float: left;
+    width: 33%;
+    margin: 10px 0px;
+}
+
+#cardDetails .filterRelate li .layui-input-block {
+    margin: 7px 0px;
+}
+
+#cardDetails .label {
+    width: 100px;
+    padding: 9px 5px 0px 15px;
+}
+
+#cardManage.select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 20px 0px 0px 10px;
+}
+
+#cardManage {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#statistics.select {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#cardManage {
+    width: 100%;
+    min-width: 100px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+    /*分页控件*/
+}
+
+#cardManage .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#cardManage .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#cardManage .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#cardManage .productDate .proNum {
+    background: #009BDE;
+}
+
+#cardManage .productDate .proBuy {
+    background: #DB527D;
+}
+
+#cardManage .productDate .proHire {
+    background: #5ABF89;
+}
+
+#cardManage .layui-tab {
+    padding: 0 30px;
+}
+
+#cardManage .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#cardManage .layui-tab .layui-tab-title li:last-child {
+    border-right: none;
+}
+
+#cardManage .layui-tab .layui-tab-content {
+    background: white;
+    border-top: none;
+}
+
+#cardManage .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#cardManage .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#cardManage .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+#cardManage .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}
+
+#cardManage .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 10px 13px 20px 0px;
+}
+
+#cardManage .layui-field-box p {
+    line-height: 30px;
+}
+
+#cardManage .source {
+    border: 1px solid #e6e6e6;
+    padding: 10px 10px;
+    margin: 10px 0px 10px 20px;
+}
+
+#cardManage #productAll select {
+    margin: 0;
+    padding: 0;
+    padding: 3px 0px;
+}
+
+#cardManage .layui-form-label {
+    width: 120px;
+    text-align: right;
+    color: #666;
+}
+
+#cardManage .requstPro,
+#cardManage .addPro {
+    margin: 10px 0px 20px 0px;
+    color: #ccc;
+}
+
+#cardManage .tab {
+    width: 100%;
+    margin: 0 auto;
+    height: 40px;
+}
+
+#cardManage .tab li {
+    float: left;
+    width: 90px;
+    margin: 0px 60px 0px 60px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#cardManage .tab .tab-this {
+    color: #009BDE;
+    border-bottom: 2px solid #009BDE;
+}
+
+#cardManage .tabContent {
+    margin: 10px 0px 10px 10px;
+    width: 350px;
+}
+
+#cardManage .formItem {
+    margin-top: 5px;
+}

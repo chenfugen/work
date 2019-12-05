@@ -1,0 +1,516 @@
+<div id="deviceDetail">
+	<p class="breadcrumb">当前位置: 设备列表 / 设备详情</p>
+	<ul class="productDate">
+		<li>
+			<p>
+				<i class="iconfont icon-riqi"></i>
+				租期状态
+			</p>
+			<div class="radius">
+				<h1>{{deviceMsg.leftLeaseDays}} 天</h1>
+				<p ng-if="deviceMsg.leaseStatus==0">未租赁状态</p>
+				<p ng-if="deviceMsg.leaseStatus==1">租赁中</p>
+				<p ng-if="deviceMsg.leaseStatus==2">租赁逾期</p>
+				<p ng-if="deviceMsg.leaseStatus==3">异常状态</p>
+				<p ng-if="deviceMsg.leaseStatus==4">租赁买断</p>
+			</div>
+		</li>
+		<li class="proBuy">
+			<p><i class="iconfont icon-water_icon"></i> 原水箱</p>
+			<div class="radius">
+				<h1>{{deviceMsg.waterAmount}}</h1>
+				<p>升</p>
+			</div>
+		</li>
+		<li class="proNumed">
+			<p><i class="iconfont icon-zhuangtaijiankong"></i> 运行状态</p>
+			<div class="radius">
+				<h1 ng-if="deviceMsg.RunState==0">正常</h1>
+				<h1 ng-if="deviceMsg.RunState==1">故障</h1>
+				<h1 ng-if="deviceMsg.RunState==3">节能</h1>
+				<p ng-if="deviceMsg.status==1">在线</p>
+				<p ng-if="deviceMsg.status==3">离线</p>
+			</div>
+		</li>
+	</ul>
+	<div style="padding:5px 30px; background-color: #F2F2F2;">
+		<div class="layui-row layui-col-space15">
+			<!-- 产品信息 -->
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">产品信息</div>
+					<div class="layui-card-body">
+						<ul class="basicInfro">
+							<li>
+								<i>产品名称：</i>{{device.productName | nullDeal}}
+							</li>
+							<li>
+								<i>产品类型：</i>{{device.productType | nullDeal}}
+							</li>
+							<li>
+								<i>产品PK：</i>{{device.productKey | nullDeal}}
+							</li>
+							<li>
+								<i>产品型号：</i>{{device.productModel | nullDeal}}
+							</li>
+							<li>
+								<i>通信类型：</i>{{device.netType | nullDeal}}
+							</li>
+							<li>
+								<i>租售类型：</i>{{device.leaseType | nullDeal}}
+							</li>
+							<li>
+								<i>滤芯级数：</i>{{filter.level | nullDeal}}
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- 设备信息 -->
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">设备信息
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp(0)">{{deviceMsgPart==false?"展开":"收起"}}</a>
+					</div>
+					<div class="layui-card-body" ng-show="deviceMsgPart">
+						<ul class="basicInfro">
+							<li><i>设备名称：</i>{{device.deviceName | nullDeal}}</li>
+							<li><i>设备ID：</i>{{device.deviceId | nullDeal}}</li>
+							<li><i>MAC/IMEI：</i>{{device.mac | nullDeal}}</li>
+							<li><i>设备SN：</i>{{device.sncode | nullDeal}}</li>
+							<li><i>激活时间：</i>{{device.activeTime | nullDeal}}</li>
+							<li><i>最后上线时间：</i>{{device.lastOnlineTime | nullDeal}}</li>
+							<li><i>在线状态：</i>{{device.status | nullDeal}}</li>
+							<li><i>运行状态：</i><span ng-style="{color:(device.workingState=='故障')?'#FF5722':''}">{{device.workingState | nullDeal}}</span></li>
+							<!-- //显示故障或正常-->
+							<li ng-if='device.userNickName!=""'>
+								<i>绑定用户：</i>
+								<a href="#/userDetails/{{device.userId}}" style="color:#1E9FFF;font-size:14px;">{{device.phone | nullDeal}}</a>
+							</li>
+							<li ng-if='device.userNickName==""'><i>绑定用户：</i>{{device.phone | nullDeal}}</li>
+							<li ng-show='device.netType=="NET_GPRS"'><i>固件版本：</i>{{deviceSnapInfo.ComModNumber | nullDeal}}</li>
+							<li ng-show='device.netType=="NET_WIFI"'><i>固件版本：</i>{{device.firmwareVersion | nullDeal}}</li>
+							<li ng-show='device.netType=="NET_GPRS"'><i>模组型号：</i>{{deviceSnapInfo.ComModType==0?'3080B':deviceSnapInfo.ComModType==1?'5080':deviceSnapInfo.ComModType==2?'M6312':'--'}}</li>
+							<li ng-show='device.netType=="NET_WIFI"'><i>模组型号：</i>{{device.hardwareVersion==0?'3080B':device.hardwareVersion==1?'5080':device.hardwareVersion==2?'M6312':'--'}}</li>
+							<li ng-show='device.netType=="NET_GPRS"'><i>IMSI：</i>{{deviceSnapInfo.IMSI | nullDeal}}</li>
+							<li ng-show='device.netType=="NET_GPRS"'><i>ICCID：</i>{{deviceSnapInfo.ICCID | nullDeal}}</li>
+							<li><i>滤芯状态：</i><span class="filterStaus">{{filter.filterStatus | filterStaus}}</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- 用户信息 -->
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">用户信息
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp(1)">{{userMsg==false?"展开":"收起"}}</a>
+					</div>
+					<div class="layui-card-body" ng-show="userMsg">
+						<div class="layui-tab" lay-filter="test" style="margin-top:10px;">
+							<ul class="layui-tab-title">
+								<li class="layui-this">绑定用户</li>
+								<li>分享用户</li>
+							</ul>
+							<div class="layui-tab-content">
+								<!--绑定设备-->
+								<div class="layui-tab-item layui-show">
+									<table class="layui-table">
+										<thead>
+											<tr>
+												<th>序号</th>
+												<th>用户昵称</th>
+												<th>用户联系方式</th>
+												<th>绑定时间</th>
+												<th class="noExl">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat='(index,item) in bindUsers'>
+												<td>{{index+1}}</td>
+												<td>{{device.userNickName | nullDeal}}</td>
+												<td>{{item.userPhone | nullDeal}}</td>
+												<td>{{item.createTime | nullDeal}}</td>
+												<td>
+													<a href="#/userDetails/{{item.userId}}" class="layui-btn layui-btn-sm layui-btn-normal">详情</a>
+													<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click='dialog("user",item.userId)'>解绑</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<p ng-if="bindUsers.length==0" class="noData">暂无数据</p>
+								</div>
+								<div class="layui-tab-item">
+									<table class="layui-table">
+										<thead>
+											<tr>
+												<th>序号</th>
+												<th>用户昵称</th>
+												<th>用户联系方式</th>
+												<th>分享时间</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="user in shareUsers">
+												<td>{{$index+1}}</td>
+												<td>{{user.user}}</td>
+												<td>{{user.userPhone| phone}}</td>
+												<td>{{user.createTime}}</td>
+												<td>
+													<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click='dialog("sharaUser",user.userId)'>解绑</button>
+													<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="goDetail(user.userId)">详情</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<p ng-if="shareUser.length==0" class="noData">暂无数据</p>
+								</div>
+							</div>
+						</div>
+						<hr class="layui-bg-gray">
+						<button ng-show="bindUsers.length==0" class="layui-btn layui-btn-sm layui-btn-normal" ng-click='dialog("bindUser",item.userId)'>绑定用户</button>
+					</div>
+				</div>
+			</div>
+			<!-- 水质信息 -->
+			<div class="layui-col-md12" ng-if="device.netType!='NET_WIFI'">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">水质信息
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp(3)">{{waterTab==false?"展开":"收起"}}</a>
+					</div>
+					<div class="layui-card-body" ng-show="waterTab">
+						<ul class="basicInfro">
+							<li>
+								<i>TDS(ppm)：</i>{{filterWater.tds| nullDeal}}
+							</li>
+							<li>
+								<i>浊度(NTU)：</i>{{filterWater.ntu | nullDeal}}
+							</li>
+							<li>
+								<i>余氯(mg/L)：</i>{{filterWater.residualChlorine| nullDeal}}
+							</li>
+						</ul>
+						<hr class="layui-bg-gray">
+						<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click='dialog("waterEdit")'>编辑</button>
+					</div>
+				</div>
+			</div>
+			<!-- 滤芯 -->
+			<div class="layui-col-md12" ng-if="filterDetail.length>0">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;text-align: left;">滤芯
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp(2)">{{filterTab==false?"展开":"收起"}}</a>
+					</div>
+					<div class="layui-card-body" ng-show="filterTab">
+						<div class="progress" ng-repeat="filter in filterDetail">
+							<label class="layui-form-label" style="margin-left:-25px;width:160px;">{{filter.name}}:</label>
+							<div class="layui-progress layui-progress-big">
+								<div ng-if="filter.status==0" class="layui-progress-bar layui-bg-green" style="width:{{filter.percent | nullDeal}}%;text-align: center;">{{filter.percent}}%</div>
+								<div ng-if="filter.status==1" class="layui-progress-bar layui-bg-red" style="width:{{filter.percent | nullDeal}}%;text-align: center;">{{filter.percent}}%</div>
+								<div ng-if="filter.status==2" class="layui-progress-bar layui-bg-orange" style="width:{{filter.percent | nullDeal}}%;text-align: center;">{{filter.percent}}%</div>
+							</div>
+							<span ng-if="filter.status==1"> (需要更换)</span>
+							<span ng-if="filter.status==2"> (即将到期)</span>
+						</div>
+						<hr class="layui-bg-gray">
+						<button ng-show="device.netType=='NET_GPRS'" class="layui-btn layui-btn-sm layui-btn-normal" ng-click='dialog("filterEdit",filterDetail)'>编辑</button>
+					</div>
+				</div>
+			</div>
+			<!-- 调试设置 -->
+			<div class="layui-col-md12" ng-if="device.netType!='NET_WIFI'">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">调试设置
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp(4)">{{debugTab==false?"展开":"收起"}}</a>
+					</div>
+					<div class="layui-card-body" ng-show="debugTab">
+						<ul class="basicInfro">
+							<li>
+								<i>调试时间：</i>{{deviceLeaseConfig.deviceLeaseMinutes/60}}h
+							</li>
+							<li>
+								<i>调试次数：</i>{{deviceLeaseConfig.deviceLeaseNum | nullDeal}}
+							</li>
+						</ul>
+						<hr class="layui-bg-gray">
+						<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click='dialog("deBugEdit")'>编辑</button>
+						<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click='resetDebug()'>重置</button>
+					</div>
+				</div>
+			</div>
+			<!-- 故障状态 -->
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">故障状态</div>
+					<div class="layui-card-body">
+						<table class="layui-table">
+							<thead>
+								<tr>
+									<th>故障名称</th>
+									<th>故障等级</th>
+									<th>上报时间</th>
+									<th>状态</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="error in ErrorList">
+									<td>{{error.errorName}}</td>
+									<td>{{error.level}}</td>
+									<td>{{error.createTime | date:'yyyy-MM-dd hh:mm:ss'}}</td>
+									<td>{{error.status}}</td>
+									<td>
+										<a href="#/faultRepair/0.3061609086493735" class="layui-btn layui-btn-sm layui-btn-normal">查看处理进度</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div ng-if="ErrorList.length!=0" id="productAll" class="paging"></div>
+						<p ng-if="ErrorList.length==0" class="noData">暂无数据</p>
+					</div>
+				</div>
+			</div>
+			<!-- 设备地址 -->
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">设备地址
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp(6)">{{deviceMap==false?"展开":"收起"}}</a>
+					</div>
+					<div class="layui-card-body" style='position:relative;height:700px;' ng-show="deviceMap">
+						<div class="mapSearch">
+							<citys class="mapCity"></citys>
+							<input type="text" ng-model="searchKey" id='searchInput' lay-verify="title" autocomplete="off" placeholder="输入查找（精确定位）" class="layui-input mapInput" style="width:300px">
+							<div id='mapResult'></div>
+							<i class="layui-icon layui-icon-search mapIcon" ng-click="handleGetlnglat()"></i>
+							<div class="searchResult" id='searchResult'></div>
+							<button class="layui-btn layui-btn-sm layui-btn-normal setLocationBtn" ng-show='showSetBtn' ng-click='handleSetLocation()'>设置为设备坐标</button>
+						</div>
+						<div id="deviceAddress"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 蒙层 -->
+	<div class="layui-layer-shade dialogShade" ng-show='dialog' id="layui-layer-shade1" times="1"></div>
+	<!-- 重置调试弹窗 -->
+	<div class="layui-layer layui-layer-page" ng-show="dialogReset" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-show="fun!=null" ng-style="dialogStyle">
+		<div class="layui-layer-title cursor">重置调试</div>
+		<div style="text-align: center;margin-top:20px;">您确定要重置该设备调试次数吗？</div>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="submitRestDebug()">确定</a>
+			<a class="layui-layer-btn1" ng-click="cancelResetDebug()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-show="fun!=null" ng-style="dialogStyle">
+		<!-- 开关-->
+		<div ng-show="fun=='bindUser' || fun=='sharaUser'|| fun=='user'" class="layui-layer-title cursor">{{fun=='bindUser'?'绑定用户':'解绑'}}</div>
+		<div ng-show="fun=='waterEdit' || fun=='filterEdit' || fun=='deBugEdit'" class="layui-layer-title cursor">编辑</div>
+		<div ng-show="fun=='passCheck' || fun=='refuseCheck'" class="layui-layer-title cursor">审核</div>
+		<div id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<div ng-show="fun=='sharaUser' || fun=='user'" style="text-align: center;">您确定要解绑该{{fun=='sharaUser'?'分享':''}}用户吗？</div>
+				<div ng-show="fun=='waterEdit'" style="text-align: center;">
+					<div class="layui-form-item" ng-show="fun=='waterEdit'">
+						<label class="layui-form-label label"><span class="mustIn">* </span>TDS(ppm)：</label>
+						<div class="layui-input-inline" style="margin-top:5px;">
+							<input type="number" name="title" ng-model="tds" min='0' max='800' step='1' required lay-verify="required" placeholder="请输入TDS值" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label label"><span class="mustIn">* </span>浊度(NTU)：</label>
+						<div class="layui-input-inline" style="margin-top:5px;">
+							<input type="number" name="title" ng-model="ntu" min='0' max='2.55' step='0.01' required lay-verify="required" placeholder="请输入浊度值" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label label"><span class="mustIn">* </span>余氯(mg/L)：</label>
+						<div class="layui-input-inline" style="margin-top:5px;">
+							<input type="number" name="title" min='0' max='2.55' step='0.01' ng-model="residualChlorine" required lay-verify="required" placeholder="请输入余氯值" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+				</div>
+				<div ng-show="fun=='bindUser'">
+					<div class="layui-form-item">
+						<label class="layui-form-label">设备IMEI：</label>
+						<div class="layui-input-inline" style="margin-top:10px;">
+							{{device.mac | nullDeal}}
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">设备SN：</label>
+						<div class="layui-input-inline" style="margin-top:10px;">
+							{{device.sncode | nullDeal}}
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label"><span class="mustIn">* </span>绑定用户：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="userPhone" lay-verify="title" autocomplete="off" placeholder="请输入手机号码" class="layui-input" style="height:31px;margin-top:5px;">
+						</div>
+					</div>
+				</div>
+				<div ng-show="fun=='deBugEdit'">
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>调试时间：</label>
+						<div class="layui-input-inline" style="margin-left:-20px;">
+							<select name="interest" lay-filter="aihao" ng-model="deviceLeaseMinutes" style="width:160px;height:30px;border:1px solid #eee;margin:15px 0px 0px 20px;">
+								<option value="">请选择</option>
+								<option value="{{item*60}}" ng-repeat="item in 72 | num">{{item}}h</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label"><span class="mustIn">* </span>调试次数：</label>
+						<div class="layui-input-inline">
+							<input type="number" ng-model="deviceLeaseNum" lay-verify="title" autocomplete="off" placeholder="请输入调试次数" class="layui-input" style="height:31px;margin-top:5px;">
+						</div>
+					</div>
+				</div>
+				<div ng-show="fun=='filterEdit'">
+					<div class="layui-form-item" ng-repeat="item in filters track by $index">
+						<label class="layui-form-label" style="width:150px;"><span class="mustIn">* </span>{{item.filterName}}：</label>
+						<div class="layui-input-inline">
+							<input type="number" ng-blur='handleCheckFilterInput($index)' min='0' ng-model="item.filterPercent" lay-verify="title" autocomplete="off" class="layui-input" style="height:31px;margin-top:5px;"> %
+						</div>
+					</div>
+				</div>
+				<div ng-show="fun=='passCheck' || fun=='refuseCheck'">
+					<p style="text-align: center;">{{fun=='passCheck'?"通过":"拒绝"}}该次调试审核？</p>
+				</div>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="save()">确定</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+</div>
+<script type="text/javascript">
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>
+<style media="screen">
+	#deviceAddress {
+		position: absolute;
+		width: 100%;
+		height: 700px;
+		left: 0px;
+	}
+
+	.mapSearch {
+		position: absolute;
+		top: 30px;
+		width: 100%;
+		z-index: 999;
+	}
+
+	.mapCity {
+		position: absolute;
+	}
+
+	.mapCity i {
+		display: none;
+	}
+
+	.mapIcon {
+		backgroundColor: #fff;
+		position: absolute;
+		top: 3px;
+		right: 110px;
+		z-index: 9999;
+		left: 500px;
+		cursor: pointer;
+	}
+
+	.mapResult {
+		position: relative;
+		padding: 10px;
+		width: 280px;
+		background-color: #fff;
+	}
+
+	.mapResult p:hover {
+		background: #959595;
+	}
+
+	.mapSearchBth {
+		color: #009BDE;
+		position: absolute;
+		z-index: 9999;
+		top: 20px;
+		right: 0;
+		bottom: 10px;
+	}
+
+	.CenterMarker {
+		position: absolute;
+		left: 12px;
+		top: 12px;
+		color: white;
+		text-align: center;
+	}
+
+	.makerBox {
+		width: 200px;
+		height: 80px;
+		position: relative;
+	}
+
+	.makerBox .cancel {
+		width: 40px;
+		height: 20px;
+		border-radius: 4px;
+		position: absolute;
+		left: 50px;
+		bottom: 3px;
+	}
+
+	.makerBox .submit {
+		width: 40px;
+		height: 20px;
+		border-radius: 4px;
+		position: absolute;
+		background-color: blue;
+		border: none;
+		color: white;
+		left: 120px;
+		bottom: 3px;
+	}
+
+	.mapInput {
+		position: absolute;
+		left: 220px;
+		/* margin-left: 250px; */
+	}
+
+	.searchResult {
+		position: absolute;
+		top: 30px;
+		left: 220px;
+	}
+
+	.setLocationBtn {
+		position: absolute;
+		right: 20px;
+		top: 10px;
+	}
+
+	.actBtn {
+		margin-left: 20px;
+	}
+</style>

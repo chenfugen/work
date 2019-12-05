@@ -1,0 +1,457 @@
+<div id="productList">
+	<p class="breadcrumb">当前位置: 产品列表</p>
+	<ul class="productDate">
+		<li class="proNum">
+			<p>{{productCount.total}}</p>
+			<p>产品总数</p>
+		</li>
+		<li class="proBuy">
+			<p>{{productCount.sellCount}}</p>
+			<p>售卖</p>
+		</li>
+		<li class="proHire">
+			<p>{{productCount.leaseCount}}</p>
+			<p>租赁</p>
+		</li>
+	</ul>
+	<!-- 主表格 -->
+	<div ng-show='showPart == true' class="layui-tab" lay-filter="test">
+		<ul class="layui-tab-title">
+			<li ng-click="productSort()" class="layui-this">全部</li>
+			<li ng-click="productSort(1)" ng-click="">售卖</li>
+			<li ng-click="productSort(2)">租赁</li>
+		</ul>
+		<div class="layui-tab-content">
+			<!--全部-->
+			<div class="layui-tab-item layui-show">
+				<div class="filter clearfix">
+					<div class="layui-input-inline">
+						<input type="text" ng-model="productName" lay-verify="title" autocomplete="off" placeholder="产品名称" class="layui-input filterInput">
+					</div>
+					<div class="layui-input-inline">
+						<input type="text" ng-model="productModel" lay-verify="title" autocomplete="off" placeholder="产品型号" class="layui-input filterInput">
+					</div>
+					<select name="modules" class="filterSelect" lay-verify="required" ng-model="producType">
+						<option value="">产品类型</option>
+						<option ng-value="x.productType" ng-repeat="x in productTypeList">{{x.productType}}</option>
+					</select>
+					<select name="modules" class="filterSelect" lay-verify="required" ng-model="netType">
+						<option value="">通信类型</option>
+						<option ng-value="x.netType" ng-repeat="x in netTypeList">{{x.netType}}</option>
+					</select>
+					<button class="layui-btn  layui-btn-sm  layui-btn-normal filterSearchBth" ng-click="search()">查询</button>
+					<button ng-show="isAdd" class="layui-btn layui-btn-sm layui-btn-normal right" style='margin-right:20px;' ng-click="addProduct()">新增</button>
+					<button ng-show="isAdd" class="layui-btn  layui-btn-sm layui-btn-normal right" style='margin-right:20px;' ng-click="handleGoActStore()">批量操作功能表</button>
+				</div>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>产品型号</th>
+							<th>产品PK</th>
+							<th>产品类型</th>
+							<th>产品名称</th>
+							<th>通信类型</th>
+							<th>默认租售类型</th>
+							<th>状态</th>
+							<th ng-if="isUpdate || isDetail || isSwitch" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="product in productList">
+							<td>{{$index+1}}</td>
+							<td>{{product.productModel | nullDeal}}</td>
+							<td>{{product.productKey}}</td>
+							<td>{{product.productType}}</td>
+							<td>{{product.productName}}</td>
+							<td>{{product.netType}}</td>
+							<td>{{product.leaseType}}</td>
+							<td>
+								<span ng-show='product.forbidden==1' class="colorStart">启用</span>
+								<span ng-show='product.forbidden==0' class="colorStop">停用</span>
+							</td>
+							<td ng-if="isUpdate || isDetail || isSwitch" class="noExl" style="min-width:230px;">
+								<button ng-show="isUpdate" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="edit(product.productKey)">编辑</button>
+								<button ng-show="product.forbidden==0 && isSwitch" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="switch(1,product.productKey)">启用</button>
+								<button ng-show="product.forbidden==1 && isSwitch" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="switch(0,product.productKey)">禁用</button>
+								<button ng-show="isDetail" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="goDetail(product.productKey)">详情</button>
+								<button ng-show="isDetail" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="refresh(product.productKey)">刷新</button>
+								<button ng-show="isDetail" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="getActAttByProduct(product)">批量功能</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show="productList.length==0" class="noData">暂无数据</p>
+				<div ng-hide="productList.length==0" id="productAll" class="paging"></div>
+				<div style='margin-left:10px;'>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 批量操作表 -->
+	<div ng-show='showPart == false' class="layui-tab" lay-filter="test">
+		<div class="layui-tab-content">
+			<!--全部-->
+			<div class="layui-tab-item layui-show">
+				<div class="filter clearfix">
+					<div class="layui-input-inline">
+						<input type="text" ng-model="actAttFilter.operateName" lay-verify="title" autocomplete="off" placeholder="批量功能名称" class="layui-input filterInput">
+					</div>
+					<select name="modules" class="filterSelect" lay-verify="required" ng-model="actAttFilter.productKey">
+						<option value="">可适配产品</option>
+						<option ng-repeat='item in selProductList' ng-value="item.productKey">{{item.productModel}}</option>
+					</select>
+					<select name="modules" class="filterSelect" lay-verify="required" ng-model="actAttFilter.status">
+						<option value="">启停状态</option>
+						<option value="0">停用</option>
+						<option value="1">启用</option>
+					</select>
+					<button class="layui-btn layui-btn-lg layui-btn-normal filterSearchBth" ng-click="handleSearchAttList()">查询</button>
+					<button ng-show="isAdd" class="layui-btn layui-btn-lg layui-btn-normal right" style='margin-right:20px;' ng-click="handleGoActStore()">产品列表</button>
+					<button ng-show="isAdd" class="layui-btn layui-btn-lg layui-btn-normal right" style='margin-right:20px;' ng-click="handleAddAtt()">新增</button>
+				</div>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>批量功能名称</th>
+							<th>命令名称</th>
+							<th>H5路径</th>
+							<th>适配产品</th>
+							<th>启停状态</th>
+							<th ng-if="isUpdate || isDetail || isSwitch" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in actAttList">
+							<td>{{$index+1}}</td>
+							<td>{{item.operateName | nullDeal}}</td>
+							<td>{{item.batchName | nullDeal}}</td>
+							<td>{{item.url}}</td>
+							<td>
+								<button ng-show="isDetail" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="handleViewProduct(item)">查看适配产品</button>
+							</td>
+							<td>
+								<button ng-show="isDetail" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="handleForbiddenActAtt(true,item)">{{item.status == 1?'停用':'启用'}}</button>
+							</td>
+							<td ng-if="isUpdate || isDetail || isSwitch" class="noExl" style="min-width:230px;">
+								<button ng-show="isUpdate" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="handleEditActAtt(item)">编辑</button>
+								<button ng-show="isDetail" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="handleDeleteActAtt(true,item)">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show="actAttList.length==0" class="noData">暂无数据</p>
+				<div ng-hide="actAttList.length==0" id="actAttPage" class="paging"></div>
+			</div>
+		</div>
+	</div>
+	<!-- 蒙层 -->
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<!-- 弹窗A -->
+	<div class="layui-layer layui-layer-page add dialog" id="layui-layer1" type="page" times="1" showtime="0" contype="string">
+		<div class="layui-layer-title cursor">新增产品</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="max-height:400px;">
+			<div style="padding:10px 20px;">
+				<p class="requstPro">已在其他平台定义的产品，可以通过此方式在本平台添加产品</p>
+				<p class="addPro">在本平台新增产品</p>
+				<ul class="tab">
+					<li class="tab-this">产品获取</li>
+					<li>产品新增</li>
+				</ul>
+				<div class="requstPro tabContent">
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>租售类型：</label>
+						<div class="layui-input-inline" style="margin-left:-20px;">
+							<select name="interest" class="select" lay-filter="aihao" ng-model="leaseType" style="width:160px;margin:15px 0px 0px 20px;">
+								<option value="">租售类型</option>
+								<option value="1">售卖</option>
+								<option value="2">租赁</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>产品来源：</label>
+						<div class="layui-input-inline" style="margin-left:-20px;">
+							<select name="interest" class="select" lay-filter="aihao" ng-model="resource" style="width:160px;margin:15px 0px 0px 20px;">
+								<option value="">请选择</option>
+								<option value="1">ilop</option>
+								<!-- <option value="2">iot</option> -->
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item" style="margin-top:25px;">
+						<label class="layui-form-label"><span class="mustIn">* </span>产品型号：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="productModel" lay-verify="title" autocomplete="off" placeholder="请输入产品型号" class="layui-input" style="height:31px;margin-top:5px;">
+						</div>
+					</div>
+					<div class="layui-form-item" style="margin-top:35px;">
+						<label class="layui-form-label"><span class="mustIn">* </span>产品代码：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="productKey" lay-verify="title" autocomplete="off" ng-model="productKey" placeholder="请输入产品代码" class="layui-input" style="height:31px;margin-top:5px;">
+						</div>
+					</div>
+				</div>
+				<!-- 增加产品表单 -->
+				<div class="addPro tabContent">
+					<div class="layui-form-item" style="margin-top:20px;">
+						<label class="layui-form-label"><span class="mustIn">* </span>产品名称：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="form.productName" lay-verify="title" autocomplete="off" placeholder="请输入产品名称" class="layui-input" style="height:31px;margin-top:5px;">
+						</div>
+					</div>
+					<div class="layui-form-item" style="margin-top:40px;">
+						<label class="layui-form-label"><span class="mustIn">* </span>ERP编码：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="form.erpNum" lay-verify="title" autocomplete="off" placeholder="请输入ERP编码" class="layui-input" style="height:31px;margin-top:5px;">
+						</div>
+					</div>
+					<div class="layui-form-item" style="margin-top:40px;">
+						<label class="layui-form-label"><span class="mustIn">* </span>产品型号：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="form.productModel" lay-verify="title" autocomplete="off" placeholder="请输入产品型号" class="layui-input" style="height:31px;margin-top:5px;">
+						</div>
+					</div>
+					<div class="layui-form-item" style="margin-top:25px;">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>产品类型：</label>
+						<div class="layui-input-inline" style="margin-left:-20px;">
+							<select name="modules" class="select" lay-verify="required" ng-model="form.productType" style="margin:15px 0px 0px 20px;">
+								<option value="">产品类型</option>
+								<option ng-value="x.productType" ng-repeat="x in productTypeList">{{x.productType}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item" style="margin-top:35px;">
+						<label class="layui-form-label"><span class="mustIn">* </span>通信类型：</label>
+						<div class="layui-input-inline" style="margin:-10px 0px 0px -20px;">
+							<select name="modules" class="select" lay-verify="required" ng-model="form.netType" style="margin:15px 0px 0px 20px;">
+								<option value="">通信类型</option>
+								<option value="NET_WIFI">NET_WIFI</option>
+								<option value="NET_GPRS">NET_GPRS</option>
+							</select>
+						</div>
+					</div>
+					<div class="layui-form-item" style="margin-top:35px;">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>租售类型：</label>
+						<div class="layui-input-inline" style="margin-left:-20px;">
+							<select name="interest" class="select" lay-filter="aihao" ng-model="form.leaseType" style="width:160px;margin:15px 0px 0px 20px;">
+								<option value="">租售类型</option>
+								<option value="1">售卖</option>
+								<option value="2">租赁</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0 requstButton" ng-click="save()">获取产品</a>
+			<a class="layui-layer-btn0 addButton" ng-click="add()">确定</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div>
+		<span class="layui-layer-resize"></span>
+	</div>
+	<!-- 弹窗B -->
+	<div class="layui-layer layui-layer-page switch dialogA" id="layui-layer1" type="page" times="1" showtime="0" contype="string">
+		<div class="layui-layer-title title cursor">启用</div>
+		<div id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;text-align: center;">
+				你确定要<span class="title">启用</span>该产品吗？
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="save()">确定</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div>
+		<span class="layui-layer-resize"></span>
+	</div>
+	<!-- 批量操作编辑/添加 -->
+	<div class="layui-layer layui-layer-page dialog addAtt" type="page" times="1" showtime="0" contype="string" style='top:30%;max-height:350px:overflow:auto'>
+		<div class="layui-layer-title title cursor">{{dialogTitle}}</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="max-height:400px;">
+			<div class="requstPro tabContent">
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>可适配产品：</label>
+					<div class="layui-input-inline" style="margin-left:-20px;">
+						<select name="interest" class="select" lay-filter="aihao" ng-model="actAttForm.productKeys" ng-change='handleAddAttProduct(actAttForm.productKeys)' style="width:160px;margin:0px 0px 0px 20px;">
+							<option value="">可适配产品</option>
+							<option ng-repeat='item in selProductList' ng-value="item.productKey">{{item.productModel}}</option>
+						</select>
+					</div>
+					<div class="layui-input-inline" style='margin-top:5px;'>
+						<div ng-repeat='item in actAttProductKeys'>
+							<span>{{item.productModel}}</span>
+							<button type="button" name="button" class="formBtn" ng-click='handleSubProducts($index)'>-</button>
+						</div>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>批量功能名称：</label>
+					<div class="layui-input-inline">
+						<input type="text" ng-model="actAttForm.operateName" lay-verify="title" autocomplete="off" ng-model="productKey" class="layui-input" style="height:31px;margin-top:5px;">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>命令名称：</label>
+					<div class="layui-input-inline">
+						<input type="text" ng-model="actAttForm.batchName" lay-verify="title" autocomplete="off" ng-model="productKey" class="layui-input" style="height:31px;margin-top:5px;">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>配置H5路径：</label>
+					<div class="layui-input-inline">
+						<input type="text" ng-model="actAttForm.url" lay-verify="title" autocomplete="off" ng-model="productKey" class="layui-input" style="height:31px;margin-top:5px;">
+					</div>
+				</div>
+				<div class="layui-layer-btn layui-layer-btn-c" style='margin:0 auto;'>
+					<a class="layui-layer-btn0" ng-click="handleSubmit()">确定</a>
+					<a class="layui-layer-btn1" ng-click="handleCancel()">取消</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 删除弹窗 -->
+	<div class="layui-layer layui-layer-page dialog deleteActAtt" id="layui-layer1" type="page" times="1" showtime="0" contype="string">
+		<div class="layui-layer-title title cursor">删除</div>
+		<div id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;text-align: center;">
+				你确定要<span class="title">删除</span>该批量操作功能吗？
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="handleDeleteActAtt(false)">确定</a>
+			<a class="layui-layer-btn1" ng-click="handleCancel()">取消</a>
+		</div>
+		<span class="layui-layer-resize"></span>
+	</div>
+	<!-- 查看产品弹窗 -->
+	<div class="layui-layer layui-layer-page dialog viewProduct" id="layui-layer1" type="page" times="1" showtime="0" contype="string">
+		<div class="layui-layer-title title cursor">适配产品</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style='overflow:auto;max-height:400px;'>
+			<div c;as>{{item}}</div>
+			<div style="padding:10px 10px;text-align: center;" ng-repeat='item in actAttProductKeys'>
+				{{item.productModel}}
+			</div>
+		</div>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="handleCancel()">确定</a>
+		</div>
+		<span class="layui-layer-resize"></span>
+	</div>
+	<!-- 禁用弹窗 -->
+	<div class="layui-layer layui-layer-page dialog forbiddenActAtt" id="layui-layer1" type="page" times="1" showtime="0" contype="string">
+		<div class="layui-layer-title title cursor">禁用/启用</div>
+		<div id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;text-align: center;">
+				你确定要<span class="title">{{forbiddenActAtt.status == 1?'禁用':'启用'}}</span>该批量操作功能吗？
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="handleForbiddenActAtt(false)">确定</a>
+			<a class="layui-layer-btn1" ng-click="handleCancel()">取消</a>
+		</div>
+		<span class="layui-layer-resize"></span>
+	</div>
+	<!-- 产品勾选弹窗 -->
+	<div class="layui-layer layui-layer-page dialog checkAct" id="layui-layer1" type="page" times="1" showtime="0" contype="string">
+		<div class="layui-layer-title title cursor">选择可批量操作功能</div>
+		<div class="requstPro tabContent" style='width:480px'>
+			<div class="layui-form-item">
+				<label class="layui-form-label"><span class="mustIn">* </span>可适配产品：</label>
+				<div class="layui-input-inline" style="margin-left:-20px;">
+					<select name="interest" class="select" lay-filter="aihao" ng-model="productActAttForm.configs" ng-change='handleProductAddAtt(productActAttForm.configs)' style="width:160px;margin:0px 0px 0px 20px;">
+						<option value="">批量操作功能</option>
+						<option ng-repeat='item in productActListAll' ng-value="item.id">{{item.operateName}}</option>
+					</select>
+				</div>
+			</div>
+			<div ng-repeat='item in productActAttList' class="selItemDiv clearfix">
+				<span class="left">{{item.operateName}}</span>
+				<button type="button" name="button" class="formBtn right" ng-click='handleProductSubAtt($index)'>-</button>
+			</div>
+			<div class="layui-layer-btn layui-layer-btn-c" style='margin:0 auto;'>
+				<a class="layui-layer-btn0" ng-click="handleSubmitProductActAtt()">确定</a>
+				<a class="layui-layer-btn1" ng-click="handleCancel()">取消</a>
+			</div>
+		</div>
+		<span class="layui-layer-resize"></span>
+	</div>
+	<script type="text/javascript">
+		//selec默认颜色
+		var unSelected = "#bababa";
+		var selected = "#505050";
+		$(function() {
+			$("select").css("color", unSelected);
+			$("option").css("color", selected);
+			$("select").change(function() {
+				var selItem = $(this).val();
+				if (selItem == $(this).find('option:first').val()) {
+					$(this).css("color", unSelected);
+				} else {
+					$(this).css("color", selected);
+				}
+			});
+		})
+		$(".addPro").hide();
+		$(".addButton").hide();
+		$(".tab li").click(function() {
+			$(this).css({
+				"color": "#009BDE",
+				"border-bottom": "2px solid #009BDE"
+			});
+			$(this).siblings().css({
+				"color": "#666",
+				"border": "none"
+			});
+			if ($(this).index() == 0) {
+				$(".addPro").hide();
+				$(".requstButton").show();
+				$(".requstPro").show();
+				$(".addButton").hide();
+			} else {
+				$(".requstPro").hide();
+				$(".requstButton").hide();
+				$(".addPro").show();
+				$(".addButton").show();
+			}
+
+		})
+	</script>
+	<style media="screen">
+		.dialog {
+			z-index: 19891015;
+			width: 480px;
+			max-height: 500px;
+			height: auto;
+			left: 50%;
+			margin-left: -200px;
+			display: none;
+		}
+
+		.dialogA {
+			z-index: 19891015;
+			width: 300px;
+			height: auto;
+			top: 50%;
+			left: 50%;
+			margin-left: -150px;
+			margin-top: -200px;
+			display: none;
+		}
+
+		.formBtn {
+			width: 30px;
+			line-height: 5px;
+			height: 15px;
+		}
+
+		.selItemDiv {
+			margin-left: 30%;
+			width: 30%;
+		}
+	</style>

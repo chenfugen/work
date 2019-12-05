@@ -1,0 +1,65 @@
+<div id="administratorsLog">
+	<p class="breadcrumb">当前位置: 管理日志</p>
+	<div class="layui-tab pageContent" lay-filter="test">
+		<div style="margin-left:10px;">
+			<input ng-model='filter.accountName' type="text" name="title" id="title" lay-verify="title" placeholder="管理员名称" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 0px;height:31px;">
+			<input ng-model='filter.time' type="text" name="date" id="date" lay-verify="date1" placeholder="操作时间" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px;height:31px;width:300px">
+			<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" ng-click='getListData({
+				pageNum:1,
+				pageSize:10,
+			},true)'>查询</button>
+		</div>
+
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>系统用户</th>
+							<th>角色名称</th>
+							<th>操作内容</th>
+							<th>时间</th>
+							<th ng-show="isDetail" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='(index, item) in listData'>
+							<td>{{index+1}}</td>
+							<td>{{item.accountName==null?'--':item.accountName}}</td>
+							<td>{{item.roleName==null?'--':item.roleName}}</td>
+							<td>{{item.methodName==null?'--':item.methodName}}</td>
+							<td>{{item.createTime==null?'--':item.createTime}}</td>
+							<td ng-show="isDetail" class="noExl">
+								<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog(item.id)">详情</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				<div id="adminLogListPage" class="paging"></div>
+			</div>
+		</div>
+		<!--<div ng-show="isExcel" style="margin:10px 10px;">
+			<button class="layui-btn layui-btn-lg layui-btn-normal" onclick="toExcel('管理日志')">导出</button>
+		</div>-->
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width: 500px; height:400px; top:20%; left:50%;margin-left:-150px;display: none;">
+		<div class="layui-layer-title cursor">详情</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="height:350px;">
+			<div style="padding:10px 20px;font-size:15px;" class="popout">
+				<p>系统用户：{{infoData.accountName==null?'--':infoData.accountName}}</p>
+				<p>角色名称：{{infoData.roleName==null?'--':infoData.roleName}}</p>
+				<p>操作时间：{{infoData.createTime==null?'--':infoData.createTime}}</p>
+				<p>IP地址：{{infoData.ip==null?'--':infoData.ip}}</p>
+				<p>操作内容：{{infoData.methodName==null?'--':infoData.methodName}}</p>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+	</div>
+</div>
+<script type="text/javascript">
+</script>

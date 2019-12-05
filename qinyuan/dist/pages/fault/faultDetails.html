@@ -1,0 +1,42 @@
+<div id="faultDetails">
+	<div class="layui-row layui-col-space15" style="padding: 0 30px;margin-top:20px;">
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header" style="font-weight:bold;">基础信息</div>
+				<div class="layui-card-body">
+					<ul class="basicInfro">
+						<li>设备名称：{{deviceDetail.deviceName | nullDeal}}</li>
+						<li>产品名称：{{deviceDetail.productName | nullDeal}}</li>
+						<li>产品型号：{{deviceDetail.productModel | nullDeal}}</li>
+						<li>详细地址：{{deviceDetail.address |nullDeal}}</li>
+						<li>绑定用户：{{deviceDetail.phone | nullDeal}}</li>
+						<li>通信方式：{{deviceDetail.netType | nullDeal}}</li>
+						<!-- ******************************* -->
+						<li>产品类型：{{deviceDetail.productType | nullDeal}}</li>
+						<li>租售类型：{{deviceDetail.leaseType}}</li>
+						<li>滤芯级数：{{filter.level | nullDeal}}</li>
+						<li>滤芯状态：{{filter.filterStatus}}</li>
+						<li>设备ID：{{deviceDetail.deviceId | nullDeal}}</li>
+						<li>MAC地址：{{deviceDetail.mac | nullDeal}}</li>
+						<li>固件版本：{{deviceDetail.firmwareVersion | nullDeal}}</li>
+						<li>硬件版本：{{deviceDetail.hardwareVersion | nullDeal}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header" style="font-weight:bold;">故障信息</div>
+				<div class="layui-card-body">
+					<ul class="basicInfro">
+						<li>故障名称：{{faultInfos.errorName | nullDeal}}</li>
+						<li>故障代码：{{faultInfos.errorId| nullDeal}}</li>
+						<li>故障等级：{{faultInfos.rank | nullDeal}}</li>
+						<li>处理状态：{{faultInfo.dealType==2?'报修':faultInfo.dealType==1?"保养":"--"}}</li>
+						<li>上报时间：{{faultInfo.createTime | nullDeal}}</li>
+					</ul>
+				</div>
+			</div> 
+		</div>
+	</div>
+</div>

@@ -1,0 +1,363 @@
+<!-- nelson 更新版本 -->
+<div id="upgradeTask" class="upgradeTask" style='min-width:1000px;'>
+    <p class="breadcrumb">当前位置: 升级任务</p>
+    <!-- 主视图 -->
+    <div class="layui-tab clearfix" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px;">
+        <!-- 筛选表单 -->
+        <div class="layui-input-inline">
+            <input type="text" ng-model="filterForm.upgradableVersion" lay-verify="title" autocomplete="off" placeholder="起始版本号" class="layui-input" style="margin:-5px 0px 0px 10px;">
+        </div>
+        <div class="layui-input-inline">
+            <input type="text" ng-model="filterForm.targetVersion" lay-verify="title" autocomplete="off" placeholder="目标版本号" class="layui-input" style="margin:-5px 0px 0px 10px;">
+        </div>
+        <select name="modules" class="select" lay-verify="required" ng-model="filterForm.productKey">
+            <option value="">产品型号</option>
+            <option ng-value="item.productKey" ng-repeat="item in productTypeList">{{item.productModel}}</option>
+        </select>
+        <select name="modules" class="select" lay-verify="required" ng-model="filterForm.type">
+            <option value="">任务类型</option>
+            <option ng-value="1">主板升级</option>
+            <option ng-value="2">模组升级</option>
+        </select>
+        <select name="modules" class="select" style='width:160px;' lay-verify="required" ng-model="filterForm.upgradeWay">
+            <option value="">升级方式（强制/非强制）</option>
+            <option value="2">强制</option>
+            <option value="1">非强制</option>
+        </select>
+        <!-- 顶部操作栏 -->
+        <button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='handleSearch()'>查询</button>
+        <button class="layui-btn layui-btn-sm layui-btn-normal right" style="margin:20px 10px;" ng-click="handleAdd()">新增</button>
+        <!-- 表格 -->
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <table class="layui-table">
+                    <thead>
+                        <tr>
+                            <th class="UT_tdShort">序号</th>
+                            <th class="UT_tdShort">任务名称</th>
+                            <th class="UT_tdShort">任务类型</th>
+                            <th class="UT_tdShort">起始版本</th>
+                            <th class="UT_tdShort">目标版本</th>
+                            <th class="UT_tdShort">产品型号</th>
+                            <th class="UT_tdShort">升级方式</th>
+                            <th class="UT_tdShort">升级设备</th>
+                            <th class="UT_tdShort">状态</th>
+                            <th class="UT_tdLong">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat='item in tableList'>
+                            <td width=''>{{$index+1}}</td>
+                            <td>{{item.taskName | nullDeal}}</td>
+                            <td>{{item.type==1?'模组升级':item.type==2?'主板':"--"}}</td>
+                            <td><a class="UT_upgradeDeviceListBtn" ng-click='handleShowVersion(item)'>查看</a></td>
+                            <td>{{item.targetVersion | nullDeal}}</td>
+                            <td>{{item.productModel | nullDeal}}</td>
+                            <td>{{item.upgradeWay==1?'非强制升级':'强制升级' | nullDeal}}</td>
+                            <td><a class="UT_upgradeDeviceListBtn" ng-click='handleShowDevice(item)'>查看列表</a></td>
+                            <td ng-style='{color:item.status==1?"green":"red"}'>{{item.status==1?'启用':'停用' | nullDeal}}</td>
+                            <td>
+                                <button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="handleEdit(item)">编辑</button>
+                                <button ng-if="item.status==0" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="handleForbidden(item)">启用</button>
+                                <button ng-if="item.status==1" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="handleForbidden(item)">停用</button>
+                                <button class="layui-btn layui-btn-sm layui-btn-danger" ng-click="handleDelete(item)">删除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p ng-show="tableList.length==0" class="noData">暂无数据</p>
+                <div ng-show="tableList.length>0" id="UT_tableList" class="paging"></div>
+            </div>
+        </div>
+        <!-- 底部操作栏 -->
+
+    </div>
+    <!-- 蒙层 -->
+    <div class="layui-layer-shade" id="layui-layer-shade1" ng-show='dialog' times="1" style="z-index:19891014; background-color: rgb(0, 0, 0); opacity: 0.5;"></div>
+    <!-- 弹窗 -->
+    <div class="layui-layer layui-layer-page" ng-show='dialog' id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width: 500px; height:auto; top:10%; left:50%;margin-left:-150px;">
+        <div class="layui-layer-title cursor">{{dialogTitle}}</div>
+        <!-- 弹窗添加表单 -->
+        <div id="LAY_layuipro" ng-show='!choseDeviceDialog&&!choseDialog&&(act=="add"||act=="edit")' class="layui-layer-content">
+            <div class="layui-form-item">
+                <label class="layui-form-label">任务名称：</label>
+                <div class="layui-input-inline">
+                    <input type="text" ng-model="addForm.taskName" lay-verify="title" autocomplete="off" placeholder="请输入任务名称" class="layui-input" style="height:31px;margin-top:5px;margin-left:-10px;">
+                </div>
+            </div>
+            <div class="layui-form-item" ng-show='act=="add"'>
+                <label class="layui-form-label" style="line-height:50px;"><span class="mustIn">* </span>产品型号：</label>
+                <div class="layui-input-inline" style="margin-left:-20px;">
+                    <select name="modules" class="select" lay-verify="required" ng-model="addForm.productModel" ng-change="getTargetVersionList()">
+                        <option value="">产品型号</option>
+                        <option ng-value="item.productModel" ng-repeat="item in productTypeList">{{item.productModel}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item" ng-show='act=="add"'>
+                <label class="layui-form-label" style="line-height:50px;"><span class="mustIn">* </span>任务类型：</label>
+                <div class="layui-input-inline" style="margin-left:-20px;">
+                    <select name="modules" class="select" lay-verify="required" ng-model="addForm.typeName" ng-change="getTargetVersionList()">
+                        <option value="">任务类型</option>
+                        <option ng-value="'模组升级'">模组升级</option>
+                        <option ng-value="'主板升级'">主板升级</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item" ng-show='act=="add"'>
+                <label class="layui-form-label"><span class="mustIn">* </span>起始版本：</label>
+                <div class="layui-input-inline" style="margin:5px 0px 0px -10px;">
+                    <div class="UT_versionList">
+                        <p ng-show='addForm.upgradableVersion.length>0''>{{addForm.upgradableVersion}}</p>
+                        <p ng-show=' addForm.upgradableVersion.length<1' style='color:#999;'>{{addForm.productModel==''?'请先选择产品型号':'未选择版本'}}</p>
+                    </div>
+                    <a class="UT_upgradeDeviceListBtn" ng-click='handleChoseVersion()'>修改</a>
+                </div>
+            </div>
+            <div class="layui-form-item" ng-show='act=="add"'>
+                <label class="layui-form-label" style="line-height:50px;"><span class="mustIn">* </span>目标版本：</label>
+                <div class="layui-input-inline" style="margin-left:-20px;">
+                    <select name="modules" class="select" lay-verify="required" ng-model="addForm.firmwareVersion" ng-change="getFirmwareVersion()">
+                        <option value="">{{addForm.productModel==''?'请先选择产品型号':'目标版本'}}</option>
+                        <option ng-repeat="item in targetVersionList" ng-value="item.firmwareVersion">{{item.firmwareVersion}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item" ng-show='act=="add"'>
+                <label class="layui-form-label" style="line-height:50px;"><span class="mustIn">* </span>升级方式：</label>
+                <div class="layui-input-inline" style="margin-left:-20px;">
+                    <select name="upgradeWay" class="select" style='width:160px;' lay-verify="required" ng-model="addForm.upgradeWay">
+                        <option value="">强制/非强制</option>
+                        <option value="1">非强制</option>
+                        <option value="2">强制</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item" ng-show='act=="add"'>
+                <label class="layui-form-label"><span class="mustIn">* </span>升级设备：</label>
+                <div class="layui-input-block">
+                    <input class="UT_radio" type="radio" name='upgradeAll' ng-model='addForm.upgradeAll' ng-value="1">
+                    <span class="UT_marginRight">全部选择</span>
+                    <input class="UT_radio" type="radio" name='upgradeAll' ng-model='addForm.upgradeAll' ng-value="2">
+                    <span>选择设备</span>
+                    <button ng-show='addForm.upgradeAll==2' class="layui-btn layui-btn-lg layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='handelSelectDevice()'>选择</button>
+                </div>
+            </div>
+        </div>
+        <!-- 搜索固件版本表单 -->
+        <div ng-show='choseDialog&&(act=="add"||act=="edit")' class="UT_choseDialog">
+            <input type="text" ng-model="searchVersion" lay-verify="title" autocomplete="off" placeholder="搜索（请输入固件版本号）" class="layui-input">
+            <i class="layui-icon layui-icon-search UT_inputIcon" ng-click='handleSearchVersion()'></i>
+            </input>
+            <div class="UT_choseDevice marginTop">
+                <!-- 版本列表 -->
+                <div class="UT_choseVersonLeft">
+                    <div class="UT_choseDeviceItem clearfloat" ng-repeat='item in readyVersionList'>
+                        <span class="left">{{item.firmwareVersion}}</span>
+                        <!-- <input class="right UT_deviceRadio" type="radio" ng-click='handleCheckVersion(item,$index)' ng-model='readyVersionList[$index].check' ng-value="true" ng-checked='readyVersionList[$index].check'> -->
+                        <input class="right UT_deviceRadio" type="radio" ng-click='handleCheckVersion(item,$index)' ng-checked='readyVersionList[$index].check'>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 筛选设备 -->
+        <div ng-show='choseDeviceDialog&&(act=="add"||act=="edit")' class="UT_choseDialog">
+            <input type="text" ng-model="searchDevice" lay-verify="title" autocomplete="off" placeholder="搜索（请输入待选择SN码，以xxxxx,xxxxx的形式批量查询）" class="layui-input">
+            <i class="layui-icon layui-icon-search UT_inputIcon" ng-click='handleSearchDevice()'></i>
+            </input>
+            <div class="UT_choseDevice clearfloat">
+                <div>
+                    <button class="layui-btn" ng-click='handleInputChoseDevice()'>加入</button>
+                    <button class="layui-btn" ng-click='handleChoseDeviceAll()'>{{checkedAll?'取消全选':'全选'}}</button>
+                </div>
+                <!-- 待选择 -->
+                <div class="UT_choseDeviceLeft left">
+                    <div class="UT_choseDeviceItem clearfloat" ng-repeat='item in readyDeviceList'>
+                        <span class="left">{{item.sncode}}</span>
+                        <input class="right UT_deviceRadio" type="radio" ng-click='handleCheckDevice(item,$index)' ng-checked='readyDeviceList[$index].checked'>
+                    </div>
+                </div>
+                <!-- 已导入 -->
+                <div class="UT_choseDeviceRight right">
+                    <div class="UT_choseDeviceItem clearfloat" ng-repeat='item in choseDeviceList'>
+                        <span class="left">{{item.sncode}}</span>
+                        <span class="right deleteTxtBtn" ng-click='handleDelDeviceInReady(item,$index)'>删除</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 弹窗删除表单  -->
+        <div class="FV_deleteDialog" ng-show='act == "delete"'>
+            <div>确认删除该任务?</div>
+        </div>
+        <!-- 弹窗停用表单  -->
+        <div class="FV_deleteDialog" ng-show='act == "forbidden"'>确认{{forbiddenForm.status==1?'停用':'启用'}}该升级任务（{{forbiddenForm.taskName}}）?</div>
+        <!-- 展示设备列表 -->
+        <div ng-show='act == "showDeviceList"' style='width:450px;margin: 0 auto;'>
+            <span ng-show='deviceForm.list.length<1'>{{deviceForm.data}}</span>
+            <div ng-show='deviceForm.list.length>=1' ng-repeat='item in deviceForm.list'>SN：{{item.sncode}},设备名称：{{item.deviceName}}</div>
+        </div>
+        <!-- 操作栏 -->
+        <div class="layui-layer-btn layui-layer-btn-c">
+            <a class="layui-layer-btn1" ng-click="handleCancel()">取消</a>
+            <a ng-show='!choseDeviceDialog&&!choseDialog' class="layui-layer-btn0" ng-click="handleSubmit()">确定</a>
+            <a ng-show='choseDeviceDialog||choseDialog' class="layui-layer-btn0" ng-click="handleNext()">下一步</a>
+        </div>
+    </div>
+    <div class="layui-layer-shade" id="layui-layer-shade1" ng-show='dialog' times="1" style="z-index:19891014; background-color: rgb(0, 0, 0); opacity: 0.5;" style='width:100%;'></div>
+</div>
+<script type="text/javascript">
+    //selec默认颜色
+    var unSelected = "#bababa";
+    var selected = "#505050";
+    $(function() {
+        $("select").css("color", unSelected);
+        $("option").css("color", selected);
+        $("select").change(function() {
+            var selItem = $(this).val();
+            if (selItem == $(this).find('option:first').val()) {
+                $(this).css("color", unSelected);
+            } else {
+                $(this).css("color", selected);
+            }
+        });
+    })
+</script>
+<style media="screen">
+    .marginTop {
+        margin-top: 20px !important;
+    }
+
+    .UT_marginLeft {
+        margin-left: 20px;
+    }
+
+    .UT_marginRight {
+        margin-right: 20px;
+    }
+
+    .UT_upgradeDeviceListBtn {
+        color: #009BDE;
+        cursor: pointer;
+    }
+
+    .UT_tdShort {
+        width: 100px;
+    }
+
+    .UT_tdLong {
+        width: 200px;
+    }
+
+    .UT_radio {
+        margin-top: 13px;
+        margin-right: 2px;
+    }
+
+    .UT_deviceRadio {
+        margin-top: 8px;
+        margin-right: 20px;
+    }
+
+    .UT_choseDialog {
+        position: relative;
+        width: 450px;
+        height: 350px;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+
+    .UT_choseDialog .layui-input {
+        width: 100% !important;
+    }
+
+    .UT_inputIcon {
+        position: absolute;
+        top: 8px;
+        right: 16px;
+        cursor: pointer;
+    }
+
+    .FV_deleteDialog {
+        width: 450px;
+        height: 50px;
+        font-size: 16px;
+        line-height: 50px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .UT_choseDevice {
+        width: 450px;
+        font-size: 16px;
+        line-height: 50px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .clearfloat {
+        zoom: 1;
+    }
+
+    .clearfloat:after {
+        display: block;
+        clear: both;
+        content: "";
+        visibility: hidden;
+        height: 0;
+    }
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+
+    .UT_choseDeviceLeft {
+        width: 48%;
+        height: 300px;
+        overflow: scroll;
+        border: 2px solid black;
+    }
+
+    .UT_choseVersonLeft {
+        width: 95%;
+        min-height: 60%;
+        border: 2px solid black;
+    }
+
+    .UT_choseDeviceRight {
+        width: 50%;
+        height: 300px;
+        overflow: scroll;
+        border: 2px solid black;
+    }
+
+    .UT_choseDeviceItem {
+        padding: 5px;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        font-size: 16px;
+    }
+
+    .UT_versionList {
+        padding: 2px;
+        width: 200px;
+        border: 2px solid #999;
+        height: 100px;
+        border-radius: 5px;
+    }
+
+    .deleteTxtBtn {
+        color: blue;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .upgradeTask .layui-form-item {
+        margin-bottom: 0px;
+    }
+</style>

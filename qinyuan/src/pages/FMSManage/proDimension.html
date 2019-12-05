@@ -1,0 +1,160 @@
+<div id="proDimension">
+	<p class="breadcrumb">当前位置: 产品维度</p>
+	<div class="layui-tab" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px;">
+		<select name="modules" class="select" lay-verify="required" ng-model="form.forceUpgrade">
+			<option value="">产品类型</option>
+			<option ng-value="x.productType" ng-repeat="x in productTypeList">{{x.productType}}</option>
+		</select>
+		<div class="layui-input-inline">
+			<input type="text" ng-model="form.productModel" placeholder="产品型号" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px;width:150px;height: 30px;">
+		</div>
+		<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='init(1,10,form,true)'>查询</button>
+		<div class="layui-tab-content">
+			<!--app更新记录-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>产品类型</th>
+							<th>产品型号</th>
+							<th>个体修正系数</th>
+							<th class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='item in products'>
+							<td>{{$index+1}}</td>
+							<td>{{item.productType | nullDeal}}</td>
+							<td>{{item.productModel | nullDeal}}</td>
+							<td>
+								<span style="color: #009BDE;text-decoration: underline;cursor: pointer;" ng-click="dialog('showUser',item.fmsData)">查看</span>
+							</td>
+							<td>
+								<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('edit',item)">修改</button>
+								<button class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog('delete',item.id)">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show="products.length==0" class="noData">暂无数据</p>
+				<div ng-show="products.length>0" id="products" class="paging"></div>
+			</div>
+		</div>
+		<div style="margin:10px 10px;">
+			<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('add',1)">新增</button>
+		</div>
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-show="fun!=null" ng-style="dialogStyle">
+		<div class="layui-layer-title cursor" ng-show='fun=="add" || fun=="delete" ||  fun=="edit" '>{{fun=="add"?'新增':fun=="edit"?'编辑':'删除'}}</div>
+		<div class="layui-layer-title cursor" ng-show='fun=="showUser"'>查看系数</div>
+		<!-- 固件控制-->
+		<div ng-show='fun=="showUser"' id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>滤芯</th>
+							<th>滤芯系数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='item in fmsData track by $index'>
+							<td>{{$index+1}}</td>
+							<td>滤芯{{$index+1}}</td>
+							<td>{{item.filterFactor | nullDeal}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- 删除-->
+		<div ng-show='fun=="delete"' id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;">
+				<div style="text-align: center;">您确定要删除该条数据吗？</div>
+			</div>
+		</div>
+		<!-- 更换详情-->
+		<div ng-show='fun=="add" || fun=="edit"' id="LAY_layuipro" class="layui-layer-content" style="max-height:400px;">
+			<div style="padding:20px 20px;">
+				<div ng-show='fun=="add"' class="layui-form-item">
+					<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>产品类型：</label>
+					<div class="layui-input-inline" style="margin:-5px 0px 0px -10px">
+						<select name="modules" class="select" lay-verify="required" ng-model="newForm.productType ">
+							<option value="">产品类型</option>
+							<option ng-value="x.productType" ng-repeat="x in productTypeList">{{x.productType}}</option>
+						</select>
+					</div>
+				</div>
+				<div ng-show='fun=="edit"' class="layui-form-item" style="margin-top:20px;">
+					<label class="layui-form-label"><span class="mustIn">* </span>产品类型：</label>
+					<div class="layui-input-inline" style="line-height:40px;">
+						{{newForm.productType}}
+					</div>
+				</div>
+				<form ng-show='fun=="add"' class="layui-form" action="">
+					<div class="layui-form-item" style="margin-top:20px;">
+						<div class="layui-inline">
+							<label class="layui-form-label">产型型号：</label>
+							<div class="layui-input-inline" id="productModel">
+								<select name="modules" lay-verify="required" lay-search="" class="select productModel" style="margin-top:-30px;display:none;" ng-model="newForm.productModel">
+									<option value="">直接选择或搜索选择</option>
+									<option ng-value="x.productModel" ng-repeat="x in productNameList">{{x.productModel}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div ng-show='fun=="edit"' class="layui-form-item" style="margin-top:20px;">
+					<label class="layui-form-label"><span class="mustIn">* </span>产型型号：</label>
+					<div class="layui-input-inline" style="line-height:40px;">
+						{{newForm.productModel}}
+					</div>
+				</div>
+				<div class="layui-form-item" style="margin-top:20px;">
+					<label class="layui-form-label" style="width:120px;">个体修正系数：</label>
+					<div class="layui-input-inline" style="width:250px;line-height:35px;color:#FD482C;">（提示：范围0~25.0，精度为0.1）</div>
+				</div>
+				<p ng-show='upDown && fun=="add"' class="upDown" ng-click="filtetInit()"><span><i class="layui-icon layui-icon-next"></i></span></p>
+				<div ng-hide="upDown" class="layui-form-item" ng-repeat="item in filters track by $index">
+					<label class="layui-form-label"><span class="mustIn">* </span>滤芯{{$index+1}}：</label>
+					<div class="layui-input-inline">
+						<input type="number" ng-model="item.filterFactor" lay-verify="title" autocomplete="off" placeholder="滤芯系数" class="layui-input" style="height:31px;margin-top:5px;">
+					</div>
+				</div>
+				<p ng-show="!upDown && filters.length==0" class="noData">暂无数据</p>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c" ng-show="fun!='showUser'">
+			<a class="layui-layer-btn0" ng-click="save()">确定</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+</div>
+<link rel="stylesheet" type="text/css" href="../../js/dependency/css/layui.css" />
+<script type="text/javascript" src="../../js/dependency/layui.js"></script>
+<script type="text/javascript">
+	layui.use(['form', 'layedit', 'laydate'], function() {
+		var form = layui.form;
+	})
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(".layui-form input").css("height", "31px");
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

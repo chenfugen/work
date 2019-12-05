@@ -1,0 +1,135 @@
+<div id="faultSetUp">
+	<p class="breadcrumb">当前位置: 故障设置</p>
+	<div class="layui-tab" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px;">
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show clearfix">
+				<div class="layui-input-inline" style="margin-top:-5px;">
+					<input ng-model='filter.errorName' type="text" name="title" id="title" placeholder="故障名称" autocomplete="off" class="layui-input">
+				</div>
+				<div class="layui-input-inline" style="margin:-5px 0px 0px 10px;">
+					<input ng-model='filter.errorId' type="text" name="title" id="title" placeholder="故障ID" autocomplete="off" class="layui-input">
+				</div>
+				<select ng-model='filter.rank' class="select" name="modules" lay-verify="required">
+					<option value="">故障等级</option>
+					<option ng-repeat='(index, item) in rankList' value="{{9-index}}">{{item}}</option>
+				</select>
+				<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='handleSearch()'>查询</button>
+				<button class="layui-btn layui-btn-sm layui-btn-normal right" style="margin:-5px 0px 0px 20px;" ng-click="dialog('add')">新增</button>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>故障名称</th>
+							<th>故障等级</th>
+							<th>故障ID</th>
+							<th>CSM 推送状态</th>
+							<th ng-show="isUpdatePretreatment || isUpdate || isDelete" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='item in listData'>
+							<!-- 序号 -->
+							<td>{{$index+1}}</td>
+							<!--故障名称-->
+							<td>{{item.errorName==null?'--':item.errorName}}</td>
+							<!-- 故障等级 -->
+							<td>{{item.rank==null?'--':item.rank}}</td>
+							<!-- 故障ID -->
+							<td>{{item.errorId==null?'--':item.errorId}}</td>
+							<td>
+								<span ng-show='item.enable=="1"' class="colorStart">启用</span>
+								<span ng-show='item.enable=="0"' class="colorStop">停用</span>
+							</td>
+							<td ng-show="isUpdatePretreatment || isUpdate || isDelete" class="noExl">
+								<button ng-show="isUpdatePretreatment" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="scheme(item.errorId)">预处理方案</button>
+								<button ng-show="isUpdate" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('edit',item.errorId,item.errorName,item.id)">编辑</button>
+								<button ng-show="item.enable==1" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog('staus',0,item.errorName,item.id)">禁用</button>
+								<button ng-show="item.enable==0" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('staus',1,item.errorName,item.id)">启用</button>
+								<button ng-show="isDelete" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog('delete',item.errorId,item.errorName,item.id)">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				<div id="faultSetUpPage" class="paging"></div>
+			</div>
+		</div>
+		<p>&nbsp;</p>
+	</div>
+	<!-- 蒙层 -->
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<!-- 弹窗 -->
+	<div class="layui-layer layui-layer-page popoutOne" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-show="dialogTitle!=null" ng-style="dialogStyle">
+		<!-- 表单Title -->
+		<div class="layui-layer-title cursor">{{dialogTitle=='edit'?'编辑':dialogTitle=='add'?'新增':'删除'}}</div>
+		<!-- 编辑新增 -->
+		<form ng-show='dialogTitle=="edit"||dialogTitle=="add"' id="LAY_layuipro" class="layui-layer-content layui-form">
+			<div style="padding:20px 20px;font-size:15px;" class="popout">
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>故障名称：</label>
+					<div class="layui-input-block">
+						<input ng-model='form.errorName' type="text" name="errorName" lay-verify="errorName" autocomplete="off" class="layui-input">
+						<span ng-style='dialog_tips'> 请输入中文</span>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label"><span class="mustIn">* </span>故障等级：</label>
+					<div class="layui-input-block">
+						<select ng-model='form.rank' class="select" style="margin-left:10px;" name="modules" lay-verify="required">
+							<option value="">故障等级</option>
+							<option ng-repeat='item in rankList' value="{{item}}">{{item}}</option>
+						</select>
+						<span ng-style='dialog_tips'>&nbsp;&nbsp;数字越小,等级越高</span>
+					</div>
+				</div>
+				<div class="layui-form-item" style="margin-top:20px;">
+					<label class="layui-form-label"><span class="mustIn">* </span>故障ID：</label>
+					<div class="layui-input-block">
+						<input ng-model='form.errorId' type="text" name="errorId" lay-verify="errorId" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- 删除列表 -->
+		<div ng-show='dialogTitle=="delete"' style="text-align:center;margin-top:20px;">确认删除该条数据（故障：{{deleteName}}）？</div>
+		<div ng-show='dialogTitle=="staus"' style="text-align:center;margin-top:20px;">确认{{enable==0?"禁用":"启用"}}该故障设置！</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="save()">{{dialogTitle=="add" || dialogTitle=="edit"?'保存':dialogTitle=="delete"?'确定 ':'确定'}}</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+</div>
+<script type="text/javascript">
+	layui.use(['form', 'laydate', 'laypage'], function() {
+		var form = layui.form,
+			layer = layui.layer,
+			layedit = layui.layedit,
+			laydate = layui.laydate;
+		//日期
+		laydate.render({
+			elem: '#date'
+		});
+		laydate.render({
+			elem: '#date1'
+		});
+		laydate.render({
+			elem: '#date2'
+		});
+	});
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

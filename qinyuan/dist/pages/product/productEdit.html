@@ -1,0 +1,412 @@
+<div id="productEdit">
+	<p class="breadcrumb">当前位置: 产品列表 / 产品编辑</p>
+	<h3 class="head">产品代码: {{productMsg.productKey}}</h3>
+	<div style="padding: 20px; background-color: #F2F2F2;">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">基础信息
+						<a href='javascript:void(0);' class="blueButton save" ng-click="editProduct()">编辑</a>
+					</div>
+					<div class="layui-card-body">
+						<ul class="basicInfro">
+							<li>产品名称：{{product.productName}}</li>
+							<li>产品PK（其他平台）：{{product.productKey}}</li>
+							<li>产品PK：{{product.ownProductKey}}</li>
+							<li>产品类型：{{product.productType}}</li>
+							<li>通信类型：{{product.netType}}</li>
+							<li>产品型号：{{product.productModel |nullDeal}}</li>
+							<li>ERP编码：{{product.erpNum | nullDeal}}</li>
+							<li>滤芯级数：{{product.filterLevel}}</li>
+							<li>默认租售类型：{{product.leaseType}}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 基本属性 -->
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12" ng-if="properties.length>0">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">基本属性
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp('basicAttr')">{{basicAttr?'收起':'展开'}}</a>
+					</div>
+					<div class="layui-card-body" ng-show="basicAttr">
+						<table class="layui-table">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>属性名称</th>
+									<th>标识符</th>
+									<th>数据类型</th>
+									<th>数据内容</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="property in properties">
+									<th>{{$index+1}}</th>
+									<td>{{property.name}}</td>
+									<td>{{property.identifier}}</td>
+									<td>{{property.dataType.type}}</td>
+									<td>{{property.dataType.specs}}</td>
+								</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 自定义属性 -->
+		<div ng-show="properties.length>0 && basicAttr" id="productAll" style="text-align:center;margin-top:-10px;background:white;"></div>
+		<div class="layui-row layui-col-space15" style="margin-top:10px;">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">自定义属性
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp('selfAttr')">{{selfAttr?'收起':'展开'}}</a>
+						<!--			<a href='javascript:void(0);' class="blueButton save" ng-click="addProduct(2)">保存</a>-->
+					</div>
+					<div class="layui-card-body" ng-show="selfAttr">
+						<table class="layui-table">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>属性名称</th>
+									<th>标识符</th>
+									<th>数据类型</th>
+									<th>数据内容</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="property in arrList track by $index">
+									<td>{{$index+1}}</td>
+									<td>{{property.attr.name}}</td>
+									<td>{{property.attr.identifier}}</td>
+									<td>{{property.attr.dataType.type}}</td>
+									<td>{{property.attr.dataType.specs}}</td>
+									<td><button class="layui-btn layui-btn-sm layui-btn-danger" ng-click="delete(property.attr.identifier)">删除</button></td>
+								</tr>
+							</tbody>
+						</table>
+						<p ng-show='arrList.length==undefined' class="noData">暂无数据</p>
+						<div ng-if="arrList.length>0" id="arrList" style="text-align:center;margin-top:10px;background:white;"></div>
+						<div style="text-align:right;">
+							<button class="layui-btn layui-btn-lg layui-btn-normal" ng-click="addAttr()">新增</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 文档设置 -->
+		<div class="layui-row layui-col-space15" style="margin-top:10px;">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">文档配置
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp('allocation')">{{allocation?'收起':'展开'}}</a>
+					</div>
+					<div class="layui-card-body" ng-show='allocation'>
+						<div ng-show='product.netType == "NET_WIFI"'>
+							<p style="padding:5px 0px;">
+								<span style="line-height:30px;">配网说明：<input type="file" style="display :none;" id="upload_file" /></span>
+								<span>{{netFile?netFile.fileName:'未配置'}}</span>
+								<a href='javascript:void(0);' class="blueButton" onclick="netFile.click()" ;>上传</a><input type="file" style="display :none;" id="netFile" />
+							</p>
+							<p style="padding:5px 0px;">
+								<span style="line-height:30px;">使用说明：</span>
+								<span>{{wifiUseFile?wifiUseFile.fileName:'未配置'}}</span>
+								<a href='javascript:void(0);' class="blueButton" onclick="wifiUseFile.click()">上传</a><input type="file" style="display :none;" id="wifiUseFile" />
+							</p>
+						</div>
+						<div ng-show='product.netType == "NET_GPRS"'>
+							<p style="padding:5px 0px;">
+								<span style="line-height:30px;">输入图片：<input type="file" style="display :none;" id="upload_file" /></span>
+								<span>{{inputFile?inputFile.fileName:'未配置'}}</span>
+								<a href='javascript:void(0);' class="blueButton" onclick="inputFile.click()" ;>上传</a><input type="file" style="display :none;" id="inputFile" />
+							</p>
+							<p style="padding:5px 0px;">
+								<span style="line-height:30px;">扫码图片：</span>
+								<span>{{scanFile?scanFile.fileName:'未配置'}}</span>
+								<a href='javascript:void(0);' class="blueButton" onclick="scanFile.click()">上传</a><input type="file" style="display :none;" id="scanFile" />
+							</p>
+							<p style="padding:5px 0px;">
+								<span style="line-height:30px;">使用说明：</span>
+								<span>{{gprsUserFile!=null?gprsUserFile.fileName:'未配置'}}</span>
+								<a href='javascript:void(0);' class="blueButton" onclick="gprsUserFile.click()">上传</a><input type="file" style="display :none;" id="gprsUserFile" />
+							</p>
+							<p style="padding:5px 0px;">
+								<span style="line-height:30px;">绑定说明：</span>
+								<span>{{bindFile!=null?bindFile.fileName:'未配置'}}</span>
+								<a href='javascript:void(0);' class="blueButton" onclick="bindFile.click()">上传</a><input type="file" style="display :none;" id="bindFile" />
+							</p>
+						</div>
+						<div style="text-align: right;">
+							<button class="layui-btn layui-btn-lg layui-btn-normal" ng-click="fileSave()">保存</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 流量修正 -->
+		<div class="layui-row layui-col-space15" style="margin-top:10px;">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">流量修正
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp('flowCorrection')">{{flowCorrection?'收起':'展开'}}</a>
+					</div>
+					<div class="layui-card-body" ng-show='flowCorrection'>
+						<p style="padding:5px 0px;">
+							<span style="line-height:30px;">是否启用：<input type="file" style="display :none;" id="upload_file" /></span>
+							<input type="checkbox" ng-model="flowCorrectionForm.status" style="display:inline-block;" />
+							<span style="line-height:30px;">启用</span>
+						</p>
+						<p style="padding:5px 0px;">
+							<span style="line-height:30px;">标准流量：</span>
+							<input type="number" ng-model="flowCorrectionForm.standardFlow" style="display:inline-block;width:80px;" class="layui-input" />
+							<span style="line-height:30px;">L/min</span>
+						</p>
+						<p style="padding:5px 0px;">
+							<span style="line-height:30px;">流量上限：</span>
+							<input type="number" ng-model="flowCorrectionForm.maxFlow" style="display:inline-block;width:80px;" class="layui-input" />
+							<span style="line-height:30px;">L/min</span>
+						</p>
+						<p style="padding:5px 0px;">
+							<span style="line-height:30px;">流量下限：</span>
+							<input type="number" ng-model="flowCorrectionForm.minFlow" style="display:inline-block;width:80px;" class="layui-input" />
+							<span style="line-height:30px;">L/min</span>
+						</p>
+						<div style="text-align: right;">
+							<button class="layui-btn layui-btn-lg layui-btn-normal" ng-click="submitFlow()">保存</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 其他设置 -->
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header" style="font-weight:bold;">设置
+						<a href='javascript:void(0);' class="blueButton save" ng-click="packUp('waterTab')">{{waterTab?'收起':'展开'}}</a>
+					</div>
+					<div class="layui-card-body" ng-show="waterTab">
+						<div class="layui-card-header">水质</div>
+						<div class="layui-card-body waterBox">
+							<ul>
+								<li ng-repeat="item in waters">
+									<label style="text-align:right;display:inline-block;width:110px;"><span class="mustIn">*</span>{{item.name}}：</label>
+									<input type="text" id="goodMin" ng-model="item.min" style="display:inline-block;" class="layui-input" placeholder="最小值" readonly="readonly" />
+									<span> - </span>
+									<input type="text" id="goodMax" ng-model="item.max" style="display:inline-block;" class="layui-input" placeholder="最大值" ng-blur="fillIn($index)" />
+									<label class="unit"> ppm </label>
+									<label class="err{{$index}}" style="color:#FF3D00;font-size:12px;"></label>
+								</li>
+							</ul>
+						</div>
+						<div ng-show="product.netType!='NET_WIFI'">
+							<hr>
+							<div class="layui-card-header">调试设置</div>
+							<div class="layui-card-body" style="height:60px">
+								<ul class="filterRelate">
+									<li>
+										<label class="layui-form-label"><span class="mustIn">* </span>调试时间：</label>
+										<div class="layui-input-block">
+											<select name="interest" class="select" lay-filter="aihao" ng-model="deviceLeaseDebug.deviceLeaseMinutes" style="width:160px;margin:3px 0px 0px 20px;">
+												<option value="">请选择</option>
+												<option value="{{item*60}}" ng-repeat="item in 72 | num">{{item}}h</option>
+											</select>
+										</div>
+									</li>
+									<li>
+										<label class="layui-form-label"><span class="mustIn">* </span>调试次数：</label>
+										<div class="layui-input-block">
+											<input type="number" name="title" ng-model="deviceLeaseDebug.deviceLeaseNum" required lay-verify="required" placeholder="请输入调试次数" autocomplete="off" class="layui-input">
+										</div>
+									</li>
+								</ul>
+							</div>
+							<hr>
+							<div class="layui-card-header">滤芯相关</div>
+							<div class="layui-card-body">
+								<ul class="filterRelate">
+									<li>
+										<label class="layui-form-label"><span class="mustIn">* </span>TDS(ppm)</label>
+										<div class="layui-input-block">
+											<input type="number" name="title" step='1' ng-model="filterRelate.tds" required lay-verify="required" placeholder="请输入TDS值" autocomplete="off" class="layui-input">
+										</div>
+									</li>
+									<li>
+										<label class="layui-form-label"><span class="mustIn">* </span>浊度(NTU)</label>
+										<div class="layui-input-block">
+											<input type="number" name="title" step='0.01' ng-model="filterRelate.ntu" required lay-verify="required" placeholder="请输入浊度值" autocomplete="off" class="layui-input">
+										</div>
+									</li>
+									<li>
+										<label class="layui-form-label"><span class="mustIn">* </span>余氯(mg/L)</label>
+										<div class="layui-input-block">
+											<input type="number" name="title" step='0.01' ng-model="filterRelate.hclo" required lay-verify="required" placeholder="请输入余氯值" autocomplete="off" class="layui-input">
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<hr ng-if="filters.length>0">
+						<div class="layui-card-header" ng-if="filters.length>0">滤芯信息</div>
+						<div class="layui-card-body">
+							<div class="layui-field-box" ng-repeat="filter in filters">
+								<h3>滤芯{{$index+1}}</h3>
+								<div class="layui-form-item">
+									<label class="layui-form-label"><span class="mustIn">* </span>滤芯名称</label>
+									<div class="layui-input-block">
+										<input type="text" name="title" ng-model="filter.name" required lay-verify="required" placeholder="请输入滤芯名称" autocomplete="off" class="layui-input">
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<label class="layui-form-label">滤芯购买链接</label>
+									<div class="layui-input-block">
+										<input type="text" name="title" ng-model="filter.url" ng-blur="DeterFilter(filter.url)" required lay-verify="required" placeholder="请输入滤芯小程序商城购买地址" autocomplete="off" class="layui-input" style="width:300px;">
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<label class="layui-form-label"><span class="mustIn">* </span>滤芯描述</label>
+									<div class="layui-input-block">
+										<textarea name="desc" placeholder="请输入内容" ng-model="filter.desc" class="layui-textarea"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div style="text-align: right;">
+							<button class="layui-btn layui-btn-lg layui-btn-normal" ng-click="addProduct(2)">保存</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 蒙层 -->
+		<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+		<!-- 上传弹窗 -->
+		<div class="layui-layer layui-layer-page  addImage" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015;width:400px;height:auto; top:10%; left:50%;margin-left:-200px;display:none;">
+			<div class="layui-layer-title cursor">上传</div>
+			<div id="LAY_layuipro" class="layui-layer-content">
+				<div style="padding:20px 20px;text-align:center;">
+					<img src="" class="imgUrl" style="max-width:260px;max-height:260px;">
+					<p class="imgMsg">图片名称：<span class="imgName"></span></p>
+					<p class="imgMsg">图片大小：<span class="imgSize"></span></p>
+				</div>
+			</div>
+			<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+			<div class="layui-layer-btn layui-layer-btn-c">
+				<a class="layui-layer-btn0" ng-click="save()">确定</a>
+				<a class="layui-layer-btn1" ng-click="close()">取消</a>
+			</div><span class="layui-layer-resize"></span>
+		</div>
+		<!-- 自定义属性弹窗 -->
+		<div class="layui-layer layui-layer-page  addAttr" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015;width:1000px;max-height:700px; top:10%; left:50%;margin-left:-450px;display:none;">
+			<div class="layui-layer-title cursor">新增</div>
+			<div id="LAY_layuipro" class="layui-layer-content">
+				<div style="padding:20px 20px;text-align:center;max-height:450px;">
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>是否配置属性</th>
+								<th>属性名称</th>
+								<th>标识符</th>
+								<th>数据类型</th>
+								<th>数据内容</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="property in propertyNum">
+								<td>
+									<input type="checkbox" lay-skin="primary" ng-model="property.isUse" ng-checked="property.isUse" ng-change="changes(!property.isUse)" />
+								</td>
+								<td>{{property.attr.name}}</td>
+								<td>{{property.attr.identifier}}</td>
+								<td>{{property.attr.dataType.type}}</td>
+								<td>{{property.attr.dataType.specs}}</td>
+							</tr>
+						</tbody>
+					</table>
+					<p ng-show='propertyNum.length==0' class="noData">暂无数据</p>
+					<div ng-if="propertyNum.length>0" id="propertyAll" style="text-align:center;margin-top:10px;background:white;"></div>
+				</div>
+			</div>
+			<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+			<div class="layui-layer-btn layui-layer-btn-c">
+				<a class="layui-layer-btn0" ng-click="save()">确定</a>
+				<a class="layui-layer-btn1" ng-click="close()">取消</a>
+			</div><span class="layui-layer-resize"></span>
+		</div>
+		<!-- 删除弹窗 -->
+		<div class="layui-layer layui-layer-page  deleteAttr" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015;width:400px;max-height:auto; top:50%;left:50%;margin-left:-200px;margin-top:-80px;display:none;">
+			<div class="layui-layer-title cursor">删除</div>
+			<div id="LAY_layuipro" class="layui-layer-content">
+				<div style="padding:20px 20px;text-align:center;">
+					确定要删除该自定义属性吗？
+				</div>
+			</div>
+			<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+			<div class="layui-layer-btn layui-layer-btn-c">
+				<a class="layui-layer-btn0" ng-click="save()">确定</a>
+				<a class="layui-layer-btn1" ng-click="close()">取消</a>
+			</div><span class="layui-layer-resize"></span>
+		</div>
+		<!-- 编辑弹窗 -->
+		<div class="layui-layer layui-layer-page editProduct" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width:400px; height:400px; top:50%; left:50%;margin-left:-200px;margin-top:-250px;display: none;">
+			<div class="layui-layer-title cursor">编辑</div>
+			<div id="LAY_layuipro" class="layui-layer-content" style="height:270px;">
+				<div style="padding:20px 20px;">
+					<div class="layui-form-item" style="margin-top:30px;">
+						<label class="layui-form-label"><span class="mustIn">* </span>产品型号：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="productModel" lay-verify="title" autocomplete="off" placeholder="请输入产品型号" class="layui-input" style="height:31px;margin-top:5px;">
+						</div>
+					</div>
+					<div class="layui-form-item" style="margin-top:30px;">
+						<label class="layui-form-label"><span class="mustIn">* </span>ERP编码：</label>
+						<div class="layui-input-inline">
+							<input type="text" ng-model="erpNum" lay-verify="title" autocomplete="off" placeholder="请输入产品代码" class="layui-input" style="height:31px;margin-top:5px;">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label" style="line-height:44px;"><span class="mustIn">* </span>租售类型：</label>
+						<div class="layui-input-inline" style="margin-left:-20px;">
+							<select name="interest" class="select" lay-filter="aihao" ng-model="leaseType" style="width:160px;margin:15px 0px 0px 20px;">
+								<option value="">租售类型</option>
+								<option value="1">售卖</option>
+								<option value="2">租赁</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+			<div class="layui-layer-btn layui-layer-btn-c">
+				<a class="layui-layer-btn0" ng-click="save()">保存</a>
+				<a class="layui-layer-btn1" ng-click="close()">取消</a>
+			</div>
+			<span class="layui-layer-resize"></span>
+		</div>
+	</div>
+	<script src="../../js/dependency/layui.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		layui.use('form', function() {
+			var form = layui.form,
+				layer = layui.layer,
+				layedit = layui.layedit,
+				laydate = layui.laydate;
+		});
+		//	//selec默认颜色
+		//	var unSelected = "#bababa";
+		//	var selected = "#505050";
+		//	$(function() {
+		//		$("select").css("color", unSelected);
+		//		$("option").css("color", selected);
+		//		$("select").change(function() {
+		//			var selItem = $(this).val();
+		//			if(selItem == $(this).find('option:first').val()) {
+		//				$(this).css("color", unSelected);
+		//			} else {
+		//				$(this).css("color", selected);
+		//			}
+		//		});
+		//	})
+	</script>

@@ -1,0 +1,179 @@
+<div id="personalCenter">
+	<p class="breadcrumb">当前位置: 个人中心</p>
+	<div class="layui-tab roleList" lay-filter="test">
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>用户名</th>
+							<th>姓名</th>
+							<th>角色类型</th>
+							<th>性别</th>
+							<th>联系方式</th>
+							<th>添加人</th>
+							<th>添加时间</th>
+							<th>邮件</th>
+							<th>权限</th>
+							<th class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<!-- 用户名 -->
+							<td>{{item.userName}}</td>
+							<!-- 姓名 -->
+							<td>{{item.realName}}</td>
+							<!-- 角色类型 -->
+							<td>{{item.roleName}}</td>
+							<!-- 性别 -->
+							<td>{{item.sex | sex |nullDeal}}</td>
+							<!-- 联系方式 -->
+							<td>{{item.phone | phone}}</td>
+							<!-- 添加人 -->
+							<td>{{item.creator |nullDeal}}</td>
+							<!-- 添加时间 -->
+							<td>{{item.createTime}}</td>
+							<!-- 邮件 -->
+							<td>{{item.mail | nullDeal}}</td>
+							<!-- 权限 -->
+							<td>
+								<a href="javascript:;" ng-click="lookOver(item.roleName,item.roleId)">查看</a>
+							</td>
+							<td>
+								<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('reset',item.id)">重置密码</button>
+								<button class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog('edit',item)">编辑</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p>&nbsp;</p>
+			<div class="back"></div>
+		</div>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page popoutOne" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width: 500px; top:30%; left:50%;margin-left:-150px;display: none;">
+		<div class="layui-layer-title cursor">{{fun=='delete'?'删除':fun=='add'?'添加':fun=='reset'?'重置密码':fun=='stop'?'禁用':fun=='start'?'启用':'编辑'}}</div>
+		<!-- 重置密码 -->
+		<div ng-show='fun=="reset"' id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;font-size:15px;" class="popout">
+				<div class="layui-form-item">
+					<label class="layui-form-label">新密码：</label>
+					<div class="layui-input-block">
+						<input ng-model='resetForm.password' type="password" name="title" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">确认密码：</label>
+					<div class="layui-input-block">
+						<input ng-model='resetForm.rePassword' type="password" name="title" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 编辑/添加表单 -->
+		<div ng-show='fun=="edit"||fun=="add"' id="LAY_layuipro" class="layui-layer-content">
+			<div style="padding:20px 20px;font-size:15px;" class="popout">
+				<div class="layui-form-item">
+					<label class="layui-form-label">用户名：</label>
+					<div class="layui-input-block">
+						<input type="text" ng-model="userName" name="title" lay-verify="title" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">姓名：</label>
+					<div class="layui-input-block">
+						<input type="text" ng-model="realName" name="title" lay-verify="title" autocomplete="off" placeholder="请输入姓名" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item" ng-hide='fun=="edit"'>
+					<label class="layui-form-label">密码：</label>
+					<div class="layui-input-block">
+						<input type="password" ng-model="password" name="title" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">联系方式：</label>
+					<div class="layui-input-block">
+						<input type="text" ng-model="phone" name="title" lay-verify="title" autocomplete="off" placeholder="请输入联系方式" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">角色类型：</label>
+					<select name="modules" class="select" style="margin: 0;" ng-model="roleId" lay-verify="required">
+						<option value="">角色类型</option>
+						<option ng-repeat="role in roleList" ng-value="role.id">{{role.roleName}}</option>
+					</select>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">性别：</label>
+					<select name="modules" ng-model="sex" class="select" style="margin: 0;" lay-verify="required">
+						<option value="">请选择性别</option>
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="beforeSubmit()">确定</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+	<div class="layui-layer layui-layer-page popoutTwo" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width: 500px; top:30%; left:50%;margin-left:-150px;display: none;">
+		<div class="layui-layer-title cursor">提示</div>
+		<!-- 删除 -->
+		<div id="LAY_layuipro" class="layui-layer-content">
+			<div style="text-align:center;margin: 20px 0px 0px 20px;">修改密码成功,请重新登录！</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="save()">确定</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+	<div class="limit">
+		<p class="limitHeader">查看</p>
+		<input type="text" name="text" readonly="readonly" ng-model="roleName" autocomplete="off" placeholder="请输入新角色名字" class="layui-input" style="width:100%;border:none;border-bottom:1px solid #eee;">
+		<ul id="treeDemo" class="ztree"></ul>
+		<p ng-show="trees.length==0" class="noData">暂无数据</p>
+		<div class="buttonBox" style="display: inline-block;margin:10px 0px;">
+			<button class="layui-btn layui-btn-sm layui-btn-danger" ng-click="lookOver()">关闭</button>
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" href="css/zTreeStyle.css" type="text/css">
+<script type="text/javascript">
+	layui.use(['form', 'layedit', 'laydate'], function() {
+		var form = layui.form,
+			layer = layui.layer,
+			layedit = layui.layedit,
+			laydate = layui.laydate;
+
+		//日期
+		laydate.render({
+			elem: '#date'
+		});
+		laydate.render({
+			elem: '#date1'
+		});
+
+	});
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

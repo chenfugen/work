@@ -1,0 +1,141 @@
+<div id="messageList">
+	<p class="breadcrumb">当前位置: 消息推送历史</p>
+	<div class="layui-tab" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px;">
+		<select ng-model='filter.msgType' class="select" name="modules" lay-verify="required">
+			<option value="">消息类型</option>
+			<option ng-repeat='item in msgTypeList' value="{{item.id}}">{{item.typeName}}</option>
+		</select>
+		<select ng-model='filter.pushType' class="select" name="modules" lay-verify="required">
+			<option value="">推送方式</option>
+			<option value="1">消息推送</option>
+			<option value="2">应用推送</option>
+			<option value="3">app推送</option>
+		</select>
+		<div class="layui-input-inline">
+			<input ng-model='filter.startTime' style="width: 300px;margin:0px 0px 4px 10px;" type="text" name="date" id="date" lay-verify="date" placeholder="请选择开始/结束时间" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px;">
+		</div>
+		<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='getListData({
+			pageNum:1,
+			pageSize:10,
+		},true)'>查询</button>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>消息类型</th>
+							<th>消息内容</th>
+							<th>推送时间</th>
+							<th>推送方式</th>
+							<th ng-show="isDelete || isDetail" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='(index, item) in listData'>
+							<!-- 序号 -->
+							<td>{{index+1}}</td>
+							<!-- 消息类型 -->
+							<td>{{item.msgTypeName | nullDeal}}</td>
+							<!-- 消息内容 -->
+							<td style="max-width:400px;word-wrap:break-word;">{{item.msgContent | nullDeal}}</td>
+							<!-- 推送时间 -->
+							<td>{{item.pushTime | nullDeal}}</td>
+							<!-- 推送方式 -->
+							<td>{{item.pushTypeName | nullDeal}}</td>
+							<td ng-show="isDelete || isDetail" class="noExl">
+								<button ng-show="isDetail" class="layui-btn layui-btn-sm layui-btn-normal" ng-click="dialog(item.id, 'info')">详情</button>
+								<button ng-show="isDelete" class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog(item.id, 'delete')">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				<div id="messageListPage" class="paging"></div>
+			</div>
+		</div>
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-show="fun!=null" ng-style="dialogStyle">
+		<div class="layui-layer-title cursor">{{fun=='delete'?'删除':'详情'}}</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="min-height:520px;">
+			<div style="padding:10px 20px;font-size:15px;" class="popout" ng-show="fun=='info'">
+				<ul class="basicInfro">
+					<li>消息类型：{{msgInfo.msgTypeName | nullDeal}}</li>
+					<li>推送时间：{{msgInfo.createTime | nullDeal}}</li>
+					<li>推送方式：{{msgInfo.pushTypeName | nullDeal}}</li>
+					<li>送达率：{{(msgInfo.totalReceived/msgInfo.totalTarget).toFixed(2)*100}}%</li>
+				</ul>
+				<p>消息内容：</p>
+				<textarea type="textarea" class="layui-textarea" style="min-height:60px;" ng-model="msgInfo.msgContent" readonly="readonly"></textarea>
+				<div class="layui-tab-item layui-show">
+					<!-- 用户列表筛选 -->
+					<select ng-model='userFilter.pushStatus' style="margin-left:0px" class="select" name="modules" lay-verify="required">
+						<option value="">推送状态</option>
+						<option value="1">已发送</option>
+						<option value="0">未发送</option>
+					</select>
+					<div class="layui-input-inline">
+						<input ng-model='userFilter.userPhone' style="margin:0px 10px 4px 10px;" type="text" name="date" lay-verify="date" placeholder="手机号" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px;">
+					</div>
+					<citys></citys>
+					<button class="layui-btn layui-btn-lg layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='getInfoListData({
+						pageNum:1,
+						pageSize:3,
+					},true)'>查询</button>
+					<span style="float: right;margin:25px 10px 0px 0px;"><span style="color:#009BDE;">{{msgInfo.totalReceived}}</span>/{{msgInfo.totalTarget}}</span>
+					<table class="layui-table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>用户手机</th>
+								<th>用户区域</th>
+								<th>推送状态</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat='(index, item) in infoListData'>
+								<!-- 序号 -->
+								<td>{{index+1}}</td>
+								<!-- 用户手机 -->
+								<td>{{item.userPhone | phone}}</td>
+								<!-- 用户区域 -->
+								<td style="max-width:400px;">{{item.provinceId+item.cityId+item.regionId | nullDeal}}</td>
+								<!-- 推送状态 -->
+								<td>
+									<span ng-show='item.pushStatus=="1"' style="color: #0CCCDA;">已发送</span>
+									<span ng-show='item.pushStatus=="0"' style="color: #FD482C;">未发送</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div id="messageListInfoPage" class="paging"></div>
+				</div>
+			</div>
+			<div style="padding:10px 20px;font-size:15px;" class="popout" ng-show="fun=='delete'">
+				<p style="margin-left:55px;">确认删除该条消息数据！？</p>
+				<button class="layui-btn layui-btn-lg layui-btn-danger" style="margin:10px 0 0 100px;" ng-click='save()'>确认</button>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+	</div>
+</div>
+<script type="text/javascript">
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>

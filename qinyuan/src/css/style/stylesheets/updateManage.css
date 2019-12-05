@@ -1,0 +1,95 @@
+#appUpgrade {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#appUpgrade .productDate {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 30px;
+}
+
+#appUpgrade .productDate li {
+    width: 32%;
+    height: 100px;
+    display: block;
+    color: white;
+}
+
+#appUpgrade .productDate li p {
+    padding: 15px 20px 5px 20px;
+    font-size: 20px;
+    text-align: left;
+}
+
+#appUpgrade .productDate .proNum {
+    background: #20A8D8;
+}
+
+#appUpgrade .productDate .proBuy {
+    background: #FFAC5E;
+}
+
+#appUpgrade .productDate .proHire {
+    background: #FF6868;
+}
+
+#appUpgrade .layui-tab {
+    padding: 0 30px;
+}
+
+#appUpgrade .layui-tab .layui-tab-title li {
+    font-size: 18px;
+}
+
+#appUpgrade .layui-tab .layui-tab-content {
+    background: white;
+    border: 1px solid #E6E6E6;
+    border-top: none;
+}
+
+#appUpgrade .layui-tab .layui-this {
+    background: white;
+    position: relative;
+    color: #1E9FFF;
+    font-weight: bold;
+}
+
+#appUpgrade .layui-tab .layui-this:before {
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    content: '';
+    width: 98%;
+    height: 4px;
+    border-radius: 2px 0px;
+    background: #1E9FFF;
+}
+
+#appUpgrade .layui-tab-item .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 10px 0px 10px 20px;
+}
+
+#appUpgrade .layui-tab-item .searchBth {
+    margin-left: 20px;
+    margin-top: -5px;
+}
+
+#appUpgrade .layui-tab-item .layui-table {
+    margin: 0 10px;
+    width: 98%;
+}

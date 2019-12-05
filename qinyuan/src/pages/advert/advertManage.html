@@ -1,0 +1,135 @@
+<div id="advertManage">
+	<p class="breadcrumb">当前位置: 广告管理</p>
+	<div class="layui-tab pageContent" lay-filter="test">
+		<div class="filter clearfix">
+			<select ng-model='filter.used' name="modules" class="filterSelect" lay-verify="required">
+				<option value="">状态</option>
+				<option value="1">停用</option>
+				<option value="2">启用</option>
+			</select>
+			<div class="layui-input-inline">
+				<input type="text" name="password" ng-model='filter.name' lay-verify="adver" placeholder="广告名称" autocomplete="off" class="layui-input filterInput">
+			</div>
+			<button class="layui-btn layui-btn-sm layui-btn-normal filterSearchBth" ng-click='getDataList({
+		        pageNum: 1,
+		        pageSize: 10,
+		    }, true)'>查询</button>
+			<button ng-show="isAdd" class="layui-btn layui-btn-sm layui-btn-normal actBtn right" style="margin:10px 10px 0 0;" ng-click='dialog(1, "add")'>新增</button>
+		</div>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<p class="grayTip">广告只允许启用一张，启用其他广告，原广告将被停用</p>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>广告名称</th>
+							<th>链接</th>
+							<th>状态</th>
+							<th>ICON</th>
+							<th ng-show="isChange || isUpdate || isDelete" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='(index, item) in listData'>
+							<td>{{index+1}}</td>
+							<td>{{item.name==null?'--':item.name}}</td>
+							<td class="linkTd">{{item.link==null?'--':item.link}}</td>
+							<td>
+								<span ng-show='item.used==2' class="colorStart">启用</span>
+								<span ng-show='item.used==1' class="colorStop">停用</span>
+							</td>
+							<td>图片</td>
+							<td ng-show="isChange || isUpdate || isDelete" class="noExl">
+								<button ng-show='item.used==1 && isChange' class="layui-btn layui-btn-sm" ng-click="dialog(item.id, 'start')">启用</button>
+								<button ng-show='item.used!=1 && isChange' class="layui-btn layui-btn-sm layui-btn-danger" ng-click="dialog(item.id, 'stop')">停用</button>
+								<button ng-show="isUpdate" ng-disabled='item.used!=1' ng-class="item.used!=1?btnDisable:btnEdit" ng-click="dialog(item.id, 'edit')">编辑</button>
+								<a ng-show="isExcel" href="{{'https://qinyuan-test.yunext.com/web/api/common/getFiles/'+item.imageId}}" class="layui-btn layui-btn-sm layui-btn-normal" download="{{'https://qinyuan-test.yunext.com/web/api/common/getFiles/'+item.imageId}}">导出</a>
+								<button ng-show="isDelete" ng-disabled='item.used!=1' ng-class="item.used!=1?btnDisable:btnDelete" ng-click="dialog(item.id, 'delete')">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				<div id="advListPage" class="advListPage paging"></div>
+			</div>
+		</div>
+		<p>&nbsp;</p>
+	</div>
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<div class="layui-layer layui-layer-page" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-show="fun!=null" ng-style="dialogStyle">
+		<div class="layui-layer-title cursor">{{fun=='edit'?'编辑':fun=='add'?'添加':fun=='stop'?'停用':fun=='start'?'启用':'删除'}}</div>
+		<!-- 编辑 -->
+		<div id="LAY_layuipro" class="layui-layer-editContent" ng-show='fun=="edit"||fun=="add"'>
+			<form class="dialogForm" name='form_edit' id='form_edit'>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>广告名称：</label>
+					<div class="layui-input-block">
+						<input ng-model='form.name' type="text" name="name" autocomplete="off" placeholder="请输入广告名称" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>广告图片：</label>
+					<div class="layui-input-block">
+						<input class="upLoadInput" id='adver_img' type="file" name="multipartFile" autocomplete="off" placeholder="上传">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label"><span class="mustIn">* </span>广告链接：</label>
+					<div class="layui-input-block">
+						<input ng-model='form.link' type="text" name="link" autocomplete="off" placeholder="请输入链接地址" class="layui-input">
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- 停用 -->
+		<div id="LAY_layuipro" class="layui-layer-stopContent dialogMessage" ng-show='fun=="stop"||fun=="start"'>
+			<p ng-show='fun=="stop"'>确认停用该广告!?</p>
+			<p ng-show='fun=="start"'>继续启用本广告，将停用其他广告，您确定继续启用吗?</p>
+		</div>
+		<!-- 删除 -->
+		<div id="LAY_layuipro" class="layui-layer-deleteContent dialogMessage" ng-show='fun=="delete" '>
+			<p>确认删除该广告!?</p>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close()"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="save()">确认</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div>
+		<span class="layui-layer-resize"></span>
+	</div>
+</div>
+<script type="text/javascript">
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+	})
+</script>
+<style>
+	.linkTd {
+		max-width: 400px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	#adver_img {
+		margin-top: 10px !important;
+	}
+
+	.actBtn {
+		margin-left: 10px;
+	}
+</style>

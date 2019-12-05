@@ -1,0 +1,135 @@
+/* line 1770, ../sass/style.scss */
+#managerList {
+    min-width: 1200px;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+/* line 1776, ../sass/style.scss */
+#managerList .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 10px 0px 10px 0px;
+}
+
+/* line 1784, ../sass/style.scss */
+#managerList .popout p {
+    line-height: 40px;
+}
+
+/* line 1788, ../sass/style.scss */
+#managerList .roleList {
+    float: left;
+    width: 94%;
+    height: auto;
+    background: white;
+    margin: 0px 30px;
+    padding: 0 20px;
+    position: relative;
+}
+
+/* line 1796, ../sass/style.scss */
+#managerList .roleList .back {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* line 1804, ../sass/style.scss */
+#managerList .limit {
+    display: none;
+    width: 20%;
+    float: left;
+    height: auto;
+    background: white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* line 1805, ../sass/style.scss */
+#managerList .limit .limitHeader {
+    line-height: 40px;
+    font-size: 20px;
+    color: white;
+    background: #009BDE;
+    padding: 0px 10px;
+    text-align: left;
+}
+
+#roleManage {
+    width: 100%;
+    min-width: 1200px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#roleManage .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 31px;
+    padding: 0px 5px;
+    margin: 20px 0px 0px 10px;
+}
+
+#roleManage .popout p {
+    line-height: 40px;
+}
+
+#roleManage .roleList {
+    float: left;
+    width: 93%;
+    background: white;
+    margin: 0px 30px;
+    padding: 0 20px;
+    position: relative;
+}
+
+#roleManage .roleList .back {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#roleManage .limit {
+    display: none;
+    width: 20%;
+    float: left;
+    height: auto;
+    background: white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#roleManage .limit .limitHeader {
+    line-height: 40px;
+    font-size: 20px;
+    color: white;
+    background: #009BDE;
+    padding: 0px 10px;
+    text-align: left;
+}
+
+#managerDetails {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+#managerDetails .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 10px 0px 0px 0px;
+}

@@ -1,0 +1,46 @@
+<div id="pushMessage">
+    <p class="breadcrumb">当前位置: 系统维护配置</p>
+    <div style="margin:0 30px;padding:10px 20px;background: white;">
+        <!-- 推送内容： -->
+        <div class="layui-form-item layui-form-text" style="margin-top:15px;">
+            <label class="layui-form-label"><span class="mustIn">* </span>状态：</label>
+            <div class="layui-input-block">
+                <select name="quiz" class="select" style='margin: 5px 0 0 0' ng-model='form.status'>
+                    <option value="">请选择开启状态</option>
+                    <option ng-value="'开启'">开启</option>
+                    <option ng-value="'停用'">停用</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label"><span class="mustIn">* </span>推送内容：</label>
+            <div class="layui-input-block">
+                <textarea ng-model='form.content' placeholder="请输入长度少于500个字符的内容" class="layui-textarea" name="desc"></textarea>
+            </div>
+        </div>
+        <!-- <div class="layui-form-item layui-form-text" style="margin-top:15px;">
+            <label class="layui-form-label"><span class="mustIn">* </span>发布时间：</label>
+            <div class="layui-input-block">
+                <input style='margin-top:5px;' placeholder="请选择发布时间" type="text" class="layui-input" id="dateSystem">
+            </div>
+        </div> -->
+        <button class="layui-btn layui-btn-fluid" ng-click="handleSubmit()">确认</button>
+    </div>
+</div>
+<script type="text/javascript">
+    //selec默认颜色
+    var unSelected = "#bababa";
+    var selected = "#505050";
+    $(function() {
+        $("select").css("color", unSelected);
+        $("option").css("color", selected);
+        $("select").change(function() {
+            var selItem = $(this).val();
+            if (selItem == $(this).find('option:first').val()) {
+                $(this).css("color", unSelected);
+            } else {
+                $(this).css("color", selected);
+            }
+        });
+    })
+</script>

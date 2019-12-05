@@ -1,0 +1,242 @@
+<div id="pushRule">
+	<p class="breadcrumb">当前位置: 消息规则设置</p>
+	<div class="layui-tab clearfix" lay-filter="test" style="background: white;margin: 0 30px;padding: 0 20px; ">
+		<select ng-model='filter.productKey' class="select" name="modules" lay-verify="required">
+			<option value="">产品名称</option>
+			<option ng-repeat='item in productList' value="{{item.productKey}}">{{item.productName}}</option>
+		</select>
+		<select ng-model='filter.msgType' class="select" name="modules" lay-verify="required">
+			<option value="">消息类型</option>
+			<option ng-repeat='item in msgTypeList' value="{{item.id}}">{{item.typeName}}</option>
+		</select>
+		<div class="layui-input-inline">
+			<input ng-model='filter.startTime' type="text" name="date" id="date" lay-verify="date" placeholder="请选择开始/结束时间" autocomplete="off" class="layui-input" style="margin:-5px 0px 0px 10px; width:300px;">
+		</div>
+		<div class="layui-input-inline">
+			<input type="text" ng-model="filter.productModel" lay-verify="title" autocomplete="off" placeholder="产品型号" class="layui-input" style="margin:-5px 0px 0px 10px;">
+		</div>
+		<button class="layui-btn layui-btn-sm layui-btn-normal searchBth" style="margin:-5px 0px 0px 20px;" ng-click='getListData({
+			pageNum:1,
+			pageSize:10,
+		},true)'>查询</button>
+		<button ng-show="isSave" class="layui-btn layui-btn-sm layui-btn-normal right" style="margin:20px 10px 0px 0" ng-click='dialog("add")'>新增</button>
+		<div class="layui-tab-content">
+			<!--故障报警-->
+			<div class="layui-tab-item layui-show">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>产品名称</th>
+							<th>产品型号</th>
+							<th>消息类型</th>
+							<th>推送规则</th>
+							<th>推送时间</th>
+							<th>状态</th>
+							<th ng-show="isOn || isSave || isDelete" class="noExl">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='(index, item) in listData'>
+							<td>{{index+1}}</td>
+							<td>{{item.productName==null?'--':item.productName}}</td>
+							<td>{{item.productModel==null?'--':item.productModel}}</td>
+							<td>{{item.msgType==null?'--':item.msgType}}</td>
+							<td>
+								<span ng-repeat='item in item.msgRules'>
+									<span ng-if="item.paramType==1">
+										{{item.identifierName}} {{methodValue[item.method-1]}} {{item.value}}
+									</span>
+									<span ng-if="item.paramType==2">
+										{{item.identifierName}}
+									</span>
+								</span>
+							</td>
+							<td>
+								<span ng-if='item.scheduled == 0'>立即发送</span>
+								<span ng-if='item.scheduled != 0'>{{item.pushTime==null?'--':item.pushTime}}</span>
+							</td>
+							<td>
+								<span ng-show='item.enable==1' class="colorStart">启用</span>
+								<span ng-show='item.enable==0' class="colorStop">停用</span>
+							</td>
+							<td ng-show="isOn || isSave || isDelete" class="noExl">
+								<button ng-show="isOn && item.enable==1" class="layui-btn layui-btn-sm layui-btn-danger" style='margin-left:10px;' ng-show='item.enable==1' ng-click='dialog("stop", item.id)'>停用</button>
+								<button ng-show="isOn && item.enable==0" class="layui-btn layui-btn-sm layui-btn-normal" ng-show='item.enable!=1' ng-click='dialog("start", item.id)'>启用</button>
+								<button ng-show="isSave" ng-disabled='item.enable==1' ng-class="item.enable==1?btnDisable:btnEdit" ng-click='dialog("edit", item.id)'>编辑</button>
+								<button ng-show="isDelete" ng-disabled='item.enable==1' ng-class="item.enable==1?btnDisable:btnEdit" ng-click='dialog("delete", item.id)'>删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='listData.length==0' class="noData">暂无数据</p>
+				<div ng-show='listData.length!=0' id="pushRulePage" class="paging"></div>
+			</div>
+		</div>
+	</div>
+	<!-- 蒙层 -->
+	<div class="layui-layer-shade dialogShade" id="layui-layer-shade1" times="1"></div>
+	<!-- 弹窗 -->
+	<div class="layui-layer layui-layer-page rule" id="layui-layer1" type="page" times="1" showtime="0" contype="string" ng-style="dialogStyle">
+		<div class="layui-layer-title cursor">{{fun=="edit"?"编辑":fun=="add"?"新增":fun=="delete"?"删除":fun=="stop"?"停用":"启用"}}</div>
+		<!-- 启用/删除/停用 -->
+		<div ng-show='fun!="edit"&&fun!="add"' style="text-align:center;margin-top:20px;">确认{{fun=="stop"?'停用':fun=="start"?'启用 ':'删除'}}该规则？</div>
+		<!-- 编辑表单 -->
+		<div ng-show='fun=="edit"||fun=="add"' id="LAY_layuipro" class="layui-layer-content" style="max-height:380px;">
+			<div style="padding:10px 20px;">
+				<!-- 产品名称 -->
+				<div class="layui-inline">
+					<label class="layui-form-label" style="line-height:30px;margin-top:10px;"><span class="mustIn">* </span>产品名称：</label>
+					<div class="layui-input-inline">
+						<select name="quiz" class="select" ng-model='form.productKey' ng-change='handleGetList()'>
+							<option value="">产品名称</option>
+							<option value="all">所有产品</option>
+							<option ng-repeat='item in productList' value="{{item.productKey}}">{{item.productName}}</option>
+						</select>
+					</div>
+				</div>
+				<!-- 消息类型 -->
+				<div class="layui-inline" style="display: block;">
+					<label class="layui-form-label" style="line-height:30px;margin-top:10px;"><span class="mustIn">* </span>消息类型：</label>
+					<div class="layui-input-inline">
+						<select ng-model='form.msgType' class="select" name="modules" lay-verify="required">
+							<option value="">消息类型</option>
+							<option ng-repeat='item in msgTypeList' value="{{item.id}}">{{item.typeName}}</option>
+						</select>
+					</div>
+				</div>
+				<!-- 推送内容 -->
+				<div class="layui-form-item layui-form-text" style="margin-top:15px;">
+					<label class="layui-form-label"><span class="mustIn">* </span>推送内容：</label>
+					<div class="layui-input-block">
+						<textarea ng-model='form.content' placeholder="请输入小于100字的内容" class="layui-textarea" name="desc" style="margin:-30px 0px 0px 20px;"></textarea>
+					</div>
+				</div>
+				<!-- 推送规则 -->
+				<div>
+					<label class="layui-form-label" style="line-height:44px;float:none;"><span class="mustIn">* </span>推送规则：</label>
+					<div class="clearfix">
+						<div class="" style="float:left;display:inline-block;margin-left:60px;" ng-repeat='(index, att) in attributeShowList'>
+							<!-- 逻辑 -->
+							<div class="layui-input-inline" ng-show='index>0'>
+								<select ng-model='att.type' style="width:60px;" name="quiz" class="select">
+									<option ng-repeat='(index,item) in combTypeValue' value="{{index + 1}}">{{item}}</option>
+								</select>
+							</div>
+							<!-- 属性/故障 -->
+							<div class="layui-input-inline">
+								<select ng-model='att.typeA' name="quiz" class="select type" ng-change='handleTips(att.typeA)'>
+									<option value="1">属性</option>
+									<option ng-show="addRule" value="2">故障</option>
+								</select>
+							</div>
+							<!-- 故障/属性 名称 -->
+							<div class="layui-input-inline">
+								<select ng-model='att.typeB' name="quiz" class="select type typeName">
+									<option ng-show='att.typeA==2' value="">故障名称</option>
+									<option ng-show='att.typeA==1' value="">属性名称</option>
+									<option ng-show='att.typeA==2' ng-repeat='item in errorList' value="{{item.errorId+','+item.errorName}}">{{item.errorName}}</option>
+									<option ng-show='att.typeA==1' ng-repeat='item in productAtt' value="{{item.identifier+','+item.name}}">{{item.name}}</option>
+								</select>
+							</div>
+							<!-- 逻辑 -->
+							<div class="layui-input-inline" ng-show='att.typeA==1'>
+								<select ng-model='att.typeC' name="quiz" class="select type">
+									<option ng-repeat='(index,item) in methodValue' value="{{index + 1}}">{{item}}</option>
+								</select>
+							</div>
+							<!-- 其他 -->
+							<div class="layui-input-inline" ng-show='att.typeA==1' style="margin:20px 0px 0px 10px;">
+								<input ng-model='att.typeD' type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input" placeholder="请输入">
+							</div>
+							<button ng-show='(attributeShowList.length!=1) && att.typeA==1' class="layui-btn layui-btn-sm" style="margin-top:20px;" ng-click='deletePushRule(index)'><i class="layui-icon layui-icon-close"></i></button>
+							<button ng-show='index==(attributeShowList.length-1) && att.typeA==1' class="layui-btn layui-btn-sm" style="margin-top:20px;" ng-click='addPushRule(index)'><i class="layui-icon layui-icon-add-1"></i></button>
+							<span ng-show='index==0 && att.typeA==1' class="lookRule layui-input-inline">(温馨提示：<span ng-click="lookRule()">查看规则设置帮助</span>)</span>
+						</div>
+					</div>
+				</div>
+				<!-- 推送时间 -->
+				<div class="" style="margin-top: 40px;">
+					<label class="layui-form-label"><span class="mustIn">* </span>推送时间：</label>
+					<div>
+						<div style="margin:8px 0px 0px 0px;display:inline-block;">
+							<input type="radio" name="sendType" value="0" checked="" ng-model='form.scheduled'> 立即发送
+						</div>
+						<div style="margin: 30px 0px 0px 120px;height:50px;">
+							<input type="radio" name="sendType" value="1" checked="" ng-model='form.scheduled'> 定时发送
+							<select ng-show='form.scheduled==1' ng-model='delayTime.hou ' class="select" name="modules" lay-verify="required" style="margin-top: 0px;width:80px;">
+								<option value="">小时</option>
+								<option ng-repeat='item in hou ' value="{{item}}">{{item}}</option>
+							</select>
+							<select ng-show='form.scheduled==1' ng-model='delayTime.min ' class="select" name="modules" lay-verify="required" style="margin-top: 0px;width:80px;">
+								<option value="">分钟</option>
+								<option ng-repeat='item in min ' value="{{item}}">{{item}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<!-- 推送方式 -->
+				<div class="layui-form-item" style="margin-top:10px;">
+					<label class="layui-form-label"><span class="mustIn">* </span>推送方式：</label>
+					<div class="layui-input-block">
+						<ul class="checks">
+							<li><input ng-model='pushWayList.app ' type="checkbox" lay-skin="primary" title="APP" checked=""> APP
+								<ul style="margin-left:20px;">
+									<li><input ng-model='pushWayList.wayA ' type="checkbox" lay-skin="primary" title="APP" checked=""> 消息中心(推送到消息中心，APP内可以查收到，推送消息会有小红点状态标记)</li>
+									<li><input ng-model='pushWayList.wayB ' type="checkbox" lay-skin="primary" title="APP" checked=""> 应用推送(推送至手机通知栏及消息中心，未开启APP也可以收到)</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close(1)"></a></span>
+		<div class="layui-layer-btn layui-layer-btn-c">
+			<a class="layui-layer-btn0" ng-click="save()">确定</a>
+			<a class="layui-layer-btn1" ng-click="close()">取消</a>
+		</div><span class="layui-layer-resize"></span>
+	</div>
+	<div class="layui-layer layui-layer-page productAtrr" id="layui-layer1" type="page" times="1" showtime="0" contype="string" style="z-index: 19891015; width:800px; height: auto;max-height:550px; top:20%; left:50%;margin-left:-300px;display: none;">
+		<div class="layui-layer-title cursor">详情</div>
+		<div id="LAY_layuipro" class="layui-layer-content" style="max-height:450px;">
+			<div style="padding:10px 20px;font-size:15px;" class="popout">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>属性名称</th>
+							<th>属性内容</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat='item in properties'>
+							<td>{{item.name}}</td>
+							<td>{{item.dataType.specs}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-show='properties.length==0' class="noData">暂无数据</p>
+				<div ng-show="properties.length>0" id="productAll" style="text-align:center;margin-top:-10px;background:white;"></div>
+			</div>
+		</div>
+		<span class="layui-layer-setwin"><a class="layui-layer-ico layui-layer-close layui-layer-close1" href="javascript:;" ng-click="close(2)"></a></span>
+	</div>
+</div>
+<script type="text/javascript">
+	//selec默认颜色
+	var unSelected = "#bababa";
+	var selected = "#505050";
+	$(function() {
+		$("select").css("color", unSelected);
+		$("option").css("color", selected);
+		$("select").change(function() {
+			var selItem = $(this).val();
+			if (selItem == $(this).find('option:first').val()) {
+				$(this).css("color", unSelected);
+			} else {
+				$(this).css("color", selected);
+			}
+		});
+		$(".type").css("color", selected);
+	})
+</script>

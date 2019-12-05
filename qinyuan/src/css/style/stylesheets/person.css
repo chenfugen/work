@@ -1,0 +1,86 @@
+/* line 1861, ../sass/style.scss */
+#personal {
+    width: 100%;
+    min-width: 1000px;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+/* line 1867, ../sass/style.scss */
+#personal .personMsg {
+    height: auto;
+    margin: 0 30px;
+    background: white;
+    padding: 20px;
+}
+
+/* line 1872, ../sass/style.scss */
+#personal .personMsg li {
+    line-height: 40px;
+    font-size: 20px;
+}
+
+/* line 1770, ../sass/style.scss */
+#personalCenter {
+    min-width: 1200px;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    background: #F2F2F2;
+}
+
+/* line 1776, ../sass/style.scss */
+#personalCenter .select {
+    border: 1px solid #e6e6e6;
+    width: 115px;
+    height: 30px;
+    padding: 0px 5px;
+    margin: 10px 0px 10px 0px;
+}
+
+/* line 1784, ../sass/style.scss */
+#personalCenter .popout p {
+    line-height: 40px;
+}
+
+/* line 1788, ../sass/style.scss */
+#personalCenter .roleList {
+    float: left;
+    width: 94%;
+    height: auto;
+    background: white;
+    margin: 0px 30px;
+    padding: 0 20px;
+    position: relative;
+}
+
+/* line 1796, ../sass/style.scss */
+#personalCenter .roleList .back {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* line 1804, ../sass/style.scss */
+#personalCenter .limit {
+    display: none;
+    width: 20%;
+    float: left;
+    height: auto;
+    background: white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* line 1805, ../sass/style.scss */
+#personalCenter .limit .limitHeader {
+    line-height: 40px;
+    font-size: 20px;
+    color: white;
+    background: #009BDE;
+    padding: 0px 10px;
+    text-align: left;
+}

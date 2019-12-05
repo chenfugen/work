@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="qinYuan">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>沁园管理系统</title>
+	<meta name="renderer" content="webkit">
+	<link rel="icon" href="images/favicon.ico" mce_href="images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="js/dependency/css/layui.css">
+</head>
+<style type="text/css">
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+
+	html,
+	body {
+		position: relative;
+		background: url(images/login-bg.jpg) no-repeat;
+		background-size: cover;
+		height: 800px;
+	}
+
+	#login {
+		height: 550px;
+		width: 550px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -275px;
+		margin-left: -275px;
+		text-align: center;
+	}
+
+	.loginBox {
+		width: 100%;
+		/* height: 400px; */
+		margin-top: 20px;
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 10px 10px;
+		overflow: hidden;
+		position: relative;
+		box-shadow: 1px 1px 5px #888888;
+	}
+
+	.layui-form {
+		background: red;
+	}
+
+	.layui-inline {
+		margin-left: -10px;
+		font-size: 18px;
+	}
+
+	.caution {
+		width: 260px;
+		height: 40px;
+		line-height: 40px;
+		font-size: 15px;
+		margin: 0 auto;
+		text-align: left;
+		color: orangered;
+	}
+
+	[ng-cloak] {
+		display: none;
+	}
+
+	.checkCodeImg {
+		width: 150px;
+		height: 69px;
+		position: absolute;
+		left: 202px;
+		border: 1px solid #eee
+	}
+</style>
+
+<body>
+	<div id="login" ng-controller="loginC">
+		<img src="images/logo.png" />
+		<form class="loginBox" autocomplete="on">
+			<div class="layui-form-item" style="margin-top:70px;">
+				<div ng-show='!rootCodeVisible' class="layui-inline">
+					<label class="layui-form-label">用户名</label>
+					<div class="layui-input-inline">
+						<input type="text" name="fname" ng-model="userName" class="layui-input" placeholder="请输入用户名" autofocus="autofocus">
+					</div>
+				</div>
+				<div ng-show='!rootCodeVisible' class="caution" ng-bind="nameErr"></div>
+				<div ng-show='!rootCodeVisible' class="layui-inline">
+					<label class="layui-form-label">密&nbsp;&nbsp; 码</label>
+					<div class="layui-input-inline">
+						<input type="password" name="password" ng-model="password" class="layui-input" placeholder="请输入密码">
+					</div>
+				</div>
+				<div ng-show='!rootCodeVisible' class="caution" ng-bind="passwordErr"></div>
+				<div ng-show='!rootCodeVisible' class="layui-inline">
+					<label class="layui-form-label">验证码</label>
+					<div class="layui-input-inline">
+						<input type="text" name="Vcode" ng-model="Vcode" class="layui-input" placeholder="验证码" autocomplete="off" style="width:40%;">
+					</div>
+					<img ng-show='showCheckCode' ng-src="{{checkCode}}" class="checkCodeImg" ng-click='getCheckCode()' />
+				</div>
+				<div ng-show='rootCodeVisible' class="caution" ng-bind="rootCodeErr"></div>
+				<div ng-show='rootCodeVisible' class="layui-inline">
+					<label class="layui-form-label">短信验证码</label>
+					<div class="layui-input-inline">
+						<input type="text" name="Vcode" ng-model="smsCode" class="layui-input" placeholder="验证码" autocomplete="off" style="width:40%;">
+					</div>
+				</div>
+				<div class="caution" ng-bind="codeErr"></div>
+			</div>
+			<input ng-show='!rootCodeVisible' type="submit" class="layui-btn layui-btn-lg" value="确定" style="width:270px;font-size:18px" ng-click="login()">
+			<input ng-show='rootCodeVisible' type="submit" class="layui-btn layui-btn-lg" value="确定" style="width:270px;font-size:18px" ng-click="rootLogin()">
+			<div class="caution loginErr"></div>
+		</form>
+	</div>
+	<script src="js/dependency/jquery.min.js" charset="utf-8"></script>
+	<script src="js/dependency/layui.js" charset="utf-8"></script>
+	<script src="js/dependency/layui.all.js" charset="utf-8"></script>
+	<script src="js/dependency/angular-1.5.8.min.js" charset="utf-8"></script>
+	<script src="js/dependency/angular-route-1.5.8.min.js" charset="utf-8"></script>
+	<script src="js/dependency/angular-resource-1.5.8.min.js" charset="utf-8"></script>
+	<script src="js/business/cookie-be868ea3dc.js" charset="utf-8"></script>
+	<script src="js/business/config-179b92b12a.js" charset="utf-8"></script>
+	<script src="js/business/controllers-be532567f4.js" charset="utf-8"></script>
+	<script src="js/business/gVerify-c5f31e85b5.js" charset="utf-8"></script>
+	<script src="js/business/md5-583e4a1154.js" charset="utf-8"></script>
+</body>
+<script type="text/javascript">
+	var app = angular.module('qinYuan', []);
+	//登录
+	app.controller('loginC', function($scope, $http, $location) {
+		$scope.checkCode = ''
+		$scope.showCheckCode = false
+		$scope.userName = "";
+		$scope.password = "";
+		$scope.rootCodeErr = "";
+		$scope.rootCodeVisible = false;
+		delCookie("token")
+		// 登录
+		$scope.login = function() {
+			$(".loginErr").text("");
+			if ($scope.userName == undefined || $scope.userName == "") {
+				$scope.nameErr = "用户名不能为空！"
+				return false;
+			} else {
+				$scope.nameErr = " ";
+			}
+			if ($scope.password == undefined || $scope.password == "") {
+				$scope.passwordErr = "密码不能为空！"
+				return false;
+			} else {
+				$scope.passwordErr = " ";
+			}
+			if ($scope.Vcode == undefined || $scope.Vcode == "") {
+				$scope.codeErr = "验证码不能为空！"
+				return false;
+			} else {
+				$scope.codeErr = " ";
+			}
+			$scope.user = {};
+			$scope.user.userName = $scope.userName;
+			$scope.user.password = $scope.password;
+			$scope.user.code = $scope.Vcode;
+			// 获取密钥
+			$.ajax({
+				type: "get",
+				url: config.webAPI.address + 'account/getSecret',
+				async: true,
+				dataType: 'json',
+				data: {
+					userName: $scope.userName
+				},
+				success: function(res) {
+					$scope.secret = res.message
+					if ($scope.userName == 'root') {
+						getRootCode()
+					} else {
+						next()
+					}
+					$scope.$apply()
+				}
+			})
+			// 登录
+			function next() {
+				var pwd = hex_md5(hex_md5($scope.user.password).toUpperCase() + $scope.secret).toUpperCase();
+				var form = {
+					code: $scope.Vcode,
+					userName: $scope.userName,
+					password: pwd,
+					codeId: $scope.codeId
+				}
+				$.ajax({
+					type: "post",
+					url: config.webAPI.address + 'account/login',
+					data: {
+						code: $scope.Vcode,
+						userName: $scope.userName,
+						password: pwd,
+						codeId: $scope.codeId
+					},
+					async: true,
+					dataType: 'json',
+					success: function(res) {
+						if (!res.success) {
+							$(".loginErr").text(res.message);
+							getVerify();
+						} else {
+							localStorage.setItem("user", JSON.stringify($scope.user)); //用户信息
+							sessionStorage.setItem("root", JSON.stringify(res.data.rolePermission)); //权限
+							setCookie("token", res.data.token);
+							if (res.data.rolePermission != "root") {
+								var arr = [];
+								res.data.rolePermission.forEach(function(msg) {
+									if (msg.checked) {
+										arr.push(msg.children[0].childId);
+									}
+								})
+								if (arr.length > 0) {
+									window.location.href = "home.html#/" + arr[0] + "/" + Math.random();
+								} else {
+									$(".loginErr").text("对不起，您没有权限!请联系管理员。");
+								}
+							} else {
+								window.location.href = "home.html#/productList/" + Math.random();
+							}
+						}
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+			// root用户获取验证码
+			function getRootCode() {
+				$.ajax({
+					type: "post",
+					url: config.webAPI.address + 'account/sendMsgCode',
+					async: true,
+					dataType: 'json',
+					data: {
+						userName: $scope.userName
+					},
+					success: function(res) {
+						$scope.rootCodeVisible = true
+						$scope.$apply()
+					}
+				})
+			}
+		}
+		// root登录
+		$scope.rootLogin = function() {
+			if ($scope.smsCode == null) {
+				$(".loginErr").text("请输入root账户验证码");
+				return false
+			}
+			var pwd = hex_md5(hex_md5($scope.user.password).toUpperCase() + $scope.secret).toUpperCase();
+			$.ajax({
+				type: "post",
+				url: config.webAPI.address + 'account/login',
+				data: {
+					code: $scope.Vcode,
+					userName: $scope.userName,
+					password: pwd,
+					codeId: $scope.codeId,
+					smsCode: $scope.smsCode
+				},
+				async: true,
+				dataType: 'json',
+				success: function(res) {
+					if (res.success) {
+						localStorage.setItem("user", JSON.stringify($scope.user)); //用户信息
+						sessionStorage.setItem("root", JSON.stringify(res.data.rolePermission)); //权限
+						setCookie("token", res.data.token);
+						window.location.href = "home.html#/productList/" + Math.random();
+					} else {
+						$scope.rootCodeErr = res.message
+						$scope.smsCode = ''
+					}
+					$scope.$apply()
+				},
+				error: function(err) {
+					console.log(err);
+				}
+			});
+		}
+		// 获取验证码
+		$scope.getCheckCode = function() {
+			$scope.showCheckCode = false
+			$.ajax({
+				type: "get",
+				url: config.webAPI.address + 'common/getCheckCodeV2',
+				data: {},
+				async: true,
+				dataType: 'json',
+				success: function(res) {
+					$scope.checkCode = res.data.code
+					$scope.codeId = res.data.codeId
+					$scope.showCheckCode = true
+					$scope.$apply()
+				},
+				error: function(err) {
+					console.log(err);
+				}
+			});
+		}
+		$scope.getCheckCode()
+	})
+</script>
+
+</html>
