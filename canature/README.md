@@ -36,7 +36,7 @@
   weapack环境
    
 #### 使用说明 
-    ######项目运行操作流程
+    ###### 项目运行操作流程
     
     1、下载项目依赖
        npm install
@@ -47,38 +47,38 @@
     3、打包项目
      npm run build 
     
-     ######项目运行操作流程 
+     ###### 项目运行操作流程 
 
 #### 项目结构
 
 #### 项目文档结构
-├─dist            //打包页面
-├─node_modules    //依赖
-├─config          //项目配置文件
-├─src             //项目代码文件
-│  ├─assets       //vue自带文件包
-│  ├─axios        //数据请求封装文件
-│  ├─components   //各个页面组件
-│  │  ├─datas     //数据模块
-│  │  ├─device    //设备模块
-│  │  ├─login     //登录模块
-│  │  ├─map       //地图模块
-│  │  ├─tabbar    //公共组件(底部栏)
-│  │  └─user      //用户组件
-│  ├─router       //路由配置          
-│  ├─store        //数据中心
-│  ├─app.vue      //入口vue文件
-│  └─main.js      //项目配置引入
-├─static          //外部引用
-│   ├─css         //样式
-│   ├─font        //图标
-│   ├─image       //图片
-│   └─js          //js文件
+├─ dist            //打包页面
+├─ node_modules    //依赖
+├─ config          //项目配置文件
+├─ src             //项目代码文件
+│  ├─ assets       //vue自带文件包
+│  ├─ axios        //数据请求封装文件
+│  ├─ components   //各个页面组件
+│  │  ├─ datas     //数据模块
+│  │  ├─ device    //设备模块
+│  │  ├─ login     //登录模块
+│  │  ├─ map       //地图模块
+│  │  ├─ tabbar    //公共组件(底部栏)
+│  │  └─ user      //用户组件
+│  ├─ router       //路由配置          
+│  ├─ store        //数据中心
+│  ├─ app.vue      //入口vue文件
+│  └─ main.js      //项目配置引入
+├─ static          //外部引用
+│   ├─ css         //样式
+│   ├─ font        //图标
+│   ├─ image       //图片
+│   └─ js          //js文件
 │
-├─.gitignore          //项目git上传可忽略内容
-├─package-lock.json   //项目npm package的具体来源和版本号
-├─package.json        //项目(配置)所需要的各种模块、插件等
-├─index.html          //项目入口
+├─ .gitignore          //项目git上传可忽略内容
+├─ package-lock.json   //项目npm package的具体来源和版本号
+├─ package.json        //项目(配置)所需要的各种模块、插件等
+├─ index.html          //项目入口
             
 #### 项目版本
    1.0.0
