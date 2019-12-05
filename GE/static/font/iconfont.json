@@ -1,0 +1,107 @@
+{
+  "id": "1180655",
+  "name": "GE",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "8821690",
+      "name": "icon_about",
+      "font_class": "icon_about",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "8821691",
+      "name": "icon_setting",
+      "font_class": "icon_setting",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "8821692",
+      "name": "icon_Customer service",
+      "font_class": "icon_Customerservice",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "8821693",
+      "name": "icon_message",
+      "font_class": "icon_message",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "8821695",
+      "name": "tabbar_icon_me_s",
+      "font_class": "tabbar_icon_me_s",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "8821696",
+      "name": "tabbar_icon_me_n",
+      "font_class": "tabbar_icon_me_n",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "8821697",
+      "name": "tabbar_icon_data_s",
+      "font_class": "tabbar_icon_data_s",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "8821698",
+      "name": "tabbar_icon_device_n",
+      "font_class": "tabbar_icon_device_n",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "8821699",
+      "name": "tabbar_icon_water quality_s",
+      "font_class": "tabbar_icon_waterquality_s",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "8821700",
+      "name": "icon_feedback",
+      "font_class": "icon_feedback",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "8821701",
+      "name": "tabbar_icon_device_s",
+      "font_class": "tabbar_icon_device_s",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "8821702",
+      "name": "tabbar_icon_water quality_n",
+      "font_class": "tabbar_icon_waterquality_n",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "8821817",
+      "name": "tabbar_icon_data_n",
+      "font_class": "tabbar_icon_data_n",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "11172200",
+      "name": "icon_repair",
+      "font_class": "icon_repair",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    }
+  ]
+}

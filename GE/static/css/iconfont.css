@@ -1,0 +1,73 @@
+@font-face {font-family: "iconfont";
+  src: url('../font/iconfont.eot?t=1570515732803'); /* IE9 */
+  src: url('../font/iconfont.eot?t=1570515732803#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAhsAAsAAAAAEcAAAAgeAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCEJgqTOI8+ATYCJAM8CyAABCAFhG0Hgj8b3Q5RlFBSLdmXmIqMdFdSZhx0xA0w4F0AIIO+YjMwggQA/AGxO3BgKKXft9/vzu6syccsiUa1UEj46ZDh9FdJtEqjtSn1XVsml1KaYvx3+SqtqWqZhVt4Hq5k2W/j43SUipCJcCHI2+EnqVHKkklZCFlQTAIEMLvB2HlYwdBv6h9caonXlE4tqXvaPYGweVIhU6/B5jCxeE2hohPzhOf+ZxIDQ2suzyIWmtm1hYqWthLv5rfjJv6oWoJmFl1/qEQioUKj9ArkjdqV/phw2DZvVg2LylURP7kZCBCtacj67fObWMGwiqDI9A7ESsmAe5yIV9uWMwO0Yfj8oybwG/8+Pb08oJgCfKuHcZOL8wuhHsYB72XAII4BcNgO0IB9AnygqzX8w3yK92MS28IXXPSrGMoIxxHBV2KsGHIrGjP3f/EcL4iSrKhAFZhkEPypauikb3SPgAgAUCAKQIMYAAZxAAYkAFiQBOBACoAHaQABZABEkAWQQA5ABnk9yuRKwYC65bX91wicEuoT+mwE35ijcMdOPqPwlmOxRjrTMKtaKS9QqKWXucUsU8gzAW2eNps+d7CX5dhnFnPoPJNj7jBH5xgaSvEF1W++wj3fGMRvSffXuMdjePMGd7sJUaSsXU7G1S3r7KV7cEbgegGge1geWavoQgOwnCxCFIlzrEIUyfJxRindf5F7PIg0vWJfLEUa0BaDPSayUITzY8FmaeNV7jpzjb2y5q47FrS8yb3nmYC0i0THlVDgaBaNQJzXKiYyo9cfHz+VPPcq2qv5dYJq/GWUpOGFTop3sFMMJGEJIW0yGWdDvBirVMmeBRLaUiZLDOJcRuoiTVKHYrXJYVbEm6+ofjcnzrU5uzoC7RfYS+HWC7dXdA+Joq8aAZuGIgooJS5C2k7IMOSmrK7uziCH+LtE2LjewL43rKei6xpznbtKXzEmNlWruJeA6RdS5blr0V7M6yrC0m1qCSffEYgbrKyPO0v3ciFLzQI3vcrSD1CXsNLFVMgMZqE2YJVNsdAaTBHZUHmWkCk4gNBSOYsgTPXnqE+RLnk+3MzwbE/A4GxL9waJ4lpbZ1CVxcH3aR2Bxg4+YqnNFULgiypI41Uu4zqTfo1NvUKT1pFFB2aljSPk0JiVsUImhMSrSF2ISfAiCpvA8FK1ZPGM0ZPi9OL15zJWnhFk98WJnOu0m2aNC1WNU/uVfjDtlI0tVY71n8marycoxq/i9guT5F2XwqUC9EbFPEXhQEqjCQWXp648Gwgspm4ZgliDU1/SktsQ3vYkCYSS2yhnwW3Y9t57bVLC6AHb0PWqfV+sEyPE9cq3nsx8kkKpCYxQP4UtQNWIjkH7+9C9CdWLQQs5i0wIwyAmIKNMiA6x1n5NRQ78FR8HImV20g6un9Kj9WPCIRQIfJbDgFx2/K0pWF7l/G0jYMMwbP3M3Q2BQPLr5adKAZ+NSmglQ2ULw3XhVg8l5VOKW7RSnVQb/+3jK33nEpHvmHURJfv9gGNyplZCSbSZT+IcN7foN8RvcA4sv+bdioouYZE/8TZ7Ud6Jn4CV8jIvS7ksQx+0QDddtyAI8FmX6rFSlZB1ObbI4sH/+D2Jr6/EynuBQJE/Qp+BF04nCqfha1etP7jm7gXthbtrD6w36/e1aCGOzJUgbRh7iXvJAvzqKygAB30Uef75YK15/YG1HA9smhRzAi+cRhROnzvGrYWTb345DKInaia+mXn/xx+SwKxe5RhiV9exYZmnjrxbSVH2MHt9vSNMG+YA234h1FuSt9imH9FABtVgPKZBmUD0G8bviR+PSjB+FKHGlbgqUtdasGAMA9h+KWA68+z1mUZ+dzDjK0OpidQopWWlrQpNhOYGgW7ZDGqLz+TujI0158woeC85asgzCRxGJrplL9s/8OlNjD55MjqRL8ifvyzWf1kAtmweXEb6X47eGW2OpqJTUi7F8CPDQoxw8gSPpWibQ8hYvKS6uhtktEH5VKku+Ma3fYWGJa5moCdvXD8JEwL/GqC650WfQTD0vNSdQIgtmwmUKa61rFTqRn2hnDzX77If/R7omqzQbvX116QxEx6UZBr3rKPkIDyeVP+ATcJ+QNYc6huaNNR3aOliwwcXHt2DjvvimR7kxuZp9Jq82Fz11zuCFeAITfJt8Zvj1zJpZ1D/HwD8P/oUlqbx8Ck6VmaOwSWxy6ObMEuU90CDyw9WGOziFmAAvgGczJk+64NT2+SkmaNOqFtP7mWvDQ6vVKX+6tN/57j3b+kD47j/eb2Y+jR4Co4gWCtKCVvwXb41trg2/VsiyK15tZyqADFKAkY4esqfOjpLLF0R09kcK0a6Ch6at85hwb6HkRxgexNce0R77s5PppF5FAHAri/wIN23h1L9e2jdD4cFvx7GnH+llV3aI3pM0yyTzT7X7gmBMZd6Jr2pSltmXkuKvqAbRaCiPHb+QEo+SXZbnWrWHZZIIo5JY9djttJSVcjbze0wxkrWVA3RcGvAXPfbbdt2bMtUhVhzjyDAX585SZsJe0alZMdma7Wff4GckQhQT5034Q+IJH75UldLh4BzR0qiOk0pnYw5PYwYS74rk0pBukUMilF6RarbdxtCBmsZMKTW+tqoLUtKWuppMd8JZl+9+NktKdLEZMiSI0+BIiXKVKhSo45py69AVyPeyMolZPalOzjmuholroqxg5Uw9gZ7zyswJXC4w6A1kKr3qdIpRLm3dA4MKh0cVchxlCrP7qdNgJE+RxA9z1Ta3K3SIuYaTGD0Z6pPuqFcv5UhrMGTEAA=') format('woff2'),
+  url('../font/iconfont.woff?t=1570515732803') format('woff'),
+  url('../font/iconfont.ttf?t=1570515732803') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('../font/iconfont.svg?t=1570515732803#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconicon_about:before {
+  content: "\e616";
+}
+
+.iconicon_setting:before {
+  content: "\e617";
+}
+
+.iconicon_Customerservice:before {
+  content: "\e618";
+}
+
+.iconicon_message:before {
+  content: "\e619";
+}
+
+.icontabbar_icon_me_s:before {
+  content: "\e61a";
+}
+
+.icontabbar_icon_me_n:before {
+  content: "\e61b";
+}
+
+.icontabbar_icon_data_s:before {
+  content: "\e61c";
+}
+
+.icontabbar_icon_device_n:before {
+  content: "\e61d";
+}
+
+.icontabbar_icon_waterquality_s:before {
+  content: "\e61e";
+}
+
+.iconicon_feedback:before {
+  content: "\e61f";
+}
+
+.icontabbar_icon_device_s:before {
+  content: "\e620";
+}
+
+.icontabbar_icon_waterquality_n:before {
+  content: "\e621";
+}
+
+.icontabbar_icon_data_n:before {
+  content: "\e622";
+}
+
+.iconicon_repair:before {
+  content: "\e623";
+}
+
