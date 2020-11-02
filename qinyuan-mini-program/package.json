@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mddir": "^1.1.1",
+    "vant-weapp": "^0.5.27"
+  }
+}

@@ -1,0 +1,21 @@
+.deviceCountContainer {
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 20px;
+}
+.deviceCountTitle {
+  color: #999999;
+}
+.deviceCountGrayBox {
+  padding: 2px 8px;
+  color: #666;
+  margin-left: 8px;
+  background: #f5f6fa;
+  border-radius: 2px;
+}
+.blue {
+  color: #537ae6;
+}
+.red {
+  color: #da5567;
+}

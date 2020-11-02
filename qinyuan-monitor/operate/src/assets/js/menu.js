@@ -1,0 +1,116 @@
+const menuList = [{
+	"moduleName": "数码管理",
+	"icon": "iconmenu_icon_numerical_code_management",
+	"sort": 1,
+	"moduleId": "filterNumManage",
+	"child": [{
+		"menuPath": "/digitalSend",
+		"menuIcon": null,
+		"moduleName": "数码发送",
+		"moduleId": "filterSend",
+		"menuSort": 2
+	}, {
+		"menuPath": "/digitalManage",
+		"menuIcon": null,
+		"moduleName": "数码配置",
+		"moduleId": "filterSetting",
+		"menuSort": 3
+	}, {
+		"menuPath": "/digitalStatistics",
+		"menuIcon": null,
+		"moduleName": "数码统计",
+		"moduleId": "filterStatistic",
+		"menuSort": 1
+	}]
+}, {
+	"moduleName": "设备管理",
+	"icon": "iconmenu_icon_device_management",
+	"sort": 2,
+	"moduleId": "deviceManage",
+	"child": [{
+		"menuPath": "/deviceList",
+		"menuIcon": null,
+		"moduleName": "设备列表",
+		"moduleId": "deviceList",
+		"menuSort": 1
+	}, {
+		"menuPath": "/deviceManage",
+		"menuIcon": null,
+		"moduleName": "设备配置",
+		"moduleId": "deviceSetting",
+		"menuSort": 2
+	}]
+}, {
+	"moduleName": "用户管理",
+	"icon": "iconmenu_icon_user_management",
+	"sort": 3,
+	"moduleId": "userManage",
+	"child": [{
+		"menuPath": "/userList",
+		"menuIcon": null,
+		"moduleName": "用户列表",
+		"moduleId": "userList",
+		"menuSort": 1
+	}]
+}, {
+	"moduleName": "配置中心",
+	"icon": "iconmenu_icon_configuration_center",
+	"sort": 4,
+	"moduleId": "settingCenter",
+	"child": [{
+		"menuPath": "/productionSet",
+		"menuIcon": null,
+		"moduleName": "产品设置",
+		"moduleId": "productSetting",
+		"menuSort": 1
+	}]
+}, {
+	"moduleName": "客服服务",
+	"icon": "iconmenu_icon_customer_service",
+	"sort": 5,
+	"moduleId": "customerService",
+	"child": null
+}, {
+	"moduleName": "系统管理",
+	"icon": "iconmenu_icon_system_management",
+	"sort": 6,
+	"moduleId": "systemManage",
+	"child": [{
+		"menuPath": "/staffManage",
+		"menuIcon": null,
+		"moduleName": "员工管理",
+		"moduleId": "accountManage",
+		"menuSort": 2
+	}, {
+		"menuPath": "/deviceLog",
+		"menuIcon": null,
+		"moduleName": "设备日志",
+		"moduleId": "deviceLog",
+		"menuSort": 6
+	}, {
+		"menuPath": "/emailManage",
+		"menuIcon": null,
+		"moduleName": "邮箱管理",
+		"moduleId": "mailManage",
+		"menuSort": 1
+	}, {
+		"menuPath": "/roleManage",
+		"menuIcon": null,
+		"moduleName": "角色管理",
+		"moduleId": "roleManage",
+		"menuSort": 4
+	}, {
+		"menuPath": "/supplierManage",
+		"menuIcon": null,
+		"moduleName": "供应商管理",
+		"moduleId": "supplierManage",
+		"menuSort": 3
+	}, {
+		"menuPath": "/log",
+		"menuIcon": null,
+		"moduleName": "系统日志",
+		"moduleId": "systemLog",
+		"menuSort": 5
+	}]
+}]
+export default menuList

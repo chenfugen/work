@@ -1,0 +1,45 @@
+.siderHeight{
+  height:100%;
+  background: #212B30;
+}
+.logo {
+  height: 54px;
+  background:url("../../static/image/logo_white.png") no-repeat;
+  background-size:90% 90%;
+  margin:5px 50px;
+}
+.hideLogo{
+  height: 54px;
+  background:url("../../static/image/logo_hide.png") center no-repeat;
+  background-size:70% 70%;
+  margin:5px 10px;
+}
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+  color: rgba(255, 255, 255, 0.65);
+  background: #212B30;
+}
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  background-color: #229794;
+}
+.ant-menu-item-selected {
+  .link{
+    color: rgba(255, 255, 255, 1);
+  }
+}
+.ant-menu-inline-collapsed{
+  .moduleId{
+    color: rgba(255, 255, 255, 0);
+  }
+  .link:hover{
+    color: rgba(255, 255, 255, 0);
+  }
+}
+.link{
+  color: rgba(255, 255, 255, 0.65);
+}
+.link:hover{
+  color: rgba(255, 255, 255, 1);
+}
+.active{
+  color: #ffffff;
+}

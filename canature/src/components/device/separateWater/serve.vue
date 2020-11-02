@@ -7,13 +7,13 @@
 			<p v-show="days>0" class="dot" :class="{'serve0':servePercent==0,'serve1':servePercent==1,'serve2':servePercent==2,'serve3':servePercent==3,'serve4':servePercent==4,'serve5':servePercent==5,'serve6':servePercent==6,'serve7':servePercent==7,'serve8':servePercent==8,'serve9':servePercent==9,'serve10':servePercent==10}"></p>
 		</div>
 		<div id="waterChart" class="waterChart"></div>
-		<p class="serveTitle">TDS：水中溶解性固体总量；TOC：水质总有机碳含量</p>
+		<p class="serveTitle">TDS：水中溶解性固体总量；TOC：水中总有机碳含量</p>
 	    <hr style="height:1px;border:none;border-top:1px dashed #eee;" />
 		<p class="explain">
-			TDS:水质优(0~50mg/L)；水质一般(50~100mg/L)；水质差(≥100mg/L)
+			TDS:水质优(0~50mg/L)；水质良(50~100mg/L)；水质差(≥100mg/L)
 		</p>
 		<p class="explain">
-			TOC:水质优(0~0.5mg/L)；水质一般(0.5~1.0mg/L)；水质差(≥1.0mg/L)
+			TOC:水质优(0~0.5mg/L)；水质良(0.5~1.0mg/L)；水质差(≥1.0mg/L)
 		</p>
 	</div>
 </template>

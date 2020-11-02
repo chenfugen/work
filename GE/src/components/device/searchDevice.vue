@@ -100,7 +100,7 @@
 												params: {
 													"accessKey":that.$store.state.accessKey,
 													"productKey":productMsg.productKey,
-													"customerId":"GE"
+													"customerId":"gewater"
 												}
 											}).then((res) => {
 												if(res.data.success) {                               												
@@ -174,7 +174,7 @@
 														}
 													})
 												} else {
-													window.location.href = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzAwMzMzNzUyOQ==&sharer_username=gh_1eaf9ab0fd9f&subscene=0&clicktime=1558688755#wechat_redirect";
+													window.location.href = "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg4NTI5MjMyOA==&scene=124#wechat_redirect";
 												}
 											})
 										}

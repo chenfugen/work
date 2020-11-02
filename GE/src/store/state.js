@@ -7,8 +7,8 @@ export default {
 	IP: process.env.API_ROOT,
 	accessKey: "1SNc3DS4W65fYLBI03SokWOSwUHcfjV4",
 	commonKey: "KPvJa7VymCFIJYFQlD1zoesA1crMp4jS",
-	appId:"wx02b59aef120e1083", //"wx2b7b943109f5b60c",
-	appsecret:"6f3ab4ad1b14444f8b1677412414b0f1", //"08ef8db905e83c41732fc4930c28b6f8",
+	appId:"wx8c29279d383e03c2", //"wx2b7b943109f5b60c",
+	appsecret:"611a0fff8f1d000feaea7dc8046cd626", //"08ef8db905e83c41732fc4930c28b6f8",
 	client: "", //全局mqtt
 	userInfo: "", //用户信息
 	deviceList: "", //设备列表
@@ -774,6 +774,6 @@ export default {
 		"saveBottleNumber": {
 			time: 0,
 			value: 0
-		}	
+		}
 	}
 }

@@ -1,0 +1,33 @@
+.rowItem {
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.rowItem::before {
+  display: table;
+  content: '';
+}
+.rowItem::after {
+  display: table;
+  content: '';
+}
+.label {
+  text-align: left;
+  vertical-align: middle;
+  float: left;
+  font-size: 14px;
+  width: 70px;
+  word-break: break-all;
+  color: #999;
+  line-height: 22px;
+  box-sizing: border-box;
+}
+.content {
+  margin-left: 70px;
+  line-height: 22px;
+  font-size: 14px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 22px;
+}

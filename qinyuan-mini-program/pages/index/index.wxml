@@ -1,0 +1,5 @@
+<view class="container">
+	<navBar title='主页' color='black' iconColor='white'></navBar>
+	<view class="index">
+	</view>
+</view>

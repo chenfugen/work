@@ -1,0 +1,15 @@
+.user {
+  font-size: 14px;
+  color: #ffffff;
+  float: right;
+  margin-right: 48px;
+}
+
+.user::before,
+.user::after {
+  display: table;
+  content: '';
+}
+.user:hover {
+  cursor: pointer;
+}

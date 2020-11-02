@@ -43,13 +43,11 @@ var router = new VueRouter({
 	routes: routers
 })
 
-
-router.beforeEach((to, from, next) => {
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
-  next()
+router.afterEach(() => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 })
+
 
 for (let key in vueFilter){ 
    Vue.filter(key,vueFilter[key]) 

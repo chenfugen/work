@@ -1,37 +1,51 @@
 <template>
 	<div class="reset">
-		<ul>
+		<ul v-if="device.productKey=='a1obsHkefOT'">
 			<li>
 				<span>
-					CPF1值复位
+					PCF值复位
 				</span>
-				<span class="set" @click="reset('PP1值')">重置</span>
+				<span class="set" @click="reset('PCF值')">重置</span>
 			</li>
 			<li>
-				<span>
-					CPF2值复位
-				</span>
-				<span class="set" @click="reset('PP2值')">重置</span>
-			</li>
-			<li v-if="device.productKey=='a1xjge89hkA'">
 				<span>
 					RO值复位
 				</span>
 				<span class="set" @click="reset('RO值')">重置</span>
 			</li>
-			<li v-else>
-				<span>
-					NF3值复位
-				</span>
-				<span class="set" @click="reset('NF值')">重置</span>
-			</li>
-			<li>
-				<span>
-					CTO4值复位
-				</span>
-				<span class="set" @click="reset('CTO值')">重置</span>
-			</li>			
 		</ul>
+    <ul v-else>
+    	<li>
+    		<span>
+    			CPF1值复位
+    		</span>
+    		<span class="set" @click="reset('PP1值')">重置</span>
+    	</li>
+    	<li>
+    		<span>
+    			CPF2值复位
+    		</span>
+    		<span class="set" @click="reset('PP2值')">重置</span>
+    	</li>
+    	<li v-if="device.productKey=='a1xjge89hkA'">
+    		<span>
+    			RO值复位
+    		</span>
+    		<span class="set" @click="reset('RO值')">重置</span>
+    	</li>
+    	<li v-else>
+    		<span>
+    			NF3值复位
+    		</span>
+    		<span class="set" @click="reset('NF值')">重置</span>
+    	</li>
+    	<li>
+    		<span>
+    			CTO4值复位
+    		</span>
+    		<span class="set" @click="reset('CTO值')">重置</span>
+    	</li>
+    </ul>
 	</div>
 </template>
 
@@ -52,7 +66,7 @@
 				that.$dialog.confirm({
 					message:'请确认您已经更换新的滤芯，否则可能影响您的用水水质',
 				}).then(() => {
-					let fliterReset;					
+					let fliterReset;
 					switch(value) {
 						case "PP1值":
 							fliterReset = [0]
@@ -68,8 +82,11 @@
 							break;
 						case "PP2值":
 							fliterReset = [3]
-							break;											
-					}					
+							break;
+            case "PCF值":
+            	fliterReset = [0]
+            	break;
+					}
 					const deviceMsg = {
 						"fliterReset": fliterReset
 					}

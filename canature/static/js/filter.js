@@ -56,10 +56,21 @@ const vFilter = {
 			return "0" + res + ":00";
 		}
 	},
+  deviceTitleFilter: res => {
+  	let deviceTitle;
+    let deviceList=["a1Yg9aEngv9","a1RDGsLn2gH","a1NRXrQiNne","a1EUR5GZocU","a1bA2DszH3T","a1b4T0fB2F0"];
+  	if(deviceList.indexOf(res) > -1 ){
+  		deviceTitle = "IMEI";
+  	}else{
+  		deviceTitle = "MAC";
+  	}
+  	return deviceTitle;
+  },
 	deviceTypeFilter: res => {
 		let deviceType;	
-	  if(res == "a1Yg9aEngv9" || res == "a1RDGsLn2gH" || res == "a1NRXrQiNne" || res == "a1EUR5GZocU" || res == "a1bA2DszH3T" || res == "a1b4T0fB2F0") {
-			deviceType = "2G";
+    let deviceList=["a1Yg9aEngv9","a1RDGsLn2gH","a1NRXrQiNne","a1EUR5GZocU","a1bA2DszH3T","a1b4T0fB2F0"];
+    if(deviceList.indexOf(res) > -1 ){
+    	deviceType = "2G";	  
 		}else{
 			deviceType = "WIFI";
 		}

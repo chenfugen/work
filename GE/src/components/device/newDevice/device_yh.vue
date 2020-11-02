@@ -13,8 +13,9 @@
 					<img v-if="bindType!=2" src="../../../../static/image/icon_qrcode.png" class="qrcodeIcon" @click="set(2)" />
 				</div>
 				<div class="flow">
-					<p class="waterNum">{{deviceMsg.regenRemain.value*10}}<span>L</span></p>
-					<p class="water_title">可使用水量</p>
+					<p class="waterNum" v-if="((deviceMsg.customVolPeriodic.value/100)*1000-deviceMsg.waterVolPeriodic.value)>0">{{((deviceMsg.customVolPeriodic.value/100)*1000-deviceMsg.waterVolPeriodic.value).toFixed(0)}}<span>L</span></p>
+					<p class="waterNum" v-else>0<span>L</span></p>
+					<p class="water_title">可使用水量(L)</p>
 					<img src="../../../../static/image/bg@3x.png" onclick="return false" />
 					<van-circle v-model="currentRate" :rate="percent" size="100" :stroke-width="50" color="#00B5E2 " layer-color="none" :speed="50" class="main" />
 				</div>
@@ -37,7 +38,7 @@
 					</li>
 					<li>
 						<p class="waterSet">周期已用水量(L)</p>
-						<p class="waterValue">{{deviceMsg.waterVolPeriodic.value*10}}</p>
+						<p class="waterValue">{{deviceMsg.waterVolPeriodic.value}}</p>
 						<div class="line"></div>
 					</li>
 					<li v-if="device.productKey=='a1TQBPNk4cT' || device.productKey=='a1ZTu3R5BKD' || device.productKey=='a1VmZ7nWwyQ'">
@@ -72,6 +73,10 @@
 							<van-icon class="link" name="arrow" />
 						</p>
 					</li>-->
+					<li>
+						<p class="waterSet"></p>
+						<p class="waterValue"></p>
+					</li>
 				</ul>
 				<div style="width:100%;height:1rem;"></div>
 				<div class="device_hint" v-show="isnormal==2" @click='checkFault'>
@@ -96,7 +101,7 @@
 			</div>
 		</v-touch>
 		<van-dialog v-model="phoneShow" show-cancel-button :before-close="beforeClose" confirm-button-text="拨打">
-			<p class="content">客户热线 <span style="color:#1E9FFF;">400-8201199</span></p>
+			<p class="content">客户热线 <span style="color:#1E9FFF;">400-788-7171</span></p>
 		</van-dialog>
 	</div>
 </template>
@@ -205,9 +210,9 @@
 						this.device = res.data.data.device;
 						document.title = this.device.deviceNickName== this.device.deviceName? this.device.productName:this.device.deviceNickName
 						this.deviceMsg = res.data.data.property;
-						let regenRemain = this.deviceMsg.regenRemain.value;
+						let regenRemain = (this.deviceMsg.customVolPeriodic.value/100)*1000;
 						let waterVolPeriodic = this.deviceMsg.waterVolPeriodic.value;
-						this.percent = Number(regenRemain / (regenRemain + waterVolPeriodic) * 100);
+						this.percent = Number((regenRemain-waterVolPeriodic )/ regenRemain * 100);
 						this.$cookies.set('firmwareVersion', this.device.firmwareVersion);
 						this.$store.commit("changeNewDevice", this.deviceMsg);
 						this.isnormal = this.device.status == "offline" ? 0 : 1;					
@@ -388,7 +393,7 @@
 			},
 			beforeClose(action, done) {
 				if(action === 'confirm') {
-					window.location.href = "tel:4008201199";
+					window.location.href = "tel:4007887171";
 					done();
 				} else {
 					done();

@@ -1,0 +1,63 @@
+@import '../../../styles/var.less';
+
+.ant-page-header-ghost.model-detail-header {
+  padding: 0 0 16px 0;
+}
+.gray-container {
+  background: @content-background-color;
+  padding: 16px;
+  display: flex;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  .part-one {
+    width: 25%;
+    .ant-descriptions {
+      .ant-descriptions-item {
+        padding-bottom: 8px;
+        &.no-padding {
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  .part-two {
+    width: 50%;
+    .ant-descriptions {
+      .ant-descriptions-item {
+        padding-bottom: 8px;
+        &.no-padding {
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+  .leave-part {
+    flex: 1;
+    text-align: right;
+  }
+  .line {
+    width: 1px;
+    margin-right: 24px;
+    background: rgba(51, 51, 51, 0.1);
+  }
+}
+.tab-container {
+  .ant-tabs-card {
+    .ant-tabs-content {
+      padding: 0 16px;
+    }
+    .ant-tabs-tab {
+      background: #f5f6fa;
+      .ant-tabs-tab-btn {
+        color: #666;
+      }
+    }
+    .ant-tabs-tab.ant-tabs-tab-active {
+      background: #fff;
+      .ant-tabs-tab-btn {
+        color: #333;
+        font-weight: bold;
+      }
+    }
+  }
+}

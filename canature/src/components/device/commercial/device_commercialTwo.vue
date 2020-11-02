@@ -20,8 +20,8 @@
 					<p class="waterSet">热水(℃)</p>
 				</li>
 				<li>
-					<p class="waterValue">{{deviceMsg.waterInTemp.value}}</p>
-					<p class="waterSet">冷水(℃)</p>
+					<p class="waterValue">{{deviceMsg.saveBottleNumber.value}}</p>
+					<p class="waterSet">节约塑料瓶</p>
 				</li>
 				<li v-if='device.productKey == "a1C6AilwYUc" || device.productKey == "a1EUR5GZocU"'>
 					<p class="waterValue">{{deviceMsg.tdsIn.value}}</p>
@@ -43,9 +43,9 @@
 					<p class="waterSet">加热</p>
 				</li>
 				<li>
-					<p class="waterValue" v-if="deviceMsg.refrigeration.value==0"><img src="../../../../static/image/icon_refrigeration_dis.png" onclick="return false" /></p>
-					<p class="waterValue" v-else><img src="../../../../static/image/icon_refrigeration.png" onclick="return false" /></p>
-					<p class="waterSet">制冷</p>
+					<p class="waterValue" v-if="deviceMsg.heating.value==1"><img src="../../../../static/image/icon_energysaving_dis.png" onclick="return false" /></p>
+					<p class="waterValue" v-else><img src="../../../../static/image/btn_refrigeration_dis.png" onclick="return false" /></p>
+					<p class="waterSet">节能</p>
 				</li>
 				<li>
 					<p class="waterValue" v-if="deviceMsg.childLock.value==0"><img src="../../../../static/image/icon_child lock_dis.png" onclick="return false" /></p>
@@ -120,7 +120,7 @@
 						<p class="oprateImg"><img src="../../../../static/image/icon_product description@3x.png" /></p>
 						<p class="oprateName">产品说明</p>
 					</li>
-					<li class="oprateWay" @click="set(7)">
+					<li class="oprateWay"  @click="set(7)">
 						<p class="oprateImg"><img src="../../../../static/image/icon_f&q@3x.png" /></p>
 						<p class="oprateName">自主报修</p>
 					</li>

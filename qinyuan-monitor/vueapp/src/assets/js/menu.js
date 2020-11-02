@@ -1,0 +1,127 @@
+const menuList = [{
+	"moduleName": "滤芯产测",
+	"icon": "iconmenu_icon_filter_element_production",
+	"sort": 1,
+	"moduleId": "filterQc",
+	"child": [{
+		"menuPath": "/taskOrder",
+		"menuIcon": null,
+		"moduleName": "任务工单",
+		"moduleId": "taskOrder",
+		"menuSort": 1
+	}, {
+		"menuPath": "/taskLog",
+		"menuIcon": null,
+		"moduleName": "生产记录",
+		"moduleId": "taskLog",
+		"menuSort": 2
+	}]
+}, {
+	"moduleName": "成品抽检",
+	"icon": "iconmenu_icon_end_product_spot_check",
+	"sort": 2,
+	"moduleId": "productCheck",
+	"child": [{
+		"menuPath": '/sampling',
+		"menuIcon": null,
+		"moduleName": "开始抽检",
+		"moduleId": "startCheck",
+		"menuSort": 1
+	}]
+}, {
+	"moduleName": "系统管理",
+	"icon": "iconmenu_icon_system_management",
+	"sort": 3,
+	"moduleId": "systemManage",
+	"child": [{
+		"menuPath": '/factoryManage',
+		"menuIcon": null,
+		"moduleName": "工厂管理",
+		"moduleId": "factoryManage",
+		"menuSort": 1,
+		"child": [{
+			"moduleName": "删除员工",
+			"url": "/api/antifake/web/systemManage/accountManage/v1/deleteAccount"
+		}, {
+			"moduleName": "编辑员工信息",
+			"url": "/api/antifake/web/systemManage/accountManage/v1/updateUserAccount"
+		}, {
+			"moduleName": "新增员工",
+			"url": "/api/antifake/web/systemManage/accountManage/v1/createAccount"
+		}, {
+			"moduleName": "员工列表",
+			"url": "/api/antifake/web/systemManage/accountManage/v1/userAccountList"
+		}, {
+			"moduleName": "启用、禁用员工",
+			"url": "/api/antifake/web/systemManage/accountManage/v1/updateUserAccountStatus"
+		}]
+	}, {
+		"menuPath": '/staffManage',
+		"menuIcon": null,
+		"moduleName": "员工管理",
+		"moduleId": "accountManage",
+		"menuSort": 2,
+		"child": [{
+			"moduleName": "删除员工",
+			"url": "/api/antifake/web/systemManage/accountManage/v1/deleteAccount"
+		}, {
+			"moduleName": "编辑员工信息",
+			"url": "/api/antifake/web/systemManage/accountManage/v1/updateUserAccount"
+		}, {
+			"moduleName": "新增员工",
+			"url": "/api/antifake/web/systemManage/accountManage/v1/createAccount"
+		}, {
+			"moduleName": "员工列表",
+			"url": "/api/antifake/web/systemManage/accountManage/v1/userAccountList"
+		}, {
+			"moduleName": "启用、禁用员工",
+			"url": "/api/antifake/web/systemManage/accountManage/v1/updateUserAccountStatus"
+		}]
+	}, {
+		"menuPath": '/productManage',
+		"menuIcon": null,
+		"moduleName": "产品管理",
+		"moduleId": "productManage",
+		"menuSort": 3,
+		"child": [{
+			"moduleName": "产线管理",
+			"url": "/api/antifake/web/systemManage/productLine/v1/getProductLineList"
+		}]
+	}, {
+		"menuPath": '/roleManage',
+		"menuIcon": null,
+		"moduleName": "角色管理",
+		"moduleId": "roleManage",
+		"menuSort": 4,
+		"child": [{
+			"moduleName": "角色列表",
+			"url": "/api/antifake/web/systemManage/roleManage/v1/roleList"
+		}, {
+			"moduleName": "新增角色",
+			"url": "/api/antifake/web/systemManage/roleManage/v1/createRole"
+		}, {
+			"moduleName": "启用、禁用角色",
+			"url": "/api/antifake/web/systemManage/roleManage/v1/updateRoleStatus"
+		}, {
+			"moduleName": "删除角色",
+			"url": "/api/antifake/web/systemManage/roleManage/v1/deleteRole"
+		}, {
+			"moduleName": "编辑角色",
+			"url": "/api/antifake/web/systemManage/roleManage/v1/updateRole"
+		}]
+	}, {
+		"menuPath": '/log',
+		"menuIcon": null,
+		"moduleName": "日志记录",
+		"moduleId": "logRecord",
+		"menuSort": 5
+	}, {
+		"menuPath": '/configuration',
+		"menuIcon": null,
+		"moduleName": "工装机配置",
+		"moduleId": "machineConfig",
+		"menuSort": 6
+	}]
+}]
+
+export default menuList

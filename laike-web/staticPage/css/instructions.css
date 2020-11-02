@@ -1,0 +1,42 @@
+#instructions {
+  width: 95%;
+  float: left;
+  padding: 0 2.5%;
+  background: #FFFFFF;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 4px; }
+  .instTitle,.distTitle{
+	  display: none;
+  }
+  #instructions p {
+    display: inline-block; }
+  #instructions .title {
+    width: 100%;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 16px;
+    font-weight: bold; }
+  #instructions .p1 {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: bold; 
+	}
+  #instructions .p2 {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold; }
+  #instructions .p-center {
+    font-size: 16px;
+    width: 100%;
+    line-height: 22px;
+    padding: 1.5px 0; }
+  #instructions .p-img {
+    display: block; 
+		max-width: 100%;
+		margin:5px auto;
+		}
+		#instructions .p-cen-img {
+		height: 30px;
+		}

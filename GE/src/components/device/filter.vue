@@ -1,13 +1,13 @@
 <template>
 	<div class="filterList">
-		<ul class="filters" v-if="productKey=='a1i8kpwPW9w' || productKey=='a1u3fpsU6yg'">
+		<ul class="filters" v-if="isShow">
 			<li>
 				<p class="filterMsg">
 					<span class="filterName">PP滤芯寿命  {{deviceMsg.filterPP.value}}%</span>
 					<van-button round class="pay" @click="pay">购买</van-button>
 				</p>
 			</li>
-			<li v-if="productKey=='a1i8kpwPW9w'">
+			<li v-if="isRo">
 				<p class="filterMsg">
 					<span class="filterName">RO滤芯寿命  {{deviceMsg.filterRO.value}}%</span>
 					<van-button round class="pay" @click="pay">购买</van-button>
@@ -53,7 +53,11 @@
 	export default {
 		data() {
 			return {
-				productKey: this.$route.query.productKey
+				productKey: this.$route.query.productKey,
+        isShow:false,
+        isRo:false,
+        commonfilters:["a1u3fpsU6yg","a1i8kpwPW9w","a1wG79dZYPJ"],
+        ROfilters:["a1i8kpwPW9w","a1wG79dZYPJ"],
 			}
 		},
 		computed: {
@@ -61,15 +65,20 @@
 				if(this.productKey == "a12KzXXwRii" || this.productKey == "a1ZLeXs5VCX" ) {
 					return this.$store.state.deviceMsg;
 				}
-				if(this.productKey == "a1u3fpsU6yg" || this.productKey == "a1i8kpwPW9w") {
+				if(this.commonfilters.indexOf(this.productKey) > -1){
 					return this.$store.state.device_commercialMsg;
 				}else{
 					return this.$store.state.newDeviceMsg;
-				}				  
+				}
 			}
 		},
 		mounted() {
-
+      if( this.commonfilters.indexOf(this.productKey) > -1){
+        this.isShow=true
+      }
+      if( this.ROfilters.indexOf(this.productKey) > -1){
+        this.isRo=true
+      }
 		},
 		methods: {
 			pay() {

@@ -116,8 +116,11 @@
 					} else {
 						that.$toast(res.data.message);
 					}
-				}).catch((res) => {
-					console.log(res);
+				}).catch((error) => {
+					if(String(error).toLowerCase().indexOf('timeout')!=-1){
+                        that.$toast('服务器繁忙，请稍后重试');
+                        return;
+                   }
 				})
 			},
 			restart() {

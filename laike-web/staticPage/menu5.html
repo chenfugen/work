@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="menu.css">
+    <script src="template.js"></script>
+</head>
+
+<body>
+    <div id="menu-details"></div>
+    <script id="menu" type="text/html">
+
+		{{if imageName != '' && imageName != null}}
+            <img class="img1" src="{{domain}}/lexy/api/common/getMenuH5Image?fileName={{imageName+'&accessKey=EFCC652BDC75C326E9D5C65D5538112A&isStep=false}}"/>
+		{{/if}}
+		
+		<p class="title1">{{name}}</p>
+		
+		{{if fastFood!= null&&fastFood!= ''}}
+			<p class="cen2" style="clear: both;">{{hour+minute}}</p>
+		{{else}}
+			<p class="cen2" style="clear: both;">{{hour+minute+' | '+people}}</p>
+		{{/if}}
+
+		<!-- {{if foodValue != ''&& foodValue != null&& foodValue != 0}}
+			<p class="cen3">
+				<img class="left" src="./comma_left.png"/>
+				{{foodValue}}
+				<img class="right" src="./comma_right.png"/>
+			</p>
+		{{/if}} -->
+		
+        <p class="title2">食材</p>
+		{{each seasonings}}
+			<p class="cen4">
+				<font style="width:32%;">{{$value.value}}</font>
+				<font style="width:64%;">{{$value.name+($value.note.length>0?'('+$value.note+')':'')}}</font>
+			</p>
+		{{/each}}
+        <p class="title2" style="margin-top:46px;">步骤简介</p>
+        <span class="cen4 cen40" style="white-space: pre-line;float:left;">{{stepDescribe}}</span>
+
+		{{if !fastFood}}
+        			<p class="title2" style="margin-top:46px;">详细步骤</p>
+		{{/if}}
+		{{each steps}}
+		{{if !fastFood}}
+			<div style="float:left;width:100%">
+				<p class="cen4">
+
+		{{if $value.beforeDescribe!=""&&$value.beforeDescribe!=null}}
+			{{$index+1+'､'+$value.beforeDescribe}}
+		{{else}}
+			{{$index+1+'､'+$value.describe}}
+		{{/if}}
+				</p>
+				{{if $value.stepImage != ''&& $value.stepImage != null&& $value.stepImage != '-inner.undefined'&&$value.stepImage[0]=='.'}}
+						<img style="background: #d3d3d3;" class="img2" src="{{$value.stepImage}}"/>
+				{{/if}}
+				{{if $value.stepImage != ''&& $value.stepImage != null&& $value.stepImage != '-inner.undefined'&&$value.stepImage[0]!='.'}}
+						<img style="background: #d3d3d3;" class="img2" src="{{domain}}/lexy/api/common/getMenuH5Image?fileName={{$value.stepImage+'&accessKey=EFCC652BDC75C326E9D5C65D5538112A&isStep=true'}}"/>
+                        {{/if}}
+
+			</div>
+		{{/if}}
+		{{/each}}
+	</script>
+    <script>
+        function loadXMLDoc() {
+            var domain = 'https://' + window.location.host,
+                para = null;
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+                //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var data = JSON.parse(xmlhttp.response);
+                    if (data.data.minute > 60) {
+                        data.data.hour = parseInt(data.data.minute / 60) + '小时';
+                        data.data.minute = data.data.minute % 60;
+                    } else if (data.data.minute == 60) {
+                        data.data.hour = 1 + '小时';
+                        data.data.minute = '';
+                    } else {
+                        data.data.hour = '';
+                    }
+                    if (data.data.minute == 0 && data.data.hour == 0) {
+                        data.data.minute = 1 + '分钟';
+                    } else {
+                        if (data.data.minute == 0) {
+                            data.data.minute = '';
+                        } else {
+                            data.data.minute = data.data.minute + '分钟';
+                        }
+                    }
+                    para = Object.assign({}, data.data);
+                    para.domain = para.domain
+                    var html = template("menu", para);
+                    document.getElementById('menu-details').innerHTML = html;
+                }
+            }
+            xmlhttp.open("GET", domain+"/lexy/api/web/singleMenu/menu?id=" + getQueryVariable("id"), true);
+            xmlhttp.send();
+        }
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return (false);
+        }
+        loadXMLDoc();
+    </script>
+</body>
+
+</html>

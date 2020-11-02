@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<van-cell title="更换手机号码" is-link to="/changePhone" class="phone">已绑定{{phone | phoneFilter}}</van-cell>
-		<div class="exit">
+		<!--<div class="exit">
 			<van-button round type="danger" @click="exit">注销账号</van-button>		
 		</div>
-		<p class="cancelHint">提示：注销账号，系统将永久删除您的账户，账户下绑定的设备也会相应解除，您分享给他人的设备也将不被使用</p>
+		<p class="cancelHint">提示：注销账号，系统将永久删除您的账户，账户下绑定的设备也会相应解除，您分享给他人的设备也将不被使用</p>-->
 	</div>
 </template>
 

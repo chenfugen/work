@@ -1,0 +1,49 @@
+.ant-table-pagination.ant-pagination {
+  float: right;
+  margin: 16px 15px;
+}
+.assetStatus{
+  .stock{
+    display: inline-block;
+    background: #60ACFC;
+    width:10px;
+    height: 10px;
+    border-radius:10px 10px;
+    overflow: hidden;
+  }
+  .user{
+    display: inline-block;
+    background: #5BC49F;
+    width:10px;
+    height: 10px;
+    border-radius:10px 10px;
+    overflow: hidden;
+  }
+  .recycle{
+    display: inline-block;
+    background:#FF7B7B;
+    width:10px;
+    height: 10px;
+    border-radius:10px 10px;
+    overflow: hidden;
+  }
+}
+.repairStatus{
+  .false{
+    display: inline-block;
+    background:white;
+    border: 1px solid #AAAAAA;
+    width:10px;
+    height: 10px;
+    border-radius:10px 10px;
+    overflow: hidden;
+  }
+  .true{
+    display: inline-block;
+    background:#FF7B7B;
+    width:10px;
+    height: 10px;
+    border-radius:10px 10px;
+    overflow: hidden;
+  }
+}

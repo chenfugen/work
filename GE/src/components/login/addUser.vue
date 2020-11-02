@@ -354,8 +354,8 @@
 					return false
 				}
 				this.uploadShow = false;
-				var windowURL = window.URL || window.webkitURL;        
-				//创建图片文件的url		        
+				var windowURL = window.URL || window.webkitURL;        
+				//创建图片文件的url		        
 				this.headerImg = windowURL.createObjectURL(event.file);
 				var fromData = new FormData();
 				fromData.append("file", event.file);

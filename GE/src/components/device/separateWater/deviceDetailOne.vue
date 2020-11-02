@@ -12,23 +12,31 @@
 				<img v-if="bindType!=2" src="../../../../static/image/icon_qrcode.png" class="qrcodeIcon" @click="set(2)" />
 			</div>
 			<div class="flow">
-				<ul v-if='device.productKey=="a12LTZQEw02"' class="tdsContent">
+				<ul v-if='device.filterType=="RO"'  class="tdsContent" @click="viewPage('serve')">
 					<li class="purifierWater">
-						<p class="waterNum">{{deviceMsg.tdsOut.value}}</p>
+						<p class="waterNum"><span>&nbsp;{{deviceMsg.tdsOut.value}}</span><span v-if="deviceMsg.tdsOut.value<=50" class="status"> 优</span>
+							<span v-else-if="deviceMsg.tdsOut.value>=100" class="status bad"> 差</span>
+							<span v-else class="status"> 良</span></p>
 						<p class="water_title">净水TDS</p>
 					</li>
 					<li class="sourceWater">
-						<p class="waterNum">{{deviceMsg.tdsIn.value}}</p>
+						<p class="waterNum"><span>&nbsp;{{deviceMsg.tdsIn.value}}</span><span v-if="deviceMsg.tdsIn.value<=50" class="status"> 优</span>
+							<span v-else-if="deviceMsg.tdsIn.value>=100" class="status bad"> 差</span>
+							<span v-else class="status"> 良</span></p>
 						<p class="water_title">源水TDS</p>
 					</li>
 				</ul>
-				<ul v-else class="tdsContent">
+				<ul v-else class="tdsContent" @click="viewPage('serve')">
 					<li class="purifierWater">
-						<p class="waterNum">{{deviceMsg.tocOut.value}}</p>
+						<p class="waterNum"><span>&nbsp;{{deviceMsg.tocOut.value}}</span><span v-if="deviceMsg.tocOut.value<=0.5" class="status"> 优</span>
+							<span v-else-if="deviceMsg.tocOut.value>=1" class="status bad"> 差</span>
+							<span v-else class="status"> 良</span></p>
 						<p class="water_title">净水TOC</p>
 					</li>
 					<li class="sourceWater">
-						<p class="waterNum">{{deviceMsg.tocIn.value}}</p>
+						<p class="waterNum"><span>&nbsp;{{deviceMsg.tocIn.value}}</span><span v-if="deviceMsg.tocIn.value<=0.5" class="status">优</span>
+							<span v-else-if="deviceMsg.tocIn.value>=1" class="status bad"> 差</span>
+							<span v-else class="status"> 良</span></p>
 						<p class="water_title">源水TOC</p>
 					</li>
 				</ul>
@@ -41,7 +49,7 @@
 					<van-tab title="用水统计"></van-tab>
 				</van-tabs>
 			</div>
-		   <Myecharts v-show="!isShowDate"  :device="device" idName="separateOneChart"  ref="init"></Myecharts>
+			<Myecharts v-show="!isShowDate" :device="device" idName="separateOneChart" ref="init"></Myecharts>
 			<ul class="waterMsg" v-show="isShowDate">
 				<li @click="viewPage('temp')">
 					<div class="deviceMsg">
@@ -77,7 +85,7 @@
 				<img src="../../../../static/image/icon_blue_more.png" @click="goMore" />
 			</div>
 			<van-dialog v-model="phoneShow" show-cancel-button :before-close="beforeClose" confirm-button-text="拨打">
-				<p class="content">客户热线 <span style="color:#1E9FFF;">400-8201199</span></p>
+				<p class="content">客户热线 <span style="color:#1E9FFF;">400-788-7171</span></p>
 			</van-dialog>
 		</div>
 	</v-touch>
@@ -102,7 +110,7 @@
 				DeviceName: "",
 				DeviceSecret: "",
 				client: "",
-				device:{},
+				device: {},
 				deviceList: this.$store.state.deviceList,
 				waterLog: "",
 				isShowDate: true,
@@ -129,7 +137,7 @@
 			showChart(value) {
 				this.isShowDate = !this.isShowDate;
 				if(value == 1) {
-					 this.$refs.init.getWaterLog(1);
+					this.$refs.init.getWaterLog(1);
 				}
 			},
 			swiperleft() {
@@ -185,8 +193,8 @@
 								filterName: "CTO滤芯寿命",
 								filterLifetime: this.deviceMsg.filterCTO.value,
 							}
-						]
-						if(this.device.productKey == "a12LTZQEw02") {
+						]        
+						if(this.device.filterType=="RO") {
 							result.push({
 								filterName: "RO滤芯寿命",
 								filterLifetime: this.deviceMsg.filterRO.value,
@@ -242,9 +250,9 @@
 			},
 			checkFault() {
 				this.$router.push("/faultList?productKey=" + this.device.productKey + "&deviceName=" + this.device.deviceName);
-			},			
+			},
 			goMore() {
-				let urlName = "/more?deviceId=" + this.$route.params.id + "&bindType=" + this.$route.params.bindType+ "&isnormal=" + this.isnormal;
+				let urlName = "/more?deviceId=" + this.$route.params.id + "&bindType=" + this.$route.params.bindType + "&isnormal=" + this.isnormal;
 				this.$router.push(urlName);
 			},
 			clear() {
@@ -287,7 +295,7 @@
 			},
 			beforeClose(action, done) {
 				if(action === 'confirm') {
-					window.location.href = "tel:4008201199";
+					window.location.href = "tel:4007887171";
 					done();
 				} else {
 					done();
@@ -297,7 +305,7 @@
 	}
 </script>
 <style lang="scss">
-	.separateDevice {
+		.separateDevice {
 		color: white;
 		overflow: hidden;
 		.van-hairline--bottom::after {
@@ -380,15 +388,22 @@
 				margin-left: -1rem;
 				z-index: 9999;
 				.purifierWater {
-					width: 70%;
-					margin: 0.2rem auto 0.1rem auto;
-					border-bottom: 1px solid #eee;
+					width: 60%;
+					margin: 0.25rem auto 0.1rem auto;
+					border-bottom: 1px solid #ccc;
 					.waterNum {
-						margin-top: 0.1rem;
 						font-size: 0.4rem;
 						color: #333;
+						font-weight: lighter;
 						text-align: center;
-						line-height: 0.5rem;
+						.status {
+							display: inline;
+							font-size: 0.12rem;
+							color: #999;
+						}
+						.bad {
+							color: #FF4444;
+						}
 					}
 					.water_title {
 						opacity: 0.7;
@@ -396,15 +411,23 @@
 						color: #999;
 						letter-spacing: 0;
 						text-align: center;
-						line-height: 0.28rem;
+						line-height: 0.24rem;
 					}
 				}
 				.sourceWater {
 					.waterNum {
 						font-size: 0.22rem;
 						color: #333;
+						font-weight: lighter;
 						text-align: center;
-						line-height: 0.24rem;
+						.status {
+							display: inline;
+							font-size: 0.1rem;
+							color: #999;
+						}
+						.bad {
+							color: #F56723;
+						}
 					}
 					.water_title {
 						opacity: 0.7;
@@ -412,135 +435,135 @@
 						color: #999;
 						letter-spacing: 0;
 						text-align: center;
-						line-height: 0.28rem;
+						line-height: 0.24rem;
 					}
 				}
 			}
-		}
-		.waterTemp {
-			background: white;
-			margin-top: -0.1rem;
-			.temp {
-				font-size: 0.22rem;
-				color: #005EB8;
-				text-align: center;
-				line-height: 0.4rem;
 			}
-			.waterTitle {
-				font-size: 0.12rem;
-				color: #999999;
-				letter-spacing: 0;
-				text-align: center;
-				line-height: 0.2rem;
+			.waterTemp {
+				background: white;
+				margin-top: -0.1rem;
+				.temp {
+					font-size: 0.22rem;
+					color: #005EB8;
+					text-align: center;
+					line-height: 0.4rem;
+				}
+				.waterTitle {
+					font-size: 0.12rem;
+					color: #999999;
+					letter-spacing: 0;
+					text-align: center;
+					line-height: 0.2rem;
+				}
 			}
-		}
-		.waterMsg {
-			height: 0.9rem;
-			background: white;
-			li {
-				float: left;
-				width: 50%;
-				height: 0.8rem;
-				text-align: center;
-				border-top: 1px solid #EAEFF3;
-				border-bottom: 1px solid #EAEFF3;
-				position: relative;
-				.deviceMsg {
-					vertical-align: top;
-					display: inline-block;
-					height: 100%;
-					margin-top: 0.25rem;
-					img {
-						float: left;
-						width: 0.36rem;
-						height: 0.36rem;
-					}
-					.deviceSet {
-						float: left;
-						margin-top: 0.03rem;
-						.waterValue {
-							text-align: left;
-							font-size: 0.16rem;
-							color: #333;
-							letter-spacing: 0;
-							.unit {
+			.waterMsg {
+				height: 0.9rem;
+				background: white;
+				li {
+					float: left;
+					width: 50%;
+					height: 0.8rem;
+					text-align: center;
+					border-top: 1px solid #EAEFF3;
+					border-bottom: 1px solid #EAEFF3;
+					position: relative;
+					.deviceMsg {
+						vertical-align: top;
+						display: inline-block;
+						height: 100%;
+						margin-top: 0.25rem;
+						img {
+							float: left;
+							width: 0.36rem;
+							height: 0.36rem;
+						}
+						.deviceSet {
+							float: left;
+							margin-top: 0.03rem;
+							.waterValue {
+								text-align: left;
+								font-size: 0.16rem;
+								color: #333;
+								letter-spacing: 0;
+								.unit {
+									font-size: 0.1rem;
+								}
+							}
+							.isDanger {
+								color: #ff6a00;
+							}
+							.waterSet {
+								opacity: 0.5;
 								font-size: 0.1rem;
+								color: #999;
+								letter-spacing: 0;
+								line-height: 0.10rem;
 							}
 						}
-						.isDanger {
-							color: #ff6a00;
-						}
-						.waterSet {
-							opacity: 0.5;
-							font-size: 0.1rem;
-							color: #999;
-							letter-spacing: 0;
-							line-height: 0.10rem;
-						}
+					}
+					.line {
+						position: absolute;
+						height: 100%;
+						width: 1px;
+						top: 1px;
+						right: 0px;
+						background: #EAEFF3;
+					}
+					.link {
+						font-size: 0.2rem;
+						color: #005EB8;
+						opacity: 0.7;
 					}
 				}
-				.line {
-					position: absolute;
-					height: 100%;
-					width: 1px;
-					top: 1px;
-					right: 0px;
-					background: #EAEFF3;
-				}
-				.link {
-					font-size: 0.2rem;
-					color: #005EB8;
-					opacity: 0.7;
+				.filter {
+					text-shadow: 0 0 5px #eee;
 				}
 			}
-			.filter {
-				text-shadow: 0 0 5px #eee;
+			.tab {
+				background: white;
+				padding: 0.1rem 0rem;
+			}
+			.van-tabs__nav--card {
+				border-radius: 0.03rem;
+			}
+			.device_hint {
+				position: fixed;
+				left: 0px;
+				bottom: 0.02rem;
+				width: 100%;
+				background: white;
+				z-index: 999;
+				border-bottom: 1px solid #eee;
+			}
+			.moreOne {
+				position: fixed;
+				width: 100%;
+				height: 0.5rem;
+				bottom: 0.45rem;
+				z-index: 999;
+				img {
+					float: right;
+					width: 0.48rem;
+					margin: 0.01rem 0.1rem;
+				}
+			}
+			.moreTwo {
+				position: fixed;
+				width: 100%;
+				height: 0.5rem;
+				bottom: 0.05rem;
+				z-index: 999;
+				img {
+					float: right;
+					width: 0.48rem;
+					margin: 0.01rem 0.1rem;
+				}
+			}
+			.content {
+				padding: 40px 0px;
+				text-align: center;
+				color: #bbb;
 			}
 		}
-		.tab {
-			background: white;
-			padding: 0.1rem 0rem;
-		}
-		.van-tabs__nav--card {
-			border-radius: 0.03rem;
-		}
-		.device_hint {
-			position: fixed;
-			left: 0px;
-			bottom: 0.02rem;
-			width: 100%;
-			background: white;
-			z-index: 999;
-			border-bottom: 1px solid #eee;
-		}
-		.moreOne {
-			position: fixed;
-			width: 100%;
-			height: 0.5rem;
-			bottom: 0.45rem;
-			z-index: 999;
-			img {
-				float: right;
-				width: 0.48rem;
-				margin: 0.01rem 0.1rem;
-			}
-		}
-		.moreTwo {
-			position: fixed;
-			width: 100%;
-			height: 0.5rem;
-			bottom: 0.05rem;
-			z-index: 999;
-			img {
-				float: right;
-				width: 0.48rem;
-				margin: 0.01rem 0.1rem;
-			}
-		}
-		.content {
-			padding: 40px 0px;
-			text-align: center;
-			color: #bbb;
-		}
-	}
 </style>

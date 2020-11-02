@@ -1,0 +1,39 @@
+.exceptionTips {
+  background: #eaeffd;
+  border-radius: 2px;
+  font-size: 12px;
+  color: #666666;
+  line-height: 20px;
+  padding: 6px 8px;
+  margin-bottom: 16px;
+}
+
+.chartBorder {
+  border: 1px solid #ebebef;
+}
+
+.empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 24px;
+  background: #fff;
+  border-radius: 4px;
+  padding: 16px;
+}
+.emptyTips {
+  font-size: 14px;
+  color: #999999;
+  line-height: 22px;
+}
+
+.hidden {
+  visibility: hidden;
+  height: 0px;
+  transition: all 0.3s;
+  overflow: hidden;
+  padding: 0;
+  margin-bottom: 0;
+}

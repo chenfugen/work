@@ -1,0 +1,11 @@
+.enum {
+  display: block;
+}
+.container {
+  margin-top: 8px;
+}
+.item {
+  display: inline;
+  background: #ecedee;
+  padding: 3px 6px;
+}

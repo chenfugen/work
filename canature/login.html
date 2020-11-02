@@ -12,7 +12,7 @@
 		<title>canature</title>
 	</head>
 
-	<body>	
+	<body>
 		<script>
 			//获取url参数
 			function getQueryString(name) {
@@ -20,7 +20,7 @@
 				var r = window.location.search.substr(1).match(reg);
 				if(r != null) return unescape(r[2]);
 				return null;
-			} 
+			}
 			function setCookie(name, value) {
 				var Days = 30;
 				var exp = new Date();
@@ -64,17 +64,19 @@
 			//测试服
 			//let url="https://smart-h5test.canature.com/"
 			//let api="https://smart-test.canature.com/"
-			//let appId="wx4cef7054339fc8ad"
-			let IP = returnCitySN.cip;
-			let lang = navigator.language || navigator.userLanguage; //常规浏览器语言和IE浏览器	
-			ajaxGet(api+"web/api/wechat/user/register/checkForeignUser", {
-				"accessKey": "1SNc3DS4W65fYLBI03SokWOSwUHcfjV4",
-				"ip": IP,
-			}, function(res) {
+			//let appId="wx8c29279d383e03c2"
+
+			// let IP = returnCitySN.cip;
+			// let lang = navigator.language || navigator.userLanguage; //常规浏览器语言和IE浏览器
+			// ajaxGet(api+"web/api/wechat/user/register/checkForeignUser", {
+			// 	"accessKey": "1SNc3DS4W65fYLBI03SokWOSwUHcfjV4",
+			// 	"ip": IP,
+			// }, function(res) {
 //				if(res.data.isForeignUser || lang != "zh-CN") {
 //					location.href = url+"error.html";
 //					return false;
 //				}
+//})
 				if(getQueryString("productKey") != null) {
 					var productMsg = {
 						productKey: getQueryString("productKey"),
@@ -85,8 +87,8 @@
 						"accessKey": "1SNc3DS4W65fYLBI03SokWOSwUHcfjV4",
 						"productKey": getQueryString("productKey"),
 					}, function(res) {
-						if(res.success){
-							setCookie("productMsg",JSON.stringify(productMsg));				
+						if(res.success){         
+							setCookie("productMsg",JSON.stringify(productMsg));
 							setCookie("productNet",res.data);
 							var REDIRECT_URI = encodeURIComponent(url+'blank.html');
 						   location.replace("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appId+"&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
@@ -100,7 +102,7 @@
 					//window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2b7b943109f5b60c&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
 					location.replace("https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appId+"&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect");
 				}
-			})
+
 		</script>
 	</body>
 

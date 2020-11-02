@@ -2,7 +2,7 @@
 	<div calss="peopleMsg">
 		<van-cell-group>
 			<van-field v-model="device.deviceNickName" is-link clear input-align="right" label="设备昵称" @click='changeDeviceName' readonly />
-			<van-field v-model="device.deviceName" clear input-align="right" label="MAC地址" readonly/>
+			<van-field v-model="device.deviceName" clear input-align="right" label="MAC/IMEI" readonly/>
 			<van-field v-model="device.sncode" clear input-align="right" label="SN码" readonly/>
 			<van-field v-model="address" clear label="设备地址" type="textarea" rows="1" autosize input-align="right" readonly/>
 			<van-field v-model="mcuHVersion" clear label="MCU版本号" type="textarea" rows="1" autosize input-align="right" readonly/>

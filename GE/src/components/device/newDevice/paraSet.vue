@@ -15,7 +15,7 @@
 					<van-field v-model="para.manTime" clear label="用水人数" is-link input-align="right" @click="showNum" placeholder="请选择人数" readonly/>
 				</div>
 				<p class="formInput"></p>
-				<!--<van-field v-show="device.runMode!=0" v-model="para.customVolPeriodic" clear label="周期用水量" is-link input-align="right" @click="showValume" placeholder="请选择用水量" readonly/>-->
+				<van-field v-show="device.runMode!=0" v-model="para.customVolPeriodic" clear label="周期用水量" is-link input-align="right" @click="showValume" placeholder="请选择用水量" readonly/>
 				<div v-if="device.productKey=='a1TQBPNk4cT' || device.productKey=='a1ZTu3R5BKD' || device.productKey=='a1VmZ7nWwyQ'">
 					<van-field v-model="para.regenSTimeSet" clear label="再生启动时间" is-link input-align="right" @click="showWashTime" placeholder="请选择时间" readonly/>
 					<van-field v-model="para.regenSIntervalSet" clear label="再生间隔时间" is-link input-align="right" @click="showOutTime" placeholder="请选择时间" readonly/>
@@ -166,7 +166,7 @@
 						this.para.saltLevel = (this.deviceMsg.saltLevel.value / 10) + " g/L";
 						this.para.reservedVolDaily = this.deviceMsg.reservedVolDaily.value + " 升/人";
 						this.para.manTime = this.deviceMsg.manTime.value + " 人";
-						this.para.customVolPeriodic = (this.deviceMsg.customVolPeriodic.value / 1000).toFixed(2) + " 立方米";
+						this.para.customVolPeriodic = (this.deviceMsg.customVolPeriodic.value/100).toFixed(2) + " 立方米";
 						if(this.device.productKey == "a1TQBPNk4cT" || this.device.productKey=='a1ZTu3R5BKD' || this.device.productKey=='a1VmZ7nWwyQ') {
 							if(this.deviceMsg.regenStartTime.value.hour < 10) {
 								this.regenMinute = "0" + this.deviceMsg.regenStartTime.value.hour;
@@ -226,7 +226,7 @@
 								this.para.manTime = this.deviceMsg.manTime.value + " 人";
 								break;
 							case "customVolPeriodic":
-								this.para.customVolPeriodic = (this.deviceMsg.customVolPeriodic.value / 1000).toFixed(2) + " 立方米";
+								this.para.customVolPeriodic = (this.deviceMsg.customVolPeriodic.value/100).toFixed(2) + " 立方米";
 								break;
 							case "saltLevel":
 								this.para.saltLevel = (this.deviceMsg.saltLevel.value / 10) + " g/L";
@@ -431,9 +431,9 @@
 					that.$toast("请设置周期用水量在0~99范围内的整数");
 					return false;
 				} 
-				that.para.customVolPeriodic = (that.Valume / 1000) + " 立方米";
+				that.para.customVolPeriodic=that.Valume + " 立方米";
 				const deviceMsg = {
-					"customVolPeriodic": Number((that.Valume).toFixed(2))
+					"customVolPeriodic": Number((that.Valume*100).toFixed(2))
 				}
 				const para = {
 					productKey: that.device.productKey,

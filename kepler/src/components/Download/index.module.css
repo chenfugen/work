@@ -1,0 +1,91 @@
+.exportPopover :global(.ant-popover-inner-content) {
+  padding: 0;
+}
+.listContainer {
+  min-height: 136px;
+  max-height: 272px;
+  overflow: auto;
+}
+.download {
+  font-size: 14px;
+  color: #ffffff;
+  float: right;
+  margin-right: 48px;
+}
+.downloadHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 46px;
+  width: 448px;
+}
+.downloadTitle {
+  font-size: 16px;
+  color: #333333;
+  line-height: 24px;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+.downloadTips {
+  font-size: 12px;
+  color: #666666;
+  line-height: 20px;
+}
+.downloadItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  box-shadow: inset 0 -1px 0 0 rgba(51, 51, 51, 0.05);
+}
+.downloadItemBody {
+  width: 370px;
+}
+.downloadItemBodyTitle {
+  font-size: 14px;
+  color: #333333;
+  line-height: 22px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.downloadItemBottom {
+  width: 280px;
+}
+.downloadItemSuccess {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #999999;
+  line-height: 22px;
+}
+.deleteIcon {
+  cursor: pointer;
+  color: #b8c5e6;
+}
+.align {
+  vertical-align: -5px;
+}
+.empty {
+  height: 136px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(122, 146, 204, 0.2);
+  border-radius: 50%;
+}
+.download::before,
+.download::after {
+  display: table;
+  content: '';
+}
+.download:hover {
+  cursor: pointer;
+}

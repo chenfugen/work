@@ -1,0 +1,45 @@
+.clearfloat {
+  zoom: 1;
+}
+
+.clearfloat:after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.input {
+  width: 200px;
+}
+
+.colorGrey {
+  font-family: 'Arial Negreta', 'Arial Normal', 'Arial';
+  font-weight: 700;
+  color: #999999;
+}
+
+.marginLeft {
+  margin-left: 10px
+}
+
+.marginRight {
+  margin-right: 10px
+}
+
+.marginTop {
+  margin-top: 10px
+}
+
+.marginBottom {
+  margin-bottom: 10px
+}

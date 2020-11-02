@@ -1,0 +1,329 @@
+.defect {
+  .statistics {
+    float: right;
+  }
+  .card-container p {
+    margin: 0;
+  }
+  .content {
+    background: #ffffff;
+  }
+  .notshow {
+    display: none;
+  }
+  .show {
+    display: block;
+  }
+  .code {
+    text-align: center;
+  }
+  .tbs {
+    width: 100%;
+    height: 40px;
+    background: #f5f6fa;
+    padding: 0px;
+    margin: 0px;
+    li {
+      list-style: none;
+      float: left;
+      text-align: center;
+      width: 118px;
+      line-height: 40px;
+      cursor: pointer;
+      color: #666666;
+      border-radius: 4px 4px 0 0;
+    }
+    .active {
+      background: #ffffff;
+      font-weight: bolder;
+      color: #333;
+    }
+    .divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(51, 51, 51, 0.1);
+      margin: 10px 0px;
+      float: left;
+    }
+  }
+
+  .marginBottom {
+    margin-bottom: 10px;
+  }
+  .floatLeft {
+    float: right;
+    margin-bottom: 10px;
+  }
+  .anchor {
+    width: 6px;
+    height: 6px;
+    border-radius: 6px 6px;
+    margin-top: 9px;
+  }
+  .finish {
+    background: #69a88a;
+  }
+  .wait {
+    background: #b34f5c;
+  }
+  .dblay {
+    background: #ddb33a;
+  }
+  .close {
+    background: #7a92cc;
+  }
+}
+.defectEdit {
+  position: relative;
+  .pageName {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333;
+    line-height: 26px;
+  }
+  .hint {
+    margin: 0px 5px;
+    font-size: 12px;
+    color: #666666;
+    line-height: 22px;
+  }
+  .submit {
+    position: absolute;
+    bottom: 0px;
+    left: 15px;
+    z-index: 999;
+  }
+  .marginBottom {
+    height: 40px;
+  }
+  .attachmentLsit {
+    padding: 0px;
+    margin: 0px;
+    li {
+      list-style: none;
+      line-height: 40px;
+    }
+  }
+  .ant-col-2 {
+    display: block;
+    -ms-flex: 0 0 5.7%;
+    flex: 0 0 5.7%;
+    max-width: 80px;
+  }
+}
+.defectChart {
+  position: relative;
+  .model {
+    position: absolute;
+    left: 150px;
+    top: 5px;
+  }
+}
+.defectDetail {
+  .header {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #eee;
+    .tag {
+      float: left;
+      display: inline-block;
+      margin: 5px 10px 0px 0px;
+      padding: 2px 5px;
+      line-height: 24px;
+      background: #ffffff;
+      border: 1px solid #d9dbe1;
+      border-radius: 2px;
+      .anchor {
+        width: 6px;
+        height: 6px;
+        border-radius: 6px 6px;
+        margin-top: 9px;
+      }
+      strong {
+        float: right;
+        margin-left: 5px;
+      }
+    }
+    .fault {
+      float: left;
+      display: inline-block;
+      font-weight: bold;
+      font-size: 18px;
+      color: #333333;
+      line-height: 40px;
+    }
+    button {
+      float: right;
+      width: 96px;
+      margin-left: 10px;
+    }
+  }
+  .content {
+    display: flex;
+    justify-content: center;
+    min-height: calc(100vh - 240px);
+    .details {
+      float: left;
+      display: inline-block;
+      border-right: 1px solid #eee;
+      width: 80%;
+      .detailBox {
+        padding: 10px 15px;
+        .describe {
+          font-size: 14px;
+          color: #333333;
+          line-height: 40px;
+        }
+        h4 {
+          font-weight: bold;
+        }
+        .attachment {
+          width: 320px;
+          border-radius: 4px;
+        }
+        .attachmentLsit {
+          padding: 10px 0px;
+          margin: 0px;
+          li {
+            list-style: none;
+            line-height: 40px;
+          }
+        }
+      }
+      .processes {
+        border-top: 1px solid #eee;
+        width: 100%;
+        padding: 20px 10px;
+        font-size: 14px;
+        color: #333333;
+        .user {
+          font-size: 14px;
+          color: #333333;
+          font-weight: bold;
+          margin-left: 20px;
+        }
+        .label {
+          display: inline-block;
+          width: 70px;
+          color: #999999;
+        }
+        .value {
+          color: #333333;
+          overflow: hidden;
+          .attachmentLsit {
+            padding: 0px 70px;
+            margin: 0px;
+            display: block;
+            .files {
+              display: block;
+              line-height: 40px;
+            }
+          }
+          .anchor {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 6px 6px;
+            margin: 2px 0px;
+          }
+          .status {
+          }
+        }
+      }
+    }
+    .info {
+      float: left;
+      width: 20%;
+      padding-left: 10px;
+      .infoList {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        li {
+          list-style: none;
+          line-height: 40px;
+          font-size: 14px;
+          width: 100%;
+          .label {
+            float: left;
+            width: 70px;
+            display: inline-block;
+            color: #999999;
+          }
+          .value {
+            display: inline-block;
+            color: #333333;
+            p {
+              height: 40px;
+              line-height: 40px;
+              margin: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .navigation {
+    margin: 10px 0px;
+    .strip {
+      width: 4px;
+      height: 16px;
+      display: inline-block;
+      background: #7a92cc;
+      margin-right: 10px;
+    }
+    .subhead {
+      font-size: 16px;
+      color: #333333;
+      line-height: 24px;
+      font-weight: bold;
+    }
+  }
+  .hint {
+    line-height: 60px;
+    font-size: 14px;
+  }
+  .finish {
+    background: #69a88a;
+  }
+  .wait {
+    background: #b34f5c;
+  }
+  .dblay {
+    background: #ddb33a;
+  }
+  .close {
+    background: #7a92cc;
+  }
+}
+
+.anchor {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 6px 6px;
+  margin: 2px 0px;
+}
+
+.hint {
+  margin: 0px 5px;
+  font-size: 12px;
+  color: #666666;
+  line-height: 22px;
+}
+
+.defectDispose {
+  .finish {
+    background: #69a88a;
+  }
+  .wait {
+    background: #b34f5c;
+  }
+  .dblay {
+    background: #ddb33a;
+  }
+  .close {
+    background: #7a92cc;
+  }
+}

@@ -6,8 +6,8 @@
 				水科技，G+生活
 			</p>
 		</div>
-		<van-cell title="品牌" value="GE通用净水" />
-		<van-cell title="版本" value="1.5.8(20190409153030)" />
+		<van-cell title="品牌" value="通用净水"/>
+		<van-cell title="版本" value="1.6.0(20200526162030)" />
 	<!--	<van-cell title="官网" is-link value="http://www.canature.com/" url="http://www.canature.com/" />-->
 	</div>
 </template>

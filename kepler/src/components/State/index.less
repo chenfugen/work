@@ -1,0 +1,29 @@
+@import '../../styles/var.less';
+
+.state-container {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  color: @text-color;
+  line-height: 20px;
+  margin: 8px 0;
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 4px;
+    vertical-align: 2px;
+    border-radius: 50%;
+    background: gray;
+  }
+  &.blue::before {
+    background: @blue;
+  }
+  &.green::before {
+    background: @green;
+  }
+  &.red::before {
+    background: @red;
+  }
+}

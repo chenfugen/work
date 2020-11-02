@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name ="viewport" content ="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="./css/instructions.css">
+		<!-- <title></title> -->
+	</head>
+	<body>
+		<div id="instructions">
+        <!-- <p class="title">FAQ</p> -->
+		<div class="distTitle">
+			<p class="p1">配网配对失败</p>
+			<p class="p1" id="a">配网失败故障码含义</p>
+			<p class="p-center">
+			    1001: 请检查手动输入或扫描的序列号是否正确,或联系售后客服;
+			</p></br>
+			<p class="p-center">
+			    1002: 请检查手动输入或扫描的MAC是否正确,或联系售后客服;
+			</p></br>
+			<p class="p-center">
+			    1003: 网络连接超时,请确认当前无线网络是否正常;
+			</p></br>
+			<p class="p-center">
+			    1004: 设备已被其它用户关联,请联系设备管理员;
+			</p></br>
+			<p class="p-center">
+			    1005: 请联系设备管理员;
+			</p></br>
+			<p class="p-center">
+			    1006: 请检查是否输入了正确的内容;
+			</p></br>
+			<p class="p-center">
+			    1007: 设备端拒绝了您的配对请求;
+			</p>
+			<p class="p-center">
+			    1008: 其它原因导致的配网失败,请重试。
+			</p>
+		</div>
+		<div class="distTitle">
+			<p class="p1">配网配对失败（添加设备失败）</p>
+			<p class="p-center">
+				1.	确保设备通电并开机。
+			</p></br><p class="p-center">
+				2.	确保设备处于待配网状态。
+			</p></br><p class="p-center">
+				3.	确保设备、手机、路由器三者靠近。
+			</p></br><p class="p-center">
+				4.	确保路由器、手机网络畅通。
+			</p></br><p class="p-center">
+				5.	确保输入的路由器密码正确。
+			</p></br><p class="p-center">
+				6.	确保使用 2.4G 的 Wi-Fi 频段添加设备，Wi-Fi 需要开启广播，不可设置为隐藏。
+			</p></br><p class="p-center">
+				7.	确保路由器无线设置中加密方式为 WPA2-PSK 类型、认证类型为 AES，或两者皆设置为自动。 无线模式不能为 11n only。
+			</p></br><p class="p-center">
+				8.	确保路由器 Wi-Fi 名称未使用中文。
+			</p></br><p class="p-center">
+				9.	若路由器接入设备量达到上限，可尝试关闭某个设备的 Wi-Fi 功能空出通道重新配置。
+			</p></br><p class="p-center">
+				10.	若路由器开启无线 MAC 地址过滤，可尝试将设备移出路由器的 MAC 过滤列表，保证路由器没有禁止设备联网。
+			</p></br><p class="p-center">
+				11.	对于有屏设备,请在使用手机APP扫码添加时,将设备端(安卓屏或彩屏上APP)打开至设置-手机APP配对界面,仅在此界面配对方有效;
+			</p></br><p class="p-center">
+				12.	对于无屏设备,请在确保已长按配网按键并将设备置于配网状态;
+			</p>
+		</div>
+
+        <p class="p-center"></p>
+    </div>
+	</body>
+	<script>
+		function getvl(name) {
+
+		　　var reg = new RegExp("(^|\\?|&)"+ name +"=([^&]*)(\\s|&|$)", "i");
+
+		　　if (reg.test(location.href))
+
+		　　return unescape(RegExp.$2.replace(/\+/g, " "));
+
+		　　return "";
+
+		};
+		var id = getvl('id')-1;
+		document.getElementsByClassName('distTitle')[id].style.display = 'block';
+	</script>
+</html>

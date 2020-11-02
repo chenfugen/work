@@ -1,0 +1,29 @@
+@font-face {font-family: "iconfont";
+  src: url('../font/iconfont.eot?t=1586593906990'); /* IE9 */
+  src: url('../font/iconfont.eot?t=1586593906990#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAO0AAsAAAAACDwAAANmAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDDAqDQIMGATYCJAMQCwoABCAFhG0HgQ4bLgcRVZTjZD8O3NhpWG/VWxcVusj6Y/Dw6Wp/JEuYnKhV3CIe1Dx06lqu4JVYyaNOAwQQtPWr6a+5GLUz+DT5x/94mr20d6Uls7ehNIfTKIWQCMn/HC5tLCyw+S3LZY5tvagXhb1oAgW2J87bwnfCeIvsriAs8zIEYMijBtG2fde+2GjMWQIQUydNGIWd0aJrSAJbEQA2asQmLGy5Wr4DNgZ/L/5ST9ggsRTmwp7j243F/bHlxzbl+R5DPQS88cwAvw0UUANoEANBa29UFK1BYdSopgzWNUrAj22+z48tHne1//JAIFEgApj5MQAEsVpxSjyHAQE/tpqRnCEPy7g5tJ5uAwFgFbhEsDk/JBGoDFMvOTVmjIh5ESlKPBRqG4Oz9rR3ysSsObPyrDM8/nm4UCaoo9ElzvH73r0SuYsUmRMPspSJWDht5cNyR+x1E8fvZxJLyhZEQn1D4X5m0LB1NNohdpRnDuu3ffe+U9dupPUPRfpHogOi0X7h8MiX0eIjkfbPQgWHww9buvTs2NHyLDqmJ+7IuMScxDiXsxx86IFm13OFoQSl5x6qbVB76JFxkodqzSMv4kJq1+WQrsGFrMWf9FX1r2eXaR1nJvoD1iNDcSaRPCJvM6rh+P6fHvYelGW9nTy4T/BWVqtOLbqqO26nNh1up/Rq2KNx9fW4kY04rfmBjZmYzeqRwnn+PfVNub9vEm9a9lk6Ir7Zf9u5jraPNw/PJhv8exrlAjYSWvN+Fq9ljdYEpk5rRehwdbsmeOszJWAwgI/pTOLrGPLU1mEQ2BkeD5I65ILCpgSpsTVg4RCEADYtwXBUG7Y7krFrYnWBKt8IhAQ/IMV5CEqCX6TG/oElzT8EJKTA6F/ygY6yJpk2szEJVppfyS1b1rZBqrDwFuaIE6cFAfkRXFyAurrNJwZk8BhLypPpRTRp3hKd0XWIcaOdN49Faiuyn5pGQ+9UL1u6qLTBYCJgRWaviLPYZNprLarC798C4xBNuKaqyvwIWOEGJ51a2wI5SHOrqmu5pXhi9ITQiMY2CTkjM0QruiE7PM6DhajZHuHdSUPq6bbSen55esJ9gGGu1EmhhBYW2Uc+1OEvUeW1CJJKU54MyhrkBiZqF72sEEWxugHCenCurqLegbxSlyr75mYuFku4uAAA') format('woff2'),
+  url('../font/iconfont.woff?t=1586593906990') format('woff'),
+  url('../font/iconfont.ttf?t=1586593906990') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('../font/iconfont.svg?t=1586593906990#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+[class^="iconmenu_icon"],[class*="iconmenu_icon"] {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconmenu_icon_system_management:before {
+  content: "\e692";
+}
+
+.iconmenu_icon_filter_element_production:before {
+  content: "\e693";
+}
+
+.iconmenu_icon_end_product_spot_check:before {
+  content: "\e694";
+}
+

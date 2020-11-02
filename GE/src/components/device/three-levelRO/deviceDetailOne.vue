@@ -12,7 +12,7 @@
 				<img v-if="bindType!=2"  src="../../../../static/image/icon_qrcode.png" class="qrcodeIcon" @click="set(2)" />
 			</div>
 			<div class="flow">
-				<ul class="tdsContent">
+				<ul class="tdsContent" @click="set(1)">
 					<li class="purifierWater">
 						<p class="waterNum">{{deviceMsg.tdsOut.value}}</p>
 						<p class="water_title">净水TDS</p>
@@ -66,7 +66,7 @@
 				<img src="../../../../static/image/icon_blue_more.png" @click="goMore" />
 			</div>
 			<van-dialog v-model="phoneShow" show-cancel-button :before-close="beforeClose" confirm-button-text="拨打">
-				<p class="content">客户热线 <span style="color:#1E9FFF;">400-8201199</span></p>
+				<p class="content">客户热线 <span style="color:#1E9FFF;">400-788-7171</span></p>
 			</van-dialog>
 		</div>
 	</v-touch>
@@ -237,7 +237,7 @@
 			},
 			beforeClose(action, done) {
 				if(action === 'confirm') {
-					window.location.href = "tel:4008201199";
+					window.location.href = "tel:4007887171";
 					done();
 				} else {
 					done();

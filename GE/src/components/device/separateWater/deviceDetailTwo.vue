@@ -12,7 +12,7 @@
 				<img v-if="bindType!=2" src="../../../../static/image/icon_qrcode.png" class="qrcodeIcon" @click="set(2)" />
 			</div>
 			<div class="flow">
-				<ul v-if='device.productKey=="a12LTZQEw02"' class="tdsContent">
+				<ul v-if='device.filterType=="RO"' class="tdsContent" @click="viewPage('serve')">
 					<li class="purifierWater">
 						<p class="waterNum">{{deviceMsg.tdsOut.value}}</p>
 						<p class="water_title">净水TDS</p>
@@ -22,7 +22,7 @@
 						<p class="water_title">源水TDS</p>
 					</li>
 				</ul>
-				<ul v-else class="tdsContent">
+				<ul v-else class="tdsContent" @click="viewPage('serve')">
 					<li class="purifierWater">
 						<p class="waterNum">{{deviceMsg.tocOut.value}}</p>
 						<p class="water_title">净水TOC</p>
@@ -49,7 +49,7 @@
 						<div class="deviceSet">
 							<p class="waterSet">水温</p>
 							<p class="waterValue">{{deviceMsg.waterInTemp.value}}<span class="unit">
-								°	
+								°
 							</span></p>
 						</div>
 					</div>
@@ -61,7 +61,7 @@
 						<div class="deviceSet">
 							<p class="waterSet">{{filterName}}</p>
 							<p class="waterValue" :class="{isDanger:filterLifetime<11}">{{filterLifetime}}<span class="unit">
-								%	
+								%
 								</span></p>
 						</div>
 					</div>
@@ -77,7 +77,7 @@
 				<img src="../../../../static/image/icon_blue_more.png" @click="goMore" />
 			</div>
 			<van-dialog v-model="phoneShow" show-cancel-button :before-close="beforeClose" confirm-button-text="拨打">
-				<p class="content">客户热线 <span style="color:#1E9FFF;">400-8201199</span></p>
+				<p class="content">客户热线 <span style="color:#1E9FFF;">400-788-7171</span></p>
 			</van-dialog>
 		</div>
 	</v-touch>
@@ -186,7 +186,7 @@
 								filterLifetime: this.deviceMsg.filterCTO.value,
 							}
 						]
-						if(this.device.productKey == "a12LTZQEw02") {
+						if(this.device.filterType=="RO") {
 							result.push({
 								filterName: "RO滤芯寿命",
 								filterLifetime: this.deviceMsg.filterRO.value,
@@ -242,7 +242,7 @@
 			},
 			checkFault() {
 				this.$router.push("/faultList?productKey=" + this.device.productKey + "&deviceName=" + this.device.deviceName);
-			},			
+			},
 			goMore() {
 				let urlName = "/more?deviceId=" + this.$route.params.id + "&bindType=" + this.$route.params.bindType+ "&isnormal=" + this.isnormal;
 				this.$router.push(urlName);
@@ -287,7 +287,7 @@
 			},
 			beforeClose(action, done) {
 				if(action === 'confirm') {
-					window.location.href = "tel:4008201199";
+					window.location.href = "tel:4007887171";
 					done();
 				} else {
 					done();

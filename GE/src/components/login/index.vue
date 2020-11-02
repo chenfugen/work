@@ -5,7 +5,7 @@
 			<p class="login_title">快捷登录</p>
 			<!--<van-tabs @click="tab">
 				<van-tab title="快捷登录">
-					
+
 				</van-tab>
 				<van-tab title="密码登录">
 					<div class="login_tab">
@@ -32,14 +32,14 @@
 			<div class="login_tab">
 				<div class="leftPhone"></div>
 				<van-cell-group>
-					<van-field left-icon="../../../static/image/logo.png" clearable placeholder="请输入手机号" type="phone" @focus="inputPhone" @blur="clearScroll" v-model="user.phone" />
+					<van-field left-icon="../../../static/image/icon_add@2x.png" clearable placeholder="请输入手机号" @focus="inputPhone" @blur="clearScroll" v-model="user.phone" />
 				</van-cell-group>
 			</div>
 			<p class="formInput"></p>
 			<div class="login_tab">
 				<div class="leftPassword"></div>
 				<van-cell-group>
-					<van-field left-icon="../../../static/image/logo.png" placeholder="请输入验证码" @focus="clickCode" v-model="user.code" @input="inputCode"  @blur="clearScroll" clearable>
+					<van-field left-icon="../../../static/image/icon_add@2x.png" placeholder="请输入验证码" @focus="clickCode" v-model="user.code" @input="inputCode"  @blur="clearScroll" clearable>
 						<van-button slot="button" type="info" size="small" v-show="codeShow" @click="getCode" :disabled="isGetcode"><span style="color:#fff;">{{codeTxt}}</span></van-button>
 						<van-button slot="button" type="info" size="small" v-show="!codeShow"><span class="count">{{count}} 秒</span></van-button>
 					</van-field>
@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		<p class="login_hint">点击登录，即代表您同意
-			<a href="#/userAgreement">《GE用户协议》</a>
+			<a href="#/userAgreement">《用户协议》</a>
 		</p>
 	</div>
 </template>
@@ -65,7 +65,7 @@
 				count: "", //倒计时
 				timer: null, //倒计时
 				showPass: true, //密码
-				tabName: "快捷登录", //登录方式		
+				tabName: "快捷登录", //登录方式
 				isLogin: true,
 				isGetcode: true,
 				user: {

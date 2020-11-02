@@ -1,0 +1,90 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+button {
+	margin: 0px;
+	padding: 0px;
+}
+
+html,
+body {
+	font-size: 100px;
+	background: #ECF0F2;
+}
+
+@media screen and (min-width:320px) {
+
+	html,
+	body {
+		font-size: 100px
+	}
+}
+
+@media screen and (min-width:321px) and (max-width:375px) {
+
+	html,
+	body {
+		font-size: 110px
+	}
+}
+
+@media screen and (min-width:375px) and (min-height:812px) {
+
+	html,
+	body {
+		font-size: 110px
+	}
+}
+
+@media screen and (min-width:376px) and (max-width:414px) {
+
+	html,
+	body {
+		font-size: 120px
+	}
+}
+
+@media screen and (min-width:415px) and (max-width:639px) {
+
+	html,
+	body {
+		font-size: 150px
+	}
+}
+
+@media screen and (min-width:640px) and (max-width:719px) {
+
+	html,
+	body {
+		font-size: 200px
+	}
+}
+
+
+@media screen and (min-width:720px) and (max-width:749px) {
+
+	html,
+	body {
+		font-size: 225px
+	}
+}
+
+@media screen and (min-width:750px) and (max-width:799px) {
+
+	html,
+	body {
+		font-size: 235px
+	}
+}
+
+@media screen and (min-width:800px) {
+
+	html,
+	body {
+		font-size: 250px
+	}
+}
+
+

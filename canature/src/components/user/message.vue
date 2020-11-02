@@ -15,7 +15,7 @@
 			<p class="nullTitle">暂无消息</p>
 		</div>
 	</div>
-	
+
 	<!--<van-swipe-cell :right-width="80" :on-close="onClose">
 			<van-cell-group>
 				<van-cell to="/filterMsg">
@@ -47,13 +47,13 @@
 			init() {
 				let that = this;
 				that.$Axios.get("wechat/device/deviceFault/list").then((res) => {
-					if(res.data.success) {						
+					if(res.data.success) {
 						that.total=res.data.data.length.toString();
 						if(that.total>0){
 							that.faultName = res.data.data[0].faultName;
 						    that.reportTime = res.data.data[0].reportTime;
-						    that.deviceName = res.data.data[0].deviceName;						    
-						}				
+						    that.deviceName = res.data.data[0].deviceName;
+						}
 					}
 				})
 			},
@@ -91,7 +91,8 @@
 		}
 		.van-card__title {
 			line-height: 0.25rem;
-			font-size: 0.15rem
+			font-size: 0.15rem;
+      margin-bottom:0.05rem;
 		}
 		.van-card__content,
 		.van-card__thumb {
@@ -102,7 +103,7 @@
 			top: 0.03rem;
 			right: 0px;
 			color: #7d7e80;
-			line-height: 0.2rem;
+			line-height: 0.3rem;
 			font-size: 0.14rem;
 		}
 		.deviceName{
@@ -110,7 +111,7 @@
 			top: 0.43rem;
 			left:0.73rem;
 			color: #7d7e80;
-			line-height: 0.2rem;
+			line-height: 0.4rem;
 			font-size: 0.1rem;
 		}
 		.van-tag--mark {
@@ -133,7 +134,7 @@
 				line-height:0.4rem;
 				color: #333;
 			}
-			
+
 		}
 	}
 </style>

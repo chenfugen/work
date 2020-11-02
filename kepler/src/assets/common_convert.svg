@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>common_convert</title>
+    <desc>Created with Sketch.</desc>
+    <g id="common_convert" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.800000012">
+        <g id="图标/通用/导出转换_透明80%">
+            <g id="编组-4复制">
+                <rect id="矩形" x="0" y="0" width="20" height="20"></rect>
+                <path d="M3.75,10 C3.75,13.4517797 6.54822031,16.25 10,16.25 L10,16.25 M16.25,10 C16.25,6.54822031 13.4517797,3.75 10,3.75" id="形状" stroke="#FFFFFF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M6.15499894,2.7229983 L8.15234416,5.91875066 C8.33528812,6.21146099 8.24630489,6.59705498 7.95359456,6.77999894 C7.85426231,6.8420816 7.73948255,6.875 7.62234522,6.875 L3.62765478,6.875 C3.28247681,6.875 3.00265478,6.59517797 3.00265478,6.25 C3.00265478,6.13286268 3.03557318,6.01808291 3.09765584,5.91875066 L5.09500106,2.7229983 C5.27794502,2.43028797 5.66353901,2.34130474 5.95624934,2.5242487 C6.03673004,2.57454914 6.1046985,2.6425176 6.15499894,2.7229983 Z" id="三角形" fill="#FFFFFF"></path>
+                <rect id="矩形复制" fill="#FFFFFF" x="12.5" y="13.125" width="4.375" height="4.375" rx="0.625"></rect>
+                <polyline id="路径-2" stroke="#FFFFFF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" points="15 9.375 16.3568141 10.4924351 17.5 9.375"></polyline>
+                <polyline id="路径-2复制" stroke="#FFFFFF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" transform="translate(3.750000, 9.933718) rotate(-180.000000) translate(-3.750000, -9.933718) " points="2.5 9.375 3.85681411 10.4924351 5 9.375"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

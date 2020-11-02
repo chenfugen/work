@@ -1,0 +1,1 @@
+scp -r build/. admin@121.40.115.131:/root/html/kepler-test.yunext.com/

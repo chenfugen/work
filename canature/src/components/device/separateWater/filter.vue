@@ -1,19 +1,19 @@
 <template>
 	<div class="filterList">
-		<ul class="filters">
+		<ul class="filters" v-if="device.productKey=='a131lEShgsO' || device.productKey=='a1LPpt2Qhxc'">
 			<li>
 				<p class="filterMsg">
-					<span class="filterName">1号ACF滤芯寿命  {{deviceMsg.filterACF.value}}%</span>
+					<span class="filterName">1号复合CPF滤芯寿命  {{deviceMsg.filterACF.value}}%</span>
 					<van-button round class="pay" size="small" @click="reset('PP值')">复位</van-button>
 				</p>
-			</li>		
+			</li>
 			<li>
 				<p class="filterMsg">
-					<span class="filterName">2号CTO滤芯寿命  {{deviceMsg.filterCTO.value}}%</span>
+					<span class="filterName">2号后碳CTO滤芯寿命  {{deviceMsg.filterCTO.value}}%</span>
 					<van-button round class="pay" size="small" @click="reset('C1值')">复位</van-button>
 				</p>
 			</li>
-			<li v-if="device.productKey=='a1NRXrQiNne' || device.productKey=='a1W00QYyJY1'">
+			<li v-if='device.filterType=="RO"'>
 				<p class="filterMsg">
 					<span class="filterName">3号RO滤芯寿命  {{deviceMsg.filterRO.value}}%</span>
 					<van-button round class="pay" size="small" @click="reset('RO值')">复位</van-button>
@@ -24,8 +24,34 @@
 					<span class="filterName">3号NF滤芯寿命  {{deviceMsg.filterNF.value}}%</span>
 					<van-button round class="pay" size="small" @click="reset('NF值')">复位</van-button>
 				</p>
-			</li>			
+			</li>
 		</ul>
+    <ul class="filters" v-else>
+    	<li>
+    		<p class="filterMsg">
+    			<span class="filterName">1号ACF滤芯寿命  {{deviceMsg.filterACF.value}}%</span>
+    			<van-button round class="pay" size="small" @click="reset('PP值')">复位</van-button>
+    		</p>
+    	</li>
+    	<li>
+    		<p class="filterMsg">
+    			<span class="filterName">2号CTO滤芯寿命  {{deviceMsg.filterCTO.value}}%</span>
+    			<van-button round class="pay" size="small" @click="reset('C1值')">复位</van-button>
+    		</p>
+    	</li>
+    	<li v-if='device.filterType=="RO"'>
+    		<p class="filterMsg">
+    			<span class="filterName">3号RO滤芯寿命  {{deviceMsg.filterRO.value}}%</span>
+    			<van-button round class="pay" size="small" @click="reset('RO值')">复位</van-button>
+    		</p>
+    	</li>
+    	<li v-else>
+    		<p class="filterMsg">
+    			<span class="filterName">3号NF滤芯寿命  {{deviceMsg.filterNF.value}}%</span>
+    			<van-button round class="pay" size="small" @click="reset('NF值')">复位</van-button>
+    		</p>
+    	</li>
+    </ul>
 		<p class="filterTitle">滤芯寿命过低，将会影响过滤效果，良好的水质，有助于保持健康，建议您及时更换滤芯</p>
 		<div class="payFilter">
 			<van-button size="large" round @click="payFilter">购买滤芯</van-button>
@@ -63,7 +89,7 @@
 							break;
 						case "NF值":
 							fliterReset = [2]
-							break;					
+							break;
 					}
 					const deviceMsg = {
 						"fliterReset": fliterReset
@@ -86,7 +112,7 @@
 							this.$toast.loading({
 								mask: true,
 								message: '复位中...'
-							});	
+							});
 							this.init();
 						}
 					}else{
@@ -103,7 +129,8 @@
 				this.$Axios.get("wechat/device/deviceDetail?deviceId=" + this.$route.query.deviceId).then((res) => {
 					if(res.data.success) {
 						this.device=res.data.data.device;
-						this.deviceMsg = res.data.data.property;    
+
+						this.deviceMsg = res.data.data.property;
 						this.$forceUpdate()
 					} else {
 						this.$toast("数据加载失败");

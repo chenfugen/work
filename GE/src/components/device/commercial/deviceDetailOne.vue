@@ -11,13 +11,13 @@
 				</div>
 				<img v-if="bindType!=2" src="../../../../static/image/icon_qrcode.png" class="qrcodeIcon" @click="set(2)" />
 			</div>
-			<div class="flow" v-if="device.productKey == 'a1i8kpwPW9w'">
+			<div class="flow" v-if="device.filterType == 'RO'" @click="set(1)">
 				<p class="waterNum">{{deviceMsg.tdsOut.value}}<span>ppm</span></p>
 				<p class="water_title">出水TDS</p>
 				<img src="../../../../static/image/bg@3x.png" />
 				<van-circle v-model="currentRate" :rate="deviceMsg.tdsOut.value/2" size="100" :stroke-width="50" color="#00B5E2 " layer-color="none" :speed="10" class="main" />
 			</div>
-			<div class="flow" v-else>
+			<div  v-else class="flow" @click="set(1)">
 				<p class="waterNum">{{deviceMsg.tocOut.value}}<span>ppm</span></p>
 				<p class="water_title">出水TOC</p>
 				<img src="../../../../static/image/bg@3x.png" />
@@ -48,7 +48,7 @@
 					<van-tab title="水质数据"></van-tab>
 					<van-tab title="用水统计"></van-tab>
 				</van-tabs>
-			</div>			
+			</div>
 			<Myecharts v-show="!isShowDate" :device="device" idName="commercialOneChart" ref="init"></Myecharts>
 			<ul class="waterMsg" v-show="isShowDate">
 				<li>
@@ -60,7 +60,7 @@
 					<p class="waterSet">冷水(℃)</p>
 					<p class="waterValue">{{deviceMsg.waterInTemp.value}}</p>
 				</li>
-				<li v-if="device.productKey == 'a1i8kpwPW9w'">
+				<li v-if="device.filterType == 'RO'">
 					<p class="waterSet">源水TDS(ppm)</p>
 					<p class="waterValue">{{deviceMsg.tdsIn.value}}</p>
 					<div class="line"></div>
@@ -87,9 +87,9 @@
 						检测到设备出现故障，请及时排查或联系客服
 					</van-notice-bar>
 				</div>
-			</div>			
+			</div>
 			<van-dialog v-model="phoneShow" show-cancel-button :before-close="beforeClose" confirm-button-text="拨打">
-				<p class="content">客户热线 <span style="color:#1E9FFF;">400-8201199</span></p>
+				<p class="content">客户热线 <span style="color:#1E9FFF;">400-788-7171</span></p>
 			</van-dialog>
 		</div>
 	</v-touch>
@@ -144,9 +144,9 @@
 			showChart(value) {
 				this.isShowDate = !this.isShowDate;
 				if(value == 1) {
-					this.$refs.init.getWaterLog(1);				 
+					this.$refs.init.getWaterLog(1);
 				}
-			},						
+			},
 			intervalBtn() {
 				let that = this;
 				const deviceMsg = {
@@ -197,7 +197,7 @@
 			init() {
 				this.$Axios.get("wechat/device/deviceDetail?deviceId=" + this.$route.params.id).then((res) => {
 					if(res.data.success) {
-						this.device = res.data.data.device;					
+						this.device = res.data.data.device;
 						this.deviceMsg = res.data.data.property;
 						document.title = this.device.deviceNickName== this.device.deviceName? this.device.productName:this.device.deviceNickName
 						this.$cookies.set('firmwareVersion', this.device.firmwareVersion);
@@ -223,7 +223,7 @@
 								filterLifetime: this.deviceMsg.filterC2.value,
 							}
 						]
-						if(this.device.productKey == "a1i8kpwPW9w") {
+						if(this.device.filterType == 'RO') {
 							result.push({
 								filterName: "RO滤芯寿命",
 								filterLifetime: this.deviceMsg.filterRO.value,
@@ -368,7 +368,7 @@
 			},
 			showFilter() {
 				this.filter = !this.filter;
-			},		
+			},
 			onClickLeft() {
 				this.client.end(true);
 				this.$router.go(-1);
@@ -400,7 +400,7 @@
 			},
 			beforeClose(action, done) {
 				if(action === 'confirm') {
-					window.location.href = "tel:4008201199";
+					window.location.href = "tel:4007887171";
 					done();
 				} else {
 					done();

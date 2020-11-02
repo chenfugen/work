@@ -22,12 +22,12 @@
 								<div class="deviceMsg">
 									<p class="deviceName">{{item.deviceNickName==item.deviceName?item.productName:item.deviceNickName}}</p>
 									<p class="deviceType">SN: {{item.sncode | nullDeal}}</p>
-									<p class="deviceMac">MAC: {{item.deviceName}}</p>
+									<p class="deviceMac">{{item.productKey | deviceTitleFilter}}: {{item.deviceName}}</p>
 									<p v-if="item.status!='online'" class="deviceStatus">{{item.productKey | deviceTypeFilter}}</p>
 									<p v-if="item.status=='online'" class="deviceStatus online">{{item.productKey | deviceTypeFilter}}</p>
 								</div>
 								<div class="waterMsg" :class="{waterOnline:item.status=='online'}">
-									<p class="waterNum" v-if="item.showProperty=='可用水量'">{{item.propertyValue==null?'--':item.propertyValue*10}}</p>
+									<p class="waterNum" v-if="item.showProperty=='可用水量'">{{item.propertyValue==null?'--':item.propertyValue}}</p>
 									<p class="waterNum" v-else>{{item.propertyValue==null?'--':item.propertyValue}}</p>
 									<p class="waterStatus">{{item.showProperty==null?"可用水量":item.showProperty}}</p>
 								</div>
@@ -154,10 +154,10 @@
 					let bTimeString = b.createTime.replace(/-/g, "/");
 					if(this.timeRank) {
 						this.timeRank = false;
-						return new Date(bTimeString).getTime() - new Date(aTimeString).getTime(); //降序					
+						return new Date(bTimeString).getTime() - new Date(aTimeString).getTime(); //降序
 					} else {
 						this.timeRank = true;
-						return new Date(aTimeString).getTime() - new Date(bTimeString).getTime(); //升序 
+						return new Date(aTimeString).getTime() - new Date(bTimeString).getTime(); //升序
 					}
 				})
 				this.filter = false;
@@ -299,7 +299,7 @@
 		/* Firefox 3.6 - 15 */
 		background: linear-gradient(to right, #267CFB, #30B3FC);
 	}
-	
+
 	.nullDevice {
 		text-align: center;
 		min-height: 4.5rem;
@@ -325,7 +325,7 @@
 			display: block;
 		}
 	}
-	
+
 	.header {
 		width: 100%;
 		position: fixed;
@@ -346,7 +346,7 @@
 			margin-right: 12px;
 		}
 	}
-	
+
 	.device_content {
 		margin: 0.5rem 0px;
 		min-height: 4rem;
@@ -356,7 +356,7 @@
 			/*margin: 0.35rem 0px;*/
 			li {
 				/*float: left;*/
-				display: inline-block;			
+				display: inline-block;
 				background: white;
 				width: 45%;
 				margin: 0 0 0.1rem 3.3%;
@@ -367,8 +367,8 @@
 				.deviceImg {
 					width: 0.5rem;
 					height: 0.7rem;
-					margin: 0.1rem auto;		
-					font-size: 0;	
+					margin: 0.1rem auto;
+					font-size: 0;
 					line-height:0.7rem;
 					overflow: hidden;
 					img {
@@ -428,7 +428,7 @@
 					text-align: center;
 					.waterNum {
 						color: #ccc;
-						font-size: 0.2rem;
+						font-size: 0.18rem;
 						line-height: 0.24rem;
 						margin-top: 0.1rem;
 					}
@@ -442,7 +442,7 @@
 					border: 0.02rem solid #267CFB;
 					.waterNum {
 						color: #267CFB;
-						font-size: 0.2rem;
+						font-size: 0.18rem;
 						line-height: 0.24rem;
 						margin-top: 0.1rem;
 					}
@@ -463,14 +463,14 @@
 					float: left;
 					width: 15%;
 					height: 0.7rem;
-					margin: 0.2rem 0.1rem 0.2rem 0.1rem;				
-					font-size: 0;	
+					margin: 0.2rem 0.1rem 0.2rem 0.1rem;
+					font-size: 0;
 					line-height:0.7rem;
 					overflow: hidden;
 					img {
 						width: 100%;
 						vertical-align: middle;
-					}				
+					}
 				}
 				.deviceMsg {
 					float: left;
@@ -528,7 +528,7 @@
 					text-align: center;
 					.waterNum {
 						color: #ccc;
-						font-size: 0.2rem;
+						font-size: 0.18rem;
 						line-height: 0.24rem;
 						margin-top: 0.1rem;
 					}
@@ -542,7 +542,7 @@
 					border: 0.02rem solid #267CFB;
 					.waterNum {
 						color: #267CFB;
-						font-size: 0.2rem;
+						font-size: 0.18rem;
 						line-height: 0.24rem;
 						margin-top: 0.1rem;
 					}
@@ -550,7 +550,7 @@
 			}
 		}
 	}
-	
+
 	.add_Device {
 		position: fixed;
 		bottom: 0.6rem;
@@ -565,7 +565,7 @@
 			width: 0.2rem;
 		}
 	}
-	
+
 	.dialog {
 		text-align: center;
 		padding: 0.3rem 0;

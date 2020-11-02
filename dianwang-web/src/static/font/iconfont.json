@@ -1,0 +1,114 @@
+{
+  "id": "1604753",
+  "name": "智慧后勤管理系统",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2532355",
+      "name": "领用",
+      "font_class": "lingyong",
+      "unicode": "e6c8",
+      "unicode_decimal": 59080
+    },
+    {
+      "icon_id": "4984020",
+      "name": "申请",
+      "font_class": "shenqing",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "9065554",
+      "name": "资产",
+      "font_class": "zichan",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "13259451",
+      "name": "asset_allocation",
+      "font_class": "asset_allocation",
+      "unicode": "e68a",
+      "unicode_decimal": 59018
+    },
+    {
+      "icon_id": "12740764",
+      "name": "organize",
+      "font_class": "organize1",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
+    {
+      "icon_id": "12740573",
+      "name": "menu",
+      "font_class": "menu",
+      "unicode": "e680",
+      "unicode_decimal": 59008
+    },
+    {
+      "icon_id": "12740574",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "12740575",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e682",
+      "unicode_decimal": 59010
+    },
+    {
+      "icon_id": "12740576",
+      "name": "arrow",
+      "font_class": "arrow",
+      "unicode": "e683",
+      "unicode_decimal": 59011
+    },
+    {
+      "icon_id": "12740577",
+      "name": "system",
+      "font_class": "system",
+      "unicode": "e684",
+      "unicode_decimal": 59012
+    },
+    {
+      "icon_id": "12740578",
+      "name": "apply",
+      "font_class": "apply",
+      "unicode": "e685",
+      "unicode_decimal": 59013
+    },
+    {
+      "icon_id": "12740580",
+      "name": "village",
+      "font_class": "village",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    },
+    {
+      "icon_id": "12740581",
+      "name": "asset",
+      "font_class": "asset",
+      "unicode": "e687",
+      "unicode_decimal": 59015
+    },
+    {
+      "icon_id": "12740582",
+      "name": "column",
+      "font_class": "column",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "12740583",
+      "name": "statistics",
+      "font_class": "statistics",
+      "unicode": "e689",
+      "unicode_decimal": 59017
+    }
+  ]
+}

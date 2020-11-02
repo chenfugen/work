@@ -16,7 +16,7 @@
 			<img src="../../../static/image/icon_fault_phone.png" />
 		</div>
 		<van-dialog v-model="show" show-cancel-button :before-close="beforeClose" confirm-button-text="拨打">
-			<p class="content">客户热线 <span style="color:#1E9FFF;">400-8201199</span></p>
+			<p class="content">客户热线 <span style="color:#1E9FFF;">400-788-7171</span></p>
 		</van-dialog>
 	</div>
 </template>
@@ -77,7 +77,7 @@
 			},
 			beforeClose(action, done) {
 				if(action === 'confirm') {
-					window.location.href = "tel:4008201199";
+					window.location.href = "tel:4007887171";
 					done();
 				} else {
 					done();

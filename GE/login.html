@@ -9,7 +9,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<script src="static/js/zepto.js"></script>
 		<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
-		<title>GE</title>
+		<title>通用净水</title>
 	</head>
 
 	<body>
@@ -20,7 +20,7 @@
 				var r = window.location.search.substr(1).match(reg);
 				if(r != null) return unescape(r[2]);
 				return null;
-			} 
+			}
 			function setCookie(name, value) {
 				var Days = 30;
 				var exp = new Date();
@@ -59,12 +59,12 @@
 			}
 			let url="https://smart.gewater.cn/";
 			let api="https://smart.canature.com/";
-			let IP = returnCitySN.cip;
-			let lang = navigator.language || navigator.userLanguage; //常规浏览器语言和IE浏览器	
-			ajaxGet(api+"web/api/wechat/user/register/checkForeignUser", {
-				"accessKey": "1SNc3DS4W65fYLBI03SokWOSwUHcfjV4",
-				"ip": IP,
-			}, function(res) {
+			// let IP = returnCitySN.cip;
+			// let lang = navigator.language || navigator.userLanguage; //常规浏览器语言和IE浏览器
+			// ajaxGet(api+"web/api/wechat/user/register/checkForeignUser", {
+			// 	"accessKey": "1SNc3DS4W65fYLBI03SokWOSwUHcfjV4",
+			// 	"ip": IP,
+			// }, function(res) {
 //				if(res.data.isForeignUser || lang != "zh-CN") {
 //					location.href = url+"error.html";
 //					return false;
@@ -81,21 +81,21 @@
 						"customerId":"GE"
 					}, function(res) {
 						if(res.success){
-							setCookie("productMsg",JSON.stringify(productMsg));				
+							setCookie("productMsg",JSON.stringify(productMsg));
 							setCookie("productNet",res.data);
 							var REDIRECT_URI = encodeURIComponent(url+'blank.html');
 						   location.replace("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx02b59aef120e1083&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
 						} else {
-							alert("非GE智能产品")
-							location.href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzAwMzMzNzUyOQ==&sharer_username=gh_1eaf9ab0fd9f&subscene=0&clicktime=1558688755#wechat_redirect";
-						}				
+							alert("非通用净水智能产品")
+							location.href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg4NTI5MjMyOA==&scene=124#wechat_redirect";
+						}
 					})
 				}else{
 					var REDIRECT_URI = encodeURIComponent(url+'blank.html');
 					//window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxff3ba7acd35cc5ab&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
 					location.replace("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx02b59aef120e1083&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect");
 				}
-			})
+	//		})
 		</script>
 	</body>
 

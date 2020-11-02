@@ -1,0 +1,99 @@
+.status{
+  span{
+    float: left;
+    margin-right:3px;
+    line-height: 16px;
+    display: inline-block;
+  }
+  .refuse{
+    width:16px;
+    height:16px;
+    overflow: hidden;
+    background: url("../../static/image/error.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .begin{
+    width:16px;
+    height:16px;
+    overflow: hidden;
+    background: url("../../static/image/news.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .ongoing{
+    width:16px;
+    height:16px;
+    overflow: hidden;
+    background: url("../../static/image/approval_s.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .end{
+    width:16px;
+    height:16px;
+    overflow: hidden;
+    background: url("../../static/image/success.png") no-repeat;
+    background-size: 100% 100%;
+  }
+}
+.applyDetail{
+  .applyContent{
+    float: left;
+    width:70%;
+    font-size:18px;
+    color: #000;
+  }
+  .begin{
+    float: right;
+    margin-right: 15px;
+    width:66px;
+    height:66px;
+    border-radius: 66px 66px;
+    overflow: hidden;
+    background: url("../../static/image/pending_approval.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .ongoing{
+    float: right;
+    margin-right: 15px;
+    width:66px;
+    height:66px;
+    border-radius: 66px 66px;
+    overflow: hidden;
+    background: url("../../static/image/approval.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .end{
+    float: right;
+    margin-right: 15px;
+    width:66px;
+    height:66px;
+    border-radius: 66px 66px;
+    overflow: hidden;
+    background: url("../../static/image/completed.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .error{
+    float: right;
+    margin-right: 15px;
+    width:66px;
+    height:66px;
+    border-radius: 66px 66px;
+    overflow: hidden;
+    background: url("../../static/image/refused.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .applyMessage{
+    .ant-descriptions-title{
+      font-size: 14px;
+    }
+    .ant-descriptions-item-label{
+      color: rgba(0, 0, 0, 0.65);
+    }
+    .ant-descriptions-item-content{
+      color: rgba(0, 0, 0, 0.85);
+    }
+    background: #F1F4F6;
+    border-radius: 4px;
+    border-radius: 4px;
+    padding: 10px;
+  }
+}

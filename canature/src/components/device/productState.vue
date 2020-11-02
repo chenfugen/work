@@ -25,7 +25,7 @@
 			message: '加载中...',
 			duration: 1000
 		});
-		
+		console.log(func.getProductNumber(this.$route.query.productKey))
 		// 有时PDF文件地址会出现跨域的情况,这里最好处理一下
 			switch(func.getProductNumber(this.$route.query.productKey)) {			
 				case 1:

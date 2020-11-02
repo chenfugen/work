@@ -6,7 +6,7 @@
 				<img src="../../../../static/image/icon_share.png" class="qrcodeIcon" @click="set(8)" />
 			</div>
 			<div v-if='device.filterType=="RO"'>
-				<ul class="tdsContent">
+				<ul class="tdsContent" @click="viewPage('serve')">
 					<img :src="tdsInImg" class="tdsInImg" />
 					<img :src="tdsOutImg" class="tdsOutImg" />
 					<li class="purifierWater">
@@ -24,7 +24,7 @@
 				</ul>
 			</div>
 			<div v-else>
-				<ul class="tdsContent">
+				<ul class="tdsContent" @click="viewPage('serve')">
 					<img :src="tdsInImg" class="tdsInImg" />
 					<img :src="tdsOutImg" class="tdsOutImg" />
 					<li class="purifierWater">
@@ -54,6 +54,7 @@
 								<p class="waterSet">（直饮水）</p>
 							</div>
 						</div>
+						<div class="action"></div>
 					</li>
 					<li @click="viewPage('temp')">
 						<div class="deviceMsg">
@@ -66,6 +67,7 @@
 							</div>
 						</div>
 						<div class="cutOff"></div>
+						<div class="action"></div>
 					</li>
 					<li @click="viewPage('filter')">
 						<div class="deviceMsg">
@@ -78,6 +80,7 @@
 							</div>
 						</div>
 						<div class="cutOff"></div>
+						<div class="action"></div>
 					</li>
 				</ul>
 				<Myecharts :device="device" idName="separaterOneChart" :isBg="false" ref="init"></Myecharts>
@@ -554,6 +557,7 @@
 					height: 0.55rem;
 					text-align: center;
 					overflow: hidden;
+					position:relative;
 					.deviceMsg {
 						vertical-align: top;
 						display: inline-block;
@@ -586,11 +590,21 @@
 						}
 					}
 					.cutOff {
-						float: left;
-						margin-top: 0.1rem;
+						position:absolute;
+						left: 0px;
+						top: 0.1rem;
 						width: 1px;
 						background: #ddd;
 						height: 0.2rem;
+					}
+					.action{
+						position:absolute;
+						right: 0px;
+						bottom:10px;
+						width: 0;
+					    height: 0;
+					    border-bottom: 0.05rem solid #ddd;
+					    border-left: 0.05rem solid transparent;
 					}
 				}
 			}

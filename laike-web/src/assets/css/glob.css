@@ -1,0 +1,74 @@
+.el-button--danger{
+    background-color: rgba(240, 43, 84, 1);
+    border-color: rgba(240, 43, 84, 1);
+}
+.el-button--danger:hover,.el-button--danger:focus,.el-button--danger:active{
+    background-color: rgba(240, 43, 84, 0.8);
+    border-color: rgba(240, 43, 84, 0.8);
+}
+input,textarea{
+    resize:none !important;
+}
+.el-table td, .el-table th{
+    padding: 2px 0;
+}
+.el-form-item {
+    margin-bottom: 20px;
+}
+/* .cheTabConClass>.el-button--text{
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    text-overflow: ellipsis;
+} */
+.el-table__expanded-cell[class*=cell]{
+    padding: 20px 120px;
+}
+.clearfloat {
+	zoom: 1;
+}
+.clearfloat:after {
+	display: block;
+	visibility: hidden;
+	clear: both;
+	height: 0;
+	content: "";
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.marginT20 {
+	margin-top: 20px;
+}
+.marginT10 {
+	margin-top: 10px;
+}
+.marginL20 {
+	margin-left: 20px;
+}
+.marginL10 {
+	margin-left: 10px;
+}
+.marginR20 {
+	margin-right: 20px;
+}
+.marginR10 {
+	margin-right: 10px;
+}
+.marginB20 {
+	margin-bottom: 20px;
+}
+.marginB10 {
+	margin-bottom: 10px;
+}
+.block{
+    display: block !important;
+}
+.formTips {
+	font-size: 12px;
+	color: #ccc;
+	display: block;
+}

@@ -31,7 +31,7 @@
 				<div class="van-cell-group van-hairline--top-bottom">
 					<div class="van-cell van-field">
 						<div class="van-cell__value van-cell__value--alone">
-							<div class="van-field__body"><input type="number" v-fixedInput v-model="Valume" @focus="inputImport" placeholder="0~9999(m³)整数" class="van-field__control"></div>
+							<div class="van-field__body"><input type="number" v-fixedInput v-model="Valume" @focus="inputImport" placeholder="0~99(m³)整数" class="van-field__control"></div>
 						</div>
 					</div>
 				</div>
@@ -162,7 +162,7 @@
 						this.para.saltLevel = (this.deviceMsg.saltLevel.value / 10) + " g/L";
 						this.para.reservedVolDaily = this.deviceMsg.reservedVolDaily.value + " 升/人";
 						this.para.manTime = this.deviceMsg.manTime.value + " 人";
-						this.para.customVolPeriodic = (this.deviceMsg.customVolPeriodic.value / 1000).toFixed(2) + " 立方米";
+						this.para.customVolPeriodic = (this.deviceMsg.customVolPeriodic.value/100).toFixed(2) + " 立方米";
 						if(this.device.productKey == "a1EnF8F09Au") {
 							if(this.deviceMsg.regenStartTime.value.hour < 10) {
 								this.regenMinute = "0" + this.deviceMsg.regenStartTime.value.hour;
@@ -221,7 +221,7 @@
 								this.para.manTime = this.deviceMsg.manTime.value + " 人";
 								break;
 							case "customVolPeriodic":
-								this.para.customVolPeriodic = (this.deviceMsg.customVolPeriodic.value / 1000).toFixed(2) + " 立方米";
+								this.para.customVolPeriodic = (this.deviceMsg.customVolPeriodic.value/100).toFixed(2) + " 立方米";
 								break;
 							case "saltLevel":
 								this.para.saltLevel = (this.deviceMsg.saltLevel.value / 10) + " g/L";
@@ -426,9 +426,9 @@
 					that.$toast("请设置周期用水量在0~99范围内的整数");
 					return false;
 				}
-				that.para.customVolPeriodic = (that.Valume / 1000) + " 立方米";
+				that.para.customVolPeriodic =that.Valume+ " 立方米";
 				const deviceMsg = {
-					"customVolPeriodic": Number((that.Valume).toFixed(2))
+					"customVolPeriodic": Number((that.Valume*100).toFixed(2))
 				}
 				const para = {
 					productKey: that.device.productKey,

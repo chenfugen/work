@@ -1,0 +1,23 @@
+.enumStyle {
+  max-width: 66.66666667%;
+  margin-left: 25%;
+  margin-top: -16px;
+}
+
+.enumStyle h3 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.startIcon {
+  display: inline-block;
+  height: 32px;
+  line-height: 32px;
+}
+
+.inputAppearance input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.inputAppearance input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}

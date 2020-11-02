@@ -1,0 +1,29 @@
+.ant-advanced-search-form {
+  padding: 15px;
+  border-radius: 2px;
+}
+
+.ant-advanced-search-form .ant-form-item {
+  display: flex;
+  margin-bottom:0px;
+}
+
+.ant-advanced-search-form .ant-form-item-control-wrapper {
+  flex: 1;
+}
+.ant-input-number{
+  min-width: 200px;
+}
+.searchBox{
+  width: 20%;
+  position: absolute;
+  right: 0px;
+  top:57px;
+  button{
+    float: right;
+    margin:0 10px 0 0;
+  }
+  .handleReset{
+    margin-right: 15px;
+  }
+}

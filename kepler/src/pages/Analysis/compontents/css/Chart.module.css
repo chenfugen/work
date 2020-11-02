@@ -1,0 +1,63 @@
+.chartContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 24px;
+  background: #fff;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.empty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.emptyTips {
+  font-size: 14px;
+  color: #999999;
+  line-height: 22px;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.chartHeader h3 {
+  font-weight: bold;
+  color: #333;
+}
+
+.tiny {
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.border {
+  border: 1px solid #ebebef;
+}
+
+.tabs {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+  list-style: none;
+}
+.chartSize {
+  min-height: 430px;
+  max-height: 594px;
+  width: 100%;
+  flex: 1;
+}
+.hidden {
+  display: none;
+}

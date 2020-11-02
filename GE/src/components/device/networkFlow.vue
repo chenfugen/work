@@ -21,7 +21,7 @@
 			return {
 				linkSuccess: false,
 				productName: "",
-				imgUrl:"../../../static/image/netWork1@3x.png",
+				imgUrl:"",
 			}
 		},
 		mounted() {
@@ -38,9 +38,11 @@
 					}
 				}).then((res) => {
 					if(res.data.success) {
-					if(res.data.data.networkImg!=null){
+						if(res.data.data.networkImg!=null){
 							 that.imgUrl=that.$store.state.IP + "common/getFile/" + res.data.data.networkImg + "?commonKey=" + that.$store.state.commonKey
-						}					
+						}else{
+							that.imgUrl="../../../static/image/netWork1@3x.png";
+						}									
 						that.$forceUpdate();
 					}
 				})
@@ -87,9 +89,9 @@
 											setTimeout(() => {
 												that.bindDevice();
 											}, 10000);
-										} else if(res.err_msg == "configWXDeviceWiFi:cancel") {
+										}else if(res.err_msg == "configWXDeviceWiFi:cancel") {
 											that.$toast("取消配网")
-										} else {
+										}else{
 											that.$router.push("/netWorkError");
 										}
 									});
@@ -119,8 +121,11 @@
 					} else {
 						that.$toast(res.data.message);
 					}
-				}).catch((res) => {
-					console.log(res);
+				}).catch((error) => {
+					if(String(error).toLowerCase().indexOf('timeout')!=-1){
+                        that.$toast('服务器繁忙，请稍后重试');
+                        return;
+                   }
 				})
 			},
 			restart() {

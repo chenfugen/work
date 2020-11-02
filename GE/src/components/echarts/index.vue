@@ -106,7 +106,7 @@
 			},
 			drawLine(x, y) {
 				let nowDay = this.getDay(0);
-				//基于准备好的dom，初始化echarts实例				
+				//基于准备好的dom，初始化echarts实例
 				this.charts = this.$echarts.init(document.getElementById(this.idName))
 				// 绘制图表
 				this.charts.setOption({
@@ -225,8 +225,9 @@
 <style lang="scss">
 	.chart {
 		background: white;
-		height: 2.6rem;
+		height: 2.5rem;
 		position: relative;
+    overflow: hidden;
 		border-top: 1px solid #EAEFF3;
 		.chartName {
 			float: left;
@@ -275,11 +276,12 @@
 		.chartContent {
 			position: relative;
 			height: 2rem;
+          margin-top: 0.4rem;
 			canvas {
 				position: absolute;
 				left: 0px;
 				width: 100%;
-				height: 1.5ren;
+				height: 1.5rem;
 			}
 		}
 	}

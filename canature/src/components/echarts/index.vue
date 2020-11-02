@@ -93,7 +93,7 @@
 						} else if(num == 1) {
 							dataX = [this.getDay(-6), this.getDay(-5), this.getDay(-4), this.getDay(-3), this.getDay(-2), this.getDay(-1), this.getDay(0)];
 							dataY = [0, 0, 0, 0, 0, 0,this.waterLog[0].waterValue];
-						} else {	
+						} else {
 							this.$toast("设备刚使用，暂无用水统计数据");
 							dataX = [this.getDay(-6), this.getDay(-5), this.getDay(-4), this.getDay(-3), this.getDay(-2), this.getDay(-1), this.getDay(0)];
 							dataY = [0, 0, 0, 0, 0, 0, 0];
@@ -332,7 +332,7 @@
 		margin: 0px 0.1rem;
 		background: rgba(0, 0, 0, 0.2);
 		border-radius: 0.08rem;
-		height: 2.6rem;
+		height: 2.5rem;
 		overflow: hidden;
 		position: relative;
 		.chartName {
@@ -375,20 +375,22 @@
 		.chartContent {
 			position: relative;
 			height: 2rem;
+      margin-top: 0.4rem;
 			canvas {
 				position: absolute;
 				left: 0px;
 				width: 100%;
-				height: 1.5ren;
+				height: 1.5rem;
 			}
 		}
 	}
-	
+
 	.charts {
 		margin: 0px 0.1rem;
 		background: white;
 		border-radius: 0.08rem;
-		height: 2.6rem;
+		height: 2.5rem;
+    overflow: hidden;
 		position: relative;
 		.chartName {
 			float: left;
@@ -424,11 +426,12 @@
 		.chartContent {
 			position: relative;
 			height: 2rem;
+      margin-top: 0.4rem;
 			canvas {
 				position: absolute;
 				left: 0px;
 				width: 100%;
-				height: 1.5ren;
+				height: 1.5rem;
 			}
 		}
 	}

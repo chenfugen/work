@@ -1,0 +1,84 @@
+
+body{
+    padding: 0px;
+    margin: 0px;
+}
+.theme{
+    text-align: center;
+    line-height:200px;
+    font-size: 60px;
+    height:200px;
+    background:#eee;
+}
+.title{
+    font-size: 15px;
+}
+.cell{
+    margin: 25px 0px;
+}
+.right{
+    float: right;
+}
+.headline{
+    line-height: 60px;
+    font-size: 25px;
+}
+.comments{
+    border: 1px solid #eeeeee;
+    border-radius: 4px 4px;
+    position: relative;
+    .userName{
+        line-height: 40px;
+        font-size: 20px;
+        margin: 10px 20px;
+    }
+    .comment{
+        line-height:20px;
+        font-size: 15px;
+        margin: 20px 50px;
+    }
+    .posRight{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+}
+.ant-btn-primary{
+    background:#229794;
+    border-color: #229794;
+}
+::selection{
+    background:#229794;
+    color:white;
+}
+.ant-btn-primary:hover{
+    background: #229794;
+}
+.ant-pagination-item-active a {
+    color: #229794;
+}
+.ant-pagination-item-active{
+    border-color: #229794;
+}
+.ant-table-row-hover{
+   background: #E8F4F4;
+}
+a{
+    color: #229794;
+}
+.hint{
+    font-size: 25px;
+}
+.primary{
+    color: #229794;
+    cursor: pointer;
+}
+.danger{
+    color: #f5222d;
+    cursor: pointer;
+}
+.divider{
+    .ant-divider-horizontal {
+        margin: 0px 0;
+    }
+}

@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 144px);
+}
+
+.background {
+  flex-direction: column;
+  background: #ffffff;
+  box-shadow: 0 2px 16px 0 rgba(51, 51, 102, 0.1);
+  border-radius: 4px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 18px;
+  color: #333333;
+  line-height: 26px;
+  font-weight: bold;
+}
+
+.chartContainer {
+  flex: 1;
+  background: #fff;
+}
+
+.chartHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.chartHeader h3 {
+  font-weight: bold;
+  color: #333;
+}
+
+.tiny {
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.ExceptionDetailContainer {
+  min-height: calc(100vh - 144px);
+  display: flex;
+  flex-direction: column;
+}
+.empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 4px;
+  padding: 16px;
+}
+.emptyTips {
+  font-size: 14px;
+  color: #999999;
+  line-height: 22px;
+}
+
+.emptyChart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pieDate {
+  position: absolute;
+  right: 15%;
+  top: 80px;
+  z-index: 999;
+}
+.pieDate li {
+  list-style: none;
+  line-height: 24px;
+  user-select: none;
+  /* cursor: pointer; */
+}
+.pieDate li span {
+  margin-left: 10px;
+}

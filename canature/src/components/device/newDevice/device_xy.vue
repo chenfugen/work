@@ -6,7 +6,8 @@
 					<img src="../../../../static/image/icon_wifi@2x.png" class="wifiIcon" onclick="return false" />
 					<img src="../../../../static/image/icon_qrcode@2x.png" class="qrcodeIcon" @click="set(7)" />
 				</div>
-				<p class="waterNum">{{deviceMsg.regenRemain.value*10}}</p>
+				<p class="waterNum" v-if="((deviceMsg.customVolPeriodic.value/100)*1000-deviceMsg.waterVolPeriodic.value)>0">{{((deviceMsg.customVolPeriodic.value/100)*1000-deviceMsg.waterVolPeriodic.value).toFixed(0)}}</p>
+				<p class="waterNum" v-else>0</p>
 				<p class="water_title">可使用水量(L)</p>
 				<ul class="waterMsg" :class="{'normalBg':isnormal==1,'faultBg':isnormal==2,'offlineBg':isnormal==0}">
 					<li>
@@ -18,7 +19,7 @@
 						<p class="waterSet">最大流量(m³/h)</p>
 					</li>
 					<li>
-						<p class="waterValue">{{deviceMsg.waterVolPeriodic.value*10}}</p>
+						<p class="waterValue">{{deviceMsg.waterVolPeriodic.value}}</p>
 						<p class="waterSet">周期已用水量(L)</p>
 					</li>
 					<li v-if="device.productKey=='a1EnF8F09Au'">

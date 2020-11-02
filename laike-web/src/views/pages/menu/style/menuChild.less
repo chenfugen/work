@@ -1,0 +1,332 @@
+#menuChildAdd,#menuChildEdit {
+	.transition-list-move {
+		transition: transform 0.5s;
+	}
+	.transition-list-enter-active,
+	.transition-list-leave-active,
+	.transition-list-move {
+		transition: all 0.5s;
+	}
+	.transition-list-enter,
+	.transition-list-leave-to {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+
+	.el-input-number--mini {
+		width: 82px;
+	}
+	width: 100%;
+	height: 100%;
+	min-width: 1090px;
+	float: left;
+	.menuQ {
+		border-radius: 4px;
+		border: 1px solid #dcdfe6;
+		width: 32px;
+		height: 32px;
+		display: block;
+		float: left;
+		box-sizing: border-box;
+		text-align: center;
+		line-height: 32px;
+		margin-right: 8px;
+		cursor: no-drop;
+	}
+	.imgBox {
+		height: 624px;
+		overflow: auto;
+		float: left;
+		> ul {
+			float: left;
+			width: 810px;
+			margin: 0;
+			padding: 0;
+			> li {
+				width: 180px;
+				height: 276px;
+				text-align: center;
+				font-size: 14px;
+				color: #59626c;
+				list-style-type: none;
+				line-height: 30px;
+				float: left;
+				margin: 0 24px 24px 0;
+				border: 2px solid #fff;
+				background: #d3d3d3;
+				transition: all 0.3s;
+				border-radius: 4px;
+				cursor: pointer;
+				position: relative;
+				> i {
+					position: absolute;
+					right: 8px;
+					top: 12px;
+					color: #5bc49f;
+					font-size: 22px;
+					display: none;
+				}
+				&.active {
+					i {
+						display: block;
+					}
+					border: 2px solid #5bc49f;
+				}
+				&:nth-child(4n + 4) {
+					margin-right: 0;
+				}
+				&:hover {
+					border: 2px solid #60acfc;
+				}
+				> img {
+					width: 180px;
+					height: 240px;
+					float: left;
+				}
+			}
+		}
+	}
+	.delImg {
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		z-index: 1;
+		cursor: pointer;
+		font-size: 16px;
+		transition: all 0.3s;
+		&.one {
+			right: 90px;
+			top: 2px;
+		}
+		&:hover {
+			font-size: 18px;
+		}
+	}
+	.menuAdd-title {
+		font-size: 14px;
+		color: #59626c;
+		letter-spacing: 0;
+		line-height: 22px;
+		margin: 0 0 24px 24px;
+		font-weight: bold;
+	}
+	.basic,
+	.detailed-steps,
+	.food-preparation {
+		width: 100%;
+		padding: 24px;
+		min-width: 1250px;
+		margin-bottom: 24px;
+		float: left;
+		background: #fff;
+		box-sizing: border-box;
+		-webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.05);
+		box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.05);
+		border-radius: 4px;
+		> div {
+			margin: auto;
+			width: 1050px;
+		}
+		.el-select {
+			.el-input--small .el-input__inner {
+				width: 240px;
+			}
+		}
+	}
+	.detailed-steps,
+	.food-preparation {
+		> .add {
+			width: 1041px;
+			height: 54px;
+			border: 1px solid #ecf0f7;
+			border-radius: 4px;
+			text-align: center;
+			line-height: 54px;
+			margin-bottom: 30px;
+			color: #60acfc;
+			cursor: pointer;
+		}
+		> div,
+		.menuAdd-title {
+			width: 1041px;
+		}
+		.food-box {
+			.transition {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: space-between;
+			}
+			.food-conter {
+				width: 500px;
+				height: 200px;
+				cursor: move;
+				border: 1px solid #ecf0f7;
+				border-radius: 4px;
+				margin-bottom: 26px;
+				float: left;
+				&.ab {
+					text-align: center;
+					background: #94d5fb;
+					border: 1px solid #4b98de;
+					width: 400px;
+					height: 200px;
+					opacity: 0.9;
+					position: absolute;
+				}
+				&.add {
+					text-align: center;
+					color: #60acfc;
+					width: 100%;
+					height: 50px;
+					line-height: 50px;
+					cursor: pointer;
+				}
+				.foodForm {
+					width: 450px;
+					height: 180px;
+					float: left;
+					z-index: -1;
+					margin-top: 12px;
+				}
+				> p {
+					height: 22px;
+					color: #59626c;
+					float: left;
+					line-height: 22px;
+					padding: 2px 10px;
+					font-size: 14px;
+					margin: -12px 0 0 24px;
+					font-weight: bold;
+					background: #fff;
+				}
+				> .icondel {
+					float: right;
+					font-size: 20px;
+					color: #60acfc;
+					margin: -8px -10px 0 0;
+					background: #fff;
+					cursor: pointer;
+					transition: all 0.3s;
+					&:hover {
+						font-size: 21px;
+					}
+				}
+			}
+		}
+		.steps-box {
+			min-height: 300px;
+			border: 1px solid #ecf0f7;
+			border-radius: 4px;
+			margin-bottom: 36px;
+			position: relative;
+			> .move {
+				position: absolute;
+				right: -80px;
+				bottom: 0;
+				width: 70px;
+				height: 140px;
+			}
+			> .add {
+				width: 100%;
+				height: 54px;
+				border: 1px solid #ecf0f7;
+				border-radius: 4px;
+				text-align: center;
+				line-height: 54px;
+				bottom: -90px;
+				color: #60acfc;
+				cursor: pointer;
+				position: absolute;
+			}
+			> p {
+				height: 22px;
+				color: #59626c;
+				float: left;
+				line-height: 22px;
+				padding: 2px 10px;
+				margin: -12px 0 0 24px;
+				font-size: 14px;
+				font-weight: bold;
+				background: #fff;
+			}
+			> .icondel {
+				float: right;
+				font-size: 20px;
+				color: #60acfc;
+				clear: both;
+				margin: -22px -10px 0 0;
+				background: #fff;
+				cursor: pointer;
+				transition: all 0.3s;
+				&:hover {
+					font-size: 21px;
+				}
+			}
+			.steps-conter {
+				width: 690px;
+				margin: 12px 17px 0 0;
+				float: right;
+				.steps-c-l {
+					width: 50%;
+					float: left;
+				}
+				.steps-c-r {
+					width: 50%;
+					float: left;
+				}
+			}
+		}
+	}
+	.avatar-uploader {
+		float: left;
+		margin-bottom: 6px;
+	}
+	.avatar-uploader .el-upload {
+		float: left;
+		border: 1px dashed #d9d9d9;
+		border-radius: 6px;
+		cursor: pointer;
+		position: relative;
+		overflow: hidden;
+		// left: 40px;  //edit by Nelson
+		height: 100%;
+		width: 100%;
+	}
+	.avatar-uploader .el-upload:hover {
+		border-color: #409eff;
+	}
+	.userAdvert-add,
+	.userAdvert-add2 {
+		font-size: 22px;
+		color: #8c939d;
+		width: 560px;
+		height: 420px;
+		line-height: 420px;
+		text-align: center;
+	}
+	.userAdvert-add2 {
+		height: 180px;
+		width: 180px;
+		line-height: 180px;
+	}
+	.steps-right {
+		height: 240px;
+		width: 310px;
+		margin: 12px 0 0 24px;
+		float: left;
+		position: relative;
+		> span {
+			color: #cccccc;
+			margin: 190px 0 0 -136px;
+			font-size: 12px;
+			float: left;
+			&.selectImg {
+				width: 35%;
+				color: #60acfc;
+				cursor: pointer;
+				float: left;
+				margin-top: 240px;
+			}
+		}
+	}
+}

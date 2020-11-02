@@ -1,0 +1,41 @@
+.commandContainer {
+  background: #ffffff;
+  /* border: 1px solid #d9dbe1; */
+  border-radius: 2px;
+  font-size: 14px;
+  color: #333333;
+  line-height: 22px;
+}
+
+.commandInner {
+  position: relative;
+  border: 1px solid #d9dbe1;
+  text-align: center;
+  padding: 9px 24px 9px 8px;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.commandInner.disabled {
+  cursor: not-allowed;
+  border: 1px solid #d9dbe1;
+  background-color: #f8f8f8;
+}
+
+.commandInner:not(.disabled):hover {
+  transition: all cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-color: #7a92cc;
+}
+.commandInner:not(.disabled):global.ant-dropdown-open {
+  transition: all cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-color: #7a92cc;
+}
+
+.absoluteIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  color: #bbb;
+  transform: translateY(-50%);
+}

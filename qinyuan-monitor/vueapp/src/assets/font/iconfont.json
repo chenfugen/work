@@ -1,0 +1,30 @@
+{
+  "id": "1744835",
+  "name": "沁园-滤芯产测",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "13995187",
+      "name": "menu_icon_system_management",
+      "font_class": "menu_icon_system_management",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "13995188",
+      "name": "menu_icon_filter_element_production",
+      "font_class": "menu_icon_filter_element_production",
+      "unicode": "e693",
+      "unicode_decimal": 59027
+    },
+    {
+      "icon_id": "13995189",
+      "name": "menu_icon_end_product_spot_check",
+      "font_class": "menu_icon_end_product_spot_check",
+      "unicode": "e694",
+      "unicode_decimal": 59028
+    }
+  ]
+}
