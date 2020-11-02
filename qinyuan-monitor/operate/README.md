@@ -41,8 +41,8 @@
 ├─ node_modules    //依赖  
 ├─ public          //项目入口      
 ├─ src             //项目代码文件  
-│  ├─ assets       //vue自带文件包 
-│  │   ├─ css         //样式  
+│  ├─ assets       //vue自带文件包   
+│  │   ├─ css         //样式     
 │  │   ├─ font        //图标       
 │  │   ├─ image       //图片      
 │  │   └─ js          //js文件             
