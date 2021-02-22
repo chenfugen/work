@@ -21,7 +21,7 @@
     "ace-builds": "^1.4.12",
     "antd": "^4.5.4",
     "antd-dayjs-webpack-plugin": "^1.0.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "big.js": "^5.2.2",
     "classnames": "^2.2.6",
     "craco-antd": "^1.18.1",
