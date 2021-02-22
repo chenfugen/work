@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.clearfloat {
+    zoom: 1;
+}
+
+.clearfloat:after {
+    display: block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+    content: "";
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.marginTop {
+    margin-top: 20px;
+}
+
+.marginRight {
+    margin-right: 20px;
+}
+
+.marginBottom {
+    margin-bottom: 20px;
+}
+
+.marginLeft {
+    margin-left: 20px;
+}
+
+.formInput {
+    width: 300px;
+}
+
+.relarive {
+    position: relative;
+}
+
+.ivu-btn-text {
+    color: #2D8CF0;
+}
+
+/* 消除谷歌自动填充时的样式 */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	box-shadow: 0 0 0px 100000000px #ffffff inset !important;
+}
